@@ -1,0 +1,61 @@
+# Workflow
+
+## Project facts
+
+- **Goal:** one reliable Gregorian / Ethiopian / Hijri engine (`@qen/core`), React components (`@qen/react`), and user products on top: website + PWA, browser extension, hosted feeds, desktop tray app.
+- **Audience:** developers building Ethiopian apps; people in Ethiopia and the diaspora who use all three calendars.
+- **Deadline:** none set. Milestones ship in order.
+- **Domains:** library/SDK (core, react) · web frontend (web, extension) · backend API (feeds) · desktop (Tauri).
+- **Stack:** see [architecture.md](architecture.md#tech-stack).
+- **Runs on:** npm (packages), a static/serverless host (web, feeds), Chrome Web Store + Firefox Add-ons, Windows/macOS/Linux installers.
+- **Tracking:** GitHub issues + milestones + project board at [MuhidinM/qen](https://github.com/MuhidinM/qen); mirrored in [backlog.md](backlog.md).
+
+## Working agreement
+
+- **May do without asking:** create and update issues, labels, milestones and the project board; push branches; open PRs; merge PRs when CI is green.
+- **Always ask first:** npm publishing (merging the "Version packages" PR), store submissions, production deploys, repo settings (branch protection, secrets), anything involving accounts, money or credentials, deleting data, publishing third-party material.
+- **Facts are never guessed:** holiday dates, religious rules and names in any language come from the owner or a cited source (CLAUDE.md rule 5). Issues that need this carry the `needs-owner` label.
+- **Merge style:** merge commits; branches deleted after merge.
+- **Public docs:** `docs/` · **private notes:** `notes/private/` (gitignored).
+
+## Where things live
+
+| What                            | Where                                    |
+| ------------------------------- | ---------------------------------------- |
+| Product spec, reference data    | [PLAN.md](../PLAN.md)                    |
+| Requirements with evidence      | [requirements.md](requirements.md)       |
+| Tasks and status                | [backlog.md](backlog.md) + GitHub issues |
+| Architecture                    | [architecture.md](architecture.md)       |
+| Decisions                       | [decisions/](decisions/README.md)        |
+| Gaps, conflicts, open questions | [spec-notes.md](spec-notes.md)           |
+
+## Branches
+
+`feature/<issue>-slug`, `fix/<issue>-slug`, `docs/<issue>-slug`, `test/<issue>-slug`, `chore/<issue>-slug`, cut from an up-to-date `main`.
+
+## Commits
+
+Conventional prefix (`feat`, `fix`, `docs`, `test`, `chore`, `perf`, `refactor`) + imperative subject. The body says why, names the key files, and records decisions, incidental fixes and known gaps. Calendar logic: the test commit comes before (or with) the implementation.
+
+## Pull requests
+
+Plain-language title. Body sections:
+
+- Closes #n
+- What changed and why
+- How it was checked (commands, results, screenshots for UI)
+- **Not in this PR:** deferred items, each linked to its new issue
+
+CI must be green before merge. A user-facing package change includes a changeset.
+
+## Definition of Done
+
+- [ ] The issue's "Done when" items are met; requirement rows ticked with evidence
+- [ ] Tests written first for calendar logic; anchors from PLAN.md §5 included where relevant
+- [ ] Error and edge paths tested (invalid dates, Pagume 6, 29/30-day Hijri months, year boundaries)
+- [ ] Lint, typecheck, format, tests (coverage ≥ 95% lines for `core`) and build pass locally and in CI
+- [ ] Every new public function has TSDoc with an example
+- [ ] Changeset added for user-facing package changes
+- [ ] UI work: keyboard, screen-reader labels, light/dark, RTL for Arabic, 320 px, checked in the running app with screenshots
+- [ ] Docs updated in the same PR: requirements, backlog, spec notes, ADR amendments, README
+- [ ] Issue closed with no empty checkboxes (deferred → "Moved to #N")

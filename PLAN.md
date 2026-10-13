@@ -1,13 +1,13 @@
 # PLAN.md: Qen multi-calendar toolkit
 
-Working name: **Qen** (ቀን). Placeholder; rename when decided.
+Name: **Qen** (ቀን), npm scope `@qen` (confirmed 2026-10-13).
 
 This file has five parts:
 
 1. Vision
 2. Architecture
 3. Feature spec (what everything does)
-4. Roadmap and tracker (the phases, with checkboxes)
+4. Roadmap (phase scope; status lives in GitHub and docs/backlog.md)
 5. Reference data, test anchors, open questions, decisions log
 
 ---
@@ -243,81 +243,81 @@ Tauri tray app showing the Ethiopian date and time in the tray, with a click-ope
 
 ---
 
-## 4. Roadmap and tracker
+## 4. Roadmap
 
-Status key: `[ ]` todo · `[x]` done · `[~]` in progress · `[-]` dropped (note why in Decisions Log)
+Scope per phase. Status lives in GitHub milestones and issues, mirrored in [docs/backlog.md](docs/backlog.md) (ADR-0010). Phase N = milestone MN.
 
 ### Stage 1: Core library
 
 #### Phase 0: Project setup
 
-- [x] Confirm project name with owner (VERIFY)
-- [x] Init monorepo: pnpm workspaces, Turborepo, root tsconfig (strict)
-- [x] Create `packages/core` with tsup build (ESM + CJS + d.ts)
-- [x] Vitest configured with coverage
-- [x] ESLint + Prettier
-- [x] Changesets configured
-- [x] GitHub Actions: lint, typecheck, test, build on push/PR
-- [x] README stub and LICENSE (MIT unless owner says otherwise)
+- Confirm project name with owner (VERIFY)
+- Init monorepo: pnpm workspaces, Turborepo, root tsconfig (strict)
+- Create `packages/core` with tsup build (ESM + CJS + d.ts)
+- Vitest configured with coverage
+- ESLint + Prettier
+- Changesets configured
+- GitHub Actions: lint, typecheck, test, build on push/PR
+- README stub and LICENSE (MIT unless owner says otherwise)
 
 **Done when:** an empty `core` package builds, tests pass in CI, and it could be published.
 
 #### Phase 1: Calendar conversion
 
-- [ ] `CalendarDate` type, `date()` constructor, `InvalidDateError`
-- [ ] Gregorian `toJDN` / `fromJDN` + validation
-- [ ] Ethiopian `toJDN` / `fromJDN` + validation (Pagume 5/6, leap years)
-- [ ] Hijri tabular `toJDN` / `fromJDN` + validation
-- [ ] `convert()` between all pairs
-- [ ] `fromJSDate` / `toJSDate`
-- [ ] Test anchors from section 5 all pass
-- [ ] Property tests: round-trip `fromJDN(toJDN(d)) === d` for every day 1900–2100 in each calendar
-- [ ] Cross-check Ethiopian and Hijri output against `Intl.DateTimeFormat` (`ethiopic`, `islamic-civil`) for every day 1900–2100
+- `CalendarDate` type, `date()` constructor, `InvalidDateError`
+- Gregorian `toJDN` / `fromJDN` + validation
+- Ethiopian `toJDN` / `fromJDN` + validation (Pagume 5/6, leap years)
+- Hijri tabular `toJDN` / `fromJDN` + validation
+- `convert()` between all pairs
+- `fromJSDate` / `toJSDate`
+- Test anchors from section 5 all pass
+- Property tests: round-trip `fromJDN(toJDN(d)) === d` for every day 1900–2100 in each calendar
+- Cross-check Ethiopian and Hijri output against `Intl.DateTimeFormat` (`ethiopic`, `islamic-civil`) for every day 1900–2100
 
 **Done when:** every date converts correctly in all directions, with round-trip and Intl cross-checks green.
 
 #### Phase 2: Everyday utilities → first npm release
 
-- [ ] `dayOfWeek`, `daysInMonth`, `monthsInYear`, `isLeapYear`
-- [ ] `addDays`, `addMonths`, `addYears` with day clamping (e.g., Hamle 30 + 2 months → Pagume 5 or 6)
-- [ ] `diff`, `compare`, `isSame`, `age`
-- [ ] Locale data: English + Amharic (month names, weekday names, era labels)
-- [ ] Locale data: Afaan Oromo, Tigrinya, Arabic (VERIFY all names with native speakers)
-- [ ] `format()` with patterns and numeral systems
-- [ ] Ge'ez numerals: `toGeezNumeral`, `fromGeezNumeral` (tests up to 99,999)
-- [ ] `parse()` with calendar detection
-- [ ] Ethiopian time conversion
-- [ ] TSDoc on all public functions
-- [ ] README with install + quick-start examples
-- [ ] Publish `@qen/core@0.1.0`
+- `dayOfWeek`, `daysInMonth`, `monthsInYear`, `isLeapYear`
+- `addDays`, `addMonths`, `addYears` with day clamping (e.g., Hamle 30 + 2 months → Pagume 5 or 6)
+- `diff`, `compare`, `isSame`, `age`
+- Locale data: English + Amharic (month names, weekday names, era labels)
+- Locale data: Afaan Oromo, Tigrinya, Arabic (VERIFY all names with native speakers)
+- `format()` with patterns and numeral systems
+- Ge'ez numerals: `toGeezNumeral`, `fromGeezNumeral` (tests up to 99,999)
+- `parse()` with calendar detection
+- Ethiopian time conversion
+- TSDoc on all public functions
+- README with install + quick-start examples
+- Publish `@qen/core@0.1.0`
 
 **Done when:** v0.1 is live on npm. First portfolio milestone.
 
 #### Phase 3: Fixed-date holidays
 
-- [ ] Holiday data model (id, names, category, rule, status)
-- [ ] Confirm official public holiday list and leap-year rules (VERIFY)
-- [ ] Implement fixed-date holidays from section 3.4
-- [ ] `getHolidays`, `getHolidaysInRange`, `nextHoliday`, category filters
-- [ ] Holiday names in all five locales (VERIFY)
+- Holiday data model (id, names, category, rule, status)
+- Confirm official public holiday list and leap-year rules (VERIFY)
+- Implement fixed-date holidays from section 3.4
+- `getHolidays`, `getHolidaysInRange`, `nextHoliday`, category filters
+- Holiday names in all five locales (VERIFY)
 
 #### Phase 4: Computed holidays
 
-- [ ] `bahireHasab(year)` computus
-- [ ] Orthodox movable feasts and fasts from the offset table
-- [ ] Fasika matches anchors and the Julian-Easter cross-check for 1900–2100
-- [ ] Islamic holidays and observances from Hijri dates
-- [ ] Multi-day observances (`getObservances`): Ramadan, Abiy Tsom, Tsome Filseta, etc.
+- `bahireHasab(year)` computus
+- Orthodox movable feasts and fasts from the offset table
+- Fasika matches anchors and the Julian-Easter cross-check for 1900–2100
+- Islamic holidays and observances from Hijri dates
+- Multi-day observances (`getObservances`): Ramadan, Abiy Tsom, Tsome Filseta, etc.
 
 #### Phase 5: Hijri adjustment → core v1.0
 
-- [ ] Build script generating the Umm al-Qura month-start table from `Intl` (committed as data)
-- [ ] Umm al-Qura `toJDN` / `fromJDN` using the table, tabular fallback outside range
-- [ ] `HijriSettings` threaded through conversion, `today`, and holidays
-- [ ] Override table + pipeline (method → overrides → offset)
-- [ ] Holiday `expected` / `confirmed` status
-- [ ] Seed overrides with recent confirmed Ethiopian Eid announcements (VERIFY each with source)
-- [ ] Publish `@qen/core@1.0.0`
+- Build script generating the Umm al-Qura month-start table from `Intl` (committed as data)
+- Umm al-Qura `toJDN` / `fromJDN` using the table, tabular fallback outside range
+- `HijriSettings` threaded through conversion, `today`, and holidays
+- Override table + pipeline (method → overrides → offset)
+- Holiday `expected` / `confirmed` status
+- Seed overrides with recent confirmed Ethiopian Eid announcements (VERIFY each with source)
+- Publish `@qen/core@1.0.0`
 
 **Done when:** core v1.0 is published. The engine is complete.
 
@@ -325,55 +325,55 @@ Status key: `[ ]` todo · `[x]` done · `[~]` in progress · `[-]` dropped (note
 
 #### Phase 6: React components
 
-- [ ] Create `packages/react`; design tokens per CLAUDE.md (Refactoring UI)
-- [ ] `<CalendarGrid>` month view, keyboard accessible
-- [ ] `<DatePicker>` (single date, any primary calendar)
-- [ ] Secondary-calendar overlay in day cells
-- [ ] Holiday markers + legend
-- [ ] `<DateRangePicker>`
-- [ ] `<EthiopianTimeInput>`
-- [ ] RTL support for Arabic; Ge'ez numeral display
-- [ ] Light/dark mode
-- [ ] Storybook (or Ladle) with every component and state
-- [ ] Publish `@qen/react@0.1.0`
+- Create `packages/react`; design tokens per CLAUDE.md (Refactoring UI)
+- `<CalendarGrid>` month view, keyboard accessible
+- `<DatePicker>` (single date, any primary calendar)
+- Secondary-calendar overlay in day cells
+- Holiday markers + legend
+- `<DateRangePicker>`
+- `<EthiopianTimeInput>`
+- RTL support for Arabic; Ge'ez numeral display
+- Light/dark mode
+- Storybook (or Ladle) with every component and state
+- Publish `@qen/react@0.1.0`
 
 #### Phase 7: Website
 
-- [ ] Next.js app in `apps/web`, using `@qen/react`
-- [ ] Landing page + "today in three calendars" hero
-- [ ] Converter with paste-and-detect
-- [ ] Full calendar view + PWA install
-- [ ] Docs site for core + react with live examples
-- [ ] Static holiday pages per holiday per year
-- [ ] Deploy (Vercel or similar), custom domain
+- Next.js app in `apps/web`, using `@qen/react`
+- Landing page + "today in three calendars" hero
+- Converter with paste-and-detect
+- Full calendar view + PWA install
+- Docs site for core + react with live examples
+- Static holiday pages per holiday per year
+- Deploy (Vercel or similar), custom domain
 
 #### Phase 8: Browser extension
 
-- [ ] Manifest V3 scaffold (Vite-based build) in `apps/extension`
-- [ ] Popup: today, converter, upcoming holidays, settings
-- [ ] Select-to-convert tooltip
-- [ ] Google Calendar overlay (selectors isolated in one module)
-- [ ] Publish to Chrome Web Store
-- [ ] Publish to Firefox Add-ons
+- Manifest V3 scaffold (Vite-based build) in `apps/extension`
+- Popup: today, converter, upcoming holidays, settings
+- Select-to-convert tooltip
+- Google Calendar overlay (selectors isolated in one module)
+- Publish to Chrome Web Store
+- Publish to Firefox Add-ons
 
 ### Stage 3: Services and extras
 
 #### Phase 9: Hosted feeds
 
-- [ ] Serverless app in `apps/feeds`
-- [ ] Hijri override JSON feed (versioned, cached, with fallback in core)
-- [ ] Simple admin flow for the owner to add a confirmed month start
-- [ ] Holiday ICS feeds per category and locale
-- [ ] Personal recurring events → ICS subscription URL
-- [ ] Hook website + extension up to the live feed
+- Serverless app in `apps/feeds`
+- Hijri override JSON feed (versioned, cached, with fallback in core)
+- Simple admin flow for the owner to add a confirmed month start
+- Holiday ICS feeds per category and locale
+- Personal recurring events → ICS subscription URL
+- Hook website + extension up to the live feed
 
 #### Phase 10: Desktop app
 
-- [ ] Tauri app in `apps/desktop`
-- [ ] Tray shows Ethiopian date and time
-- [ ] Panel: converter + upcoming holidays
-- [ ] Holiday notifications
-- [ ] Installers for Windows, macOS, Linux
+- Tauri app in `apps/desktop`
+- Tray shows Ethiopian date and time
+- Panel: converter + upcoming holidays
+- Holiday notifications
+- Installers for Windows, macOS, Linux
 
 ---
 
@@ -428,6 +428,8 @@ Add Hijri anchors during Phase 1/5, generated from `Intl` and cross-checked with
 
 ## 6. Open questions
 
+Detailed gaps and conflicts, with defaults, are in [docs/spec-notes.md](docs/spec-notes.md).
+
 - [x] Final project name and npm scope: `qen`, `@qen` org owned by the owner
 - [x] License: MIT
 - [ ] Default Hijri method for Ethiopian users (Umm al-Qura vs. following local announcements only)
@@ -454,3 +456,6 @@ Add entries as `YYYY-MM-DD: decision (reason)`.
 - 2026-10-13: TypeScript pinned to 6.0.x because typescript-eslint 8 does not support TS 7 yet. tsup's d.ts step sets `ignoreDeprecations: '6.0'` for the `baseUrl` it injects.
 - 2026-10-13: Root tsconfig adds `noUncheckedIndexedAccess` and `exactOptionalPropertyTypes` on top of `strict` (calendar math indexes month tables; this catches off-by-one lookups).
 - 2026-10-13: CI runs on Node 22; local dev uses Node 24.
+- 2026-10-13: Adopted the project-flow process: requirements, ADRs, spec notes and backlog in `docs/`; work tracked as GitHub issues under milestones M0–M10 and the "Qen roadmap" board (ADR-0010).
+- 2026-10-13: One monorepo for every package and app (ADR-0001). Desktop stays Tauri, confirmed by owner (ADR-0008). No native mobile app; the PWA covers phones (ADR-0009).
+- 2026-10-13: Owner allows creating issues/labels/milestones/board, pushing branches, opening PRs and merging on green CI without asking. npm publishing, store submissions, deploys and repo settings still need the owner.

@@ -2,7 +2,7 @@
 
 A multi-calendar toolkit for **Gregorian, Ethiopian, and Hijri** dates: conversion, arithmetic, formatting, holidays, and Hijri moon-sighting adjustment.
 
-> Early development. Nothing is published yet. See [PLAN.md](PLAN.md) for the roadmap.
+> Early development. Nothing is published yet. See [PLAN.md](PLAN.md) for the product spec, [docs/](docs/README.md) for requirements, architecture and decisions, and the [roadmap board](https://github.com/users/MuhidinM/projects/3) for progress.
 
 ## Packages
 
