@@ -257,7 +257,7 @@ Status key: `[ ]` todo · `[x]` done · `[~]` in progress · `[-]` dropped (note
 - [x] Vitest configured with coverage
 - [x] ESLint + Prettier
 - [x] Changesets configured
-- [ ] GitHub Actions: lint, typecheck, test, build on push/PR
+- [x] GitHub Actions: lint, typecheck, test, build on push/PR
 - [x] README stub and LICENSE (MIT unless owner says otherwise)
 
 **Done when:** an empty `core` package builds, tests pass in CI, and it could be published.
