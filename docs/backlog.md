@@ -24,7 +24,7 @@ PLAN.md Phase 1. Done when every date converts correctly in all directions, with
 | ID    | Issue                                            | Task                                                                    | Reqs                                   | Size | Status |
 | ----- | ------------------------------------------------ | ----------------------------------------------------------------------- | -------------------------------------- | ---- | ------ |
 | T-010 | [#7](https://github.com/MuhidinM/qen/issues/7)   | Define the date type, the date() constructor and InvalidDateError       | R-CAL-01, R-CAL-02, R-CAL-11, R-LIB-12 | M    | done   |
-| T-011 | [#8](https://github.com/MuhidinM/qen/issues/8)   | Convert Gregorian dates to and from Julian Day Numbers                  | R-CAL-03, R-CAL-08                     | S    | todo   |
+| T-011 | [#8](https://github.com/MuhidinM/qen/issues/8)   | Convert Gregorian dates to and from Julian Day Numbers                  | R-CAL-03, R-CAL-08                     | S    | done   |
 | T-012 | [#9](https://github.com/MuhidinM/qen/issues/9)   | Convert Ethiopian dates to and from Julian Day Numbers                  | R-CAL-04, R-CAL-08                     | M    | todo   |
 | T-013 | [#10](https://github.com/MuhidinM/qen/issues/10) | Convert Hijri dates (tabular method) to and from Julian Day Numbers     | R-CAL-05, R-CAL-08                     | M    | todo   |
 | T-014 | [#11](https://github.com/MuhidinM/qen/issues/11) | Convert any date to any calendar with convert()                         | R-CAL-06                               | S    | todo   |
