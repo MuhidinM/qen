@@ -18,6 +18,7 @@ export type { DayBoundary, GeoLocation, InstantOptions } from './day-boundary.js
 export { fromJSDate, toJSDate, type ToJSDateOptions } from './js-date.js';
 export { today, type TodayOptions } from './today.js';
 export { fromGeezNumeral, toGeezNumeral } from './geez.js';
+export { fromEthiopianTime, toEthiopianTime, type EthiopianTimePeriod } from './ethiopian-time.js';
 export { dayOfWeek, daysInMonth, isLeapYear, monthsInYear } from './info.js';
 export { addDays, addMonths, addYears } from './arithmetic.js';
 export { age, compare, diff, isSame, type DiffUnit } from './compare.js';

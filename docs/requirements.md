@@ -33,7 +33,7 @@ Tasks (T-xxx) are listed in [backlog.md](backlog.md). IDs never change once crea
 | R-UTIL-04 | `compare`, `isSame`                                                                                          | must     | T-022 | `src/compare.ts` `compare`/`isSame`, cross-calendar and Hijri-method tests (#17)                                                                               | ☑   |
 | R-UTIL-05 | `age(birth, on?)` → `{ years, months, days }`, including from an Ethiopian birth date                        | must     | T-023 | `src/compare.ts` `age`; `test/age.test.ts`: Ethiopian (13 months, Pagume 6), 29 Feb, Hijri, 900-case property test that the parts add back to `on` (#18)       | ☑   |
 | R-UTIL-06 | `today(calendar, { now?, hijri? })`; no other function reads the clock                                       | must     | T-024 | `src/today.ts`; `test/today.test.ts` (fixed `now`, fake timers); ESLint `no-restricted-syntax` bans `Date.now()`/`new Date()` elsewhere in core (#19)          | ☑   |
-| R-UTIL-07 | Ethiopian time: `toEthiopianTime`, `fromEthiopianTime` (07:00 → 1, 06:00 → 12 morning, 18:00 → 12 evening)   | must     | T-030 |                                                                                                                                                                | ☐   |
+| R-UTIL-07 | Ethiopian time: `toEthiopianTime`, `fromEthiopianTime` (07:00 → 1, 06:00 → 12 morning, 18:00 → 12 evening)   | must     | T-030 | `src/ethiopian-time.ts`; `test/ethiopian-time.test.ts`: PLAN.md §5 examples, all 1,440 minutes round-trip (#25)                                                | ☑   |
 
 ## C. Formatting, parsing and locales
 
