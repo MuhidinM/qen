@@ -3,3 +3,4 @@ coverage
 .turbo
 pnpm-lock.yaml
 .changeset/*.md
+packages/core/src/calendars/umalqura-table.ts

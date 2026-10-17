@@ -48,7 +48,9 @@
     "typecheck": "tsc --noEmit",
     "check:package": "publint --strict && attw --pack . --profile node16",
     "size": "size-limit",
-    "smoke": "sh smoke/run.sh node"
+    "smoke": "sh smoke/run.sh node",
+    "generate:umalqura": "node scripts/generate-umalqura.mjs",
+    "check:umalqura": "node scripts/generate-umalqura.mjs --check"
   },
   "devDependencies": {
     "@arethetypeswrong/cli": "^0.18.5",

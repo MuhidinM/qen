@@ -65,14 +65,14 @@ Tasks (T-xxx) are listed in [backlog.md](backlog.md). IDs never change once crea
 
 ## E. Hijri adjustment
 
-| ID       | Requirement                                                                                                       | Priority | Task  | Evidence | ✓   |
-| -------- | ----------------------------------------------------------------------------------------------------------------- | -------- | ----- | -------- | --- |
-| R-HIJ-01 | Build script generates the Umm al-Qura month-start table (about 1300–1500 AH) from `Intl`; the table is committed | must     | T-060 |          | ☐   |
-| R-HIJ-02 | Umm al-Qura `toJDN` / `fromJDN` from the table; outside the range, fall back to tabular and flag the result       | must     | T-061 |          | ☐   |
-| R-HIJ-03 | `HijriSettings` (method, offset −2…+2, overrides) accepted by conversion, `today` and holidays                    | must     | T-062 |          | ☐   |
-| R-HIJ-04 | Pipeline: base method → official overrides → user offset; the result records which step decided the date          | must     | T-063 |          | ☐   |
-| R-HIJ-05 | Islamic holidays are `expected` until an override confirms the month start, then `confirmed` with the source      | must     | T-064 |          | ☐   |
-| R-HIJ-06 | Bundled overrides seeded from recent confirmed Ethiopian Eid announcements, each with its source                  | must     | T-065 |          | ☐   |
+| ID       | Requirement                                                                                                       | Priority | Task  | Evidence                                                                                                                                                                           | ✓   |
+| -------- | ----------------------------------------------------------------------------------------------------------------- | -------- | ----- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --- |
+| R-HIJ-01 | Build script generates the Umm al-Qura month-start table (about 1300–1500 AH) from `Intl`; the table is committed | must     | T-060 | `scripts/generate-umalqura.mjs` → `src/calendars/umalqura-table.ts` (ICU 77.1, 1300–1500 AH, ~1 KB); CI step "Umm al-Qura table matches ICU"; samples match van Gent (N-027) (#40) | ☑   |
+| R-HIJ-02 | Umm al-Qura `toJDN` / `fromJDN` from the table; outside the range, fall back to tabular and flag the result       | must     | T-061 |                                                                                                                                                                                    | ☐   |
+| R-HIJ-03 | `HijriSettings` (method, offset −2…+2, overrides) accepted by conversion, `today` and holidays                    | must     | T-062 |                                                                                                                                                                                    | ☐   |
+| R-HIJ-04 | Pipeline: base method → official overrides → user offset; the result records which step decided the date          | must     | T-063 |                                                                                                                                                                                    | ☐   |
+| R-HIJ-05 | Islamic holidays are `expected` until an override confirms the month start, then `confirmed` with the source      | must     | T-064 |                                                                                                                                                                                    | ☐   |
+| R-HIJ-06 | Bundled overrides seeded from recent confirmed Ethiopian Eid announcements, each with its source                  | must     | T-065 |                                                                                                                                                                                    | ☐   |
 
 ## F. Library quality (`@qen/core`, `@qen/react`)
 
