@@ -3,3 +3,102 @@
   font-family: var(--qen-font-family);
   font-variant-numeric: tabular-nums;
 }
+
+/* <CalendarGrid>. Today and the selection each carry a non-colour cue (weight, fill). */
+.qen-calendar {
+  display: inline-block;
+  padding: var(--qen-space-4);
+  border-radius: var(--qen-radius-lg);
+  background: var(--qen-color-surface);
+  box-shadow: var(--qen-shadow-2);
+  color: var(--qen-color-text);
+  font-family: var(--qen-font-family);
+  line-height: var(--qen-line-height-tight);
+}
+.qen-calendar__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--qen-space-2);
+  margin-bottom: var(--qen-space-3);
+}
+.qen-calendar__title {
+  margin: 0;
+  font-size: var(--qen-font-size-18);
+  font-weight: var(--qen-font-weight-semibold);
+}
+.qen-calendar__nav {
+  width: var(--qen-space-6);
+  height: var(--qen-space-6);
+  border: none;
+  border-radius: var(--qen-radius-md);
+  background: transparent;
+  color: var(--qen-color-text-muted);
+  font-size: var(--qen-font-size-20);
+  cursor: pointer;
+}
+.qen-calendar__nav:hover {
+  background: var(--qen-color-surface-muted);
+  color: var(--qen-color-text);
+}
+.qen-calendar__grid {
+  border-collapse: separate;
+  border-spacing: 0;
+}
+.qen-calendar__weekday {
+  height: var(--qen-space-6);
+  color: var(--qen-color-text-muted);
+  font-size: var(--qen-font-size-12);
+  font-weight: var(--qen-font-weight-regular);
+}
+.qen-calendar__day,
+.qen-calendar__empty {
+  width: var(--qen-space-7);
+  height: var(--qen-space-7);
+  padding: 0;
+  text-align: center;
+}
+.qen-calendar__day {
+  border-radius: var(--qen-radius-md);
+  font-size: var(--qen-font-size-16);
+  font-variant-numeric: tabular-nums;
+  cursor: pointer;
+}
+.qen-calendar__day:hover {
+  background: var(--qen-color-surface-muted);
+}
+.qen-calendar__day:focus-visible,
+.qen-calendar__nav:focus-visible {
+  outline: 2px solid var(--qen-color-focus);
+  outline-offset: 2px;
+}
+.qen-calendar__day[aria-current='date'] {
+  color: var(--qen-color-accent-text);
+  font-weight: var(--qen-font-weight-semibold);
+  text-decoration: underline;
+  text-underline-offset: var(--qen-space-1);
+}
+.qen-calendar__day[aria-selected='true'] {
+  background: var(--qen-color-accent);
+  color: var(--qen-color-on-accent);
+  font-weight: var(--qen-font-weight-semibold);
+}
+.qen-calendar__day[aria-disabled='true'] {
+  color: var(--qen-color-text-muted);
+  text-decoration: line-through;
+  cursor: not-allowed;
+}
+.qen-calendar__day[aria-disabled='true']:hover {
+  background: transparent;
+}
+/* Fits a 320 px viewport: 7 × 32 px cells plus padding. */
+@media (max-width: 400px) {
+  .qen-calendar {
+    padding: var(--qen-space-3);
+  }
+  .qen-calendar__day,
+  .qen-calendar__empty {
+    width: var(--qen-space-6);
+    height: var(--qen-space-6);
+  }
+}
