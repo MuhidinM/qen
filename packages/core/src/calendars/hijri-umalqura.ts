@@ -1,10 +1,4 @@
-import { InvalidDateError } from '../errors.js';
-import { hijri } from './hijri.js';
-import {
-  hijriTabularDaysInMonth,
-  hijriTabularFromJDN,
-  hijriTabularToJDN,
-} from './hijri-tabular.js';
+import { hijriTabularFromJDN, hijriTabularToJDN } from './hijri-tabular.js';
 import {
   UMALQURA_FIRST_YEAR,
   UMALQURA_LAST_YEAR,
@@ -42,23 +36,12 @@ export function umalquraCoversJDN(jdn: number): boolean {
 /**
  * Julian Day Number of a Hijri date under Umm al-Qura, falling back to tabular outside
  * 1300–1500 AH (both methods start 1300 and 1501 AH on the same day, so there is no seam).
- *
- * @throws {@link InvalidDateError} for a 30th the month does not have.
+ * Expects a day the month has; the Hijri pipeline checks month lengths.
  */
 export function umalquraToJDN(year: number, month: number, day: number): number {
   if (!umalquraCovers(year)) return hijriTabularToJDN(year, month, day);
   const index = (year - UMALQURA_FIRST_YEAR) * 12 + month - 1;
-  const start = startOf(index);
-  if (day > startOf(index + 1) - start) {
-    throw new InvalidDateError(
-      `${hijri.monthNames[month - 1]} ${day} does not exist in ${year} AH (Umm al-Qura method)`,
-      'hijri',
-      year,
-      month,
-      day,
-    );
-  }
-  return start + day - 1;
+  return startOf(index) + day - 1;
 }
 
 /** Hijri date of a Julian Day Number under Umm al-Qura, tabular outside the table. */
@@ -77,11 +60,4 @@ export function umalquraFromJDN(jdn: number): { year: number; month: number; day
     month: (lo % 12) + 1,
     day: jdn - startOf(lo) + 1,
   };
-}
-
-/** Length of a Hijri month under Umm al-Qura (tabular outside the table). */
-export function umalquraDaysInMonth(year: number, month: number): number {
-  if (!umalquraCovers(year)) return hijriTabularDaysInMonth(year, month);
-  const index = (year - UMALQURA_FIRST_YEAR) * 12 + month - 1;
-  return startOf(index + 1) - startOf(index);
 }

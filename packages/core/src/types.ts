@@ -54,8 +54,27 @@ export type HijriMethod = 'umalqura' | 'tabular';
  * ```
  */
 export interface ConvertOptions {
-  /** How Hijri dates are calculated; Umm al-Qura by default. */
-  readonly hijri?: { readonly method?: HijriMethod };
+  /** How Hijri dates are calculated and adjusted (ADR-0006). */
+  readonly hijri?: HijriSettings;
+}
+
+/**
+ * How Hijri dates are calculated and adjusted. Steps run in order (ADR-0006): the base
+ * `method`, then official overrides, then the user's `offset`.
+ *
+ * @example
+ * ```ts
+ * const settings: HijriSettings = { method: 'umalqura', offset: 1 };
+ * ```
+ */
+export interface HijriSettings {
+  /** Base calculation; Umm al-Qura by default. */
+  readonly method?: HijriMethod;
+  /**
+   * Whole days to move every month start, −2 to +2, to match local moon sighting. +1 means
+   * months start a day later, so a given day shows the previous Hijri date.
+   */
+  readonly offset?: -2 | -1 | 0 | 1 | 2;
 }
 
 /**
@@ -72,4 +91,6 @@ export interface HijriExplanation {
   readonly date: CalendarDate<'hijri'>;
   readonly method: HijriMethod;
   readonly fallback: boolean;
+  /** The last pipeline step that changed the result: the base method, or the user offset. */
+  readonly decidedBy: 'method' | 'offset';
 }
