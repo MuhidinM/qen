@@ -25,6 +25,8 @@ describe('date()', () => {
     const d = date('gregorian', 2026, 10, 17);
     expect(Object.isFrozen(d)).toBe(true);
     expect(JSON.parse(JSON.stringify(d))).toEqual(d);
+    // structuredClone exists in every supported runtime but not in the ES2022 type library.
+    const { structuredClone } = globalThis as unknown as { structuredClone: <T>(v: T) => T };
     expect(structuredClone(d)).toEqual(d);
   });
 
