@@ -1,0 +1,35 @@
+name: Task
+description: A planned piece of work from the backlog
+labels: []
+body:
+  - type: input
+    id: backlog
+    attributes:
+      label: Backlog ID and requirements
+      placeholder: 'T-0xx · R-CAL-01, R-CAL-02'
+    validations:
+      required: true
+  - type: textarea
+    id: why
+    attributes:
+      label: Why
+      description: One or two sentences on the user or project need.
+    validations:
+      required: true
+  - type: textarea
+    id: what
+    attributes:
+      label: What to do
+      value: |
+        - [ ]
+    validations:
+      required: true
+  - type: textarea
+    id: done
+    attributes:
+      label: Done when
+      value: |
+        - [ ]
+        - [ ] Meets the Definition of Done (docs/workflow.md)
+    validations:
+      required: true

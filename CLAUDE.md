@@ -6,15 +6,20 @@ Instructions for Claude Code working in this repository. Read this file and `PLA
 
 A multi-calendar toolkit for **Gregorian, Ethiopian, and Hijri** dates: conversion, arithmetic, formatting, holidays, and Hijri moon-sighting adjustment. It ships as developer packages on npm (`core`, `react`) and as user products built on those packages (website, browser extension, later a desktop app and hosted feeds).
 
-`PLAN.md` holds the full feature spec, the phased roadmap, and the task tracker. It is the source of truth.
+`PLAN.md` holds the product spec: vision, features, reference data and phase scope. It is the source of truth for _what_ to build. Status and the _how_ live in `docs/` and GitHub (see `docs/README.md`):
 
-**Working name:** `qen` (ቀን, "day"). This is a placeholder. Package names are `@qen/core`, `@qen/react`, etc. If the owner picks a different name, rename everywhere in one commit.
+- `docs/requirements.md`: requirement IDs with evidence
+- `docs/backlog.md` + GitHub issues/milestones (M0–M10 = Phases 0–10): the work and its status
+- `docs/decisions/`: ADRs · `docs/spec-notes.md`: gaps, conflicts, open questions
+- `docs/workflow.md`: working agreement, branches, PRs, Definition of Done
+
+**Name:** `qen` (ቀን, "day"), confirmed. Package names are `@qen/core`, `@qen/react`, etc. The owner owns the `@qen` npm org.
 
 ## How to work
 
 1. **One phase at a time, in order.** Phases go from easiest to hardest and each depends on the previous one. Don't start a phase until the previous phase's "Done when" is met, unless the owner says otherwise.
-2. **Find the next unchecked task** in `PLAN.md` → Tracker. Work on that one task. Keep commits small and scoped to it.
-3. **Update the tracker as you go.** Tick `[x]` when a task is complete and tested. Add a short dated entry to the Decisions Log in `PLAN.md` whenever you make a choice that isn't already written there.
+2. **Find the next open issue** in the current milestone (`docs/backlog.md`, respecting "Depends on"). Work on that one issue on its own branch and PR, following `docs/workflow.md`. Keep commits small and scoped to it. Skip `needs-owner` issues until the owner has answered.
+3. **Update the paper trail in the same PR.** Tick requirement rows with evidence, set the backlog status, close the issue with no empty checkboxes. Choices between real alternatives get an ADR; gaps and conflicts get a spec note; small choices get a dated entry in the `PLAN.md` Decisions log.
 4. **Tests first for all calendar logic.** Write the test cases (including the anchor dates in `PLAN.md`) before the implementation. Calendar bugs are silent and off-by-one; tests are the only defense.
 5. **Ask before guessing on facts.** Never invent holiday dates, month names in a language, or religious rules. If `PLAN.md` marks something **VERIFY**, or you are not certain, stop and ask the owner. Record the answer and its source in the Decisions Log.
 6. **Stop at the end of each phase** and summarize what was built, what's tested, and anything left open, before moving on.

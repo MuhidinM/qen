@@ -1,0 +1,23 @@
+name: Bug
+description: Something gives a wrong date, crashes, or behaves unexpectedly
+labels: ['bug']
+body:
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened
+      description: Include the exact input, e.g. `convert(date('ethiopian', 2015, 13, 6), 'gregorian')`.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: What you expected, and your source
+      description: For a wrong date, say where the correct date comes from (official calendar, announcement, etc.).
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Package, version and runtime
+      placeholder: '@qen/core 0.1.0, Node 22'
