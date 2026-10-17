@@ -12,8 +12,11 @@ import {
   UMALQURA_START_JDN,
 } from './umalqura-table.js';
 
-/** JDN of the 1st of every month in the table, plus 1 Muharram of the year after it. */
-const MONTH_STARTS: readonly number[] = (() => {
+/**
+ * JDN of the 1st of every month in the table, plus 1 Muharram of the year after it.
+ * Marked pure so bundlers drop the table when no Hijri code is imported.
+ */
+const MONTH_STARTS: readonly number[] = /* @__PURE__ */ (() => {
   const starts = [UMALQURA_START_JDN];
   for (let y = 0; y <= UMALQURA_LAST_YEAR - UMALQURA_FIRST_YEAR; y++) {
     const bits = parseInt(UMALQURA_MONTH_LENGTHS.slice(y * 3, y * 3 + 3), 16);
@@ -25,7 +28,6 @@ const MONTH_STARTS: readonly number[] = (() => {
 })();
 
 const startOf = (index: number): number => MONTH_STARTS[index] ?? Number.NaN;
-const TABLE_END = startOf(MONTH_STARTS.length - 1);
 
 /** Whether a Hijri year is inside the Umm al-Qura table; outside it, tabular is used. */
 export function umalquraCovers(year: number): boolean {
@@ -34,7 +36,7 @@ export function umalquraCovers(year: number): boolean {
 
 /** Whether a JDN falls inside the Umm al-Qura table. */
 export function umalquraCoversJDN(jdn: number): boolean {
-  return jdn >= UMALQURA_START_JDN && jdn < TABLE_END;
+  return jdn >= UMALQURA_START_JDN && jdn < startOf(MONTH_STARTS.length - 1);
 }
 
 /**

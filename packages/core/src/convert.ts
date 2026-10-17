@@ -28,9 +28,9 @@ const hijriMethod = (options: ConvertOptions) => HIJRI_METHODS[methodName(option
 
 /** First JDN of year 1 in each calendar (N-002). */
 const FIRST_JDN: Readonly<Record<CalendarId, number>> = {
-  gregorian: gregorianToJDN(1, 1, 1),
-  ethiopian: ethiopianToJDN(1, 1, 1),
-  hijri: hijriTabularToJDN(1, 1, 1),
+  gregorian: 1_721_426, // 1 January 1 (proleptic)
+  ethiopian: 1_724_221, // Meskerem 1, 1 EC
+  hijri: 1_948_440, // 1 Muharram 1 AH (tabular; before the Umm al-Qura table)
 };
 
 /**
