@@ -29,7 +29,7 @@ core  ◄──  feeds
 
 | Part      | Runs in                                                   | Ships as                             |
 | --------- | --------------------------------------------------------- | ------------------------------------ |
-| core      | Browsers, Node ≥ 20, Deno, Bun, service workers           | ESM + CJS + `.d.ts`, subpath exports |
+| core      | Browsers, Node ≥ 22, Deno, Bun, service workers           | ESM + CJS + `.d.ts`, subpath exports |
 | react     | Browsers (React 19), server rendering                     | ESM + CJS + `.d.ts` + CSS variables  |
 | web       | Static pages + client islands; service worker for offline | Deployed site                        |
 | extension | MV3 service worker, popup page, content scripts           | Zipped bundles per store             |
@@ -163,7 +163,7 @@ Choices for M6–M10 (components onward) are proposed and get their own ADRs whe
 | Exhaustive / property | core                    | Round trip for every day 1900–2100; ordering and arithmetic invariants                      |
 | Oracle cross-checks   | core (test-only code)   | `Intl` `ethiopic` / `islamic-civil` for every day 1900–2100; Meeus Julian Easter for Fasika |
 | Type tests            | core, react             | `expectTypeOf` for public types                                                             |
-| Runtime matrix        | core                    | Built package imported and smoke-tested in Node 20/22/24, Deno, Bun                         |
+| Runtime matrix        | core                    | Built package imported and smoke-tested in Node 22/24/26, Deno, Bun                         |
 | Component             | react                   | Testing Library by role; axe in light and dark; keyboard paths; RTL snapshot                |
 | End-to-end            | web, extension          | Playwright on production builds; extension loaded unpacked                                  |
 | Integration           | feeds                   | Handlers against a local instance; JSON schema contract for the override feed               |

@@ -80,7 +80,7 @@ Tasks (T-xxx) are listed in [backlog.md](backlog.md). IDs never change once crea
 | -------- | ------------------------------------------------------------------------------------------- | -------- | ----- | -------------------------------------------------- | --- |
 | R-LIB-01 | `core` has zero runtime dependencies                                                        | must     | T-001 | `packages/core/package.json` has no `dependencies` | ☑   |
 | R-LIB-02 | Ships ESM + CJS + type declarations, with an explicit `exports` map                         | must     | T-001 | `packages/core/dist`, commit 5acc559               | ☑   |
-| R-LIB-03 | Runs in Node (20, 22, 24), Deno, Bun, browsers and service workers; no DOM access in `core` | must     | T-003 |                                                    | ☐   |
+| R-LIB-03 | Runs in Node (22, 24, 26), Deno, Bun, browsers and service workers; no DOM access in `core` | must     | T-003 |                                                    | ☐   |
 | R-LIB-04 | Tree-shakable: functions, no import side effects (`sideEffects: false`)                     | must     | T-003 |                                                    | ◐   |
 | R-LIB-05 | Bundle size budget enforced in CI (size-limit)                                              | must     | T-003 |                                                    | ☐   |
 | R-LIB-06 | Package correctness checked in CI (publint, Are the Types Wrong)                            | must     | T-003 |                                                    | ☐   |
