@@ -48,6 +48,13 @@ Plain-language title. Body sections:
 
 CI must be green before merge. A user-facing package change includes a changeset.
 
+## Releasing a package
+
+1. Feature PRs add changesets (`pnpm changeset`); `release.yml` waits while any are pending.
+2. When a release is due: on a branch `chore/release-<version>`, run `pnpm changeset version` (bumps versions, writes CHANGELOG.md, deletes the changesets), run the release checklist in [requirements.md](requirements.md#release-checklist), open a "Version packages" PR.
+3. **The owner merges it.** That is the approval to publish: `release.yml` then publishes to npm with provenance and creates the git tag and GitHub release.
+4. Check `npm view @qen/<pkg> version` and install it in a fresh project.
+
 ## Definition of Done
 
 - [ ] The issue's "Done when" items are met; requirement rows ticked with evidence
