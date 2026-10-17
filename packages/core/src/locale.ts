@@ -1,4 +1,5 @@
 import type { EthiopianTimePeriod } from './ethiopian-time.js';
+import type { HolidayId } from './holidays/types.js';
 import type { CalendarId } from './types.js';
 
 /**
@@ -30,6 +31,8 @@ export interface Locale {
   readonly eras: Readonly<Record<CalendarId, { readonly short: string; readonly long: string }>>;
   /** Names of the Ethiopian time periods. */
   readonly periods: Readonly<Record<EthiopianTimePeriod, string>>;
+  /** Holiday names, keyed by holiday id. */
+  readonly holidays: Readonly<Record<HolidayId, string>>;
   /** False until a native speaker has reviewed the names (N-018, T-068). */
   readonly reviewed: boolean;
 }

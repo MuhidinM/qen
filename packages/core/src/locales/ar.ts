@@ -71,5 +71,21 @@ export const ar = defineLocale({
     hijri: { short: 'هـ', long: 'هجري' },
   },
   periods: { morning: 'صباحًا', afternoon: 'بعد الظهر', evening: 'مساءً', night: 'ليلًا' },
+  // Holidays: general usage, not yet reviewed (#55).
+  holidays: {
+    enkutatash: 'رأس السنة الإثيوبية',
+    meskel: 'عيد الصليب',
+    genna: 'عيد الميلاد الإثيوبي',
+    timket: 'عيد الغطاس',
+    adwa: 'يوم النصر في عدوة',
+    'labour-day': 'عيد العمال',
+    'patriots-victory': 'يوم انتصار الوطنيين',
+    'derg-downfall': 'يوم سقوط الدرغ',
+    siklet: 'الجمعة العظيمة',
+    fasika: 'عيد الفصح',
+    'eid-al-fitr': 'عيد الفطر',
+    'eid-al-adha': 'عيد الأضحى',
+    mawlid: 'المولد النبوي',
+  },
   reviewed: false,
 });

@@ -67,7 +67,7 @@ PLAN.md Phase 3. Done when confirmed fixed-date holidays are queryable by year, 
 | T-041 | [#30](https://github.com/MuhidinM/qen/issues/30) | Confirm the official public holiday list and leap-year rules | R-HOL-02 | S    | done   |
 | T-042 | [#31](https://github.com/MuhidinM/qen/issues/31) | Implement the fixed-date holidays                            | R-HOL-03 | M    | done   |
 | T-043 | [#32](https://github.com/MuhidinM/qen/issues/32) | Query holidays by year, date range and category              | R-HOL-04 | M    | done   |
-| T-044 | [#33](https://github.com/MuhidinM/qen/issues/33) | Add holiday names in all five locales                        | R-HOL-05 | M    | todo   |
+| T-044 | [#33](https://github.com/MuhidinM/qen/issues/33) | Add holiday names in all five locales                        | R-HOL-05 | M    | done   |
 
 ## M4 · Computed holidays
 

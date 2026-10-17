@@ -83,5 +83,22 @@ export const am = defineLocale({
     evening: 'በምሽት',
     night: 'በሌሊት',
   },
+  // Holidays: Adwa, Labour Day, Patriots and Meskel from Wikipedia, "Public holidays in
+  // Ethiopia"; ግንቦት 20 is the common name for the Downfall of the Derg; the rest general usage.
+  holidays: {
+    enkutatash: 'እንቁጣጣሽ',
+    meskel: 'መስቀል',
+    genna: 'ገና',
+    timket: 'ጥምቀት',
+    adwa: 'የዓድዋ ድል በዓል',
+    'labour-day': 'ዓለም አቀፍ የሠራተኞች ቀን',
+    'patriots-victory': 'የአርበኞች ቀን',
+    'derg-downfall': 'ግንቦት 20',
+    siklet: 'ስቅለት',
+    fasika: 'ፋሲካ',
+    'eid-al-fitr': 'ዒድ አል ፈጥር',
+    'eid-al-adha': 'ዒድ አል አድሐ',
+    mawlid: 'መውሊድ',
+  },
   reviewed: false,
 });
