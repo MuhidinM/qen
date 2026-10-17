@@ -88,7 +88,7 @@ PLAN.md Phase 5. Done when @qen/core@1.0.0 is published.
 
 | ID    | Issue                                            | Task                                                                  | Reqs                         | Size | Status             |
 | ----- | ------------------------------------------------ | --------------------------------------------------------------------- | ---------------------------- | ---- | ------------------ |
-| T-062 | [#42](https://github.com/MuhidinM/qen/issues/42) | Pass Hijri settings through conversion, today() and holidays          | R-HIJ-03                     | M    | todo               |
+| T-062 | [#42](https://github.com/MuhidinM/qen/issues/42) | Pass Hijri settings through conversion, today() and holidays          | R-HIJ-03                     | M    | done               |
 | T-063 | [#43](https://github.com/MuhidinM/qen/issues/43) | Apply official overrides and the user offset to Hijri dates           | R-HIJ-04                     | M    | todo               |
 | T-064 | [#44](https://github.com/MuhidinM/qen/issues/44) | Mark Islamic holidays as expected or confirmed                        | R-HIJ-05                     | S    | todo               |
 | T-065 | [#45](https://github.com/MuhidinM/qen/issues/45) | Seed overrides with recent confirmed Ethiopian Eid announcements      | R-HIJ-06                     | S    | todo               |

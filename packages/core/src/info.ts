@@ -1,9 +1,8 @@
 import { ethiopian, isEthiopianLeapYear } from './calendars/ethiopian.js';
 import { gregorian, isGregorianLeapYear } from './calendars/gregorian.js';
-import { hijriTabularDaysInMonth } from './calendars/hijri-tabular.js';
-import { umalquraDaysInMonth } from './calendars/hijri-umalqura.js';
 import { toJDN } from './convert.js';
 import { date } from './date.js';
+import { hijriMonthLength, resolve } from './hijri/pipeline.js';
 import type { CalendarDate, CalendarId, ConvertOptions } from './types.js';
 
 /**
@@ -60,9 +59,7 @@ export function daysInMonth(
     case 'ethiopian':
       return ethiopian.maxDay(year, month);
     case 'hijri':
-      return options.hijri?.method === 'tabular'
-        ? hijriTabularDaysInMonth(year, month)
-        : umalquraDaysInMonth(year, month);
+      return hijriMonthLength(year, month, resolve(options));
   }
 }
 
