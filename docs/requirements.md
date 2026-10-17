@@ -149,18 +149,18 @@ Refined into detailed rows when milestone M6 starts.
 
 ## L. Cross-cutting (all products)
 
-| ID        | Requirement                                                                              | Priority | Task         | Evidence                                     | ✓   |
-| --------- | ---------------------------------------------------------------------------------------- | -------- | ------------ | -------------------------------------------- | --- |
-| R-A11Y-01 | WCAG 2.2 AA: keyboard navigation, ARIA grid and dialog roles, visible focus, AA contrast | must     | T-100–T-140  |                                              | ☐   |
-| R-A11Y-02 | Responsive from 320 px; reduced motion respected                                         | must     | T-100–T-120  |                                              | ☐   |
-| R-I18N-01 | Locales: Amharic, Afaan Oromo, Tigrinya, English, Arabic; Ge'ez numerals optional        | must     | T-025, T-026 |                                              | ☐   |
-| R-SEC-01  | No secrets committed; `.env*` ignored except `.env.example`                              | must     | T-001        | `.gitignore`                                 | ◐   |
-| R-SEC-02  | Dependency updates automated; lockfile with frozen install in CI                         | must     | T-005        | `pnpm install --frozen-lockfile` in `ci.yml` | ◐   |
-| R-CQ-01   | Strict TypeScript, no `any` in public APIs; lint with zero warnings; Prettier            | must     | T-001        | `tsconfig.base.json`, `eslint.config.js`     | ☑   |
-| R-CQ-02   | CI runs lint, typecheck, test and build on every push and PR, required on `main`         | must     | T-001, T-004 | CI run 38405098068 green                     | ◐   |
-| R-CQ-03   | Pre-commit hook for format and lint; tests before push                                   | should   | T-002        |                                              | ☐   |
-| R-CQ-04   | Apps contain no calendar logic; dependency direction enforced by a lint rule             | must     | T-003        |                                              | ☐   |
-| R-CQ-05   | Tests are deterministic: no real network, fixed clock and time zone                      | must     | T-003        |                                              | ☐   |
+| ID        | Requirement                                                                              | Priority | Task         | Evidence                                                                                                            | ✓   |
+| --------- | ---------------------------------------------------------------------------------------- | -------- | ------------ | ------------------------------------------------------------------------------------------------------------------- | --- |
+| R-A11Y-01 | WCAG 2.2 AA: keyboard navigation, ARIA grid and dialog roles, visible focus, AA contrast | must     | T-100–T-140  |                                                                                                                     | ☐   |
+| R-A11Y-02 | Responsive from 320 px; reduced motion respected                                         | must     | T-100–T-120  |                                                                                                                     | ☐   |
+| R-I18N-01 | Locales: Amharic, Afaan Oromo, Tigrinya, English, Arabic; Ge'ez numerals optional        | must     | T-025, T-026 |                                                                                                                     | ☐   |
+| R-SEC-01  | No secrets committed; `.env*` ignored except `.env.example`                              | must     | T-001        | `.gitignore`                                                                                                        | ◐   |
+| R-SEC-02  | Dependency updates automated; lockfile with frozen install in CI                         | must     | T-005        | `pnpm install --frozen-lockfile` in `ci.yml`                                                                        | ◐   |
+| R-CQ-01   | Strict TypeScript, no `any` in public APIs; lint with zero warnings; Prettier            | must     | T-001        | `tsconfig.base.json`, `eslint.config.js`                                                                            | ☑   |
+| R-CQ-02   | CI runs lint, typecheck, test and build on every push and PR, required on `main`         | must     | T-001, T-004 | CI run 38405098068 green; `main` protection requires `ci` (strict), no force push or deletion, admins included (#5) | ☑   |
+| R-CQ-03   | Pre-commit hook for format and lint; tests before push                                   | should   | T-002        |                                                                                                                     | ☐   |
+| R-CQ-04   | Apps contain no calendar logic; dependency direction enforced by a lint rule             | must     | T-003        |                                                                                                                     | ☐   |
+| R-CQ-05   | Tests are deterministic: no real network, fixed clock and time zone                      | must     | T-003        |                                                                                                                     | ☐   |
 
 ## X. Extras (proposed, not in PLAN.md)
 
