@@ -68,7 +68,9 @@ describe('parse(): calendar detection', () => {
   });
 
   it('throws when the marker and the month name disagree', () => {
-    expect(() => parse('17 Ramadan 2019 EC', { locales })).toThrow('says ethiopian');
+    expect(() => parse('17 Ramadan 2019 EC', { locales })).toThrow(
+      /month name says hijri, but other signals say ethiopian/,
+    );
   });
 
   it('resolves names shared by two calendars with a marker (Oromo, Tigrinya)', () => {
@@ -128,6 +130,22 @@ describe('parse(): errors', () => {
 
   it('rejects two numbers that could both be the day', () => {
     expect(() => parse('Meskerem 17 12', { locales })).toThrow(RangeError);
+  });
+
+  it('still refuses to guess when only one calendar can read the numbers', () => {
+    // Month 13 exists only in the Ethiopian calendar, but nothing in the text says so.
+    let error: unknown;
+    try {
+      parse('5/13/2018');
+    } catch (e) {
+      error = e;
+    }
+    expect(error).toBeInstanceOf(AmbiguousDateError);
+    expect((error as AmbiguousDateError).candidates).toEqual([date('ethiopian', 2018, 13, 5)]);
+  });
+
+  it('reports an invalid date when no calendar can read it', () => {
+    expect(() => parse('30/13/2018')).toThrow(InvalidDateError);
   });
 
   it('rejects dates that do not exist', () => {
