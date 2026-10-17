@@ -90,28 +90,51 @@ describe("boundary: 'midnight'", () => {
 });
 
 describe('sunsetUTCMinutes() (NOAA solar algorithm)', () => {
-  // Published by sunrise-sunset.org (api.sunrise-sunset.org, read 2026-10-17), UTC.
+  const minutesOf = (hms: string) => {
+    const [h = 0, m = 0, sec = 0] = hms.split(':').map(Number);
+    return h * 60 + m + sec / 60;
+  };
+
+  // Primary reference: Open-Meteo forecast API (api.open-meteo.com, daily=sunset, GMT, read
+  // 2026-10-17). It truncates to the minute, so ours must fall inside that minute (±0.5 min slack).
+  it.each([
+    ['Addis Ababa', ADDIS, [2026, 10, 17], '15:07'],
+    ['Addis Ababa', ADDIS, [2026, 10, 24], '15:04'],
+    ['Addis Ababa', ADDIS, [2026, 10, 30], '15:03'],
+    ['Mecca', MECCA, [2026, 10, 17], '14:54'],
+    ['Mecca', MECCA, [2026, 10, 24], '14:49'],
+    ['Mecca', MECCA, [2026, 10, 30], '14:45'],
+    ['London', LONDON, [2026, 10, 17], '17:03'],
+    ['London', LONDON, [2026, 10, 24], '16:48'],
+    ['London', LONDON, [2026, 10, 30], '16:37'],
+  ] as const)('%s %j: sunset in the minute %s UTC (Open-Meteo)', (_, loc, [y, m, d], hm) => {
+    const ours = sunsetUTCMinutes(g(y, m, d), loc);
+    expect(ours).toBeGreaterThanOrEqual(minutesOf(hm) - 0.5);
+    expect(ours).toBeLessThan(minutesOf(hm) + 1.5);
+  });
+
+  // Second reference across the seasons: sunrise-sunset.org (api.sunrise-sunset.org, read
+  // 2026-10-17). It runs 1–2.3 minutes later than Open-Meteo and NOAA's equations, so the
+  // tolerance is 2.5 minutes (N-028).
   it.each([
     ['Addis Ababa', ADDIS, [2026, 1, 15], '15:25:09'],
     ['Addis Ababa', ADDIS, [2026, 3, 20], '15:36:55'],
     ['Addis Ababa', ADDIS, [2026, 6, 21], '15:47:29'],
-    ['Addis Ababa', ADDIS, [2026, 10, 17], '15:08:56'],
     ['Addis Ababa', ADDIS, [2026, 12, 21], '15:12:08'],
     ['Mecca', MECCA, [2026, 1, 15], '15:00:23'],
     ['Mecca', MECCA, [2026, 3, 20], '15:32:46'],
     ['Mecca', MECCA, [2026, 6, 21], '16:06:53'],
-    ['Mecca', MECCA, [2026, 10, 17], '14:56:05'],
     ['Mecca', MECCA, [2026, 12, 21], '14:44:46'],
     ['London', LONDON, [2026, 1, 15], '16:22:38'],
     ['London', LONDON, [2026, 3, 20], '18:14:49'],
     ['London', LONDON, [2026, 6, 21], '20:23:44'],
-    ['London', LONDON, [2026, 10, 17], '17:05:18'],
     ['London', LONDON, [2026, 12, 21], '15:55:33'],
-  ] as const)('%s %j: sunset %s UTC within 2 minutes', (_, loc, [y, m, d], hms) => {
-    const [h, min, s] = hms.split(':').map(Number) as [number, number, number];
-    const published = h * 60 + min + s / 60;
-    expect(Math.abs(sunsetUTCMinutes(g(y, m, d), loc) - published)).toBeLessThanOrEqual(2);
-  });
+  ] as const)(
+    '%s %j: sunset %s UTC within 2.5 minutes (sunrise-sunset.org)',
+    (_, loc, [y, m, d], hms) => {
+      expect(Math.abs(sunsetUTCMinutes(g(y, m, d), loc) - minutesOf(hms))).toBeLessThanOrEqual(2.5);
+    },
+  );
 
   it('rejects impossible coordinates', () => {
     expect(() => sunsetUTCMinutes(g(2026, 1, 1), { latitude: 91, longitude: 0 })).toThrow(
