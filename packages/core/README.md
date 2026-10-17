@@ -169,9 +169,8 @@ Ethiopian public holidays, filterable by category (`public` by default, plus `or
 ```ts
 import { date, getHolidays, getHolidaysInRange, nextHoliday } from '@qen/core';
 
-getHolidays(2026)
-  .map((h) => h.id)
-  .slice(0, 5); // => ['genna', 'timket', 'adwa', 'siklet', 'fasika']
+const holidays2026 = getHolidays(2026).map((h) => h.id);
+holidays2026.slice(0, 5); // => ['genna', 'timket', 'adwa', 'siklet', 'fasika']
 getHolidays(2027).find((h) => h.id === 'fasika')?.gregorian; // => { calendar: 'gregorian', year: 2027, month: 5, day: 2 }
 getHolidays(2026, { categories: ['orthodox'] }).length; // => 14
 nextHoliday(date('gregorian', 2026, 9, 12))?.date; // => { calendar: 'ethiopian', year: 2019, month: 1, day: 17 }
