@@ -6,10 +6,10 @@ A multi-calendar toolkit for **Gregorian, Ethiopian, and Hijri** dates: conversi
 
 ## Packages
 
-| Package                      | Description                                                                                                  |
-| ---------------------------- | ------------------------------------------------------------------------------------------------------------ |
-| [`@qen/core`](packages/core) | Zero-dependency calendar engine: conversion, arithmetic, formatting, parsing, Ge'ez numerals, Ethiopian time |
-| `@qen/react` (planned)       | React components and design tokens                                                                           |
+| Package                        | Description                                                                                                  |
+| ------------------------------ | ------------------------------------------------------------------------------------------------------------ |
+| [`@qen/core`](packages/core)   | Zero-dependency calendar engine: conversion, arithmetic, formatting, parsing, Ge'ez numerals, Ethiopian time |
+| [`@qen/react`](packages/react) | Accessible React components and design tokens (in progress)                                                  |
 
 ## Development
 
