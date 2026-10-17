@@ -10,4 +10,12 @@ const runtime =
       : `Node ${process.version}`;
 
 if (typeof core !== 'object' || core === null) throw new Error('ESM import of @qen/core failed');
+if (core.date('ethiopian', 2019, 1, 17).day !== 17)
+  throw new Error('date() returned a wrong value');
+try {
+  core.date('ethiopian', 2018, 13, 6);
+  throw new Error('date() accepted Pagume 6, 2018 EC');
+} catch (e) {
+  if (!(e instanceof core.InvalidDateError)) throw e;
+}
 console.log(`ESM ok on ${runtime}: [${Object.keys(core).join(', ')}]`);
