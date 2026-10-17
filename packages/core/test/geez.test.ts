@@ -25,7 +25,7 @@ describe('toGeezNumeral()', () => {
     [10_100, '፼፻'],
     [20_000, '፪፼'],
     [83_692, '፰፼፴፮፻፺፪'], // (W)
-    [99_999, '፺፱፼፺፱፻፺፱'],
+    [99_999, '፱፼፺፱፻፺፱'], // groups 9 | 99 | 99
     [1_000_000, '፻፼'],
     [1_010_000, '፻፩፼'], // even-index group of 1 that isn't the leading one keeps ፩
     [78_010_092, '፸፰፻፩፼፺፪'], // CSS spec input, output derived from the spec text

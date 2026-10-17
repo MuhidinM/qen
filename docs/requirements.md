@@ -37,15 +37,15 @@ Tasks (T-xxx) are listed in [backlog.md](backlog.md). IDs never change once crea
 
 ## C. Formatting, parsing and locales
 
-| ID       | Requirement                                                                                                                              | Priority | Task  | Evidence | ✓   |
-| -------- | ---------------------------------------------------------------------------------------------------------------------------------------- | -------- | ----- | -------- | --- |
-| R-FMT-01 | Locale data for English and Amharic: month names, weekday names, era labels                                                              | must     | T-025 |          | ☐   |
-| R-FMT-02 | Locale data for Afaan Oromo, Tigrinya and Arabic, each verified by a native speaker                                                      | must     | T-026 |          | ☐   |
-| R-FMT-03 | Each locale is a separate import so unused locales add no bytes                                                                          | must     | T-025 |          | ☐   |
-| R-FMT-04 | `format(d, pattern, { locale, numerals })` with numerals `latin`, `geez`, `arabic`                                                       | must     | T-028 |          | ☐   |
-| R-FMT-05 | `toGeezNumeral` / `fromGeezNumeral`, tested up to 99,999                                                                                 | must     | T-027 |          | ☐   |
-| R-FMT-06 | `parse(input, { calendar?, locale? })` detects the calendar for `17/01/2019 EC`, `Meskerem 17, 2019`, `መስከረም 17 2019`, `15 Ramadan 1447` | must     | T-029 |          | ☐   |
-| R-FMT-07 | Ambiguous input (no calendar marker) is never silently guessed (see N-011)                                                               | must     | T-029 |          | ☐   |
+| ID       | Requirement                                                                                                                              | Priority | Task  | Evidence                                                                                                                 | ✓   |
+| -------- | ---------------------------------------------------------------------------------------------------------------------------------------- | -------- | ----- | ------------------------------------------------------------------------------------------------------------------------ | --- |
+| R-FMT-01 | Locale data for English and Amharic: month names, weekday names, era labels                                                              | must     | T-025 |                                                                                                                          | ☐   |
+| R-FMT-02 | Locale data for Afaan Oromo, Tigrinya and Arabic, each verified by a native speaker                                                      | must     | T-026 |                                                                                                                          | ☐   |
+| R-FMT-03 | Each locale is a separate import so unused locales add no bytes                                                                          | must     | T-025 |                                                                                                                          | ☐   |
+| R-FMT-04 | `format(d, pattern, { locale, numerals })` with numerals `latin`, `geez`, `arabic`                                                       | must     | T-028 |                                                                                                                          | ☐   |
+| R-FMT-05 | `toGeezNumeral` / `fromGeezNumeral`, tested up to 99,999                                                                                 | must     | T-027 | `src/geez.ts`; `test/geez.test.ts`: W3C ethiopic-numeric algorithm, Wikipedia examples, unique round trip 1–99,999 (#22) | ☑   |
+| R-FMT-06 | `parse(input, { calendar?, locale? })` detects the calendar for `17/01/2019 EC`, `Meskerem 17, 2019`, `መስከረም 17 2019`, `15 Ramadan 1447` | must     | T-029 |                                                                                                                          | ☐   |
+| R-FMT-07 | Ambiguous input (no calendar marker) is never silently guessed (see N-011)                                                               | must     | T-029 |                                                                                                                          | ☐   |
 
 ## D. Holidays and observances
 
