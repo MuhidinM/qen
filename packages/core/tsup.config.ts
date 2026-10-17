@@ -5,6 +5,9 @@ export default defineConfig({
     index: 'src/index.ts',
     'locales/en': 'src/locales/en.ts',
     'locales/am': 'src/locales/am.ts',
+    'locales/om': 'src/locales/om.ts',
+    'locales/ti': 'src/locales/ti.ts',
+    'locales/ar': 'src/locales/ar.ts',
   },
   format: ['esm', 'cjs'],
   // tsup's dts step injects `baseUrl`, which TypeScript 6 flags as deprecated.

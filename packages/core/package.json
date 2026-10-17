@@ -39,6 +39,36 @@
         "default": "./dist/locales/am.cjs"
       }
     },
+    "./locales/om": {
+      "import": {
+        "types": "./dist/locales/om.d.ts",
+        "default": "./dist/locales/om.js"
+      },
+      "require": {
+        "types": "./dist/locales/om.d.cts",
+        "default": "./dist/locales/om.cjs"
+      }
+    },
+    "./locales/ti": {
+      "import": {
+        "types": "./dist/locales/ti.d.ts",
+        "default": "./dist/locales/ti.js"
+      },
+      "require": {
+        "types": "./dist/locales/ti.d.cts",
+        "default": "./dist/locales/ti.cjs"
+      }
+    },
+    "./locales/ar": {
+      "import": {
+        "types": "./dist/locales/ar.d.ts",
+        "default": "./dist/locales/ar.js"
+      },
+      "require": {
+        "types": "./dist/locales/ar.d.cts",
+        "default": "./dist/locales/ar.cjs"
+      }
+    },
     "./package.json": "./package.json"
   },
   "files": [
@@ -99,6 +129,21 @@
     {
       "name": "locale: am",
       "path": "dist/locales/am.js",
+      "limit": "1.5 kB"
+    },
+    {
+      "name": "locale: om",
+      "path": "dist/locales/om.js",
+      "limit": "1.5 kB"
+    },
+    {
+      "name": "locale: ti",
+      "path": "dist/locales/ti.js",
+      "limit": "1.5 kB"
+    },
+    {
+      "name": "locale: ar",
+      "path": "dist/locales/ar.js",
       "limit": "1.5 kB"
     }
   ]
