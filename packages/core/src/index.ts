@@ -16,3 +16,4 @@ export { date, isValid } from './date.js';
 export { convert, explainHijri, fromJDN, toJDN } from './convert.js';
 export type { DayBoundary, GeoLocation, InstantOptions } from './day-boundary.js';
 export { fromJSDate, toJSDate, type ToJSDateOptions } from './js-date.js';
+export { dayOfWeek, daysInMonth, isLeapYear, monthsInYear } from './info.js';
