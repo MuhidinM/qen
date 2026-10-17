@@ -117,9 +117,33 @@
   },
   "size-limit": [
     {
-      "name": "main entry (everything, no locales)",
+      "name": "everything (main entry)",
       "path": "dist/index.js",
-      "limit": "5 kB"
+      "limit": "6 kB"
+    },
+    {
+      "name": "{ date, convert } (includes the Umm al-Qura table)",
+      "path": "dist/index.js",
+      "import": "{ date, convert }",
+      "limit": "2.5 kB"
+    },
+    {
+      "name": "{ format }",
+      "path": "dist/index.js",
+      "import": "{ format }",
+      "limit": "3 kB"
+    },
+    {
+      "name": "{ toGeezNumeral }",
+      "path": "dist/index.js",
+      "import": "{ toGeezNumeral }",
+      "limit": "500 B"
+    },
+    {
+      "name": "{ toEthiopianTime }",
+      "path": "dist/index.js",
+      "import": "{ toEthiopianTime }",
+      "limit": "400 B"
     },
     {
       "name": "locale: en",

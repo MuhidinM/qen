@@ -20,6 +20,7 @@ export { today, type TodayOptions } from './today.js';
 export { fromGeezNumeral, toGeezNumeral } from './geez.js';
 export { fromEthiopianTime, toEthiopianTime, type EthiopianTimePeriod } from './ethiopian-time.js';
 export type { Locale } from './locale.js';
+export { format, type FormatOptions, type NumeralSystem } from './format.js';
 export { dayOfWeek, daysInMonth, isLeapYear, monthsInYear } from './info.js';
 export { addDays, addMonths, addYears } from './arithmetic.js';
 export { age, compare, diff, isSame, type DiffUnit } from './compare.js';

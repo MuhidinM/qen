@@ -90,6 +90,9 @@ describe('format(): literals and errors', () => {
     expect(() => format(meskel, 'Q')).toThrow('Unknown pattern token "Q"');
     expect(() => format(meskel, 'MMMMM')).toThrow('Unknown pattern token "MMMMM"');
     expect(() => format(meskel, 'ddd')).toThrow(RangeError);
+    for (const t of ['yyy', 'yyyyy', 'EEEEE', 'GGGGG']) {
+      expect(() => format(meskel, t, { locale: en }), t).toThrow(`Unknown pattern token "${t}"`);
+    }
     expect(() => format(meskel, "'unclosed")).toThrow('Unclosed quote in pattern');
   });
 
