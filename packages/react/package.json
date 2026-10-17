@@ -73,6 +73,17 @@
         "@qen/core"
       ],
       "limit": "1 kB"
+    },
+    {
+      "name": "{ CalendarGrid } without React and @qen/core",
+      "path": "dist/index.js",
+      "import": "{ CalendarGrid }",
+      "ignore": [
+        "react",
+        "react-dom",
+        "@qen/core"
+      ],
+      "limit": "2 kB"
     }
   ],
   "devDependencies": {
