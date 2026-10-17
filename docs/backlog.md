@@ -15,7 +15,7 @@ Monorepo, tooling, CI and project docs. Done when an empty core package builds, 
 | T-002 | [#3](https://github.com/MuhidinM/qen/issues/3) | Run format and lint before each commit, and tests before each push                             | R-CQ-03                                                  | S    | done   |
 | T-003 | [#4](https://github.com/MuhidinM/qen/issues/4) | Check the published package in every supported runtime and enforce size and import rules in CI | R-LIB-03, R-LIB-04, R-LIB-05, R-LIB-06, R-CQ-04, R-CQ-05 | M    | done   |
 | T-004 | [#5](https://github.com/MuhidinM/qen/issues/5) | Require green CI before merging to main                                                        | R-CQ-02                                                  | S    | done   |
-| T-005 | [#6](https://github.com/MuhidinM/qen/issues/6) | Keep dependencies up to date automatically                                                     | R-SEC-02                                                 | S    | todo   |
+| T-005 | [#6](https://github.com/MuhidinM/qen/issues/6) | Keep dependencies up to date automatically                                                     | R-SEC-02                                                 | S    | done   |
 
 ## M1 · Calendar conversion
 
