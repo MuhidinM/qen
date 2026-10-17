@@ -84,6 +84,17 @@
         "@qen/core"
       ],
       "limit": "3 kB"
+    },
+    {
+      "name": "{ DatePicker } without React and @qen/core",
+      "path": "dist/index.js",
+      "import": "{ DatePicker }",
+      "ignore": [
+        "react",
+        "react-dom",
+        "@qen/core"
+      ],
+      "limit": "4.5 kB"
     }
   ],
   "devDependencies": {

@@ -13,3 +13,4 @@ export {
   type CalendarGridProps,
   type VisibleMonth,
 } from './CalendarGrid.js';
+export { DatePicker, type DatePickerLabels, type DatePickerProps } from './DatePicker.js';
