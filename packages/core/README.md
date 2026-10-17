@@ -193,6 +193,8 @@ march10.map((o) => o.id); // => ['abiy-tsom', 'ramadan']
 march10[1]?.endGregorian; // => { calendar: 'gregorian', year: 2026, month: 3, day: 19 }
 ```
 
+`isWeeklyFast(date)` flags the Wednesday and Friday fasts, which are lifted from Fasika to Peraklitos and when Genna or Timket falls on them.
+
 ## Ge'ez numerals and Ethiopian time
 
 ```ts
