@@ -11,6 +11,7 @@ import {
   isSame,
   toJDN,
   type CalendarId,
+  type DiffUnit,
 } from '../src/index.js';
 
 describe('compare() and isSame()', () => {
@@ -96,9 +97,9 @@ describe('diff(from, to, unit) = to − from', () => {
     const bad = { calendar: 'gregorian', year: 2025, month: 2, day: 29 } as const;
     expect(() => diff(bad, date('gregorian', 2026, 1, 1), 'days')).toThrow(InvalidDateError);
     expect(() => compare(date('gregorian', 2026, 1, 1), bad)).toThrow(InvalidDateError);
-    // @ts-expect-error: not a unit
-    expect(() =>
-      diff(date('gregorian', 2026, 1, 1), date('gregorian', 2026, 1, 2), 'hours'),
-    ).toThrow('Unknown unit "hours": expected days, weeks, months or years');
+    const hours = 'hours' as unknown as DiffUnit;
+    expect(() => diff(date('gregorian', 2026, 1, 1), date('gregorian', 2026, 1, 2), hours)).toThrow(
+      'Unknown unit "hours": expected days, weeks, months or years',
+    );
   });
 });
