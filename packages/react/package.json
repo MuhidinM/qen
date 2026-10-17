@@ -57,7 +57,7 @@
     "test": "vitest run --coverage",
     "test:watch": "vitest",
     "typecheck": "tsc --noEmit",
-    "check:package": "publint --strict && attw --pack . --profile node16",
+    "check:package": "publint --strict && attw --pack . --profile node16 --exclude-entrypoints styles.css",
     "size": "size-limit",
     "stories": "ladle serve",
     "build:stories": "ladle build"

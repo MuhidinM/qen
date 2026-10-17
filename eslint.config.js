@@ -1,12 +1,20 @@
 import js from '@eslint/js';
 import tseslint from 'typescript-eslint';
 import prettier from 'eslint-config-prettier';
+import jsxA11y from 'eslint-plugin-jsx-a11y';
+import reactHooks from 'eslint-plugin-react-hooks';
 
 export default tseslint.config(
-  { ignores: ['**/dist/**', '**/coverage/**', '**/.turbo/**', '**/docs-api/**'] },
+  { ignores: ['**/dist/**', '**/coverage/**', '**/.turbo/**', '**/docs-api/**', '**/build/**'] },
   js.configs.recommended,
   ...tseslint.configs.strict,
   prettier,
+  {
+    // React components (ADR-0015): rules of hooks and accessibility checks.
+    files: ['packages/react/**/*.tsx'],
+    plugins: { 'react-hooks': reactHooks, 'jsx-a11y': jsxA11y },
+    rules: { ...reactHooks.configs.recommended.rules, ...jsxA11y.configs.strict.rules },
+  },
   {
     rules: {
       '@typescript-eslint/no-explicit-any': 'error',

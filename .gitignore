@@ -9,3 +9,4 @@ notes/private/
 docs-api/
 .readme-check/
 temp/
+/build/

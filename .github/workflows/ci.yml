@@ -36,6 +36,11 @@ jobs:
         run: pnpm --filter @qen/core check:readme
       - name: Bundle size budget
         run: pnpm --filter @qen/core size
+      - name: '@qen/react package correctness, size and stories'
+        run: |
+          pnpm --filter @qen/react check:package
+          pnpm --filter @qen/react size
+          pnpm --filter @qen/react build:stories
 
   test:
     name: test (TZ=${{ matrix.tz }})

@@ -1,0 +1,45 @@
+{
+  "about": {
+    "homepage": "https://www.ladle.dev",
+    "github": "https://github.com/tajo/ladle",
+    "version": 1
+  },
+  "stories": {
+    "date-text--amharic-geez": {
+      "name": "Amharic geez",
+      "levels": ["Date text"],
+      "locStart": 11,
+      "locEnd": 11,
+      "filePath": "src/DateText.stories.tsx",
+      "namedExport": "AmharicGeez",
+      "meta": {}
+    },
+    "date-text--arabic-hijri": {
+      "name": "Arabic hijri",
+      "levels": ["Date text"],
+      "locStart": 12,
+      "locEnd": 14,
+      "filePath": "src/DateText.stories.tsx",
+      "namedExport": "ArabicHijri",
+      "meta": {}
+    },
+    "date-text--english": {
+      "name": "English",
+      "levels": ["Date text"],
+      "locStart": 10,
+      "locEnd": 10,
+      "filePath": "src/DateText.stories.tsx",
+      "namedExport": "English",
+      "meta": {}
+    },
+    "date-text--numeric": {
+      "name": "Numeric",
+      "levels": ["Date text"],
+      "locStart": 9,
+      "locEnd": 9,
+      "filePath": "src/DateText.stories.tsx",
+      "namedExport": "Numeric",
+      "meta": {}
+    }
+  }
+}

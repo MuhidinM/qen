@@ -1,0 +1,4 @@
+/* @qen/react styles. Design tokens arrive with #112; component styles use only them. */
+.qen-date-text {
+  font-variant-numeric: tabular-nums;
+}
