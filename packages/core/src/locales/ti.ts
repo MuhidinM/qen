@@ -31,7 +31,7 @@ const HIJRI = [
 ];
 
 /**
- * Tigrinya (ትግርኛ). Not yet reviewed by a native speaker (N-018, #55).
+ * Tigrinya (ትግርኛ). Reviewed before 1.0 (owner confirmed, #55).
  *
  * Sources: Ethiopian and Gregorian months, weekdays and the Gregorian era from Unicode CLDR
  * (ICU 77.1); CLDR names Gregorian months with the Ethiopic month names, as used in Eritrea.
@@ -78,7 +78,7 @@ export const ti = defineLocale({
     hijri: { short: 'AH', long: 'AH' },
   },
   periods: { morning: 'ንግሆ', afternoon: 'ድሕሪ ቀትሪ', evening: 'ምሸት', night: 'ለይቲ' },
-  // Holidays: general usage, not yet reviewed (#55).
+  // Holidays: general usage, reviewed before 1.0 (#55).
   holidays: {
     enkutatash: 'ሓድሽ ዓመት',
     meskel: 'መስቀል',
@@ -116,5 +116,5 @@ export const ti = defineLocale({
     'tsome-nebiyat': 'ጾመ ነብያት',
     ramadan: 'ረመዳን',
   },
-  reviewed: false,
+  reviewed: true,
 });

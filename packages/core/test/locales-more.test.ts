@@ -63,8 +63,8 @@ describe.each<[string, Locale, 'ltr' | 'rtl']>([
     expect(Object.isFrozen(locale.months)).toBe(true);
   });
 
-  it('is marked for native-speaker review before 1.0 (N-018, #55)', () => {
-    expect(locale.reviewed).toBe(false);
+  it('is marked reviewed (owner confirmed, #55)', () => {
+    expect(locale.reviewed).toBe(true);
   });
 });
 
