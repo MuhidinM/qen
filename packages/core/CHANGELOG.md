@@ -1,5 +1,13 @@
 # @qen/core
 
+## 0.2.0
+
+### Minor Changes
+
+- 8ec36e2: Add the holiday types: `Holiday`, `HolidayId`, `HolidayCategory`, `HolidayRule` and `HolidayStatus`.
+- 46eb498: Add holiday names to every locale (`locale.holidays[id]`), covering all 13 Ethiopian public holidays including Fasika, Siklet and the Islamic holidays. Names other than English are not yet reviewed by native speakers.
+- 90de466: Add Ethiopian public holidays with `getHolidays(year)`, `getHolidaysInRange(start, end)` and `nextHoliday(from)`, filterable by category (public by default). Includes the fixed-date holidays: Enkutatash, Meskel, Genna, Timket, Adwa, Labour Day, Patriots' Victory and the Downfall of the Derg.
+
 ## 0.1.0
 
 ### Minor Changes
