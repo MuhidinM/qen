@@ -26,3 +26,26 @@ export interface CalendarDate<C extends CalendarId = CalendarId> {
   readonly month: number;
   readonly day: number;
 }
+
+/**
+ * How Hijri dates are calculated. `'tabular'` is the arithmetic 30-year cycle (civil epoch).
+ * Umm al-Qura is added before the first release and becomes the default (N-008).
+ *
+ * @example
+ * ```ts
+ * const method: HijriMethod = 'tabular';
+ * ```
+ */
+export type HijriMethod = 'tabular';
+
+/**
+ * Options for functions that map Hijri dates to days.
+ *
+ * @example
+ * ```ts
+ * convert(date('gregorian', 2026, 2, 18), 'hijri', { hijri: { method: 'tabular' } });
+ * ```
+ */
+export interface ConvertOptions {
+  readonly hijri?: { readonly method?: HijriMethod };
+}
