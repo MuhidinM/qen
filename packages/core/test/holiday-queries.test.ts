@@ -31,7 +31,7 @@ describe('getHolidays(gregorianYear, options)', () => {
     expect(orthodox).toContain('meskel');
     expect(orthodox).not.toContain('adwa');
     expect(ids(getHolidays(2026, { categories: ['other'] }))).toEqual([]);
-    expect(getHolidays(2026, { categories: ['public', 'orthodox'] })).toHaveLength(18);
+    expect(getHolidays(2026, { categories: ['public', 'orthodox'] })).toHaveLength(19);
   });
 
   it('rejects invalid years and categories', () => {
