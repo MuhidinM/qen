@@ -99,9 +99,10 @@ PLAN.md Phase 5. Done when @qen/core@1.0.0 is published.
 
 PLAN.md Phase 6. Done when @qen/react@0.1.0 is published.
 
-| ID    | Issue                                            | Task                                          | Reqs                                                                                | Size | Status  |
-| ----- | ------------------------------------------------ | --------------------------------------------- | ----------------------------------------------------------------------------------- | ---- | ------- |
-| T-100 | [#48](https://github.com/MuhidinM/qen/issues/48) | Plan and split the React components milestone | R-UI-01, R-UI-02, R-UI-03, R-UI-04, R-UI-05, R-UI-06, R-UI-07, R-A11Y-01, R-A11Y-02 | —    | outline |
+| ID    | Issue                                            | Task                                                        | Reqs                                                                                | Size | Status  |
+| ----- | ------------------------------------------------ | ----------------------------------------------------------- | ----------------------------------------------------------------------------------- | ---- | ------- |
+| T-100 | [#48](https://github.com/MuhidinM/qen/issues/48) | Plan and split the React components milestone               | R-UI-01, R-UI-02, R-UI-03, R-UI-04, R-UI-05, R-UI-06, R-UI-07, R-A11Y-01, R-A11Y-02 | —    | outline |
+| T-101 | [#59](https://github.com/MuhidinM/qen/issues/59) | Smoke-test @qen/core in a real browser and a service worker | R-LIB-03                                                                            | S    | todo    |
 
 ## M7 · Website
 
