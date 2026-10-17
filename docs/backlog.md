@@ -79,7 +79,7 @@ PLAN.md Phase 4. Done when Bahire Hasab, Orthodox movable feasts, Islamic holida
 | T-051 | [#35](https://github.com/MuhidinM/qen/issues/35) | Derive the Orthodox movable feasts and fasts                      | R-HOL-07 | M    | done   |
 | T-052 | [#36](https://github.com/MuhidinM/qen/issues/36) | Cross-check Fasika against Julian Easter for 1900–2100            | R-HOL-08 | S    | done   |
 | T-053 | [#37](https://github.com/MuhidinM/qen/issues/37) | Add Islamic holidays and observances                              | R-HOL-09 | M    | done   |
-| T-054 | [#38](https://github.com/MuhidinM/qen/issues/38) | List multi-day observances such as Ramadan and the Orthodox fasts | R-HOL-10 | M    | todo   |
+| T-054 | [#38](https://github.com/MuhidinM/qen/issues/38) | List multi-day observances such as Ramadan and the Orthodox fasts | R-HOL-10 | M    | done   |
 | T-055 | [#39](https://github.com/MuhidinM/qen/issues/39) | Flag the weekly Wednesday and Friday fasts                        | R-HOL-11 | S    | todo   |
 
 ## M5 · Hijri adjustment and core 1.0

@@ -112,5 +112,12 @@ export const en = defineLocale({
     'laylat-al-qadr': 'Laylat al-Qadr',
     arafah: 'Day of Arafah',
   },
+  observances: {
+    'abiy-tsom': 'Abiy Tsom (Great Lent)',
+    'tsome-hawariyat': "Tsome Hawariyat (Apostles' Fast)",
+    'tsome-filseta': 'Tsome Filseta (Fast of the Assumption)',
+    'tsome-nebiyat': "Tsome Nebiyat (Prophets' Fast)",
+    ramadan: 'Ramadan',
+  },
   reviewed: true,
 });

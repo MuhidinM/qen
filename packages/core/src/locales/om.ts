@@ -122,5 +122,12 @@ export const om = defineLocale({
     'laylat-al-qadr': 'Laylatul Qadrii',
     arafah: 'Guyyaa Arafaa',
   },
+  observances: {
+    'abiy-tsom': 'Soomii Guddaa',
+    'tsome-hawariyat': 'Soomii Hawaariyaa',
+    'tsome-filseta': 'Soomii Filsataa',
+    'tsome-nebiyat': 'Soomii Nabiyyootaa',
+    ramadan: 'Ramadaana',
+  },
   reviewed: false,
 });

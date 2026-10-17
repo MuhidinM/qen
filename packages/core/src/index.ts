@@ -36,6 +36,12 @@ export {
   type HolidayOptions,
 } from './holidays/queries.js';
 export { bahireHasab, type BahireHasab, type Evangelist } from './holidays/bahire-hasab.js';
+export {
+  getObservances,
+  type Observance,
+  type ObservanceId,
+  type ObservanceOptions,
+} from './holidays/observances.js';
 export { dayOfWeek, daysInMonth, isLeapYear, monthsInYear } from './info.js';
 export { addDays, addMonths, addYears } from './arithmetic.js';
 export { age, compare, diff, isSame, type DiffUnit } from './compare.js';

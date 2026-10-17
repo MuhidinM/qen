@@ -181,6 +181,18 @@ Public: Enkutatash, Meskel, Genna (always 7 January), Timket, Adwa, Siklet, Fasi
 
 Islamic holidays follow the Hijri method you pass (`hijri: { method }`), can fall twice in one Gregorian year, and have `status: 'expected'`: the calculated date may differ by a day from the locally announced one.
 
+### Fasts and Ramadan
+
+`getObservances(start, end)` returns the periods that overlap a range, with both ends included: Abiy Tsom, Tsome Hawariyat, Tsome Filseta (Nehase 1–15), Tsome Nebiyat (Hidar 15 to the eve of Genna) and Ramadan.
+
+```ts
+import { date, getObservances } from '@qen/core';
+
+const march10 = getObservances(date('gregorian', 2026, 3, 10), date('gregorian', 2026, 3, 10));
+march10.map((o) => o.id); // => ['abiy-tsom', 'ramadan']
+march10[1]?.endGregorian; // => { calendar: 'gregorian', year: 2026, month: 3, day: 19 }
+```
+
 ## Ge'ez numerals and Ethiopian time
 
 ```ts
@@ -210,7 +222,7 @@ Ge'ez numerals follow the W3C CSS `ethiopic-numeric` algorithm.
 
 - Amharic, Afaan Oromo, Tigrinya and Arabic names haven't been reviewed by native speakers yet.
 - Browsers and service workers are supported by design (ES2022, no DOM or Node APIs) but not yet covered by an automated browser test.
-- Multi-day observances (Ramadan, the fasts) and official Hijri month confirmations are planned for later releases.
+- Official Hijri month confirmations (so Islamic dates can be marked `confirmed`) are planned for a later release.
 
 ## License
 
