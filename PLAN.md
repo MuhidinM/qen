@@ -462,3 +462,4 @@ Add entries as `YYYY-MM-DD: decision (reason)`.
 - 2026-10-17: Umm al-Qura table and method move into Phase 1 so `@qen/core@0.1.0` ships with the final Hijri default (owner: "the best one"; N-008, ADR-0006 amended).
 - 2026-10-17: Day boundaries differ per calendar (owner): Gregorian at midnight, Ethiopian in the morning (06:00), Hijri at sunset. Applied when turning an instant into a date; date-to-date conversion is unchanged (ADR-0012, N-005).
 - 2026-10-17: Owner delegated the open facts (holiday list and leap-year shifts, locale names, Tsome Nebiyat, weekly fasts) to Claude's best knowledge plus CLDR. Recorded in N-016 to N-019, marked "review before 1.0", tracked in T-068 (#55).
+- 2026-10-17: Supported Node versions are 22, 24 and 26 (`engines: >=22`). Node 20 reached end of life in April 2026. CI smoke-tests the packed tarball in each, plus Deno 2 and Bun.
