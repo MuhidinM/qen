@@ -162,6 +162,20 @@ parse('17/01/2019', { calendar: 'gregorian' }); // => { calendar: 'gregorian', y
 
 It never guesses: `parse('17/01/2019')` is a valid date in all three calendars, so it throws an `AmbiguousDateError` whose `candidates` list every reading. Numeric dates are read day/month/year, or year-month-day when the first number has four digits.
 
+## Holidays
+
+Ethiopian public holidays, filterable by category (`public` by default, plus `orthodox`, `islamic`, `other`). A holiday's `date` is in its own calendar and `gregorian` gives the same day.
+
+```ts
+import { date, getHolidays, getHolidaysInRange, nextHoliday } from '@qen/core';
+
+getHolidays(2026, { categories: ['orthodox'] }).map((h) => h.id); // => ['genna', 'timket', 'meskel']
+nextHoliday(date('gregorian', 2026, 9, 12))?.date; // => { calendar: 'ethiopian', year: 2019, month: 1, day: 17 }
+getHolidaysInRange(date('ethiopian', 2018, 13, 1), date('ethiopian', 2019, 1, 17)).map((h) => h.id); // => ['enkutatash', 'meskel']
+```
+
+So far: Enkutatash, Meskel, Genna (always 7 January), Timket, Adwa, Labour Day, Patriots' Victory and the Downfall of the Derg. Fasika, Siklet and the Islamic holidays come next.
+
 ## Ge'ez numerals and Ethiopian time
 
 ```ts
@@ -191,7 +205,7 @@ Ge'ez numerals follow the W3C CSS `ethiopic-numeric` algorithm.
 
 - Amharic, Afaan Oromo, Tigrinya and Arabic names haven't been reviewed by native speakers yet.
 - Browsers and service workers are supported by design (ES2022, no DOM or Node APIs) but not yet covered by an automated browser test.
-- Holidays, Bahire Hasab and official Hijri month confirmations are planned for later releases.
+- Movable Orthodox holidays (Fasika, Siklet), Islamic holidays and official Hijri month confirmations are planned for later releases.
 
 ## License
 

@@ -150,6 +150,12 @@
       "limit": "4 kB"
     },
     {
+      "name": "{ getHolidays, nextHoliday }",
+      "path": "dist/index.js",
+      "import": "{ getHolidays, nextHoliday }",
+      "limit": "3 kB"
+    },
+    {
       "name": "{ toGeezNumeral }",
       "path": "dist/index.js",
       "import": "{ toGeezNumeral }",

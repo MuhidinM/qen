@@ -29,6 +29,12 @@ export type {
   HolidayRule,
   HolidayStatus,
 } from './holidays/types.js';
+export {
+  getHolidays,
+  getHolidaysInRange,
+  nextHoliday,
+  type HolidayOptions,
+} from './holidays/queries.js';
 export { dayOfWeek, daysInMonth, isLeapYear, monthsInYear } from './info.js';
 export { addDays, addMonths, addYears } from './arithmetic.js';
 export { age, compare, diff, isSame, type DiffUnit } from './compare.js';
