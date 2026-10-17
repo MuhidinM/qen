@@ -9,6 +9,8 @@ import {
   type CalendarId,
 } from '../src/index.js';
 
+const TABULAR = { hijri: { method: 'tabular' } } as const;
+
 // The same day in all three calendars (Hijri: tabular). Sources: PLAN.md §5 and
 // Intl ethiopic / islamic-civil, ICU 77.1.
 const SAME_DAY: [gregorian: number[], ethiopian: number[], hijri: number[]][] = [
@@ -54,7 +56,10 @@ describe('convert()', () => {
     });
     for (const from of dates) {
       for (const to of dates) {
-        expect(convert(from, to.calendar), `${JSON.stringify(from)} → ${to.calendar}`).toEqual(to);
+        expect(
+          convert(from, to.calendar, TABULAR),
+          `${JSON.stringify(from)} → ${to.calendar}`,
+        ).toEqual(to);
       }
     }
   });
@@ -75,7 +80,9 @@ describe('convert()', () => {
   it('validates its input', () => {
     const pagume6 = { calendar: 'ethiopian', year: 2018, month: 13, day: 6 } as const;
     expect(() => convert(pagume6, 'gregorian')).toThrow('Pagume 6 does not exist in 2018 EC');
-    expect(() => convert(date('hijri', 1446, 12, 30), 'gregorian')).toThrow(InvalidDateError);
+    expect(() => convert(date('hijri', 1446, 12, 30), 'gregorian', TABULAR)).toThrow(
+      InvalidDateError,
+    );
   });
 
   it('accepts the tabular Hijri method explicitly', () => {
@@ -89,7 +96,7 @@ describe('toJDN() / fromJDN()', () => {
   it('maps dates to Julian Day Numbers and back', () => {
     expect(toJDN(date('gregorian', 2000, 1, 1))).toBe(2_451_545);
     expect(toJDN(date('ethiopian', 1, 1, 1))).toBe(1_724_221);
-    expect(toJDN(date('hijri', 1, 1, 1))).toBe(1_948_440);
+    expect(toJDN(date('hijri', 1, 1, 1))).toBe(1_948_440); // before the table: tabular
     expect(fromJDN(2_451_545, 'ethiopian')).toEqual(date('ethiopian', 1992, 4, 22));
     expect(Object.isFrozen(fromJDN(2_451_545, 'gregorian'))).toBe(true);
     expectTypeOf(fromJDN(1_948_440, 'hijri')).toEqualTypeOf<CalendarDate<'hijri'>>();
