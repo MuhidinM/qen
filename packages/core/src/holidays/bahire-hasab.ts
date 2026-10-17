@@ -26,6 +26,7 @@ export interface BahireHasab {
   readonly year: number;
   /** Amete Alem, the year counted from creation: `year + 5500`. */
   readonly ameteAlem: number;
+  /** The evangelist the year is dedicated to: Amete Alem mod 4 (1 Matthew … 0 John). */
   readonly evangelist: Evangelist;
   /** Position in the 19-year lunar cycle: `(ameteAlem − 1) mod 19`. */
   readonly wenber: number;

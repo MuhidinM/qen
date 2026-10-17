@@ -119,10 +119,13 @@
     "check:umalqura": "node scripts/generate-umalqura.mjs --check",
     "docs": "typedoc",
     "check:docs": "typedoc --json docs-api/api.json && node scripts/check-examples.mjs docs-api/api.json",
-    "check:readme": "node scripts/check-readme.mjs"
+    "check:readme": "node scripts/check-readme.mjs",
+    "check:api": "api-extractor run",
+    "update:api": "api-extractor run --local"
   },
   "devDependencies": {
     "@arethetypeswrong/cli": "^0.18.5",
+    "@microsoft/api-extractor": "^7.59.4",
     "@size-limit/preset-small-lib": "^14.2.0",
     "@vitest/coverage-v8": "^5.0.4",
     "publint": "^0.3.25",

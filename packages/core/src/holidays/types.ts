@@ -88,10 +88,13 @@ export type HolidayId =
  * ```
  */
 export interface Holiday {
+  /** Stable id; names are in `locale.holidays[id]`. */
   readonly id: HolidayId;
+  /** One or more categories; queries match any of them. */
   readonly categories: readonly HolidayCategory[];
   /** The calendar the holiday's rule is defined in. */
   readonly calendar: CalendarId;
+  /** Fixed day of its calendar, or computed each year. */
   readonly rule: HolidayRule;
   /** The date in the holiday's own calendar. */
   readonly date: CalendarDate;

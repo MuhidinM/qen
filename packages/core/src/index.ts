@@ -20,7 +20,13 @@ export type { DayBoundary, GeoLocation, InstantOptions } from './day-boundary.js
 export { fromJSDate, toJSDate, type ToJSDateOptions } from './js-date.js';
 export { today, type TodayOptions } from './today.js';
 export { fromGeezNumeral, toGeezNumeral } from './geez.js';
-export { fromEthiopianTime, toEthiopianTime, type EthiopianTimePeriod } from './ethiopian-time.js';
+export {
+  fromEthiopianTime,
+  toEthiopianTime,
+  type ClockTime,
+  type EthiopianTime,
+  type EthiopianTimePeriod,
+} from './ethiopian-time.js';
 export type { Locale } from './locale.js';
 export { format, type FormatOptions, type NumeralSystem } from './format.js';
 export { AmbiguousDateError, parse, type ParseOptions } from './parse.js';
@@ -47,4 +53,4 @@ export {
 export { isWeeklyFast } from './holidays/weekly-fasts.js';
 export { dayOfWeek, daysInMonth, isLeapYear, monthsInYear } from './info.js';
 export { addDays, addMonths, addYears } from './arithmetic.js';
-export { age, compare, diff, isSame, type DiffUnit } from './compare.js';
+export { age, compare, diff, isSame, type Age, type DiffUnit } from './compare.js';

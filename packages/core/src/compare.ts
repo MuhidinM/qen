@@ -90,6 +90,23 @@ export function diff(
 }
 
 /**
+ * An age or elapsed time, as returned by {@link age}.
+ *
+ * @example
+ * ```ts
+ * const a: Age = { years: 29, months: 0, days: 20 };
+ * ```
+ */
+export interface Age {
+  /** Whole years. */
+  readonly years: number;
+  /** Whole months after the last full year (0–12 in the Ethiopian calendar, 0–11 otherwise). */
+  readonly months: number;
+  /** Days after the last full month. */
+  readonly days: number;
+}
+
+/**
  * A person's age, or the time elapsed between two dates, as years, months and days.
  *
  * Counted in the calendar of `birth` (`on` is converted into it): Ethiopian years have 13
@@ -105,11 +122,7 @@ export function diff(
  * age(date('ethiopian', 1990, 1, 17), date('ethiopian', 2019, 2, 7)); // { years: 29, months: 0, days: 20 }
  * ```
  */
-export function age(
-  birth: CalendarDate,
-  on: CalendarDate,
-  options: ConvertOptions = {},
-): { years: number; months: number; days: number } {
+export function age(birth: CalendarDate, on: CalendarDate, options: ConvertOptions = {}): Age {
   if (compare(on, birth, options) < 0) {
     throw new RangeError('The "on" date is before the birth date');
   }

@@ -28,6 +28,8 @@ jobs:
         run: pnpm --filter @qen/core check:package
       - name: Umm al-Qura table matches ICU
         run: pnpm --filter @qen/core check:umalqura
+      - name: Public API matches the committed report (api-extractor)
+        run: pnpm --filter @qen/core check:api
       - name: Every export documented, with an example (TypeDoc)
         run: pnpm --filter @qen/core check:docs
       - name: README examples run and are correct

@@ -12,10 +12,15 @@
  * ```
  */
 export class InvalidDateError extends Error {
+  /** Always `'InvalidDateError'`. */
   override readonly name = 'InvalidDateError';
+  /** The calendar given (a string, since it may not be a known calendar). */
   readonly calendar: string;
+  /** The year given. */
   readonly year: number;
+  /** The month given. */
   readonly month: number;
+  /** The day given. */
   readonly day: number;
 
   constructor(message: string, calendar: string, year: number, month: number, day: number) {
