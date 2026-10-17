@@ -102,5 +102,12 @@ export const ar = defineLocale({
     'laylat-al-qadr': 'ليلة القدر',
     arafah: 'يوم عرفة',
   },
+  observances: {
+    'abiy-tsom': 'الصوم الكبير',
+    'tsome-hawariyat': 'صوم الرسل',
+    'tsome-filseta': 'صوم السيدة العذراء',
+    'tsome-nebiyat': 'صوم الأنبياء',
+    ramadan: 'رمضان',
+  },
   reviewed: false,
 });

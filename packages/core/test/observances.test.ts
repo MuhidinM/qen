@@ -13,7 +13,9 @@ import {
 
 const year = (y: number) =>
   getObservances(date('gregorian', y, 1, 1), date('gregorian', y, 12, 31));
-const find = (y: number, id: ObservanceId) => year(y).find((o) => o.id === id);
+// The period that starts in year y (Tsome Nebiyat runs into January, so a year overlaps two).
+const find = (y: number, id: ObservanceId) =>
+  year(y).find((o) => o.id === id && o.startGregorian.year === y);
 const span = (y: number, id: ObservanceId) => {
   const o = find(y, id);
   return o && [o.startGregorian, o.endGregorian];
@@ -121,5 +123,11 @@ describe('getObservances(start, end)', () => {
         date('gregorian', 2026, 1, 1),
       ),
     ).toThrow(InvalidDateError);
+    const unknown = ['fasts'] as unknown as ['orthodox'];
+    expect(() =>
+      getObservances(date('gregorian', 2026, 1, 1), date('gregorian', 2026, 2, 1), {
+        categories: unknown,
+      }),
+    ).toThrow('Unknown holiday category "fasts"');
   });
 });

@@ -109,5 +109,12 @@ export const ti = defineLocale({
     'laylat-al-qadr': 'ለይለት ኣል-ቀድር',
     arafah: 'መዓልቲ ዓረፋ',
   },
+  observances: {
+    'abiy-tsom': 'ዓቢይ ጾም',
+    'tsome-hawariyat': 'ጾመ ሓዋርያት',
+    'tsome-filseta': 'ጾመ ፍልሰታ',
+    'tsome-nebiyat': 'ጾመ ነብያት',
+    ramadan: 'ረመዳን',
+  },
   reviewed: false,
 });

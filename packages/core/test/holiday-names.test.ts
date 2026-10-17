@@ -73,3 +73,23 @@ describe('names taken from Wikipedia, "Public holidays in Ethiopia"', () => {
     expect(om.holidays.meskel).toBe('Masqalaa');
   });
 });
+
+describe.each<[string, Locale]>([
+  ['en', en],
+  ['am', am],
+  ['om', om],
+  ['ti', ti],
+  ['ar', ar],
+])('%s observance names', (_, locale) => {
+  it('names every multi-day observance', () => {
+    const ids = [
+      'abiy-tsom',
+      'tsome-hawariyat',
+      'tsome-filseta',
+      'tsome-nebiyat',
+      'ramadan',
+    ] as const;
+    expect(ids.every((id) => locale.observances[id].trim().length > 0)).toBe(true);
+    expect(Object.keys(locale.observances).sort()).toEqual([...ids].sort());
+  });
+});

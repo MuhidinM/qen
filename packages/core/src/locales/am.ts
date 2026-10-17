@@ -115,5 +115,12 @@ export const am = defineLocale({
     'laylat-al-qadr': 'ለይለቱል ቀድር',
     arafah: 'የዐረፋ ቀን',
   },
+  observances: {
+    'abiy-tsom': 'ዐቢይ ጾም',
+    'tsome-hawariyat': 'ጾመ ሐዋርያት',
+    'tsome-filseta': 'ጾመ ፍልሰታ',
+    'tsome-nebiyat': 'ጾመ ነቢያት',
+    ramadan: 'ረመዳን',
+  },
   reviewed: false,
 });
