@@ -55,7 +55,7 @@ PLAN.md Phase 2. Done when @qen/core@0.1.0 is live on npm.
 | T-031 | [#26](https://github.com/MuhidinM/qen/issues/26) | Document every public function and generate the API reference              | R-LIB-07, X-02                | S    | done   |
 | T-032 | [#27](https://github.com/MuhidinM/qen/issues/27) | Write the core README with install and quick-start examples that run in CI | R-LIB-08                      | S    | done   |
 | T-033 | [#28](https://github.com/MuhidinM/qen/issues/28) | Publish @qen/core 0.1.0 to npm                                             | R-LIB-13                      | S    | done   |
-| T-034 | [#89](https://github.com/MuhidinM/qen/issues/89) | Publish with npm provenance attestations (M3)                              | R-LIB-13                      | S    | doing  |
+| T-034 | [#89](https://github.com/MuhidinM/qen/issues/89) | Publish with npm provenance attestations (M3)                              | R-LIB-13                      | S    | done   |
 
 ## M3 · Fixed-date holidays
 
