@@ -1,4 +1,6 @@
 import { existsSync, readFileSync, writeFileSync } from 'node:fs';
+import { dirname, join } from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { describe, expect, it } from 'vitest';
 import { tokens, tokensToCss } from '../src/index.js';
 
@@ -70,7 +72,8 @@ describe('design tokens (CLAUDE.md, Refactoring UI)', () => {
 
 describe('tokens.css', () => {
   it('is generated from the tokens (UPDATE_TOKENS=1 rewrites it)', () => {
-    const file = new URL('../src/tokens.css', import.meta.url);
+    // jsdom replaces the global URL, so build a plain path for node:fs.
+    const file = join(dirname(fileURLToPath(import.meta.url)), '../src/tokens.css');
     const css = tokensToCss();
     if (process.env.UPDATE_TOKENS === '1' || !existsSync(file)) writeFileSync(file, css);
     expect(readFileSync(file, 'utf8')).toBe(css);

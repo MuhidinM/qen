@@ -1,4 +1,4 @@
-import { copyFileSync } from 'node:fs';
+import { readFileSync, writeFileSync } from 'node:fs';
 import { defineConfig } from 'tsup';
 
 export default defineConfig({
@@ -12,6 +12,8 @@ export default defineConfig({
   target: 'es2022',
   external: ['react', 'react-dom', '@qen/core'],
   onSuccess: async () => {
-    copyFileSync('src/styles.css', 'dist/styles.css');
+    // One stylesheet for consumers: the generated tokens, then the component styles.
+    const css = [readFileSync('src/tokens.css', 'utf8'), readFileSync('src/styles.css', 'utf8')];
+    writeFileSync('dist/styles.css', css.join('\n'));
   },
 });
