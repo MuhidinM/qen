@@ -32,7 +32,7 @@ PLAN.md Phase 1. Done when every date converts correctly in all directions, with
 | T-015 | [#12](https://github.com/MuhidinM/qen/issues/12) | Convert between calendar dates and JavaScript Date objects              | R-CAL-07                               | S    | todo   |
 | T-016 | [#13](https://github.com/MuhidinM/qen/issues/13) | Prove every day from 1900 to 2100 round-trips in every calendar         | R-CAL-09                               | S    | done   |
 | T-017 | [#14](https://github.com/MuhidinM/qen/issues/14) | Cross-check Ethiopian and Hijri results against Intl for 1900–2100      | R-CAL-10                               | M    | done   |
-| T-060 | [#40](https://github.com/MuhidinM/qen/issues/40) | Generate and commit the Umm al-Qura month-start table                   | R-HIJ-01                               | M    | todo   |
+| T-060 | [#40](https://github.com/MuhidinM/qen/issues/40) | Generate and commit the Umm al-Qura month-start table                   | R-HIJ-01                               | M    | done   |
 | T-061 | [#41](https://github.com/MuhidinM/qen/issues/41) | Convert Hijri dates with the Umm al-Qura method                         | R-HIJ-02                               | M    | todo   |
 
 ## M2 · Everyday utilities and core 0.1

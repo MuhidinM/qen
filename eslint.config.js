@@ -42,9 +42,16 @@ export default tseslint.config(
     },
   },
   {
-    files: ['**/smoke/*.{mjs,cjs}'],
+    files: ['**/smoke/*.{mjs,cjs}', '**/scripts/*.mjs'],
     languageOptions: {
-      globals: { console: 'readonly', process: 'readonly', Deno: 'readonly', Bun: 'readonly' },
+      globals: {
+        console: 'readonly',
+        process: 'readonly',
+        URL: 'readonly',
+        Intl: 'readonly',
+        Deno: 'readonly',
+        Bun: 'readonly',
+      },
     },
   },
   {
