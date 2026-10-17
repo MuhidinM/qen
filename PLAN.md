@@ -411,18 +411,23 @@ Ones ፩–፱ (1–9), tens ፲–፺ (10–90), ፻ = 100, ፼ = 10,000. There
 
 ### Test anchors (must pass)
 
-| Check                      | Expected                            |
-| -------------------------- | ----------------------------------- |
-| Meskerem 1, 2016 EC        | 12 September 2023 (year after leap) |
-| Meskerem 1, 2019 EC        | 11 September 2026                   |
-| 2015 EC is a leap year     | Pagume has 6 days                   |
-| 2018 EC is not a leap year | Pagume has 5 days                   |
-| Fasika 2024                | 5 May 2024                          |
-| Fasika 2025                | 20 April 2025                       |
-| Fasika 2026                | 12 April 2026                       |
-| Fasika 2027                | 2 May 2027                          |
+| Check                                  | Expected                                        |
+| -------------------------------------- | ----------------------------------------------- |
+| Meskerem 1, 2016 EC                    | 12 September 2023 (year after leap)             |
+| Meskerem 1, 2019 EC                    | 11 September 2026                               |
+| 2015 EC is a leap year                 | Pagume has 6 days                               |
+| 2018 EC is not a leap year             | Pagume has 5 days                               |
+| Fasika 2024                            | 5 May 2024                                      |
+| Fasika 2025                            | 20 April 2025                                   |
+| Fasika 2026                            | 12 April 2026                                   |
+| Fasika 2027                            | 2 May 2027                                      |
+| 1 Muharram 1 AH (tabular, civil epoch) | JDN 1948440 = 19 July 622 (proleptic Gregorian) |
+| 1 Ramadan 1447 (tabular)               | 18 February 2026                                |
+| 1 Shawwal 1447 (tabular)               | 20 March 2026                                   |
+| 5 Jumada al-Ula 1448 (tabular)         | 17 October 2026                                 |
+| 1447 AH is a tabular leap year         | Dhu al-Hijjah has 30 days                       |
 
-Add Hijri anchors during Phase 1/5, generated from `Intl` and cross-checked with at least one published Umm al-Qura calendar.
+Tabular Hijri anchors come from `Intl` `islamic-civil` (ICU 77.1). Umm al-Qura anchors are added with #41, from `Intl` and cross-checked with at least one published Umm al-Qura calendar.
 
 ---
 
