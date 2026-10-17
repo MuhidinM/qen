@@ -14,6 +14,38 @@
  */
 export type EthiopianTimePeriod = 'morning' | 'afternoon' | 'evening' | 'night';
 
+/**
+ * A time of day on the 24-hour international clock.
+ *
+ * @example
+ * ```ts
+ * const t: ClockTime = { hour: 18, minute: 30 };
+ * ```
+ */
+export interface ClockTime {
+  /** 0–23 */
+  readonly hour: number;
+  /** 0–59 */
+  readonly minute: number;
+}
+
+/**
+ * A time in Ethiopian time: hours 1–12 counted from 06:00 and 18:00, with the period of day.
+ *
+ * @example
+ * ```ts
+ * const t: EthiopianTime = { hour: 12, minute: 30, period: 'evening' }; // 18:30
+ * ```
+ */
+export interface EthiopianTime {
+  /** 1–12 */
+  readonly hour: number;
+  /** 0–59 */
+  readonly minute: number;
+  /** Part of the day; tells apart the hours that repeat. */
+  readonly period: EthiopianTimePeriod;
+}
+
 /** First international hour of each period. */
 const PERIOD_START: Readonly<Record<EthiopianTimePeriod, number>> = {
   night: 0,
@@ -47,11 +79,7 @@ function checkTime(hour: number, minute: number, maxHour: number, minHour: numbe
  * toEthiopianTime({ hour: 18, minute: 0 });  // { hour: 12, minute: 0, period: 'evening' }
  * ```
  */
-export function toEthiopianTime(time: { hour: number; minute: number }): {
-  hour: number;
-  minute: number;
-  period: EthiopianTimePeriod;
-} {
+export function toEthiopianTime(time: ClockTime): EthiopianTime {
   const { hour, minute } = time;
   checkTime(hour, minute, 23, 0);
   const period: EthiopianTimePeriod =
@@ -70,11 +98,7 @@ export function toEthiopianTime(time: { hour: number; minute: number }): {
  * fromEthiopianTime({ hour: 12, minute: 0, period: 'evening' }); // { hour: 18, minute: 0 }
  * ```
  */
-export function fromEthiopianTime(time: {
-  hour: number;
-  minute: number;
-  period: EthiopianTimePeriod;
-}): { hour: number; minute: number } {
+export function fromEthiopianTime(time: EthiopianTime): ClockTime {
   const { hour, minute, period } = time;
   checkTime(hour, minute, 12, 1);
   if (!Object.hasOwn(PERIOD_START, period)) {

@@ -86,15 +86,15 @@ PLAN.md Phase 4. Done when Bahire Hasab, Orthodox movable feasts, Islamic holida
 
 PLAN.md Phase 5. Done when @qen/core@1.0.0 is published.
 
-| ID    | Issue                                            | Task                                                                  | Reqs                         | Size | Status             |
-| ----- | ------------------------------------------------ | --------------------------------------------------------------------- | ---------------------------- | ---- | ------------------ |
-| T-062 | [#42](https://github.com/MuhidinM/qen/issues/42) | Pass Hijri settings through conversion, today() and holidays          | R-HIJ-03                     | M    | done               |
-| T-063 | [#43](https://github.com/MuhidinM/qen/issues/43) | Apply official overrides and the user offset to Hijri dates           | R-HIJ-04                     | M    | done               |
-| T-064 | [#44](https://github.com/MuhidinM/qen/issues/44) | Mark Islamic holidays as expected or confirmed                        | R-HIJ-05                     | S    | done               |
-| T-065 | [#45](https://github.com/MuhidinM/qen/issues/45) | Seed overrides with recent confirmed Ethiopian Eid announcements      | R-HIJ-06                     | S    | done               |
-| T-066 | [#46](https://github.com/MuhidinM/qen/issues/46) | Review the public API and lock it for 1.0                             | R-LIB-09, R-LIB-10           | S    | todo               |
-| T-068 | [#55](https://github.com/MuhidinM/qen/issues/55) | Get native-speaker and authority review of delegated facts before 1.0 | R-FMT-02, R-HOL-02, R-HOL-05 | S    | todo · needs-owner |
-| T-067 | [#47](https://github.com/MuhidinM/qen/issues/47) | Publish @qen/core 1.0.0                                               | R-LIB-13                     | S    | todo · needs-owner |
+| ID    | Issue                                            | Task                                                                  | Reqs                         | Size | Status                     |
+| ----- | ------------------------------------------------ | --------------------------------------------------------------------- | ---------------------------- | ---- | -------------------------- |
+| T-062 | [#42](https://github.com/MuhidinM/qen/issues/42) | Pass Hijri settings through conversion, today() and holidays          | R-HIJ-03                     | M    | done                       |
+| T-063 | [#43](https://github.com/MuhidinM/qen/issues/43) | Apply official overrides and the user offset to Hijri dates           | R-HIJ-04                     | M    | done                       |
+| T-064 | [#44](https://github.com/MuhidinM/qen/issues/44) | Mark Islamic holidays as expected or confirmed                        | R-HIJ-05                     | S    | done                       |
+| T-065 | [#45](https://github.com/MuhidinM/qen/issues/45) | Seed overrides with recent confirmed Ethiopian Eid announcements      | R-HIJ-06                     | S    | done                       |
+| T-066 | [#46](https://github.com/MuhidinM/qen/issues/46) | Review the public API and lock it for 1.0                             | R-LIB-09, R-LIB-10           | S    | doing · needs owner review |
+| T-068 | [#55](https://github.com/MuhidinM/qen/issues/55) | Get native-speaker and authority review of delegated facts before 1.0 | R-FMT-02, R-HOL-02, R-HOL-05 | S    | todo · needs-owner         |
+| T-067 | [#47](https://github.com/MuhidinM/qen/issues/47) | Publish @qen/core 1.0.0                                               | R-LIB-13                     | S    | todo · needs-owner         |
 
 ## M6 · React components
 

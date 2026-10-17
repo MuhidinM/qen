@@ -221,6 +221,16 @@ Ge'ez numerals follow the W3C CSS `ethiopic-numeric` algorithm.
 - Node 22, 24, 26; Deno 2; Bun; modern browsers and service workers (ES2022). ESM and CommonJS, with TypeScript types.
 - Zero dependencies. Tree-shakable: `toGeezNumeral` alone is about 0.3 kB, `date` + `convert` about 2 kB (including the Umm al-Qura table), the whole API about 6 kB (minified, brotli).
 
+## Compatibility
+
+`@qen/core` follows [semantic versioning](https://semver.org) from 1.0:
+
+- **Public API** means everything exported from `@qen/core`, `@qen/core/locales/*` and `@qen/core/overrides/*`, as recorded in [`etc/core.api.md`](etc/core.api.md). CI fails if it changes without that file being updated, so every change is deliberate.
+- **Breaking changes** (removing or renaming an export, narrowing a parameter, changing a result for the same input and settings) only happen in a major version.
+- **Not breaking:** new exports, new optional options, new holiday or observance ids, new locale strings, corrected names in a locale, new entries in the bundled overrides, and fixes that make a date match a cited source. Holiday and Hijri data can change in minor versions because the real world changes.
+- **Deprecation:** a deprecated export is marked `@deprecated` with its replacement for at least one minor release before removal in the next major.
+- **Runtimes:** Node versions are supported while maintained upstream; dropping one is a major change.
+
 ## Known limitations
 
 - Amharic, Afaan Oromo, Tigrinya and Arabic names haven't been reviewed by native speakers yet.

@@ -19,6 +19,7 @@ import type { CalendarDate, CalendarId, ConvertOptions } from './types.js';
  * ```
  */
 export class AmbiguousDateError extends Error {
+  /** Always `'AmbiguousDateError'`. */
   override readonly name = 'AmbiguousDateError';
   /** Every valid reading of the input, one per possible calendar. */
   readonly candidates: readonly CalendarDate[];

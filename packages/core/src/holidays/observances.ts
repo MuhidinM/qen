@@ -27,7 +27,9 @@ export type ObservanceId =
  * ```
  */
 export interface Observance {
+  /** Stable id; names are in `locale.observances[id]`. */
   readonly id: ObservanceId;
+  /** `orthodox` for the fasts, `islamic` for Ramadan. */
   readonly categories: readonly HolidayCategory[];
   /** The calendar the period is defined in. */
   readonly calendar: CalendarId;
@@ -35,7 +37,9 @@ export interface Observance {
   readonly start: CalendarDate;
   /** Last day (included), in the observance's own calendar. */
   readonly end: CalendarDate;
+  /** First day in the Gregorian calendar. */
   readonly startGregorian: CalendarDate<'gregorian'>;
+  /** Last day (included) in the Gregorian calendar. */
   readonly endGregorian: CalendarDate<'gregorian'>;
   /** Ramadan only: `expected` until its month start is officially confirmed. */
   readonly status?: HolidayStatus;

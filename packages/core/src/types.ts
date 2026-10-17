@@ -21,9 +21,13 @@ export type CalendarId = 'gregorian' | 'ethiopian' | 'hijri';
  * ```
  */
 export interface CalendarDate<C extends CalendarId = CalendarId> {
+  /** Which calendar the numbers belong to. */
   readonly calendar: C;
+  /** Year, 1 or later (Amete Mihret for Ethiopian, AH for Hijri). */
   readonly year: number;
+  /** 1-based month: 1–12, or 1–13 in the Ethiopian calendar (13 = Pagume). */
   readonly month: number;
+  /** 1-based day of the month. */
   readonly day: number;
 }
 
@@ -93,7 +97,9 @@ export interface HijriSettings {
  * ```
  */
 export interface HijriOverride {
+  /** The Hijri (AH) year of the month. */
   readonly hijriYear: number;
+  /** 1–12 */
   readonly hijriMonth: number;
   /** The Gregorian day the month starts on. */
   readonly startsOn: { readonly year: number; readonly month: number; readonly day: number };
@@ -112,8 +118,11 @@ export interface HijriOverride {
  * ```
  */
 export interface HijriExplanation {
+  /** The Hijri date after every step of the pipeline. */
   readonly date: CalendarDate<'hijri'>;
+  /** The method actually used (tabular when Umm al-Qura fell back). */
   readonly method: HijriMethod;
+  /** True when Umm al-Qura was requested but the date is outside its table. */
   readonly fallback: boolean;
   /** The pipeline step that decided this month: the base method, an official override, or the user offset. */
   readonly decidedBy: 'method' | 'override' | 'offset';
