@@ -195,7 +195,7 @@ Compute the date of Tsome Nenewe (Fast of Nineveh), then derive the others by of
 | Tsome Hawariyat begins        | +119                |
 | Tsome Dihnet                  | +121                |
 
-Treat the offsets as VERIFY until the computed Fasika matches the anchors in section 5. Fasika must equal Orthodox Easter (Julian computus), which gives an independent cross-check: implement Meeus' Julian Easter algorithm in tests only.
+Fasika (Nineveh + 69) is verified: it matches the section 5 anchors and equals Meeus' Julian Easter for every year 1900–2100 (2026-10-17, #36). The other offsets are checked in #35 against Fasika and their fixed weekdays.
 
 **Islamic computed (Phase 4), from Hijri dates:**
 
