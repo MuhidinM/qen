@@ -69,6 +69,17 @@ Bahire Hasab (Nineveh date + offsets)       ├─► Holiday[] for a Gregorian 
 Hijri rules  (month, day) + pipeline status ─┘
 ```
 
+## Day boundaries
+
+Date-to-date conversion maps the daylight part of a day. Turning an instant into a date applies each calendar's own boundary (ADR-0012):
+
+```
+instant ──► Gregorian: day changes at 00:00 local
+        ──► Ethiopian: day changes at 06:00 local
+        ──► Hijri:     day changes at sunset (NOAA formula from a location, else 18:00)
+        (option boundary: 'midnight' → civil rule for all three)
+```
+
 ## State
 
 - `core` is stateless. No caches with global effect, no module-level mutable state, no reading the clock. "Now" is an argument; `today()` is the only helper that defaults it.

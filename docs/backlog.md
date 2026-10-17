@@ -21,16 +21,19 @@ Monorepo, tooling, CI and project docs. Done when an empty core package builds, 
 
 PLAN.md Phase 1. Done when every date converts correctly in all directions, with round-trip and Intl cross-checks green.
 
-| ID    | Issue                                            | Task                                                                | Reqs                                   | Size | Status |
-| ----- | ------------------------------------------------ | ------------------------------------------------------------------- | -------------------------------------- | ---- | ------ |
-| T-010 | [#7](https://github.com/MuhidinM/qen/issues/7)   | Define the date type, the date() constructor and InvalidDateError   | R-CAL-01, R-CAL-02, R-CAL-11, R-LIB-12 | M    | todo   |
-| T-011 | [#8](https://github.com/MuhidinM/qen/issues/8)   | Convert Gregorian dates to and from Julian Day Numbers              | R-CAL-03, R-CAL-08                     | S    | todo   |
-| T-012 | [#9](https://github.com/MuhidinM/qen/issues/9)   | Convert Ethiopian dates to and from Julian Day Numbers              | R-CAL-04, R-CAL-08                     | M    | todo   |
-| T-013 | [#10](https://github.com/MuhidinM/qen/issues/10) | Convert Hijri dates (tabular method) to and from Julian Day Numbers | R-CAL-05, R-CAL-08                     | M    | todo   |
-| T-014 | [#11](https://github.com/MuhidinM/qen/issues/11) | Convert any date to any calendar with convert()                     | R-CAL-06                               | S    | todo   |
-| T-015 | [#12](https://github.com/MuhidinM/qen/issues/12) | Convert between calendar dates and JavaScript Date objects          | R-CAL-07                               | S    | todo   |
-| T-016 | [#13](https://github.com/MuhidinM/qen/issues/13) | Prove every day from 1900 to 2100 round-trips in every calendar     | R-CAL-09                               | S    | todo   |
-| T-017 | [#14](https://github.com/MuhidinM/qen/issues/14) | Cross-check Ethiopian and Hijri results against Intl for 1900–2100  | R-CAL-10                               | M    | todo   |
+| ID    | Issue                                            | Task                                                                    | Reqs                                   | Size | Status |
+| ----- | ------------------------------------------------ | ----------------------------------------------------------------------- | -------------------------------------- | ---- | ------ |
+| T-010 | [#7](https://github.com/MuhidinM/qen/issues/7)   | Define the date type, the date() constructor and InvalidDateError       | R-CAL-01, R-CAL-02, R-CAL-11, R-LIB-12 | M    | todo   |
+| T-011 | [#8](https://github.com/MuhidinM/qen/issues/8)   | Convert Gregorian dates to and from Julian Day Numbers                  | R-CAL-03, R-CAL-08                     | S    | todo   |
+| T-012 | [#9](https://github.com/MuhidinM/qen/issues/9)   | Convert Ethiopian dates to and from Julian Day Numbers                  | R-CAL-04, R-CAL-08                     | M    | todo   |
+| T-013 | [#10](https://github.com/MuhidinM/qen/issues/10) | Convert Hijri dates (tabular method) to and from Julian Day Numbers     | R-CAL-05, R-CAL-08                     | M    | todo   |
+| T-014 | [#11](https://github.com/MuhidinM/qen/issues/11) | Convert any date to any calendar with convert()                         | R-CAL-06                               | S    | todo   |
+| T-018 | [#54](https://github.com/MuhidinM/qen/issues/54) | Decide which calendar day an instant falls on: midnight, dawn or sunset | R-CAL-12                               | M    | todo   |
+| T-015 | [#12](https://github.com/MuhidinM/qen/issues/12) | Convert between calendar dates and JavaScript Date objects              | R-CAL-07                               | S    | todo   |
+| T-016 | [#13](https://github.com/MuhidinM/qen/issues/13) | Prove every day from 1900 to 2100 round-trips in every calendar         | R-CAL-09                               | S    | todo   |
+| T-017 | [#14](https://github.com/MuhidinM/qen/issues/14) | Cross-check Ethiopian and Hijri results against Intl for 1900–2100      | R-CAL-10                               | M    | todo   |
+| T-060 | [#40](https://github.com/MuhidinM/qen/issues/40) | Generate and commit the Umm al-Qura month-start table                   | R-HIJ-01                               | M    | todo   |
+| T-061 | [#41](https://github.com/MuhidinM/qen/issues/41) | Convert Hijri dates with the Umm al-Qura method                         | R-HIJ-02                               | M    | todo   |
 
 ## M2 · Everyday utilities and core 0.1
 
@@ -43,8 +46,8 @@ PLAN.md Phase 2. Done when @qen/core@0.1.0 is live on npm.
 | T-022 | [#17](https://github.com/MuhidinM/qen/issues/17) | Compare dates and measure the difference between them                      | R-UTIL-03, R-UTIL-04          | M    | todo               |
 | T-023 | [#18](https://github.com/MuhidinM/qen/issues/18) | Calculate age from a birth date in any calendar                            | R-UTIL-05                     | S    | todo               |
 | T-024 | [#19](https://github.com/MuhidinM/qen/issues/19) | Get today's date in any calendar without hidden clock reads                | R-UTIL-06                     | S    | todo               |
-| T-025 | [#20](https://github.com/MuhidinM/qen/issues/20) | Add English and Amharic locale data as separate imports                    | R-FMT-01, R-FMT-03, R-I18N-01 | M    | todo · needs-owner |
-| T-026 | [#21](https://github.com/MuhidinM/qen/issues/21) | Add Afaan Oromo, Tigrinya and Arabic locale data                           | R-FMT-02, R-I18N-01           | M    | todo · needs-owner |
+| T-025 | [#20](https://github.com/MuhidinM/qen/issues/20) | Add English and Amharic locale data as separate imports                    | R-FMT-01, R-FMT-03, R-I18N-01 | M    | todo               |
+| T-026 | [#21](https://github.com/MuhidinM/qen/issues/21) | Add Afaan Oromo, Tigrinya and Arabic locale data                           | R-FMT-02, R-I18N-01           | M    | todo               |
 | T-027 | [#22](https://github.com/MuhidinM/qen/issues/22) | Convert numbers to and from Ge'ez numerals                                 | R-FMT-05                      | M    | todo               |
 | T-028 | [#23](https://github.com/MuhidinM/qen/issues/23) | Format dates with patterns, locales and numeral systems                    | R-FMT-04                      | L    | todo               |
 | T-029 | [#24](https://github.com/MuhidinM/qen/issues/24) | Parse date strings and detect which calendar they are in                   | R-FMT-06, R-FMT-07            | L    | todo               |
@@ -57,41 +60,40 @@ PLAN.md Phase 2. Done when @qen/core@0.1.0 is live on npm.
 
 PLAN.md Phase 3. Done when confirmed fixed-date holidays are queryable by year, range and category.
 
-| ID    | Issue                                            | Task                                                         | Reqs     | Size | Status             |
-| ----- | ------------------------------------------------ | ------------------------------------------------------------ | -------- | ---- | ------------------ |
-| T-040 | [#29](https://github.com/MuhidinM/qen/issues/29) | Define the holiday data model                                | R-HOL-01 | M    | todo               |
-| T-041 | [#30](https://github.com/MuhidinM/qen/issues/30) | Confirm the official public holiday list and leap-year rules | R-HOL-02 | S    | todo · needs-owner |
-| T-042 | [#31](https://github.com/MuhidinM/qen/issues/31) | Implement the fixed-date holidays                            | R-HOL-03 | M    | todo               |
-| T-043 | [#32](https://github.com/MuhidinM/qen/issues/32) | Query holidays by year, date range and category              | R-HOL-04 | M    | todo               |
-| T-044 | [#33](https://github.com/MuhidinM/qen/issues/33) | Add holiday names in all five locales                        | R-HOL-05 | M    | todo · needs-owner |
+| ID    | Issue                                            | Task                                                         | Reqs     | Size | Status |
+| ----- | ------------------------------------------------ | ------------------------------------------------------------ | -------- | ---- | ------ |
+| T-040 | [#29](https://github.com/MuhidinM/qen/issues/29) | Define the holiday data model                                | R-HOL-01 | M    | todo   |
+| T-041 | [#30](https://github.com/MuhidinM/qen/issues/30) | Confirm the official public holiday list and leap-year rules | R-HOL-02 | S    | todo   |
+| T-042 | [#31](https://github.com/MuhidinM/qen/issues/31) | Implement the fixed-date holidays                            | R-HOL-03 | M    | todo   |
+| T-043 | [#32](https://github.com/MuhidinM/qen/issues/32) | Query holidays by year, date range and category              | R-HOL-04 | M    | todo   |
+| T-044 | [#33](https://github.com/MuhidinM/qen/issues/33) | Add holiday names in all five locales                        | R-HOL-05 | M    | todo   |
 
 ## M4 · Computed holidays
 
 PLAN.md Phase 4. Done when Bahire Hasab, Orthodox movable feasts, Islamic holidays and observances are correct for 1900–2100.
 
-| ID    | Issue                                            | Task                                                              | Reqs     | Size | Status             |
-| ----- | ------------------------------------------------ | ----------------------------------------------------------------- | -------- | ---- | ------------------ |
-| T-050 | [#34](https://github.com/MuhidinM/qen/issues/34) | Compute Bahire Hasab for any Ethiopian year                       | R-HOL-06 | L    | todo               |
-| T-051 | [#35](https://github.com/MuhidinM/qen/issues/35) | Derive the Orthodox movable feasts and fasts                      | R-HOL-07 | M    | todo               |
-| T-052 | [#36](https://github.com/MuhidinM/qen/issues/36) | Cross-check Fasika against Julian Easter for 1900–2100            | R-HOL-08 | S    | todo               |
-| T-053 | [#37](https://github.com/MuhidinM/qen/issues/37) | Add Islamic holidays and observances                              | R-HOL-09 | M    | todo               |
-| T-054 | [#38](https://github.com/MuhidinM/qen/issues/38) | List multi-day observances such as Ramadan and the Orthodox fasts | R-HOL-10 | M    | todo · needs-owner |
-| T-055 | [#39](https://github.com/MuhidinM/qen/issues/39) | Flag the weekly Wednesday and Friday fasts                        | R-HOL-11 | S    | todo · needs-owner |
+| ID    | Issue                                            | Task                                                              | Reqs     | Size | Status |
+| ----- | ------------------------------------------------ | ----------------------------------------------------------------- | -------- | ---- | ------ |
+| T-050 | [#34](https://github.com/MuhidinM/qen/issues/34) | Compute Bahire Hasab for any Ethiopian year                       | R-HOL-06 | L    | todo   |
+| T-051 | [#35](https://github.com/MuhidinM/qen/issues/35) | Derive the Orthodox movable feasts and fasts                      | R-HOL-07 | M    | todo   |
+| T-052 | [#36](https://github.com/MuhidinM/qen/issues/36) | Cross-check Fasika against Julian Easter for 1900–2100            | R-HOL-08 | S    | todo   |
+| T-053 | [#37](https://github.com/MuhidinM/qen/issues/37) | Add Islamic holidays and observances                              | R-HOL-09 | M    | todo   |
+| T-054 | [#38](https://github.com/MuhidinM/qen/issues/38) | List multi-day observances such as Ramadan and the Orthodox fasts | R-HOL-10 | M    | todo   |
+| T-055 | [#39](https://github.com/MuhidinM/qen/issues/39) | Flag the weekly Wednesday and Friday fasts                        | R-HOL-11 | S    | todo   |
 
 ## M5 · Hijri adjustment and core 1.0
 
 PLAN.md Phase 5. Done when @qen/core@1.0.0 is published.
 
-| ID    | Issue                                            | Task                                                             | Reqs               | Size | Status             |
-| ----- | ------------------------------------------------ | ---------------------------------------------------------------- | ------------------ | ---- | ------------------ |
-| T-060 | [#40](https://github.com/MuhidinM/qen/issues/40) | Generate and commit the Umm al-Qura month-start table            | R-HIJ-01           | M    | todo               |
-| T-061 | [#41](https://github.com/MuhidinM/qen/issues/41) | Convert Hijri dates with the Umm al-Qura method                  | R-HIJ-02           | M    | todo               |
-| T-062 | [#42](https://github.com/MuhidinM/qen/issues/42) | Pass Hijri settings through conversion, today() and holidays     | R-HIJ-03           | M    | todo               |
-| T-063 | [#43](https://github.com/MuhidinM/qen/issues/43) | Apply official overrides and the user offset to Hijri dates      | R-HIJ-04           | M    | todo               |
-| T-064 | [#44](https://github.com/MuhidinM/qen/issues/44) | Mark Islamic holidays as expected or confirmed                   | R-HIJ-05           | S    | todo               |
-| T-065 | [#45](https://github.com/MuhidinM/qen/issues/45) | Seed overrides with recent confirmed Ethiopian Eid announcements | R-HIJ-06           | S    | todo · needs-owner |
-| T-066 | [#46](https://github.com/MuhidinM/qen/issues/46) | Review the public API and lock it for 1.0                        | R-LIB-09, R-LIB-10 | S    | todo               |
-| T-067 | [#47](https://github.com/MuhidinM/qen/issues/47) | Publish @qen/core 1.0.0                                          | R-LIB-13           | S    | todo · needs-owner |
+| ID    | Issue                                            | Task                                                                  | Reqs                         | Size | Status             |
+| ----- | ------------------------------------------------ | --------------------------------------------------------------------- | ---------------------------- | ---- | ------------------ |
+| T-062 | [#42](https://github.com/MuhidinM/qen/issues/42) | Pass Hijri settings through conversion, today() and holidays          | R-HIJ-03                     | M    | todo               |
+| T-063 | [#43](https://github.com/MuhidinM/qen/issues/43) | Apply official overrides and the user offset to Hijri dates           | R-HIJ-04                     | M    | todo               |
+| T-064 | [#44](https://github.com/MuhidinM/qen/issues/44) | Mark Islamic holidays as expected or confirmed                        | R-HIJ-05                     | S    | todo               |
+| T-065 | [#45](https://github.com/MuhidinM/qen/issues/45) | Seed overrides with recent confirmed Ethiopian Eid announcements      | R-HIJ-06                     | S    | todo               |
+| T-066 | [#46](https://github.com/MuhidinM/qen/issues/46) | Review the public API and lock it for 1.0                             | R-LIB-09, R-LIB-10           | S    | todo               |
+| T-068 | [#55](https://github.com/MuhidinM/qen/issues/55) | Get native-speaker and authority review of delegated facts before 1.0 | R-FMT-02, R-HOL-02, R-HOL-05 | S    | todo · needs-owner |
+| T-067 | [#47](https://github.com/MuhidinM/qen/issues/47) | Publish @qen/core 1.0.0                                               | R-LIB-13                     | S    | todo · needs-owner |
 
 ## M6 · React components
 

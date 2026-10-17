@@ -14,7 +14,7 @@
 
 - **May do without asking:** create and update issues, labels, milestones and the project board; push branches; open PRs; merge PRs when CI is green.
 - **Always ask first:** npm publishing (merging the "Version packages" PR), store submissions, production deploys, repo settings (branch protection, secrets), anything involving accounts, money or credentials, deleting data, publishing third-party material.
-- **Facts are never guessed:** holiday dates, religious rules and names in any language come from the owner or a cited source (CLAUDE.md rule 5). Issues that need this carry the `needs-owner` label.
+- **Facts:** holiday dates, religious rules and names in any language come from a cited source (CLDR, an official text) or, where the owner delegated it (2026-10-17), from Claude's best knowledge marked "review before 1.0" (T-068). `needs-owner` marks issues waiting on owner approval or facts.
 - **Merge style:** merge commits; branches deleted after merge.
 - **Public docs:** `docs/` · **private notes:** `notes/private/` (gitignored).
 

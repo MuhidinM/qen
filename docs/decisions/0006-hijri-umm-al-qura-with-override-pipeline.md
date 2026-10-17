@@ -12,7 +12,7 @@ Hijri months start on moon sighting, so any calculated date can be a day off fro
 - Outside the table, Umm al-Qura falls back to tabular and the result is flagged.
 - Then official overrides (confirmed month starts, each with a source), then the user offset (−2…+2).
 - Results record which step decided the date. Islamic holidays are `expected` until an override confirms them.
-- The default method in 0.x is tabular; 1.0 switches to Umm al-Qura (N-008, owner to confirm).
+- Umm al-Qura is the default from the first release. (Amended 2026-10-17: the table and method moved into M1 so 0.1 ships with the final default; N-008.)
 
 Alternatives considered:
 

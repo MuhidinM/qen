@@ -268,6 +268,8 @@ Scope per phase. Status lives in GitHub milestones and issues, mirrored in [docs
 - Gregorian `toJDN` / `fromJDN` + validation
 - Ethiopian `toJDN` / `fromJDN` + validation (Pagume 5/6, leap years)
 - Hijri tabular `toJDN` / `fromJDN` + validation
+- Umm al-Qura table + `toJDN` / `fromJDN` (moved from Phase 5, 2026-10-17)
+- Day boundaries for instants: Gregorian midnight, Ethiopian dawn, Hijri sunset
 - `convert()` between all pairs
 - `fromJSDate` / `toJSDate`
 - Test anchors from section 5 all pass
@@ -311,8 +313,6 @@ Scope per phase. Status lives in GitHub milestones and issues, mirrored in [docs
 
 #### Phase 5: Hijri adjustment → core v1.0
 
-- Build script generating the Umm al-Qura month-start table from `Intl` (committed as data)
-- Umm al-Qura `toJDN` / `fromJDN` using the table, tabular fallback outside range
 - `HijriSettings` threaded through conversion, `today`, and holidays
 - Override table + pipeline (method → overrides → offset)
 - Holiday `expected` / `confirmed` status
@@ -459,3 +459,6 @@ Add entries as `YYYY-MM-DD: decision (reason)`.
 - 2026-10-13: Adopted the project-flow process: requirements, ADRs, spec notes and backlog in `docs/`; work tracked as GitHub issues under milestones M0–M10 and the "Qen roadmap" board (ADR-0010).
 - 2026-10-13: One monorepo for every package and app (ADR-0001). Desktop stays Tauri, confirmed by owner (ADR-0008). No native mobile app; the PWA covers phones (ADR-0009).
 - 2026-10-13: Owner allows creating issues/labels/milestones/board, pushing branches, opening PRs and merging on green CI without asking. npm publishing, store submissions, deploys and repo settings still need the owner.
+- 2026-10-17: Umm al-Qura table and method move into Phase 1 so `@qen/core@0.1.0` ships with the final Hijri default (owner: "the best one"; N-008, ADR-0006 amended).
+- 2026-10-17: Day boundaries differ per calendar (owner): Gregorian at midnight, Ethiopian in the morning (06:00), Hijri at sunset. Applied when turning an instant into a date; date-to-date conversion is unchanged (ADR-0012, N-005).
+- 2026-10-17: Owner delegated the open facts (holiday list and leap-year shifts, locale names, Tsome Nebiyat, weekly fasts) to Claude's best knowledge plus CLDR. Recorded in N-016 to N-019, marked "review before 1.0", tracked in T-068 (#55).

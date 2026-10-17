@@ -15,3 +15,4 @@ One record per choice between real alternatives. Amend in place, with a date, wh
 | [0009](0009-no-native-mobile-app-pwa-covers-phones.md)    | No native mobile app for now; the PWA covers phones                | accepted |
 | [0010](0010-plan-is-the-spec-github-is-the-tracker.md)    | PLAN.md is the spec; GitHub issues and docs/ are the tracker       | accepted |
 | [0011](0011-release-from-ci-with-changesets.md)           | Packages released from CI with Changesets and npm provenance       | accepted |
+| [0012](0012-each-calendar-keeps-its-own-day-boundary.md)  | Each calendar keeps its own day boundary: midnight, dawn, sunset   | accepted |

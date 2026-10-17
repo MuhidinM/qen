@@ -8,19 +8,20 @@ Tasks (T-xxx) are listed in [backlog.md](backlog.md). IDs never change once crea
 
 ## A. Calendar conversion (`@qen/core`)
 
-| ID       | Requirement                                                                                                                   | Priority | Task        | Evidence | ✓   |
-| -------- | ----------------------------------------------------------------------------------------------------------------------------- | -------- | ----------- | -------- | --- |
-| R-CAL-01 | Dates are plain immutable objects `{ calendar, year, month, day }`, months 1-based                                            | must     | T-010       |          | ☐   |
-| R-CAL-02 | `date()` constructor and `isValid()`; invalid dates throw a typed `InvalidDateError` with a clear message                     | must     | T-010       |          | ☐   |
-| R-CAL-03 | Proleptic Gregorian `toJDN` / `fromJDN` with validation                                                                       | must     | T-011       |          | ☐   |
-| R-CAL-04 | Ethiopian (Amete Mihret) `toJDN` / `fromJDN`: 13 months, Pagume 5 or 6, leap when `year % 4 === 3`                            | must     | T-012       |          | ☐   |
-| R-CAL-05 | Hijri tabular `toJDN` / `fromJDN`: 30-year cycle, leap years 2, 5, 7, 10, 13, 16, 18, 21, 24, 26, 29, civil epoch JDN 1948440 | must     | T-013       |          | ☐   |
-| R-CAL-06 | `convert()` between every pair of calendars, always through the JDN                                                           | must     | T-014       |          | ☐   |
-| R-CAL-07 | `fromJSDate` / `toJSDate`                                                                                                     | must     | T-015       |          | ☐   |
-| R-CAL-08 | All test anchors in PLAN.md §5 pass                                                                                           | must     | T-011–T-013 |          | ☐   |
-| R-CAL-09 | Round trip `fromJDN(toJDN(d))` equals `d` for every day 1900–2100 in each calendar                                            | must     | T-016       |          | ☐   |
-| R-CAL-10 | Ethiopian and Hijri tabular output equals `Intl.DateTimeFormat` (`ethiopic`, `islamic-civil`) for every day 1900–2100         | must     | T-017       |          | ☐   |
-| R-CAL-11 | Supported range is documented and enforced: year ≥ 1 in every calendar (see N-002)                                            | must     | T-010       |          | ☐   |
+| ID       | Requirement                                                                                                                                                                      | Priority | Task        | Evidence | ✓   |
+| -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- | ----------- | -------- | --- |
+| R-CAL-01 | Dates are plain immutable objects `{ calendar, year, month, day }`, months 1-based                                                                                               | must     | T-010       |          | ☐   |
+| R-CAL-02 | `date()` constructor and `isValid()`; invalid dates throw a typed `InvalidDateError` with a clear message                                                                        | must     | T-010       |          | ☐   |
+| R-CAL-03 | Proleptic Gregorian `toJDN` / `fromJDN` with validation                                                                                                                          | must     | T-011       |          | ☐   |
+| R-CAL-04 | Ethiopian (Amete Mihret) `toJDN` / `fromJDN`: 13 months, Pagume 5 or 6, leap when `year % 4 === 3`                                                                               | must     | T-012       |          | ☐   |
+| R-CAL-05 | Hijri tabular `toJDN` / `fromJDN`: 30-year cycle, leap years 2, 5, 7, 10, 13, 16, 18, 21, 24, 26, 29, civil epoch JDN 1948440                                                    | must     | T-013       |          | ☐   |
+| R-CAL-06 | `convert()` between every pair of calendars, always through the JDN                                                                                                              | must     | T-014       |          | ☐   |
+| R-CAL-07 | `fromJSDate` / `toJSDate`                                                                                                                                                        | must     | T-015       |          | ☐   |
+| R-CAL-08 | All test anchors in PLAN.md §5 pass                                                                                                                                              | must     | T-011–T-013 |          | ☐   |
+| R-CAL-09 | Round trip `fromJDN(toJDN(d))` equals `d` for every day 1900–2100 in each calendar                                                                                               | must     | T-016       |          | ☐   |
+| R-CAL-10 | Ethiopian and Hijri tabular output equals `Intl.DateTimeFormat` (`ethiopic`, `islamic-civil`) for every day 1900–2100                                                            | must     | T-017       |          | ☐   |
+| R-CAL-12 | `fromJSDate` and `today` apply each calendar's day boundary: Gregorian midnight, Ethiopian 06:00, Hijri sunset (computed from a location, else 18:00); option for civil midnight | must     | T-018       |          | ☐   |
+| R-CAL-11 | Supported range is documented and enforced: year ≥ 1 in every calendar (see N-002)                                                                                               | must     | T-010       |          | ☐   |
 
 ## B. Everyday utilities
 
@@ -180,4 +181,5 @@ Run top to bottom before each package release. Anything unticked goes into the R
 - ☐ README setup works from a fresh clone
 - ☐ Every ADR still matches the code
 - ☐ Changesets applied, CHANGELOG written, version tagged
+- ☐ Delegated facts reviewed (locale names, holiday rules, fasts; T-068), required for 1.0
 - ☐ Install the published package in a fresh project (Node ESM, Node CJS, Deno, Bun) and run the quick-start (owner)
