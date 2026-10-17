@@ -78,5 +78,21 @@ export const ti = defineLocale({
     hijri: { short: 'AH', long: 'AH' },
   },
   periods: { morning: 'ንግሆ', afternoon: 'ድሕሪ ቀትሪ', evening: 'ምሸት', night: 'ለይቲ' },
+  // Holidays: general usage, not yet reviewed (#55).
+  holidays: {
+    enkutatash: 'ሓድሽ ዓመት',
+    meskel: 'መስቀል',
+    genna: 'ልደት',
+    timket: 'ጥምቀት',
+    adwa: 'ዓወት ዓድዋ',
+    'labour-day': 'መዓልቲ ሰራሕተኛታት',
+    'patriots-victory': 'መዓልቲ ዓወት ኣርበኛታት',
+    'derg-downfall': 'ውድቀት ደርግ',
+    siklet: 'ስቅለት',
+    fasika: 'ፋሲካ',
+    'eid-al-fitr': 'ዒድ ኣል ፈጥር',
+    'eid-al-adha': 'ዒድ ኣል ኣድሓ',
+    mawlid: 'መውሊድ',
+  },
   reviewed: false,
 });

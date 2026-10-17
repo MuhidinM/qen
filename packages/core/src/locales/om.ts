@@ -90,5 +90,22 @@ export const om = defineLocale({
     hijri: { short: 'AH', long: 'AH' },
   },
   periods: { morning: 'ganama', afternoon: 'waaree booda', evening: 'galgala', night: 'halkan' },
+  // Holidays: Christian and Islamic names from Wikipedia, "Public holidays in Ethiopia";
+  // the national days are best guesses (review #55).
+  holidays: {
+    enkutatash: 'Bara Haaraa',
+    meskel: 'Masqalaa',
+    genna: 'Ayaana Qillee',
+    timket: 'Ayaana Cuuphaa',
+    adwa: "Ayyaana Mo'icha Adwaa",
+    'labour-day': 'Guyyaa Hojjettootaa Addunyaa',
+    'patriots-victory': 'Guyyaa Injifannoo Gootota',
+    'derg-downfall': 'Kufaatii Dergii',
+    siklet: 'Ayyaana Faannoo',
+    fasika: 'Ayyaana Faasiikaa',
+    'eid-al-fitr': 'Iid al-Fitrii',
+    'eid-al-adha': 'Iid al-Adhaa',
+    mawlid: 'Mawliid',
+  },
   reviewed: false,
 });
