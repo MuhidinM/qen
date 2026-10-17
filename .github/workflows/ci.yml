@@ -28,6 +28,8 @@ jobs:
         run: pnpm --filter @qen/core check:package
       - name: Umm al-Qura table matches ICU
         run: pnpm --filter @qen/core check:umalqura
+      - name: Every export documented, with an example (TypeDoc)
+        run: pnpm --filter @qen/core check:docs
       - name: Bundle size budget
         run: pnpm --filter @qen/core size
 

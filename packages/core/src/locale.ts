@@ -16,12 +16,15 @@ import type { CalendarId } from './types.js';
 export interface Locale {
   /** BCP 47 language code (N-024). */
   readonly code: string;
+  /** Text direction; `'rtl'` for Arabic. */
   readonly direction: 'ltr' | 'rtl';
   /** Month names per calendar, index 0 = month 1. */
   readonly months: Readonly<Record<CalendarId, readonly string[]>>;
+  /** Short month names per calendar (the long names where a language has no short form). */
   readonly monthsShort: Readonly<Record<CalendarId, readonly string[]>>;
   /** Weekday names, index 0 = Sunday. */
   readonly weekdays: readonly string[];
+  /** Short weekday names, index 0 = Sunday. */
   readonly weekdaysShort: readonly string[];
   /** Era labels per calendar, e.g. "EC" / "ዓ.ም.". */
   readonly eras: Readonly<Record<CalendarId, { readonly short: string; readonly long: string }>>;

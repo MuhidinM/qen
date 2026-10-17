@@ -26,6 +26,7 @@ export type NumeralSystem = 'latin' | 'arabic' | 'geez';
 export interface FormatOptions extends ConvertOptions {
   /** Needed for name tokens (MMM, MMMM, E…EEEE, G…GGGG). Import it from `@qen/core/locales/*`. */
   readonly locale?: Locale;
+  /** How numbers are written; `'latin'` by default. */
   readonly numerals?: NumeralSystem;
 }
 

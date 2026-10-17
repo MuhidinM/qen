@@ -100,7 +100,9 @@
     "size": "size-limit",
     "smoke": "sh smoke/run.sh node",
     "generate:umalqura": "node scripts/generate-umalqura.mjs",
-    "check:umalqura": "node scripts/generate-umalqura.mjs --check"
+    "check:umalqura": "node scripts/generate-umalqura.mjs --check",
+    "docs": "typedoc",
+    "check:docs": "typedoc --json docs-api/api.json && node scripts/check-examples.mjs docs-api/api.json"
   },
   "devDependencies": {
     "@arethetypeswrong/cli": "^0.18.5",
@@ -109,6 +111,7 @@
     "publint": "^0.3.25",
     "size-limit": "^14.2.0",
     "tsup": "^8.5.1",
+    "typedoc": "^0.28.20",
     "typescript": "^6.0.3",
     "vitest": "^5.0.4"
   },

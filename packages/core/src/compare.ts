@@ -35,7 +35,14 @@ export function isSame(a: CalendarDate, b: CalendarDate, options: ConvertOptions
   return compare(a, b, options) === 0;
 }
 
-/** Units for {@link diff}. */
+/**
+ * Units for {@link diff}.
+ *
+ * @example
+ * ```ts
+ * const unit: DiffUnit = 'months';
+ * ```
+ */
 export type DiffUnit = 'days' | 'weeks' | 'months' | 'years';
 
 /**
