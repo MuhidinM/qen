@@ -29,7 +29,7 @@ PLAN.md Phase 1. Done when every date converts correctly in all directions, with
 | T-013 | [#10](https://github.com/MuhidinM/qen/issues/10) | Convert Hijri dates (tabular method) to and from Julian Day Numbers     | R-CAL-05, R-CAL-08                     | M    | done   |
 | T-014 | [#11](https://github.com/MuhidinM/qen/issues/11) | Convert any date to any calendar with convert()                         | R-CAL-06                               | S    | done   |
 | T-018 | [#54](https://github.com/MuhidinM/qen/issues/54) | Decide which calendar day an instant falls on: midnight, dawn or sunset | R-CAL-12                               | M    | done   |
-| T-015 | [#12](https://github.com/MuhidinM/qen/issues/12) | Convert between calendar dates and JavaScript Date objects              | R-CAL-07                               | S    | todo   |
+| T-015 | [#12](https://github.com/MuhidinM/qen/issues/12) | Convert between calendar dates and JavaScript Date objects              | R-CAL-07                               | S    | done   |
 | T-016 | [#13](https://github.com/MuhidinM/qen/issues/13) | Prove every day from 1900 to 2100 round-trips in every calendar         | R-CAL-09                               | S    | done   |
 | T-017 | [#14](https://github.com/MuhidinM/qen/issues/14) | Cross-check Ethiopian and Hijri results against Intl for 1900–2100      | R-CAL-10                               | M    | done   |
 | T-060 | [#40](https://github.com/MuhidinM/qen/issues/40) | Generate and commit the Umm al-Qura month-start table                   | R-HIJ-01                               | M    | done   |
