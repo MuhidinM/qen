@@ -42,6 +42,28 @@ export default tseslint.config(
     },
   },
   {
+    // Locales are separate entry points, so the main entry must never import them (R-FMT-03).
+    files: ['packages/core/src/**/*.ts'],
+    ignores: ['packages/core/src/locales/**'],
+    rules: {
+      'no-restricted-imports': [
+        'error',
+        {
+          patterns: [
+            {
+              regex: '^(?!\\.)',
+              message: '@qen/core has zero dependencies: only relative imports are allowed.',
+            },
+            {
+              group: ['**/locales/*'],
+              message: 'Locales are separate entry points; the main entry must not import them.',
+            },
+          ],
+        },
+      ],
+    },
+  },
+  {
     // No hidden clock reads in core: "now" is an argument; today() is the only exception.
     files: ['packages/core/src/**/*.ts'],
     ignores: ['packages/core/src/today.ts'],
