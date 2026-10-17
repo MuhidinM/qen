@@ -2,5 +2,7 @@ packages:
   - 'packages/*'
   - 'apps/*'
 allowBuilds:
+  '@swc/core': true
   esbuild: true
+  msw: false
   simple-git-hooks: true
