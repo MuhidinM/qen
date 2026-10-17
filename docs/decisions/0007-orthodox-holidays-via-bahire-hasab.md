@@ -14,6 +14,8 @@ Alternatives considered:
 
 - Julian Easter only: gives Fasika but not the computus outputs (Evangelist year, Metqe, Beale Metqe) that `bahireHasab()` exposes.
 
+(Amended 2026-10-17: no authoritative written description of the steps was found online, only other libraries' code, which we did not use. The implementation follows the traditional steps: Amete Alem = year + 5500; Wenber = (Amete Alem − 1) mod 19; Abekte = 11·Wenber mod 30; Metqe = 19·Wenber mod 30 (0 counts as 30); Beale Metqe in Meskerem if Metqe > 14, else Tikimt; Tewsak by Beale Metqe's weekday (Sun 7, Mon 6, Tue 5, Wed 4, Thu 3, Fri 2, Sat 8); Nineveh = Tir or Yekatit day Metqe + Tewsak, carrying past 30. Correctness rests on the Julian Easter cross-check, #36.)
+
 ## Consequences
 
 - Two independent methods must agree, which catches off-by-one errors in either.
