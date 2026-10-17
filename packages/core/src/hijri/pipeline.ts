@@ -1,6 +1,8 @@
 import { hijri } from '../calendars/hijri.js';
 import { hijriTabularFromJDN, hijriTabularToJDN } from '../calendars/hijri-tabular.js';
 import { umalquraFromJDN, umalquraToJDN } from '../calendars/hijri-umalqura.js';
+import { gregorianToJDN } from '../calendars/gregorian.js';
+import { date } from '../date.js';
 import { InvalidDateError } from '../errors.js';
 import type { ConvertOptions, HijriMethod } from '../types.js';
 
@@ -23,7 +25,11 @@ const METHOD_LABEL: Readonly<Record<HijriMethod, string>> = {
 export interface Resolved {
   readonly method: HijriMethod;
   readonly offset: number;
+  /** Override month starts as JDNs, keyed by "year-month". */
+  readonly overrides: ReadonlyMap<string, { readonly jdn: number; readonly source: string }>;
 }
+
+const key = (year: number, month: number) => `${year}-${month}`;
 
 export function resolve(options: ConvertOptions): Resolved {
   const method = options.hijri?.method ?? 'umalqura';
@@ -31,7 +37,56 @@ export function resolve(options: ConvertOptions): Resolved {
   if (!Number.isInteger(offset) || Math.abs(offset) > 2) {
     throw new RangeError(`Hijri offset must be -2, -1, 0, 1 or 2, got ${offset}`);
   }
-  return { method, offset };
+  const overrides = new Map<string, { jdn: number; source: string }>();
+  const settings: Resolved = { method, offset, overrides };
+  for (const o of options.hijri?.overrides ?? []) {
+    const label = `${o.hijriMonth}/${o.hijriYear}`;
+    if (!Number.isInteger(o.hijriYear) || o.hijriYear < 1) {
+      throw new RangeError(`Hijri override: year ${o.hijriYear} is not a Hijri year`);
+    }
+    if (!Number.isInteger(o.hijriMonth) || o.hijriMonth < 1 || o.hijriMonth > 12) {
+      throw new RangeError(
+        `Hijri override: month ${o.hijriMonth} of ${o.hijriYear} is not a Hijri month (1–12)`,
+      );
+    }
+    if (typeof o.source !== 'string' || o.source.trim() === '') {
+      throw new RangeError(`Hijri override for ${label} needs a source`);
+    }
+    let jdn: number;
+    try {
+      const { year, month, day } = date(
+        'gregorian',
+        o.startsOn.year,
+        o.startsOn.month,
+        o.startsOn.day,
+      );
+      jdn = gregorianToJDN(year, month, day);
+    } catch (e) {
+      throw new RangeError(
+        `Hijri override for ${label}: ${e instanceof Error ? e.message : String(e)}`,
+        { cause: e },
+      );
+    }
+    if (overrides.has(key(o.hijriYear, o.hijriMonth))) {
+      throw new RangeError(`Hijri override: two overrides for ${label}`);
+    }
+    overrides.set(key(o.hijriYear, o.hijriMonth), { jdn, source: o.source });
+  }
+  // Months next to an override must still have 29 or 30 days.
+  for (const k of overrides.keys()) {
+    const [y = 0, m = 0] = k.split('-').map(Number);
+    const [py, pm] = m === 1 ? [y - 1, 12] : [y, m - 1];
+    for (const [cy, cm] of [
+      [py, pm],
+      [y, m],
+    ] as const) {
+      const length = hijriMonthLength(cy, cm, settings);
+      if (length !== 29 && length !== 30) {
+        throw new RangeError(`Hijri override for ${m}/${y} would give ${cm}/${cy} ${length} days`);
+      }
+    }
+  }
+  return settings;
 }
 
 const next = (year: number, month: number): [number, number] =>
@@ -39,7 +94,9 @@ const next = (year: number, month: number): [number, number] =>
 
 /** JDN of the 1st of a Hijri month after every step of the pipeline. */
 function monthStart(year: number, month: number, s: Resolved): number {
-  return METHODS[s.method].toJDN(year, month, 1) + s.offset;
+  return (
+    s.overrides.get(key(year, month))?.jdn ?? METHODS[s.method].toJDN(year, month, 1) + s.offset
+  );
 }
 
 /** Length of a Hijri month after every step of the pipeline. */
@@ -81,7 +138,13 @@ export function hijriFromJDN(jdn: number, s: Resolved): YMD {
   }
 }
 
-/** Which step of the pipeline decided the date of a Hijri month. */
-export function decidedBy(s: Resolved): 'method' | 'offset' {
-  return s.offset !== 0 ? 'offset' : 'method';
+/** Which step of the pipeline decided a Hijri month, and the override's source if any. */
+export function decidedBy(
+  year: number,
+  month: number,
+  s: Resolved,
+): { decidedBy: 'method' | 'override' | 'offset'; source?: string } {
+  const override = s.overrides.get(key(year, month));
+  if (override) return { decidedBy: 'override', source: override.source };
+  return { decidedBy: s.offset !== 0 ? 'offset' : 'method' };
 }

@@ -112,10 +112,11 @@ export function explainHijri(d: CalendarDate, options: ConvertOptions = {}): Hij
   const jdn = toJDN(d, options);
   const settings = resolve(options);
   const fallback = settings.method === 'umalqura' && !umalquraCoversJDN(jdn - settings.offset);
+  const hijriDate = fromJDN(jdn, 'hijri', options);
   return Object.freeze({
-    date: fromJDN(jdn, 'hijri', options),
+    date: hijriDate,
     method: fallback ? 'tabular' : settings.method,
     fallback,
-    decidedBy: decidedBy(settings),
+    ...decidedBy(hijriDate.year, hijriDate.month, settings),
   });
 }

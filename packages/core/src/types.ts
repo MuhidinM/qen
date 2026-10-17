@@ -75,6 +75,30 @@ export interface HijriSettings {
    * months start a day later, so a given day shows the previous Hijri date.
    */
   readonly offset?: -2 | -1 | 0 | 1 | 2;
+  /** Officially announced month starts. Each wins for its own month, before the offset. */
+  readonly overrides?: readonly HijriOverride[];
+}
+
+/**
+ * An officially announced start of a Hijri month, such as an Eid confirmation.
+ *
+ * @example
+ * ```ts
+ * const shawwal: HijriOverride = {
+ *   hijriYear: 1447,
+ *   hijriMonth: 10,
+ *   startsOn: { year: 2026, month: 3, day: 20 },
+ *   source: 'Ethiopian Islamic Affairs Supreme Council',
+ * };
+ * ```
+ */
+export interface HijriOverride {
+  readonly hijriYear: number;
+  readonly hijriMonth: number;
+  /** The Gregorian day the month starts on. */
+  readonly startsOn: { readonly year: number; readonly month: number; readonly day: number };
+  /** Who announced it. Required. */
+  readonly source: string;
 }
 
 /**
@@ -91,6 +115,8 @@ export interface HijriExplanation {
   readonly date: CalendarDate<'hijri'>;
   readonly method: HijriMethod;
   readonly fallback: boolean;
-  /** The last pipeline step that changed the result: the base method, or the user offset. */
-  readonly decidedBy: 'method' | 'offset';
+  /** The pipeline step that decided this month: the base method, an official override, or the user offset. */
+  readonly decidedBy: 'method' | 'override' | 'offset';
+  /** The override's source, when `decidedBy` is `'override'`. */
+  readonly source?: string;
 }

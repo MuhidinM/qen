@@ -10,6 +10,7 @@ export type {
   ConvertOptions,
   HijriExplanation,
   HijriMethod,
+  HijriOverride,
   HijriSettings,
 } from './types.js';
 export { InvalidDateError } from './errors.js';

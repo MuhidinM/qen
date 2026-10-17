@@ -45,11 +45,15 @@ describe('official Hijri overrides (ADR-0006)', () => {
   });
 
   it('round-trips every day around the overrides (fromJDN steps between months)', () => {
+    // One override starts a month a day later (fromJDN steps back a month), one a day earlier
+    // (it steps forward). They sit in different years so their neighbours stay 29–30 days.
+    const lengths1448 = Array.from({ length: 12 }, (_, i) => daysInMonth('hijri', 1448, i + 1));
+    const long1448 = lengths1448.findIndex((n, i) => n === 30 && lengths1448[i + 1] === 29) + 1;
     const settings = {
-      hijri: { overrides: [later(1447, short + 1, 1), later(1447, long + 1, -1)] },
+      hijri: { overrides: [later(1447, short + 1, 1), later(1448, long1448 + 1, -1)] },
     };
     const first = toJDN(date('hijri', 1446, 12, 1));
-    const last = toJDN(date('hijri', 1448, 2, 1));
+    const last = toJDN(date('hijri', 1449, 2, 1));
     let prev = fromJDN(first - 1, 'hijri', settings);
     for (let jdn = first; jdn <= last; jdn++) {
       const h = fromJDN(jdn, 'hijri', settings);
@@ -93,6 +97,7 @@ describe('official Hijri overrides (ADR-0006)', () => {
     const at = (o: HijriOverride) => () =>
       convert(date('gregorian', 2026, 3, 1), 'hijri', { hijri: { overrides: [o] } });
     expect(at({ ...later(1447, 10, 0), hijriMonth: 13 })).toThrow('Hijri override: month 13');
+    expect(at({ ...later(1447, 10, 0), hijriYear: 0 })).toThrow('Hijri override: year 0');
     expect(at({ ...later(1447, 10, 0), startsOn: { year: 2026, month: 2, day: 30 } })).toThrow(
       'Hijri override for 10/1447',
     );

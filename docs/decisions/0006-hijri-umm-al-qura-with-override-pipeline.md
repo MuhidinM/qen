@@ -19,6 +19,8 @@ Alternatives considered:
 - Astronomical crescent-visibility calculation: complex, and still not what authorities announce.
 - Local announcements only: no dates for future years.
 
+(Amended 2026-10-17, #42 and #43: an override decides its own month and is not shifted by the user offset, since an announced date is already local; the offset applies to every month without an override. Each override needs a source, and one that would give a neighbouring month fewer than 29 or more than 30 days is rejected as bad data. `explainHijri` reports `decidedBy` ('method' | 'override' | 'offset') and the override's source.)
+
 ## Consequences
 
 - The table needs a regeneration script and a CI check that the committed copy matches it.

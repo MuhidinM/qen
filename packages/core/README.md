@@ -56,7 +56,7 @@ date('ethiopian', 2015, 13, 6); // => { calendar: 'ethiopian', year: 2015, month
 - `umalqura` (default): the Umm al-Qura calendar of Saudi Arabia, from a table covering 1300–1500 AH (1882–2077). It matches `Intl`'s `islamic-umalqura` on every day of that range. Month starts for 1420–1449 AH (1999–2028) also match R. H. van Gent's published tables; outside those years, published reconstructions differ by a day in some months. Outside the table it falls back to `tabular` (where `Intl` uses ICU's own extrapolation up to 1600 AH).
 - `tabular`: the arithmetic 30-year cycle with the civil epoch, the same as `Intl`'s `islamic-civil`.
 
-Either may differ by a day from the month start announced locally after moon sighting. To follow local practice, pass `hijri: { offset }` (−2 to +2 days): +1 starts every month a day later.
+Either may differ by a day from the month start announced locally after moon sighting. To follow local practice, pass `hijri: { offset }` (−2 to +2 days): +1 starts every month a day later. Officially announced month starts go in `hijri: { overrides: [{ hijriYear, hijriMonth, startsOn, source }] }`; each one wins for its month, and `explainHijri` tells you which step decided a date.
 
 ```ts
 import { convert, date, explainHijri } from '@qen/core';
