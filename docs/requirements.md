@@ -96,15 +96,15 @@ Tasks (T-xxx) are listed in [backlog.md](backlog.md). IDs never change once crea
 
 Refined into detailed rows when milestone M6 starts.
 
-| ID      | Requirement                                                                                    | Priority | Task  | Evidence | ✓   |
-| ------- | ---------------------------------------------------------------------------------------------- | -------- | ----- | -------- | --- |
-| R-UI-01 | Design tokens in `packages/react/src/tokens` per CLAUDE.md (Refactoring UI scales, HSL colors) | must     | T-100 |          | ☐   |
-| R-UI-02 | Month grid, date picker, range picker, Ethiopian time input                                    | must     | T-100 |          | ☐   |
-| R-UI-03 | Secondary-calendar numbers in day cells; holiday markers with legend and filters               | must     | T-100 |          | ☐   |
-| R-UI-04 | Week starts on Sunday or Monday                                                                | must     | T-100 |          | ☐   |
-| R-UI-05 | Month, year and agenda views                                                                   | should   | T-100 |          | ☐   |
-| R-UI-06 | Ge'ez and Arabic script render correctly; Arabic is right-to-left                              | must     | T-100 |          | ☐   |
-| R-UI-07 | Light and dark mode through CSS variables                                                      | must     | T-100 |          | ☐   |
+| ID      | Requirement                                                                                    | Priority | Task                | Evidence | ✓   |
+| ------- | ---------------------------------------------------------------------------------------------- | -------- | ------------------- | -------- | --- |
+| R-UI-01 | Design tokens in `packages/react/src/tokens` per CLAUDE.md (Refactoring UI scales, HSL colors) | must     | T-103               |          | ☐   |
+| R-UI-02 | Month grid, date picker, range picker, Ethiopian time input                                    | must     | T-104, T-106, T-107 |          | ☐   |
+| R-UI-03 | Secondary-calendar numbers in day cells; holiday markers with legend and filters               | must     | T-105               |          | ☐   |
+| R-UI-04 | Week starts on Sunday or Monday                                                                | must     | T-104               |          | ☐   |
+| R-UI-05 | Month, year and agenda views                                                                   | should   | T-108               |          | ☐   |
+| R-UI-06 | Ge'ez and Arabic script render correctly; Arabic is right-to-left                              | must     | T-104               |          | ☐   |
+| R-UI-07 | Light and dark mode through CSS variables                                                      | must     | T-103               |          | ☐   |
 
 ## H. Website (`apps/web`), outline
 
