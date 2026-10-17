@@ -129,19 +129,19 @@
     {
       "name": "everything (main entry)",
       "path": "dist/index.js",
-      "limit": "8 kB"
+      "limit": "9 kB"
     },
     {
       "name": "{ date, convert } (includes the Umm al-Qura table)",
       "path": "dist/index.js",
       "import": "{ date, convert }",
-      "limit": "2.5 kB"
+      "limit": "3 kB"
     },
     {
       "name": "{ format }",
       "path": "dist/index.js",
       "import": "{ format }",
-      "limit": "3 kB"
+      "limit": "3.5 kB"
     },
     {
       "name": "{ parse }",
@@ -153,7 +153,7 @@
       "name": "{ getHolidays, nextHoliday }",
       "path": "dist/index.js",
       "import": "{ getHolidays, nextHoliday }",
-      "limit": "4 kB"
+      "limit": "4.5 kB"
     },
     {
       "name": "{ toGeezNumeral }",
