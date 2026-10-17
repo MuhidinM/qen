@@ -90,7 +90,7 @@ Tasks (T-xxx) are listed in [backlog.md](backlog.md). IDs never change once crea
 | R-LIB-10 | Public API surface checked for breaking changes against the last release (api-extractor)    | should   | T-066 |                                                                                                                                                                                      | ☐   |
 | R-LIB-11 | Line coverage ≥ 95% for `core`, enforced in CI                                              | must     | T-001 | `vitest.config.ts` threshold 95% lines, enforced in CI; actual 100% lines at 0.1.0                                                                                                   | ☑   |
 | R-LIB-12 | Type tests for the public types                                                             | should   | T-010 | `expectTypeOf` in `test/date.test.ts`, checked by `pnpm typecheck` (#7)                                                                                                              | ◐   |
-| R-LIB-13 | Releases published from CI with npm provenance; every user-facing change has a changeset    | must     | T-033 | `.github/workflows/release.yml` with provenance (#86); first publish pending the 0.1.0 Version packages PR                                                                           | ◐   |
+| R-LIB-13 | Releases published from CI with npm provenance; every user-facing change has a changeset    | must     | T-033 | Published from CI by `release.yml` (0.1.0, #87); provenance did not attach to 0.1.0 → `publishConfig.provenance` added, verified on the next release (#89)                           | ◐   |
 
 ## G. React components (`@qen/react`), outline
 
