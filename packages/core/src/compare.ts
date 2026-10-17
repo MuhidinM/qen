@@ -81,3 +81,33 @@ export function diff(
       throw new RangeError(`Unknown unit "${String(unit)}": expected days, weeks, months or years`);
   }
 }
+
+/**
+ * A person's age, or the time elapsed between two dates, as years, months and days.
+ *
+ * Counted in the calendar of `birth` (`on` is converted into it): Ethiopian years have 13
+ * months. A birthday that doesn't exist in a year (Pagume 6, 29 February, a Hijri 30th) is
+ * reached on the month's last day. `on` is required because `@qen/core` never reads the
+ * clock; pass `today(calendar)` for the current age.
+ *
+ * @throws {@link InvalidDateError} if either date does not exist.
+ * @throws `RangeError` if `on` is before `birth`.
+ *
+ * @example
+ * ```ts
+ * age(date('ethiopian', 1990, 1, 17), date('ethiopian', 2019, 2, 7)); // { years: 29, months: 0, days: 20 }
+ * ```
+ */
+export function age(
+  birth: CalendarDate,
+  on: CalendarDate,
+  options: ConvertOptions = {},
+): { years: number; months: number; days: number } {
+  if (compare(on, birth, options) < 0) {
+    throw new RangeError('The "on" date is before the birth date');
+  }
+  const perYear = birth.calendar === 'ethiopian' ? 13 : 12;
+  const totalMonths = diff(birth, on, 'months', options);
+  const days = diff(addMonths(birth, totalMonths, options), on, 'days', options);
+  return { years: Math.floor(totalMonths / perYear), months: totalMonths % perYear, days };
+}

@@ -469,3 +469,4 @@ Add entries as `YYYY-MM-DD: decision (reason)`.
 - 2026-10-17: Owner delegated the open facts (holiday list and leap-year shifts, locale names, Tsome Nebiyat, weekly fasts) to Claude's best knowledge plus CLDR. Recorded in N-016 to N-019, marked "review before 1.0", tracked in T-068 (#55).
 - 2026-10-17: Supported Node versions are 22, 24 and 26 (`engines: >=22`). Node 20 reached end of life in April 2026. CI smoke-tests the packed tarball in each, plus Deno 2 and Bun.
 - 2026-10-17: Corrected PLAN.md §3.1 new-year rule: 12 September follows an Ethiopian leap year; the "following Gregorian leap year" shortcut fails in 2099. Found by the Ethiopian tests (#9), confirmed with Intl ethiopic (ICU 77.1). N-026.
+- 2026-10-17: `age(birth, on)` takes `on` as a required argument (PLAN.md §2 had `on?`), because core never reads the clock (CLAUDE.md); callers pass `today(calendar)`.
