@@ -19,6 +19,26 @@
         "default": "./dist/index.cjs"
       }
     },
+    "./locales/en": {
+      "import": {
+        "types": "./dist/locales/en.d.ts",
+        "default": "./dist/locales/en.js"
+      },
+      "require": {
+        "types": "./dist/locales/en.d.cts",
+        "default": "./dist/locales/en.cjs"
+      }
+    },
+    "./locales/am": {
+      "import": {
+        "types": "./dist/locales/am.d.ts",
+        "default": "./dist/locales/am.js"
+      },
+      "require": {
+        "types": "./dist/locales/am.d.cts",
+        "default": "./dist/locales/am.cjs"
+      }
+    },
     "./package.json": "./package.json"
   },
   "files": [
@@ -67,9 +87,19 @@
   },
   "size-limit": [
     {
-      "name": "main entry (everything)",
+      "name": "main entry (everything, no locales)",
       "path": "dist/index.js",
       "limit": "5 kB"
+    },
+    {
+      "name": "locale: en",
+      "path": "dist/locales/en.js",
+      "limit": "1 kB"
+    },
+    {
+      "name": "locale: am",
+      "path": "dist/locales/am.js",
+      "limit": "1.5 kB"
     }
   ]
 }

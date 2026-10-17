@@ -1,5 +1,6 @@
 // Requires the installed package by name through its CJS entry.
 const core = require('@qen/core');
+const { en } = require('@qen/core/locales/en');
 
 const runtime = typeof Bun !== 'undefined' ? `Bun ${Bun.version}` : `Node ${process.version}`;
 
@@ -12,4 +13,6 @@ if (meskerem1.year !== 2026 || meskerem1.month !== 9 || meskerem1.day !== 11) {
 }
 const noon = core.toJSDate(core.date('ethiopian', 2019, 1, 1), { utc: true }).toISOString();
 if (noon !== '2026-09-11T12:00:00.000Z') throw new Error(`toJSDate() returned ${noon}`);
+if (en.months.ethiopian[12] !== 'Pagume')
+  throw new Error('locale subpath @qen/core/locales/en failed');
 console.log(`CJS ok on ${runtime}: [${Object.keys(core).join(', ')}]`);
