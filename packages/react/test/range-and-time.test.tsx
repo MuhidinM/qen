@@ -60,12 +60,25 @@ describe('<DateRangePicker>', () => {
 
   it('works from the keyboard, across a month boundary', async () => {
     const { user, onChange } = setupRange({ defaultValue: { start: day(28), end: day(28) } });
-    cell('Tuesday, 28 Meskerem 2019').focus();
+    cell('Thursday, 28 Meskerem 2019').focus();
     await user.keyboard('{Enter}{ArrowDown}{Enter}');
     expect(onChange).toHaveBeenLastCalledWith({
       start: day(28),
       end: date('ethiopian', 2019, 2, 5),
     });
+  });
+
+  it('opens on the month of the range', () => {
+    render(
+      <DateRangePicker
+        label="Trip"
+        calendar="ethiopian"
+        locale={en}
+        today={today}
+        defaultValue={{ start: day(13), end: day(17) }}
+      />,
+    );
+    expect(screen.getByRole('grid', { name: 'Meskerem 2019' })).toBeTruthy();
   });
 
   it('follows a controlled value', () => {

@@ -95,6 +95,28 @@
         "@qen/core"
       ],
       "limit": "4.5 kB"
+    },
+    {
+      "name": "{ DateRangePicker } without React and @qen/core",
+      "path": "dist/index.js",
+      "import": "{ DateRangePicker }",
+      "ignore": [
+        "react",
+        "react-dom",
+        "@qen/core"
+      ],
+      "limit": "3.5 kB"
+    },
+    {
+      "name": "{ EthiopianTimeInput } without React and @qen/core",
+      "path": "dist/index.js",
+      "import": "{ EthiopianTimeInput }",
+      "ignore": [
+        "react",
+        "react-dom",
+        "@qen/core"
+      ],
+      "limit": "1.5 kB"
     }
   ],
   "devDependencies": {
