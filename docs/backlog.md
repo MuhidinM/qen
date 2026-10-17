@@ -63,7 +63,7 @@ PLAN.md Phase 3. Done when confirmed fixed-date holidays are queryable by year, 
 
 | ID    | Issue                                            | Task                                                         | Reqs     | Size | Status |
 | ----- | ------------------------------------------------ | ------------------------------------------------------------ | -------- | ---- | ------ |
-| T-040 | [#29](https://github.com/MuhidinM/qen/issues/29) | Define the holiday data model                                | R-HOL-01 | M    | todo   |
+| T-040 | [#29](https://github.com/MuhidinM/qen/issues/29) | Define the holiday data model                                | R-HOL-01 | M    | done   |
 | T-041 | [#30](https://github.com/MuhidinM/qen/issues/30) | Confirm the official public holiday list and leap-year rules | R-HOL-02 | S    | done   |
 | T-042 | [#31](https://github.com/MuhidinM/qen/issues/31) | Implement the fixed-date holidays                            | R-HOL-03 | M    | todo   |
 | T-043 | [#32](https://github.com/MuhidinM/qen/issues/32) | Query holidays by year, date range and category              | R-HOL-04 | M    | todo   |

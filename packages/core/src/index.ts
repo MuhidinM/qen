@@ -22,6 +22,13 @@ export { fromEthiopianTime, toEthiopianTime, type EthiopianTimePeriod } from './
 export type { Locale } from './locale.js';
 export { format, type FormatOptions, type NumeralSystem } from './format.js';
 export { AmbiguousDateError, parse, type ParseOptions } from './parse.js';
+export type {
+  Holiday,
+  HolidayCategory,
+  HolidayId,
+  HolidayRule,
+  HolidayStatus,
+} from './holidays/types.js';
 export { dayOfWeek, daysInMonth, isLeapYear, monthsInYear } from './info.js';
 export { addDays, addMonths, addYears } from './arithmetic.js';
 export { age, compare, diff, isSame, type DiffUnit } from './compare.js';
