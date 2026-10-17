@@ -28,7 +28,7 @@ Tasks (T-xxx) are listed in [backlog.md](backlog.md). IDs never change once crea
 | ID        | Requirement                                                                                                  | Priority | Task  | Evidence                                                                                                                                                       | ✓   |
 | --------- | ------------------------------------------------------------------------------------------------------------ | -------- | ----- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- | --- |
 | R-UTIL-01 | `dayOfWeek` (0 = Sunday), `daysInMonth`, `monthsInYear`, `isLeapYear`                                        | must     | T-020 | `src/info.ts`; `test/info.test.ts`: weekday anchors + every day 1900–2100 × 3 calendars vs `Date.getUTCDay()`; month lengths agree with `date()`/`toJDN` (#15) | ☑   |
-| R-UTIL-02 | `addDays`, `addMonths`, `addYears`; month and year math clamps the day (Hamle 30 + 2 months → Pagume 5 or 6) | must     | T-021 |                                                                                                                                                                | ☐   |
+| R-UTIL-02 | `addDays`, `addMonths`, `addYears`; month and year math clamps the day (Hamle 30 + 2 months → Pagume 5 or 6) | must     | T-021 | `src/arithmetic.ts`; `test/arithmetic.test.ts`: N-013 clamping cases in all 3 calendars, 6,000-case addDays inverse property (#16)                             | ☑   |
 | R-UTIL-03 | `diff(a, b, unit)` for days, weeks, months, years                                                            | must     | T-022 |                                                                                                                                                                | ☐   |
 | R-UTIL-04 | `compare`, `isSame`                                                                                          | must     | T-022 |                                                                                                                                                                | ☐   |
 | R-UTIL-05 | `age(birth, on?)` → `{ years, months, days }`, including from an Ethiopian birth date                        | must     | T-023 |                                                                                                                                                                | ☐   |
@@ -164,10 +164,10 @@ Refined into detailed rows when milestone M6 starts.
 
 ## X. Extras (proposed, not in PLAN.md)
 
-| ID   | Extra                                                                                   | Priority | Task  | Evidence | ✓   |
-| ---- | --------------------------------------------------------------------------------------- | -------- | ----- | -------- | --- |
-| X-01 | `addDays` etc. accept negative numbers (subtract) rather than separate `sub*` functions | should   | T-021 |          | ☐   |
-| X-02 | Generated API reference (TypeDoc) published with the docs site                          | could    | T-031 |          | ☐   |
+| ID   | Extra                                                                                   | Priority | Task  | Evidence                                                             | ✓   |
+| ---- | --------------------------------------------------------------------------------------- | -------- | ----- | -------------------------------------------------------------------- | --- |
+| X-01 | `addDays` etc. accept negative numbers (subtract) rather than separate `sub*` functions | should   | T-021 | Negative amounts subtract; tested in `test/arithmetic.test.ts` (#16) | ☑   |
+| X-02 | Generated API reference (TypeDoc) published with the docs site                          | could    | T-031 |                                                                      | ☐   |
 
 ## Release checklist
 
