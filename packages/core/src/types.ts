@@ -54,6 +54,7 @@ export type HijriMethod = 'umalqura' | 'tabular';
  * ```
  */
 export interface ConvertOptions {
+  /** How Hijri dates are calculated; Umm al-Qura by default. */
   readonly hijri?: { readonly method?: HijriMethod };
 }
 

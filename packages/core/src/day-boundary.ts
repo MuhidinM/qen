@@ -11,7 +11,9 @@ import type { CalendarDate, CalendarId, ConvertOptions } from './types.js';
  * ```
  */
 export interface GeoLocation {
+  /** Degrees north (negative for south), −90 to 90. */
   readonly latitude: number;
+  /** Degrees east (negative for west), −180 to 180. */
   readonly longitude: number;
 }
 
@@ -39,6 +41,7 @@ export type DayBoundary = 'traditional' | 'midnight';
 export interface InstantOptions extends ConvertOptions {
   /** Read the instant's wall-clock time in UTC instead of the runtime's local time zone. */
   readonly utc?: boolean;
+  /** When each calendar's day starts; `'traditional'` by default (ADR-0012). */
   readonly boundary?: DayBoundary;
   /** Where to compute sunset for the Hijri boundary. Without it, sunset is taken as 18:00. */
   readonly location?: GeoLocation;

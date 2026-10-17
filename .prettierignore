@@ -4,3 +4,4 @@ coverage
 pnpm-lock.yaml
 .changeset/*.md
 packages/core/src/calendars/umalqura-table.ts
+packages/core/docs-api

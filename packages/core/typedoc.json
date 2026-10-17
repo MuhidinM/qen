@@ -1,0 +1,31 @@
+{
+  "$schema": "https://typedoc.org/schema.json",
+  "entryPoints": [
+    "src/index.ts",
+    "src/locales/en.ts",
+    "src/locales/am.ts",
+    "src/locales/om.ts",
+    "src/locales/ti.ts",
+    "src/locales/ar.ts"
+  ],
+  "out": "docs-api",
+  "name": "@qen/core",
+  "readme": "none",
+  "excludePrivate": true,
+  "excludeInternal": true,
+  "treatWarningsAsErrors": true,
+  "validation": {
+    "notExported": true,
+    "invalidLink": true,
+    "notDocumented": true
+  },
+  "requiredToBeDocumented": [
+    "Function",
+    "Class",
+    "Interface",
+    "TypeAlias",
+    "Variable",
+    "Enum",
+    "Namespace"
+  ]
+}

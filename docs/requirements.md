@@ -84,7 +84,7 @@ Tasks (T-xxx) are listed in [backlog.md](backlog.md). IDs never change once crea
 | R-LIB-04 | Tree-shakable: functions, no import side effects (`sideEffects: false`)                     | must     | T-003 | `sideEffects: false`; size-limit per-import budgets (e.g. `toEthiopianTime` 192 B, `toGeezNumeral` 307 B); Umm al-Qura table dropped when unused (#23)                               | ☑   |
 | R-LIB-05 | Bundle size budget enforced in CI (size-limit)                                              | must     | T-003 | size-limit budgets in `packages/core/package.json`: main 6 kB, per-import and per-locale budgets, run in CI (#4, #23)                                                                | ☑   |
 | R-LIB-06 | Package correctness checked in CI (publint, Are the Types Wrong)                            | must     | T-003 | publint --strict + attw (node16 CJS/ESM, bundler all green), CI run 39012139411                                                                                                      | ☑   |
-| R-LIB-07 | Every public function has TSDoc with at least one example; API reference generated          | must     | T-031 |                                                                                                                                                                                      | ☐   |
+| R-LIB-07 | Every public function has TSDoc with at least one example; API reference generated          | must     | T-031 | TypeDoc with `notDocumented` + `treatWarningsAsErrors`, and `scripts/check-examples.mjs` requiring an `@example` on every export; CI step "Every export documented" (#26)            | ☑   |
 | R-LIB-08 | README examples compile and run in CI                                                       | should   | T-032 |                                                                                                                                                                                      | ☐   |
 | R-LIB-09 | Semver and a written backward-compatibility and deprecation policy                          | must     | T-066 |                                                                                                                                                                                      | ☐   |
 | R-LIB-10 | Public API surface checked for breaking changes against the last release (api-extractor)    | should   | T-066 |                                                                                                                                                                                      | ☐   |
@@ -164,10 +164,10 @@ Refined into detailed rows when milestone M6 starts.
 
 ## X. Extras (proposed, not in PLAN.md)
 
-| ID   | Extra                                                                                   | Priority | Task  | Evidence                                                             | ✓   |
-| ---- | --------------------------------------------------------------------------------------- | -------- | ----- | -------------------------------------------------------------------- | --- |
-| X-01 | `addDays` etc. accept negative numbers (subtract) rather than separate `sub*` functions | should   | T-021 | Negative amounts subtract; tested in `test/arithmetic.test.ts` (#16) | ☑   |
-| X-02 | Generated API reference (TypeDoc) published with the docs site                          | could    | T-031 |                                                                      | ☐   |
+| ID   | Extra                                                                                   | Priority | Task  | Evidence                                                                                                                             | ✓   |
+| ---- | --------------------------------------------------------------------------------------- | -------- | ----- | ------------------------------------------------------------------------------------------------------------------------------------ | --- |
+| X-01 | `addDays` etc. accept negative numbers (subtract) rather than separate `sub*` functions | should   | T-021 | Negative amounts subtract; tested in `test/arithmetic.test.ts` (#16)                                                                 | ☑   |
+| X-02 | Generated API reference (TypeDoc) published with the docs site                          | could    | T-031 | `pnpm --filter @qen/core docs` generates the HTML reference (`docs-api/`, not committed); publishing it waits for the docs site (M7) | ◐   |
 
 ## Release checklist
 
