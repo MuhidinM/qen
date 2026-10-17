@@ -108,6 +108,12 @@ export const am = defineLocale({
     peraklitos: 'ጰራቅሊጦስ',
     'tsome-hawariyat': 'ጾመ ሐዋርያት',
     'tsome-dihnet': 'ጾመ ድኅነት',
+    'islamic-new-year': 'የሂጅራ አዲስ ዓመት',
+    ashura: 'አሹራ',
+    'isra-miraj': 'ኢስራእ ወል ሚዕራጅ',
+    'ramadan-start': 'የረመዳን መጀመሪያ',
+    'laylat-al-qadr': 'ለይለቱል ቀድር',
+    arafah: 'የዐረፋ ቀን',
   },
   reviewed: false,
 });

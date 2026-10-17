@@ -115,6 +115,12 @@ export const om = defineLocale({
     peraklitos: 'Phaaraaqliixoos',
     'tsome-hawariyat': 'Soomii Hawaariyaa',
     'tsome-dihnet': 'Soomii Fayyinaa',
+    'islamic-new-year': 'Bara Haaraa Islaamaa',
+    ashura: 'Aashuuraa',
+    'isra-miraj': "Israa'i fi Mi'iraaj",
+    'ramadan-start': 'Jalqaba Ramadaanaa',
+    'laylat-al-qadr': 'Laylatul Qadrii',
+    arafah: 'Guyyaa Arafaa',
   },
   reviewed: false,
 });

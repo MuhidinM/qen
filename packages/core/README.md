@@ -164,20 +164,22 @@ It never guesses: `parse('17/01/2019')` is a valid date in all three calendars, 
 
 ## Holidays
 
-Ethiopian public holidays, filterable by category (`public` by default, plus `orthodox`, `islamic`, `other`). A holiday's `date` is in its own calendar and `gregorian` gives the same day.
+Ethiopian public holidays and religious observances, filterable by category (`public` by default, plus `orthodox`, `islamic`, `other`). A holiday's `date` is in its own calendar and `gregorian` gives the same day.
 
 ```ts
 import { date, getHolidays, getHolidaysInRange, nextHoliday } from '@qen/core';
 
 const holidays2026 = getHolidays(2026).map((h) => h.id);
-holidays2026.slice(0, 5); // => ['genna', 'timket', 'adwa', 'siklet', 'fasika']
+holidays2026.slice(0, 6); // => ['genna', 'timket', 'adwa', 'eid-al-fitr', 'siklet', 'fasika']
 getHolidays(2027).find((h) => h.id === 'fasika')?.gregorian; // => { calendar: 'gregorian', year: 2027, month: 5, day: 2 }
 getHolidays(2026, { categories: ['orthodox'] }).length; // => 14
 nextHoliday(date('gregorian', 2026, 9, 12))?.date; // => { calendar: 'ethiopian', year: 2019, month: 1, day: 17 }
 getHolidaysInRange(date('ethiopian', 2018, 13, 1), date('ethiopian', 2019, 1, 17)).map((h) => h.id); // => ['enkutatash', 'meskel']
 ```
 
-Public: Enkutatash, Meskel, Genna (always 7 January), Timket, Adwa, Siklet, Fasika, Labour Day, Patriots' Victory and the Downfall of the Derg. Orthodox: also the Fast of Nineveh, Abiy Tsom, Debre Zeit, Hosanna, Rekebe Kahnat, Erget, Peraklitos, Tsome Hawariyat and Tsome Dihnet, computed with `bahireHasab()` and checked against the Julian Easter date for 1900–2100. The Islamic holidays come next.
+Public: Enkutatash, Meskel, Genna (always 7 January), Timket, Adwa, Siklet, Fasika, Labour Day, Patriots' Victory and the Downfall of the Derg. Public also includes Eid al-Fitr, Eid al-Adha and Mawlid. Orthodox: also the Fast of Nineveh, Abiy Tsom, Debre Zeit, Hosanna, Rekebe Kahnat, Erget, Peraklitos, Tsome Hawariyat and Tsome Dihnet, computed with `bahireHasab()` and checked against the Julian Easter date for 1900–2100. Islamic: also the Islamic New Year, Ashura, Isra and Mi'raj, the start of Ramadan, Laylat al-Qadr (marked `approximate`) and the Day of Arafah.
+
+Islamic holidays follow the Hijri method you pass (`hijri: { method }`), can fall twice in one Gregorian year, and have `status: 'expected'`: the calculated date may differ by a day from the locally announced one.
 
 ## Ge'ez numerals and Ethiopian time
 
@@ -208,7 +210,7 @@ Ge'ez numerals follow the W3C CSS `ethiopic-numeric` algorithm.
 
 - Amharic, Afaan Oromo, Tigrinya and Arabic names haven't been reviewed by native speakers yet.
 - Browsers and service workers are supported by design (ES2022, no DOM or Node APIs) but not yet covered by an automated browser test.
-- Islamic holidays, multi-day fasts and official Hijri month confirmations are planned for later releases.
+- Multi-day observances (Ramadan, the fasts) and official Hijri month confirmations are planned for later releases.
 
 ## License
 

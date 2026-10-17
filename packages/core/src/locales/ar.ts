@@ -95,6 +95,12 @@ export const ar = defineLocale({
     peraklitos: 'عيد العنصرة',
     'tsome-hawariyat': 'بداية صوم الرسل',
     'tsome-dihnet': 'صوم الخلاص',
+    'islamic-new-year': 'رأس السنة الهجرية',
+    ashura: 'عاشوراء',
+    'isra-miraj': 'الإسراء والمعراج',
+    'ramadan-start': 'بداية رمضان',
+    'laylat-al-qadr': 'ليلة القدر',
+    arafah: 'يوم عرفة',
   },
   reviewed: false,
 });
