@@ -29,6 +29,13 @@ try {
       .map((line) => {
         const m = line.match(/^(.*?);\s*\/\/ => (.*)$/);
         if (!m) return line;
+        // A continuation line (indented, or starting with . ) or ]) means the statement began
+        // on an earlier line, which this line-by-line check can't assert.
+        if (/^[\s.)\]]/.test(line)) {
+          throw new Error(
+            `README example spans several lines; keep each "// =>" example on one line:\n  ${line.trim()}`,
+          );
+        }
         assertions++;
         return `globalThis.__assertReadme(${m[1]}, ${m[2]}, ${JSON.stringify(line.trim())});`;
       })

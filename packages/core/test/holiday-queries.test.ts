@@ -15,6 +15,8 @@ describe('getHolidays(gregorianYear, options)', () => {
       'genna',
       'timket',
       'adwa',
+      'siklet',
+      'fasika',
       'labour-day',
       'patriots-victory',
       'derg-downfall',
@@ -24,13 +26,12 @@ describe('getHolidays(gregorianYear, options)', () => {
   });
 
   it('filters by category: a holiday matches if any of its categories is requested', () => {
-    expect(ids(getHolidays(2026, { categories: ['orthodox'] }))).toEqual([
-      'genna',
-      'timket',
-      'meskel',
-    ]);
+    const orthodox = ids(getHolidays(2026, { categories: ['orthodox'] }));
+    expect(orthodox).toHaveLength(14);
+    expect(orthodox).toContain('meskel');
+    expect(orthodox).not.toContain('adwa');
     expect(ids(getHolidays(2026, { categories: ['other'] }))).toEqual([]);
-    expect(getHolidays(2026, { categories: ['public', 'orthodox'] })).toHaveLength(8);
+    expect(getHolidays(2026, { categories: ['public', 'orthodox'] })).toHaveLength(19);
   });
 
   it('rejects invalid years and categories', () => {
@@ -59,7 +60,7 @@ describe('getHolidaysInRange(start, end, options)', () => {
   it('spans several years', () => {
     expect(
       getHolidaysInRange(date('gregorian', 2024, 1, 1), date('gregorian', 2026, 12, 31)),
-    ).toHaveLength(24);
+    ).toHaveLength(30);
   });
 
   it('returns nothing for a range without holidays, and one day works', () => {
@@ -94,6 +95,7 @@ describe('nextHoliday(from, options)', () => {
     expect(nextHoliday(date('ethiopian', 2019, 1, 18), { categories: ['orthodox'] })?.id).toBe(
       'genna',
     );
+    expect(nextHoliday(date('gregorian', 2026, 4, 11))?.id).toBe('fasika');
   });
 
   it('returns undefined when nothing matches the categories', () => {

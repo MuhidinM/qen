@@ -1,6 +1,7 @@
 import { convert, toJDN } from '../convert.js';
 import type { CalendarDate, ConvertOptions } from '../types.js';
 import { fixedHolidays } from './fixed.js';
+import { movableHolidays } from './movable.js';
 import type { Holiday, HolidayCategory } from './types.js';
 
 /**
@@ -33,7 +34,9 @@ function categoriesOf(options: HolidayOptions): ReadonlySet<HolidayCategory> {
 /** All holidays of a Gregorian year that match the options, sorted by date. */
 function holidaysIn(year: number, options: HolidayOptions): Holiday[] {
   const wanted = categoriesOf(options);
-  return fixedHolidays(year).filter((h) => h.categories.some((c) => wanted.has(c)));
+  return [...fixedHolidays(year), ...movableHolidays(year)]
+    .filter((h) => h.categories.some((c) => wanted.has(c)))
+    .sort((a, b) => toJDN(a.gregorian) - toJDN(b.gregorian));
 }
 
 /**

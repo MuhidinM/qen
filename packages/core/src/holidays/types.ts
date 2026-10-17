@@ -55,7 +55,16 @@ export type HolidayId =
   | 'fasika'
   | 'eid-al-fitr'
   | 'eid-al-adha'
-  | 'mawlid';
+  | 'mawlid'
+  | 'tsome-nenewe'
+  | 'abiy-tsom'
+  | 'debre-zeit'
+  | 'hosanna'
+  | 'rekebe-kahnat'
+  | 'erget'
+  | 'peraklitos'
+  | 'tsome-hawariyat'
+  | 'tsome-dihnet';
 
 /**
  * One occurrence of a holiday.
