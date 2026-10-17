@@ -42,6 +42,7 @@ export {
   type ObservanceId,
   type ObservanceOptions,
 } from './holidays/observances.js';
+export { isWeeklyFast } from './holidays/weekly-fasts.js';
 export { dayOfWeek, daysInMonth, isLeapYear, monthsInYear } from './info.js';
 export { addDays, addMonths, addYears } from './arithmetic.js';
 export { age, compare, diff, isSame, type DiffUnit } from './compare.js';
