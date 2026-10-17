@@ -22,6 +22,8 @@ pnpm typecheck
 pnpm changeset
 ```
 
+`pnpm install` sets up git hooks: each commit runs ESLint and Prettier on the staged files, and each push runs `pnpm typecheck` and `pnpm test`.
+
 ## License
 
 [MIT](LICENSE)
