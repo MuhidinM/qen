@@ -91,6 +91,101 @@
 .qen-calendar__day[aria-disabled='true']:hover {
   background: transparent;
 }
+/* Other calendars and holidays (secondary, holidays props). */
+.qen-calendar__heading {
+  text-align: center;
+}
+.qen-calendar__span {
+  margin: 0;
+  color: var(--qen-color-text-muted);
+  font-size: var(--qen-font-size-12);
+}
+.qen-calendar--rich .qen-calendar__day {
+  vertical-align: top;
+  padding-top: var(--qen-space-1);
+}
+.qen-calendar--tall .qen-calendar__day {
+  height: var(--qen-space-8);
+}
+.qen-calendar__number,
+.qen-calendar__secondary,
+.qen-calendar__markers {
+  display: block;
+}
+.qen-calendar__secondary {
+  color: var(--qen-color-text-muted);
+  font-size: var(--qen-font-size-12);
+  font-weight: var(--qen-font-weight-regular);
+}
+.qen-calendar__markers {
+  display: flex;
+  justify-content: center;
+  gap: var(--qen-space-1);
+  margin-top: var(--qen-space-1);
+}
+/* Shape and fill carry the meaning, colour reinforces it: circle = public,
+   square = Orthodox, diamond = Islamic, bar = other; an outline = not yet confirmed. */
+.qen-calendar__marker {
+  display: inline-block;
+  flex: none;
+  width: var(--qen-space-2);
+  height: var(--qen-space-2);
+  border: 2px solid currentColor;
+  background: currentColor;
+}
+.qen-calendar__marker[data-category='public'] {
+  border-radius: var(--qen-radius-full);
+  color: var(--qen-color-holiday-public-text);
+}
+.qen-calendar__marker[data-category='orthodox'] {
+  color: var(--qen-color-holiday-orthodox-text);
+}
+.qen-calendar__marker[data-category='islamic'] {
+  transform: rotate(45deg) scale(0.85);
+  color: var(--qen-color-holiday-islamic-text);
+}
+.qen-calendar__marker[data-category='other'] {
+  height: var(--qen-space-1);
+  color: var(--qen-color-text-muted);
+}
+.qen-calendar__marker[data-expected='true'] {
+  background: transparent;
+}
+.qen-calendar__day[aria-selected='true'] .qen-calendar__secondary,
+.qen-calendar__day[aria-selected='true'] .qen-calendar__marker {
+  color: inherit;
+}
+/* Width 0 + min-width 100%: wraps to the grid instead of widening the calendar. */
+.qen-calendar__legend {
+  box-sizing: border-box;
+  width: 0;
+  min-width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--qen-space-2) var(--qen-space-4);
+  margin: var(--qen-space-3) 0 0;
+  padding: var(--qen-space-3) 0 0;
+  border: none;
+  border-top: 1px solid var(--qen-color-border);
+  font-size: var(--qen-font-size-14);
+}
+.qen-calendar__legend-title {
+  float: inline-start;
+  padding: 0;
+  color: var(--qen-color-text-muted);
+  font-size: var(--qen-font-size-12);
+  font-weight: var(--qen-font-weight-semibold);
+}
+.qen-calendar__filter {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--qen-space-2);
+}
+.qen-calendar__filter input {
+  margin: 0;
+  accent-color: var(--qen-color-accent);
+}
 /* Fits a 320 px viewport: 7 × 32 px cells plus padding. */
 @media (max-width: 400px) {
   .qen-calendar {
@@ -99,6 +194,9 @@
   .qen-calendar__day,
   .qen-calendar__empty {
     width: var(--qen-space-6);
+  }
+  .qen-calendar:not(.qen-calendar--rich) .qen-calendar__day,
+  .qen-calendar:not(.qen-calendar--rich) .qen-calendar__empty {
     height: var(--qen-space-6);
   }
 }

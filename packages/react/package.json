@@ -83,7 +83,7 @@
         "react-dom",
         "@qen/core"
       ],
-      "limit": "2 kB"
+      "limit": "3 kB"
     }
   ],
   "devDependencies": {

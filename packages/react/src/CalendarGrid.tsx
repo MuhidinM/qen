@@ -2,13 +2,18 @@ import {
   addDays,
   addMonths,
   addYears,
+  convert,
   date,
   dayOfWeek,
   daysInMonth,
   format,
+  getHolidaysInRange,
+  toJDN,
   today as todayIn,
   type CalendarDate,
   type CalendarId,
+  type Holiday,
+  type HolidayCategory,
   type HijriSettings,
   type Locale,
   type NumeralSystem,
@@ -58,9 +63,46 @@ export interface CalendarGridProps {
   /** Today, for the `aria-current` marker. Default: `today(calendar)`. */
   readonly today?: CalendarDate;
   readonly isDateDisabled?: (date: CalendarDate) => boolean;
-  /** Button labels; locales don't carry UI strings yet. */
-  readonly labels?: { readonly previousMonth?: string; readonly nextMonth?: string };
+  /** Other calendars whose day numbers appear in each cell, in this order. */
+  readonly secondary?: readonly CalendarId[];
+  /**
+   * Holiday categories offered in the legend, all shown at first; the legend's checkboxes
+   * filter them. Default: none, and no legend.
+   */
+  readonly holidays?: readonly HolidayCategory[];
+  /** UI strings, English by default; locales don't carry UI strings yet. */
+  readonly labels?: CalendarGridLabels;
 }
+
+/**
+ * UI strings for {@link CalendarGrid}. Holiday, month and weekday names come from the locale.
+ *
+ * @example
+ * ```ts
+ * const labels: CalendarGridLabels = { holidays: 'Holidays', expected: 'expected' };
+ * ```
+ */
+export interface CalendarGridLabels {
+  readonly previousMonth?: string;
+  readonly nextMonth?: string;
+  /** The legend's heading. */
+  readonly holidays?: string;
+  readonly categories?: Readonly<Partial<Record<HolidayCategory, string>>>;
+  /** Added to the name of an Islamic holiday whose month start is not yet confirmed. */
+  readonly expected?: string;
+  /** Added to the name of a holiday whose date is traditional, not exact. */
+  readonly approximate?: string;
+  /** Explains the outline marker in the legend. */
+  readonly expectedLegend?: string;
+}
+
+const CATEGORY_ORDER: readonly HolidayCategory[] = ['public', 'orthodox', 'islamic', 'other'];
+const CATEGORY_NAMES: Record<HolidayCategory, string> = {
+  public: 'Public',
+  orthodox: 'Orthodox',
+  islamic: 'Islamic',
+  other: 'Other',
+};
 
 const key = (d: CalendarDate | null | undefined) => (d ? `${d.year}-${d.month}-${d.day}` : '');
 const inMonth = (d: CalendarDate | null | undefined, m: VisibleMonth) =>
@@ -78,6 +120,7 @@ const inMonth = (d: CalendarDate | null | undefined, m: VisibleMonth) =>
  */
 export function CalendarGrid(props: CalendarGridProps) {
   const { calendar, locale, weekStartsOn = 0, numerals, hijri, isDateDisabled, labels } = props;
+  const { secondary = [], holidays: offered = [] } = props;
   const options = hijri ? { hijri } : {};
   const formatOptions = { ...options, locale, ...(numerals ? { numerals } : {}) };
   const today = props.today ?? todayIn(calendar, options);
@@ -93,6 +136,7 @@ export function CalendarGrid(props: CalendarGridProps) {
   const shouldFocus = useRef(false);
   const gridRef = useRef<HTMLTableElement>(null);
   const titleId = useId();
+  const [shown, setShown] = useState<readonly HolidayCategory[]>(offered);
 
   const showMonth = (m: VisibleMonth) => {
     setOwnMonth(m);
@@ -107,6 +151,39 @@ export function CalendarGrid(props: CalendarGridProps) {
   const first = date(calendar, month.year, month.month, 1);
   const length = daysInMonth(calendar, month.year, month.month, options);
   const leading = (dayOfWeek(first, options) - weekStartsOn + 7) % 7;
+  const last = date(calendar, month.year, month.month, length);
+
+  const byDay = new Map<number, Holiday[]>();
+  if (shown.length > 0) {
+    for (const h of getHolidaysInRange(first, last, { ...options, categories: shown })) {
+      const day = toJDN(h.gregorian);
+      byDay.set(day, [...(byDay.get(day) ?? []), h]);
+    }
+  }
+  const holidayName = (h: Holiday) => {
+    const notes = [
+      h.status === 'expected' ? (labels?.expected ?? 'expected') : null,
+      h.approximate ? (labels?.approximate ?? 'approximate') : null,
+    ].filter(Boolean);
+    const name = locale.holidays[h.id];
+    return notes.length > 0 ? `${name} (${notes.join(', ')})` : name;
+  };
+  // A holiday in several categories shows the first one that is switched on.
+  const markerCategory = (h: Holiday) =>
+    CATEGORY_ORDER.find((c) => h.categories.includes(c) && shown.includes(c)) ?? 'other';
+
+  // Under the title: the span of each other calendar, e.g. "September – October 2026".
+  const spans = secondary.map((other) => {
+    const a = convert(first, other, options);
+    const b = convert(last, other, options);
+    if (a.year !== b.year) {
+      return `${format(a, 'MMMM y', formatOptions)} – ${format(b, 'MMMM y', formatOptions)}`;
+    }
+    if (a.month !== b.month) {
+      return `${format(a, 'MMMM', formatOptions)} – ${format(b, 'MMMM y', formatOptions)}`;
+    }
+    return format(a, 'MMMM y', formatOptions);
+  });
 
   // The one tabbable day: the focused day, else the selection, else today, else the 1st.
   const tabbable = [focusDate, value, today].find((d) => inMonth(d, month)) ?? first;
@@ -162,8 +239,16 @@ export function CalendarGrid(props: CalendarGridProps) {
   while (slots.length % 7 !== 0) slots.push(null);
   const weeks = Array.from({ length: slots.length / 7 }, (_, w) => slots.slice(w * 7, w * 7 + 7));
 
+  // Extra lines under each day number: one per other calendar, one for holiday markers.
+  const extraLines = secondary.length + (offered.length > 0 ? 1 : 0);
+  const className = [
+    'qen-calendar',
+    ...(extraLines > 0 ? ['qen-calendar--rich'] : []),
+    ...(extraLines > 1 ? ['qen-calendar--tall'] : []),
+  ].join(' ');
+
   return (
-    <div className="qen-calendar" lang={locale.code} dir={locale.direction}>
+    <div className={className} lang={locale.code} dir={locale.direction}>
       <div className="qen-calendar__header">
         <button
           type="button"
@@ -173,9 +258,16 @@ export function CalendarGrid(props: CalendarGridProps) {
         >
           <span aria-hidden="true">{locale.direction === 'rtl' ? '›' : '‹'}</span>
         </button>
-        <h2 id={titleId} className="qen-calendar__title" aria-live="polite">
-          {format(first, 'MMMM y', formatOptions)}
-        </h2>
+        <div className="qen-calendar__heading">
+          <h2 id={titleId} className="qen-calendar__title" aria-live="polite">
+            {format(first, 'MMMM y', formatOptions)}
+          </h2>
+          {spans.map((span, i) => (
+            <p key={i} className="qen-calendar__span">
+              {span}
+            </p>
+          ))}
+        </div>
         <button
           type="button"
           className="qen-calendar__nav"
@@ -210,12 +302,21 @@ export function CalendarGrid(props: CalendarGridProps) {
                 if (!d) return <td key={i} role="gridcell" className="qen-calendar__empty" />;
                 const disabled = isDateDisabled?.(d) ?? false;
                 const selected = key(d) === key(value);
+                const others = secondary.map((c) => convert(d, c, options));
+                const dayHolidays = byDay.get(toJDN(d, options)) ?? [];
+                const names = dayHolidays.map(holidayName);
+                const label = [
+                  format(d, 'EEEE, d MMMM y', formatOptions),
+                  ...others.map((o) => format(o, 'd MMMM y', formatOptions)),
+                  ...names,
+                ].join(', ');
                 return (
                   <td
                     key={i}
                     role="gridcell"
                     tabIndex={key(d) === key(tabbable) ? 0 : -1}
-                    aria-label={format(d, 'EEEE, d MMMM y', formatOptions)}
+                    aria-label={label}
+                    title={names.length > 0 ? names.join(', ') : undefined}
                     aria-selected={selected}
                     aria-current={key(d) === key(today) ? 'date' : undefined}
                     aria-disabled={disabled || undefined}
@@ -223,7 +324,24 @@ export function CalendarGrid(props: CalendarGridProps) {
                     onClick={() => select(d)}
                     onFocus={() => setFocusDate(d)}
                   >
-                    {format(d, 'd', formatOptions)}
+                    <span className="qen-calendar__number">{format(d, 'd', formatOptions)}</span>
+                    {others.map((o) => (
+                      <span key={o.calendar} className="qen-calendar__secondary">
+                        {format(o, 'd', formatOptions)}
+                      </span>
+                    ))}
+                    {dayHolidays.length > 0 && (
+                      <span className="qen-calendar__markers" aria-hidden="true">
+                        {dayHolidays.map((h) => (
+                          <span
+                            key={h.id}
+                            className="qen-calendar__marker"
+                            data-category={markerCategory(h)}
+                            data-expected={h.status === 'expected' || h.approximate === true}
+                          />
+                        ))}
+                      </span>
+                    )}
                   </td>
                 );
               })}
@@ -231,6 +349,39 @@ export function CalendarGrid(props: CalendarGridProps) {
           ))}
         </tbody>
       </table>
+      {offered.length > 0 && (
+        <fieldset className="qen-calendar__legend">
+          <legend className="qen-calendar__legend-title">{labels?.holidays ?? 'Holidays'}</legend>
+          {offered.map((c) => (
+            <label key={c} className="qen-calendar__filter">
+              <input
+                type="checkbox"
+                checked={shown.includes(c)}
+                onChange={(e) =>
+                  setShown(
+                    e.target.checked
+                      ? CATEGORY_ORDER.filter((x) => x === c || shown.includes(x))
+                      : shown.filter((x) => x !== c),
+                  )
+                }
+              />
+              <span className="qen-calendar__marker" data-category={c} aria-hidden="true" />
+              {labels?.categories?.[c] ?? CATEGORY_NAMES[c]}
+            </label>
+          ))}
+          {offered.includes('islamic') && (
+            <span className="qen-calendar__filter">
+              <span
+                className="qen-calendar__marker"
+                data-category="islamic"
+                data-expected="true"
+                aria-hidden="true"
+              />
+              {labels?.expectedLegend ?? 'Outline: date not yet confirmed'}
+            </span>
+          )}
+        </fieldset>
+      )}
     </div>
   );
 }

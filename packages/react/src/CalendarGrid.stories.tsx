@@ -45,3 +45,26 @@ export const DisabledWeekends = () => (
     isDateDisabled={(d) => dayOfWeek(d) === 0 || dayOfWeek(d) === 6}
   />
 );
+export const WithOtherCalendars = () => (
+  <CalendarGrid calendar="ethiopian" locale={en} secondary={['gregorian', 'hijri']} today={today} />
+);
+export const WithHolidays = () => (
+  <CalendarGrid
+    calendar="ethiopian"
+    locale={en}
+    secondary={['gregorian']}
+    holidays={['public', 'orthodox', 'islamic']}
+    defaultMonth={{ year: 2018, month: 7 }}
+    today={today}
+  />
+);
+export const HijriHolidaysArabic = () => (
+  <CalendarGrid
+    calendar="hijri"
+    locale={ar}
+    numerals="arabic"
+    secondary={['ethiopian']}
+    holidays={['public', 'islamic']}
+    defaultMonth={{ year: 1447, month: 10 }}
+  />
+);
