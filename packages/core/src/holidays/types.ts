@@ -64,7 +64,13 @@ export type HolidayId =
   | 'erget'
   | 'peraklitos'
   | 'tsome-hawariyat'
-  | 'tsome-dihnet';
+  | 'tsome-dihnet'
+  | 'islamic-new-year'
+  | 'ashura'
+  | 'isra-miraj'
+  | 'ramadan-start'
+  | 'laylat-al-qadr'
+  | 'arafah';
 
 /**
  * One occurrence of a holiday.

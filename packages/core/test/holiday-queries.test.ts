@@ -15,11 +15,14 @@ describe('getHolidays(gregorianYear, options)', () => {
       'genna',
       'timket',
       'adwa',
+      'eid-al-fitr',
       'siklet',
       'fasika',
       'labour-day',
       'patriots-victory',
+      'eid-al-adha',
       'derg-downfall',
+      'mawlid',
       'enkutatash',
       'meskel',
     ]);
@@ -31,7 +34,7 @@ describe('getHolidays(gregorianYear, options)', () => {
     expect(orthodox).toContain('meskel');
     expect(orthodox).not.toContain('adwa');
     expect(ids(getHolidays(2026, { categories: ['other'] }))).toEqual([]);
-    expect(getHolidays(2026, { categories: ['public', 'orthodox'] })).toHaveLength(19);
+    expect(getHolidays(2026, { categories: ['public', 'orthodox'] })).toHaveLength(22);
   });
 
   it('rejects invalid years and categories', () => {
@@ -60,7 +63,7 @@ describe('getHolidaysInRange(start, end, options)', () => {
   it('spans several years', () => {
     expect(
       getHolidaysInRange(date('gregorian', 2024, 1, 1), date('gregorian', 2026, 12, 31)),
-    ).toHaveLength(30);
+    ).toHaveLength(39);
   });
 
   it('returns nothing for a range without holidays, and one day works', () => {

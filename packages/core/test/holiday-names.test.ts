@@ -29,6 +29,12 @@ const ALL_IDS: HolidayId[] = [
   'peraklitos',
   'tsome-hawariyat',
   'tsome-dihnet',
+  'islamic-new-year',
+  'ashura',
+  'isra-miraj',
+  'ramadan-start',
+  'laylat-al-qadr',
+  'arafah',
 ];
 
 describe.each<[string, Locale]>([

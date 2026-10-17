@@ -105,6 +105,12 @@ export const en = defineLocale({
     peraklitos: 'Peraklitos (Pentecost)',
     'tsome-hawariyat': "Tsome Hawariyat begins (Apostles' Fast)",
     'tsome-dihnet': 'Tsome Dihnet (Fast of Salvation)',
+    'islamic-new-year': 'Islamic New Year',
+    ashura: 'Ashura',
+    'isra-miraj': "Isra and Mi'raj",
+    'ramadan-start': 'Ramadan begins',
+    'laylat-al-qadr': 'Laylat al-Qadr',
+    arafah: 'Day of Arafah',
   },
   reviewed: true,
 });
