@@ -41,7 +41,7 @@ describe.each<[CalendarId, string]>([
     const f = formatter(icuCalendar);
     const mismatches: string[] = [];
     for (let jdn = FIRST; jdn <= LAST; jdn++) {
-      const ours = fromJDN(jdn, calendar);
+      const ours = fromJDN(jdn, calendar, { hijri: { method: 'tabular' } });
       const icu = icuDate(f, jdn);
       if (ours.year !== icu.year || ours.month !== icu.month || ours.day !== icu.day) {
         mismatches.push(

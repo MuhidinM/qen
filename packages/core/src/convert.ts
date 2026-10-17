@@ -2,21 +2,29 @@ import { calendarFor, isCalendarId } from './calendars/index.js';
 import { ethiopianFromJDN, ethiopianToJDN } from './calendars/ethiopian.js';
 import { gregorianFromJDN, gregorianToJDN } from './calendars/gregorian.js';
 import { hijriTabularFromJDN, hijriTabularToJDN } from './calendars/hijri-tabular.js';
+import { umalquraCoversJDN, umalquraFromJDN, umalquraToJDN } from './calendars/hijri-umalqura.js';
 import { date } from './date.js';
-import type { CalendarDate, CalendarId, ConvertOptions, HijriMethod } from './types.js';
+import type {
+  CalendarDate,
+  CalendarId,
+  ConvertOptions,
+  HijriExplanation,
+  HijriMethod,
+} from './types.js';
 
 type YMD = { year: number; month: number; day: number };
 
-/** Hijri method implementations. Umm al-Qura joins and becomes the default with #41 (N-008). */
+/** Hijri method implementations (ADR-0006). */
 const HIJRI_METHODS: Readonly<
   Record<HijriMethod, { toJDN(y: number, m: number, d: number): number; fromJDN(jdn: number): YMD }>
 > = {
+  umalqura: { toJDN: umalquraToJDN, fromJDN: umalquraFromJDN },
   tabular: { toJDN: hijriTabularToJDN, fromJDN: hijriTabularFromJDN },
 };
 
-function hijriMethod(options: ConvertOptions) {
-  return HIJRI_METHODS[options.hijri?.method ?? 'tabular'];
-}
+/** Umm al-Qura is the default from the first release (N-008). */
+const methodName = (options: ConvertOptions): HijriMethod => options.hijri?.method ?? 'umalqura';
+const hijriMethod = (options: ConvertOptions) => HIJRI_METHODS[methodName(options)];
 
 /** First JDN of year 1 in each calendar (N-002). */
 const FIRST_JDN: Readonly<Record<CalendarId, number>> = {
@@ -104,4 +112,29 @@ export function convert<C extends CalendarId>(
   options: ConvertOptions = {},
 ): CalendarDate<C> {
   return fromJDN(toJDN(d, options), target, options);
+}
+
+/**
+ * Converts a date to Hijri and reports how it was decided: the method actually used and
+ * whether Umm al-Qura fell back to tabular outside its 1300–1500 AH table.
+ *
+ * @throws {@link InvalidDateError} if the input date does not exist.
+ *
+ * @example
+ * ```ts
+ * explainHijri(date('gregorian', 2026, 10, 17));
+ * // { date: { calendar: 'hijri', year: 1448, month: 5, day: 6 }, method: 'umalqura', fallback: false }
+ * explainHijri(date('gregorian', 2100, 1, 1));
+ * // { date: …, method: 'tabular', fallback: true }
+ * ```
+ */
+export function explainHijri(d: CalendarDate, options: ConvertOptions = {}): HijriExplanation {
+  const jdn = toJDN(d, options);
+  const requested = methodName(options);
+  const fallback = requested === 'umalqura' && !umalquraCoversJDN(jdn);
+  return Object.freeze({
+    date: fromJDN(jdn, 'hijri', options),
+    method: fallback ? 'tabular' : requested,
+    fallback,
+  });
 }
