@@ -55,7 +55,6 @@ PLAN.md Phase 2. Done when @qen/core@0.1.0 is live on npm.
 | T-031 | [#26](https://github.com/MuhidinM/qen/issues/26) | Document every public function and generate the API reference              | R-LIB-07, X-02                | S    | done   |
 | T-032 | [#27](https://github.com/MuhidinM/qen/issues/27) | Write the core README with install and quick-start examples that run in CI | R-LIB-08                      | S    | done   |
 | T-033 | [#28](https://github.com/MuhidinM/qen/issues/28) | Publish @qen/core 0.1.0 to npm                                             | R-LIB-13                      | S    | done   |
-| T-034 | [#89](https://github.com/MuhidinM/qen/issues/89) | Publish with npm provenance attestations (M3)                              | R-LIB-13                      | S    | done   |
 
 ## M3 · Fixed-date holidays
 
@@ -63,6 +62,7 @@ PLAN.md Phase 3. Done when confirmed fixed-date holidays are queryable by year, 
 
 | ID    | Issue                                            | Task                                                         | Reqs     | Size | Status |
 | ----- | ------------------------------------------------ | ------------------------------------------------------------ | -------- | ---- | ------ |
+| T-034 | [#89](https://github.com/MuhidinM/qen/issues/89) | Publish with npm provenance attestations                     | R-LIB-13 | S    | done   |
 | T-040 | [#29](https://github.com/MuhidinM/qen/issues/29) | Define the holiday data model                                | R-HOL-01 | M    | done   |
 | T-041 | [#30](https://github.com/MuhidinM/qen/issues/30) | Confirm the official public holiday list and leap-year rules | R-HOL-02 | S    | done   |
 | T-042 | [#31](https://github.com/MuhidinM/qen/issues/31) | Implement the fixed-date holidays                            | R-HOL-03 | M    | done   |
@@ -100,10 +100,18 @@ PLAN.md Phase 5. Done when @qen/core@1.0.0 is published.
 
 PLAN.md Phase 6. Done when @qen/react@0.1.0 is published.
 
-| ID    | Issue                                            | Task                                                        | Reqs                                                                                | Size | Status  |
-| ----- | ------------------------------------------------ | ----------------------------------------------------------- | ----------------------------------------------------------------------------------- | ---- | ------- |
-| T-100 | [#48](https://github.com/MuhidinM/qen/issues/48) | Plan and split the React components milestone               | R-UI-01, R-UI-02, R-UI-03, R-UI-04, R-UI-05, R-UI-06, R-UI-07, R-A11Y-01, R-A11Y-02 | —    | outline |
-| T-101 | [#59](https://github.com/MuhidinM/qen/issues/59) | Smoke-test @qen/core in a real browser and a service worker | R-LIB-03                                                                            | S    | todo    |
+| ID    | Issue                                              | Task                                                                               | Reqs                                                                                | Size | Status                      |
+| ----- | -------------------------------------------------- | ---------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- | ---- | --------------------------- |
+| T-100 | [#48](https://github.com/MuhidinM/qen/issues/48)   | Plan and split the React components milestone                                      | R-UI-01, R-UI-02, R-UI-03, R-UI-04, R-UI-05, R-UI-06, R-UI-07, R-A11Y-01, R-A11Y-02 | —    | done (split into #111–#118) |
+| T-101 | [#59](https://github.com/MuhidinM/qen/issues/59)   | Smoke-test @qen/core in a real browser and a service worker                        | R-LIB-03                                                                            | S    | todo                        |
+| T-102 | [#111](https://github.com/MuhidinM/qen/issues/111) | Create @qen/react with build, tests, accessibility checks and a component explorer | R-CQ-01, R-A11Y-01                                                                  | M    | todo                        |
+| T-103 | [#112](https://github.com/MuhidinM/qen/issues/112) | Define the design tokens, with light and dark mode                                 | R-UI-01, R-UI-07, R-A11Y-01                                                         | M    | todo                        |
+| T-104 | [#113](https://github.com/MuhidinM/qen/issues/113) | Build the month calendar grid with keyboard navigation                             | R-UI-02, R-UI-04, R-UI-06, R-A11Y-01, R-A11Y-02                                     | L    | todo                        |
+| T-105 | [#114](https://github.com/MuhidinM/qen/issues/114) | Show other calendars and holidays in day cells, with a legend and filters          | R-UI-03                                                                             | M    | todo                        |
+| T-106 | [#115](https://github.com/MuhidinM/qen/issues/115) | Build the date picker                                                              | R-UI-02, R-A11Y-01                                                                  | L    | todo                        |
+| T-107 | [#116](https://github.com/MuhidinM/qen/issues/116) | Build the date range picker and the Ethiopian time input                           | R-UI-02, R-A11Y-01                                                                  | M    | todo                        |
+| T-108 | [#117](https://github.com/MuhidinM/qen/issues/117) | Add year and agenda views                                                          | R-UI-05                                                                             | M    | todo                        |
+| T-109 | [#118](https://github.com/MuhidinM/qen/issues/118) | Publish @qen/react 0.1.0                                                           | R-LIB-13                                                                            | S    | todo · needs-owner          |
 
 ## M7 · Website
 
