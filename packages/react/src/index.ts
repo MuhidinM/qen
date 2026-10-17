@@ -6,3 +6,4 @@
  */
 
 export { DateText, type DateTextProps } from './DateText.js';
+export { tokens, tokensToCss, type ThemeColors } from './tokens/index.js';

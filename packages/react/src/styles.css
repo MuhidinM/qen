@@ -1,4 +1,5 @@
-/* @qen/react styles. Design tokens arrive with #112; component styles use only them. */
+/* @qen/react component styles. Only token variables (src/tokens.css), never raw values. */
 .qen-date-text {
+  font-family: var(--qen-font-family);
   font-variant-numeric: tabular-nums;
 }

@@ -1,0 +1,102 @@
+/* Generated from src/tokens/index.ts. Do not edit; run UPDATE_TOKENS=1 vitest run test/tokens.test.ts. */
+:root {
+  --qen-space-1: 4px;
+  --qen-space-2: 8px;
+  --qen-space-3: 12px;
+  --qen-space-4: 16px;
+  --qen-space-5: 24px;
+  --qen-space-6: 32px;
+  --qen-space-7: 48px;
+  --qen-space-8: 64px;
+  --qen-space-9: 96px;
+  --qen-space-10: 128px;
+  --qen-font-size-12: 12px;
+  --qen-font-size-14: 14px;
+  --qen-font-size-16: 16px;
+  --qen-font-size-18: 18px;
+  --qen-font-size-20: 20px;
+  --qen-font-size-24: 24px;
+  --qen-font-size-30: 30px;
+  --qen-font-size-36: 36px;
+  --qen-font-size-48: 48px;
+  --qen-font-weight-regular: 400;
+  --qen-font-weight-semibold: 600;
+  --qen-line-height-tight: 1.25;
+  --qen-line-height-normal: 1.5;
+  --qen-font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Noto Sans', 'Noto Sans Ethiopic', Nyala, 'Abyssinica SIL', 'Noto Sans Arabic', 'Segoe UI Historic', sans-serif;
+  --qen-radius-sm: 4px;
+  --qen-radius-md: 6px;
+  --qen-radius-lg: 8px;
+  --qen-radius-full: 9999px;
+  --qen-shadow-1: 0 1px 3px hsla(0, 0%, 0%, 0.2);
+  --qen-shadow-2: 0 4px 6px hsla(0, 0%, 0%, 0.2);
+  --qen-shadow-3: 0 5px 15px hsla(0, 0%, 0%, 0.2);
+  --qen-shadow-4: 0 10px 24px hsla(0, 0%, 0%, 0.2);
+  --qen-shadow-5: 0 15px 35px hsla(0, 0%, 0%, 0.2);
+  --qen-color-background: hsl(0 0% 100%);
+  --qen-color-surface: hsl(0 0% 100%);
+  --qen-color-surface-muted: hsl(210 40% 98%);
+  --qen-color-border: hsl(212 33% 89%);
+  --qen-color-border-strong: hsl(211 18% 49%);
+  --qen-color-text: hsl(212 35% 12%);
+  --qen-color-text-muted: hsl(209 20% 38%);
+  --qen-color-accent: hsl(220 80% 45%);
+  --qen-color-on-accent: hsl(0 0% 100%);
+  --qen-color-accent-text: hsl(222 75% 37%);
+  --qen-color-accent-tint: hsl(214 100% 97%);
+  --qen-color-focus: hsl(217 85% 53%);
+  --qen-color-danger-text: hsl(356 70% 36%);
+  --qen-color-holiday-public-text: hsl(224 70% 28%);
+  --qen-color-holiday-public-tint: hsl(214 100% 97%);
+  --qen-color-holiday-orthodox-text: hsl(25 80% 18%);
+  --qen-color-holiday-orthodox-tint: hsl(48 100% 96%);
+  --qen-color-holiday-islamic-text: hsl(158 70% 15%);
+  --qen-color-holiday-islamic-tint: hsl(145 70% 96%);
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    --qen-color-background: hsl(212 35% 12%);
+    --qen-color-surface: hsl(210 30% 20%);
+    --qen-color-surface-muted: hsl(210 30% 20%);
+    --qen-color-border: hsl(209 25% 29%);
+    --qen-color-border-strong: hsl(211 25% 65%);
+    --qen-color-text: hsl(210 40% 98%);
+    --qen-color-text-muted: hsl(210 31% 80%);
+    --qen-color-accent: hsl(214 88% 62%);
+    --qen-color-on-accent: hsl(212 35% 12%);
+    --qen-color-accent-text: hsl(212 92% 74%);
+    --qen-color-accent-tint: hsl(226 70% 20%);
+    --qen-color-focus: hsl(214 88% 62%);
+    --qen-color-danger-text: hsl(0 90% 76%);
+    --qen-color-holiday-public-text: hsl(214 95% 93%);
+    --qen-color-holiday-public-tint: hsl(226 70% 20%);
+    --qen-color-holiday-orthodox-text: hsl(46 96% 89%);
+    --qen-color-holiday-orthodox-tint: hsl(25 80% 18%);
+    --qen-color-holiday-islamic-text: hsl(145 64% 90%);
+    --qen-color-holiday-islamic-tint: hsl(158 70% 15%);
+    color-scheme: dark;
+  }
+}
+:root[data-theme='dark'] {
+  --qen-color-background: hsl(212 35% 12%);
+  --qen-color-surface: hsl(210 30% 20%);
+  --qen-color-surface-muted: hsl(210 30% 20%);
+  --qen-color-border: hsl(209 25% 29%);
+  --qen-color-border-strong: hsl(211 25% 65%);
+  --qen-color-text: hsl(210 40% 98%);
+  --qen-color-text-muted: hsl(210 31% 80%);
+  --qen-color-accent: hsl(214 88% 62%);
+  --qen-color-on-accent: hsl(212 35% 12%);
+  --qen-color-accent-text: hsl(212 92% 74%);
+  --qen-color-accent-tint: hsl(226 70% 20%);
+  --qen-color-focus: hsl(214 88% 62%);
+  --qen-color-danger-text: hsl(0 90% 76%);
+  --qen-color-holiday-public-text: hsl(214 95% 93%);
+  --qen-color-holiday-public-tint: hsl(226 70% 20%);
+  --qen-color-holiday-orthodox-text: hsl(46 96% 89%);
+  --qen-color-holiday-orthodox-tint: hsl(25 80% 18%);
+  --qen-color-holiday-islamic-text: hsl(145 64% 90%);
+  --qen-color-holiday-islamic-tint: hsl(158 70% 15%);
+  color-scheme: dark;
+}
