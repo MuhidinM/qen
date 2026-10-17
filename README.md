@@ -6,14 +6,18 @@ A multi-calendar toolkit for **Gregorian, Ethiopian, and Hijri** dates: conversi
 
 ## Packages
 
-| Package                      | Description                        |
-| ---------------------------- | ---------------------------------- |
-| [`@qen/core`](packages/core) | Zero-dependency calendar engine    |
-| `@qen/react` (planned)       | React components and design tokens |
+| Package                      | Description                                                                                                  |
+| ---------------------------- | ------------------------------------------------------------------------------------------------------------ |
+| [`@qen/core`](packages/core) | Zero-dependency calendar engine: conversion, arithmetic, formatting, parsing, Ge'ez numerals, Ethiopian time |
+| `@qen/react` (planned)       | React components and design tokens                                                                           |
 
 ## Development
 
+Requires Node 22 or later and pnpm (run `corepack enable` once to get the pinned version).
+
 ```sh
+git clone https://github.com/MuhidinM/qen.git
+cd qen
 pnpm install
 pnpm build
 pnpm test

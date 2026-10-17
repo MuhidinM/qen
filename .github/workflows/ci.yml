@@ -30,6 +30,8 @@ jobs:
         run: pnpm --filter @qen/core check:umalqura
       - name: Every export documented, with an example (TypeDoc)
         run: pnpm --filter @qen/core check:docs
+      - name: README examples run and are correct
+        run: pnpm --filter @qen/core check:readme
       - name: Bundle size budget
         run: pnpm --filter @qen/core size
 

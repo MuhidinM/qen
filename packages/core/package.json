@@ -102,7 +102,8 @@
     "generate:umalqura": "node scripts/generate-umalqura.mjs",
     "check:umalqura": "node scripts/generate-umalqura.mjs --check",
     "docs": "typedoc",
-    "check:docs": "typedoc --json docs-api/api.json && node scripts/check-examples.mjs docs-api/api.json"
+    "check:docs": "typedoc --json docs-api/api.json && node scripts/check-examples.mjs docs-api/api.json",
+    "check:readme": "node scripts/check-readme.mjs"
   },
   "devDependencies": {
     "@arethetypeswrong/cli": "^0.18.5",
