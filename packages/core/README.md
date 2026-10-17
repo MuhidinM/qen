@@ -187,6 +187,12 @@ Ge'ez numerals follow the W3C CSS `ethiopic-numeric` algorithm.
 - Node 22, 24, 26; Deno 2; Bun; modern browsers and service workers (ES2022). ESM and CommonJS, with TypeScript types.
 - Zero dependencies. Tree-shakable: `toGeezNumeral` alone is about 0.3 kB, `date` + `convert` about 2 kB (including the Umm al-Qura table), the whole API about 6 kB (minified, brotli).
 
+## Known limitations
+
+- Amharic, Afaan Oromo, Tigrinya and Arabic names haven't been reviewed by native speakers yet.
+- Browsers and service workers are supported by design (ES2022, no DOM or Node APIs) but not yet covered by an automated browser test.
+- Holidays, Bahire Hasab and official Hijri month confirmations are planned for later releases.
+
 ## License
 
 MIT
