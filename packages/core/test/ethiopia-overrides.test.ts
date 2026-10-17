@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
-import { convert, date, ethiopianHijriOverrides, getHolidays } from '../src/index.js';
+import { convert, date, getHolidays } from '../src/index.js';
+import { ethiopianHijriOverrides } from '../src/overrides/ethiopia.js';
 
 const withOverrides = { hijri: { overrides: ethiopianHijriOverrides } };
 

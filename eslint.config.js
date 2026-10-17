@@ -44,7 +44,7 @@ export default tseslint.config(
   {
     // Locales are separate entry points, so the main entry must never import them (R-FMT-03).
     files: ['packages/core/src/**/*.ts'],
-    ignores: ['packages/core/src/locales/**'],
+    ignores: ['packages/core/src/locales/**', 'packages/core/src/overrides/**'],
     rules: {
       'no-restricted-imports': [
         'error',
@@ -55,8 +55,9 @@ export default tseslint.config(
               message: '@qen/core has zero dependencies: only relative imports are allowed.',
             },
             {
-              group: ['**/locales/*'],
-              message: 'Locales are separate entry points; the main entry must not import them.',
+              group: ['**/locales/*', '**/overrides/*'],
+              message:
+                'Locales and override data are separate entry points; the main entry must not import them.',
             },
           ],
         },

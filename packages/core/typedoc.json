@@ -6,7 +6,8 @@
     "src/locales/am.ts",
     "src/locales/om.ts",
     "src/locales/ti.ts",
-    "src/locales/ar.ts"
+    "src/locales/ar.ts",
+    "src/overrides/ethiopia.ts"
   ],
   "out": "docs-api",
   "name": "@qen/core",
