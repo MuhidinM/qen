@@ -22,4 +22,6 @@ try {
 } catch (e) {
   if (!(e instanceof core.InvalidDateError)) throw e;
 }
+const noon = core.toJSDate(core.date('ethiopian', 2019, 1, 1), { utc: true }).toISOString();
+if (noon !== '2026-09-11T12:00:00.000Z') throw new Error(`toJSDate() returned ${noon}`);
 console.log(`ESM ok on ${runtime}: [${Object.keys(core).join(', ')}]`);
