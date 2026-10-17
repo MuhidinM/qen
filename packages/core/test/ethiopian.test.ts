@@ -33,13 +33,22 @@ describe('Ethiopian ↔ JDN', () => {
     expect(ethiopianFromJDN(jdn)).toEqual({ year: y, month: m, day: d });
   });
 
-  it('starts every year 1893–2092 EC on 11 September, or 12 September before a Gregorian leap year', () => {
-    // PLAN.md §3.1. Meskerem 1 of EC year y falls in Gregorian year y + 7.
+  it('starts every year 1893–2092 EC on 11 September, or 12 September after an Ethiopian leap year', () => {
+    // PLAN.md §3.1 (corrected, N-026). Meskerem 1 of EC year y falls in Gregorian year y + 7.
     for (let y = 1893; y <= 2092; y++) {
       const start = gregorianFromJDN(ethiopianToJDN(y, 1, 1));
-      const expectedDay = isGregorianLeapYear(y + 8) ? 12 : 11;
+      const expectedDay = isEthiopianLeapYear(y - 1) ? 12 : 11;
       expect(start, `Meskerem 1, ${y} EC`).toEqual({ year: y + 7, month: 9, day: expectedDay });
     }
+  });
+
+  it('matches the "following Gregorian year is a leap year" shortcut until 2098, but not in 2099', () => {
+    for (let y = 1893; y <= 2091; y++) {
+      expect(isEthiopianLeapYear(y - 1), `${y} EC`).toBe(isGregorianLeapYear(y + 8));
+    }
+    // 2092 EC starts on 12 Sep 2099 (after Pagume 6, 2091), yet 2100 is not a Gregorian leap year.
+    expect(gregorianFromJDN(ethiopianToJDN(2092, 1, 1))).toEqual({ year: 2099, month: 9, day: 12 });
+    expect(isGregorianLeapYear(2100)).toBe(false);
   });
 
   it('round-trips every day from 1900 to 2100 with no gaps', () => {

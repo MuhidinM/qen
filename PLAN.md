@@ -131,7 +131,7 @@ bahireHasab(ethiopianYear)   // full computus output
 
 - 13 months: 12 × 30 days, then Pagume with 5 days (6 in leap years).
 - Leap year when `year % 4 === 3` (Pagume has 6 days).
-- New year (Meskerem 1) falls on 11 September, or 12 September when the following Gregorian year is a leap year (valid 1900–2099).
+- New year (Meskerem 1) falls on 11 September, or 12 September in a year that follows an Ethiopian leap year (Pagume 6), for new years from 1900 to 2099. The shortcut "12 September when the following Gregorian year is a leap year" fails in 2099 (Meskerem 1, 2092 EC = 12 Sep 2099, but 2100 is not a leap year); corrected 2026-10-17, N-026.
 - JDN formula: `JDN = 1724221 + 365*(y-1) + floor(y/4) + 30*(m-1) + d - 1`. Confirm against test anchors before trusting.
 
 **Hijri.**
@@ -463,3 +463,4 @@ Add entries as `YYYY-MM-DD: decision (reason)`.
 - 2026-10-17: Day boundaries differ per calendar (owner): Gregorian at midnight, Ethiopian in the morning (06:00), Hijri at sunset. Applied when turning an instant into a date; date-to-date conversion is unchanged (ADR-0012, N-005).
 - 2026-10-17: Owner delegated the open facts (holiday list and leap-year shifts, locale names, Tsome Nebiyat, weekly fasts) to Claude's best knowledge plus CLDR. Recorded in N-016 to N-019, marked "review before 1.0", tracked in T-068 (#55).
 - 2026-10-17: Supported Node versions are 22, 24 and 26 (`engines: >=22`). Node 20 reached end of life in April 2026. CI smoke-tests the packed tarball in each, plus Deno 2 and Bun.
+- 2026-10-17: Corrected PLAN.md §3.1 new-year rule: 12 September follows an Ethiopian leap year; the "following Gregorian leap year" shortcut fails in 2099. Found by the Ethiopian tests (#9), confirmed with Intl ethiopic (ICU 77.1). N-026.
