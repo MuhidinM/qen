@@ -3,6 +3,7 @@ import { convert, toJDN } from '../convert.js';
 import { date } from '../date.js';
 import type { CalendarDate, CalendarId, ConvertOptions } from '../types.js';
 import { bahireHasab } from './bahire-hasab.js';
+import { hijriStatus } from './status.js';
 import type { HolidayCategory, HolidayStatus } from './types.js';
 
 /**
@@ -38,6 +39,8 @@ export interface Observance {
   readonly endGregorian: CalendarDate<'gregorian'>;
   /** Ramadan only: `expected` until its month start is officially confirmed. */
   readonly status?: HolidayStatus;
+  /** Who confirmed the start, when `status` is `confirmed`. */
+  readonly source?: string;
 }
 
 /**
@@ -61,7 +64,7 @@ function period(
   start: CalendarDate,
   end: CalendarDate,
   options: ConvertOptions,
-  status?: HolidayStatus,
+  confirmation?: { status: HolidayStatus; source?: string },
 ): Observance {
   return Object.freeze({
     id,
@@ -71,7 +74,7 @@ function period(
     end,
     startGregorian: convert(start, 'gregorian', options),
     endGregorian: convert(end, 'gregorian', options),
-    ...(status ? { status } : {}),
+    ...confirmation,
   });
 }
 
@@ -104,7 +107,8 @@ function orthodoxFasts(year: number, options: ConvertOptions): Observance[] {
 /** Ramadan of one Hijri year, under the method in `options`. */
 function ramadan(year: number, options: ConvertOptions): Observance {
   const end = addDays(date('hijri', year, 10, 1), -1, options);
-  return period('ramadan', ['islamic'], date('hijri', year, 9, 1), end, options, 'expected');
+  const start = date('hijri', year, 9, 1);
+  return period('ramadan', ['islamic'], start, end, options, hijriStatus(year, 9, options));
 }
 
 /**

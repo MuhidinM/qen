@@ -1,6 +1,7 @@
 import { convert, fromJDN, toJDN } from '../convert.js';
 import { date } from '../date.js';
 import type { ConvertOptions } from '../types.js';
+import { hijriStatus } from './status.js';
 import type { Holiday, HolidayCategory, HolidayId } from './types.js';
 
 const ISLAMIC: readonly HolidayCategory[] = ['islamic'];
@@ -48,7 +49,7 @@ export function islamicHolidays(gregorianYear: number, options: ConvertOptions =
           rule: 'fixed' as const,
           date: own,
           gregorian,
-          status: 'expected' as const,
+          ...hijriStatus(year, month, options),
           ...(approximate ? { approximate: true } : {}),
         }),
       );
