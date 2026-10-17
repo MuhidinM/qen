@@ -41,7 +41,7 @@ PLAN.md Phase 2. Done when @qen/core@0.1.0 is live on npm.
 
 | ID    | Issue                                            | Task                                                                       | Reqs                          | Size | Status             |
 | ----- | ------------------------------------------------ | -------------------------------------------------------------------------- | ----------------------------- | ---- | ------------------ |
-| T-020 | [#15](https://github.com/MuhidinM/qen/issues/15) | Add dayOfWeek, daysInMonth, monthsInYear and isLeapYear                    | R-UTIL-01                     | S    | todo               |
+| T-020 | [#15](https://github.com/MuhidinM/qen/issues/15) | Add dayOfWeek, daysInMonth, monthsInYear and isLeapYear                    | R-UTIL-01                     | S    | done               |
 | T-021 | [#16](https://github.com/MuhidinM/qen/issues/16) | Add and subtract days, months and years with day clamping                  | R-UTIL-02, X-01               | M    | todo               |
 | T-022 | [#17](https://github.com/MuhidinM/qen/issues/17) | Compare dates and measure the difference between them                      | R-UTIL-03, R-UTIL-04          | M    | todo               |
 | T-023 | [#18](https://github.com/MuhidinM/qen/issues/18) | Calculate age from a birth date in any calendar                            | R-UTIL-05                     | S    | todo               |

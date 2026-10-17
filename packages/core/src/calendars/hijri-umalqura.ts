@@ -1,6 +1,10 @@
 import { InvalidDateError } from '../errors.js';
 import { hijri } from './hijri.js';
-import { hijriTabularFromJDN, hijriTabularToJDN } from './hijri-tabular.js';
+import {
+  hijriTabularDaysInMonth,
+  hijriTabularFromJDN,
+  hijriTabularToJDN,
+} from './hijri-tabular.js';
 import {
   UMALQURA_FIRST_YEAR,
   UMALQURA_LAST_YEAR,
@@ -71,4 +75,11 @@ export function umalquraFromJDN(jdn: number): { year: number; month: number; day
     month: (lo % 12) + 1,
     day: jdn - startOf(lo) + 1,
   };
+}
+
+/** Length of a Hijri month under Umm al-Qura (tabular outside the table). */
+export function umalquraDaysInMonth(year: number, month: number): number {
+  if (!umalquraCovers(year)) return hijriTabularDaysInMonth(year, month);
+  const index = (year - UMALQURA_FIRST_YEAR) * 12 + month - 1;
+  return startOf(index + 1) - startOf(index);
 }
