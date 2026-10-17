@@ -119,7 +119,7 @@
     {
       "name": "everything (main entry)",
       "path": "dist/index.js",
-      "limit": "6 kB"
+      "limit": "7 kB"
     },
     {
       "name": "{ date, convert } (includes the Umm al-Qura table)",
@@ -132,6 +132,12 @@
       "path": "dist/index.js",
       "import": "{ format }",
       "limit": "3 kB"
+    },
+    {
+      "name": "{ parse }",
+      "path": "dist/index.js",
+      "import": "{ parse }",
+      "limit": "4 kB"
     },
     {
       "name": "{ toGeezNumeral }",
