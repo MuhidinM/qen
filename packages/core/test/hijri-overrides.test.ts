@@ -83,9 +83,10 @@ describe('official Hijri overrides (ADR-0006)', () => {
   });
 
   it('moves the holidays in that month', () => {
-    const settings = { hijri: { overrides: [later(1447, 10, 1)] } };
+    // Ramadan 1447 has 30 days under Umm al-Qura, so the announced Shawwal can only be earlier.
+    const settings = { hijri: { overrides: [later(1447, 10, -1)] } };
     const eid = getHolidays(2026, settings).find((h) => h.id === 'eid-al-fitr');
-    expect(eid?.gregorian).toEqual(date('gregorian', 2026, 3, 21));
+    expect(eid?.gregorian).toEqual(date('gregorian', 2026, 3, 19));
   });
 
   it('rejects overrides that cannot be right', () => {
