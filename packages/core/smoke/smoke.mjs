@@ -2,6 +2,7 @@
 // Extend with real calls as the public API grows.
 import * as core from '@qen/core';
 import { am } from '@qen/core/locales/am';
+import { ethiopianHijriOverrides } from '@qen/core/overrides/ethiopia';
 
 const runtime =
   typeof Deno !== 'undefined'
@@ -27,4 +28,6 @@ const noon = core.toJSDate(core.date('ethiopian', 2019, 1, 1), { utc: true }).to
 if (noon !== '2026-09-11T12:00:00.000Z') throw new Error(`toJSDate() returned ${noon}`);
 if (am.months.ethiopian[0] !== 'መስከረም')
   throw new Error('locale subpath @qen/core/locales/am failed');
+if (ethiopianHijriOverrides.length < 5)
+  throw new Error('subpath @qen/core/overrides/ethiopia failed');
 console.log(`ESM ok on ${runtime}: [${Object.keys(core).join(', ')}]`);

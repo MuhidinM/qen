@@ -74,6 +74,16 @@
         "default": "./dist/locales/ar.cjs"
       }
     },
+    "./overrides/ethiopia": {
+      "import": {
+        "types": "./dist/overrides/ethiopia.d.ts",
+        "default": "./dist/overrides/ethiopia.js"
+      },
+      "require": {
+        "types": "./dist/overrides/ethiopia.d.cts",
+        "default": "./dist/overrides/ethiopia.cjs"
+      }
+    },
     "./package.json": "./package.json"
   },
   "files": [
@@ -191,6 +201,11 @@
       "name": "locale: ar",
       "path": "dist/locales/ar.js",
       "limit": "1.5 kB"
+    },
+    {
+      "name": "overrides: ethiopia",
+      "path": "dist/overrides/ethiopia.js",
+      "limit": "1 kB"
     }
   ]
 }

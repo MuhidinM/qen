@@ -8,6 +8,7 @@ export default defineConfig({
     'locales/om': 'src/locales/om.ts',
     'locales/ti': 'src/locales/ti.ts',
     'locales/ar': 'src/locales/ar.ts',
+    'overrides/ethiopia': 'src/overrides/ethiopia.ts',
   },
   format: ['esm', 'cjs'],
   // tsup's dts step injects `baseUrl`, which TypeScript 6 flags as deprecated.
