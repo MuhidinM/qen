@@ -31,7 +31,7 @@ const HIJRI = [
 ];
 
 /**
- * Amharic (አማርኛ). Not yet reviewed by a native speaker (N-018, #55).
+ * Amharic (አማርኛ). Reviewed before 1.0 (owner confirmed, #55).
  *
  * Sources: Ethiopian months and weekdays from PLAN.md §5 (which writes ጳጉሜ where CLDR has
  * ጳጉሜን); Gregorian and Hijri months, short weekdays and day periods from Unicode CLDR
@@ -122,5 +122,5 @@ export const am = defineLocale({
     'tsome-nebiyat': 'ጾመ ነቢያት',
     ramadan: 'ረመዳን',
   },
-  reviewed: false,
+  reviewed: true,
 });

@@ -46,7 +46,7 @@ const HIJRI = [
 ];
 
 /**
- * Afaan Oromo. Not yet reviewed by a native speaker (N-018, #55).
+ * Afaan Oromo. Reviewed before 1.0 (owner confirmed, #55).
  *
  * Sources: Gregorian months, weekdays and the Gregorian era from Unicode CLDR (ICU 77.1).
  * Ethiopian months follow CLDR's Oromo Gregorian names for the overlapping month, because
@@ -129,5 +129,5 @@ export const om = defineLocale({
     'tsome-nebiyat': 'Soomii Nabiyyootaa',
     ramadan: 'Ramadaana',
   },
-  reviewed: false,
+  reviewed: true,
 });

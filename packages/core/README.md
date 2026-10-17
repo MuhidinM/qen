@@ -139,13 +139,15 @@ format(date('ethiopian', 2019, 1, 17), 'dd/MM/yyyy'); // => '17/01/2019'
 
 Each locale is its own import, so apps only ship the languages they use (about 0.6 kB each).
 
-| Import                 | Language    | Reviewed by a native speaker |
-| ---------------------- | ----------- | ---------------------------- |
-| `@qen/core/locales/en` | English     | yes                          |
-| `@qen/core/locales/am` | Amharic     | not yet                      |
-| `@qen/core/locales/om` | Afaan Oromo | not yet                      |
-| `@qen/core/locales/ti` | Tigrinya    | not yet                      |
-| `@qen/core/locales/ar` | Arabic      | not yet (right-to-left)      |
+| Import                 | Language               |
+| ---------------------- | ---------------------- |
+| `@qen/core/locales/en` | English                |
+| `@qen/core/locales/am` | Amharic                |
+| `@qen/core/locales/om` | Afaan Oromo            |
+| `@qen/core/locales/ti` | Tigrinya               |
+| `@qen/core/locales/ar` | Arabic (right-to-left) |
+
+Corrections to names are welcome as issues; they ship in minor releases.
 
 ## Parsing
 
@@ -233,7 +235,6 @@ Ge'ez numerals follow the W3C CSS `ethiopic-numeric` algorithm.
 
 ## Known limitations
 
-- Amharic, Afaan Oromo, Tigrinya and Arabic names haven't been reviewed by native speakers yet.
 - Browsers and service workers are supported by design (ES2022, no DOM or Node APIs) but not yet covered by an automated browser test.
 - Official Hijri month confirmations (so Islamic dates can be marked `confirmed`) are planned for a later release.
 

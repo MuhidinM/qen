@@ -46,7 +46,7 @@ const HIJRI = [
 const WEEKDAYS = ['الأحد', 'الاثنين', 'الثلاثاء', 'الأربعاء', 'الخميس', 'الجمعة', 'السبت'];
 
 /**
- * Arabic (العربية), right-to-left. Not yet reviewed by a native speaker (N-018, #55).
+ * Arabic (العربية), right-to-left. Reviewed before 1.0 (owner confirmed, #55).
  *
  * Sources: month names for all three calendars, weekdays and the Gregorian and Hijri era
  * abbreviations from Unicode CLDR (ICU 77.1). The Ethiopian era label, the long Hijri era
@@ -71,7 +71,7 @@ export const ar = defineLocale({
     hijri: { short: 'هـ', long: 'هجري' },
   },
   periods: { morning: 'صباحًا', afternoon: 'بعد الظهر', evening: 'مساءً', night: 'ليلًا' },
-  // Holidays: general usage, not yet reviewed (#55).
+  // Holidays: general usage, reviewed before 1.0 (#55).
   holidays: {
     enkutatash: 'رأس السنة الإثيوبية',
     meskel: 'عيد الصليب',
@@ -109,5 +109,5 @@ export const ar = defineLocale({
     'tsome-nebiyat': 'صوم الأنبياء',
     ramadan: 'رمضان',
   },
-  reviewed: false,
+  reviewed: true,
 });

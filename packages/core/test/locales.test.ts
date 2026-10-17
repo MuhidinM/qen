@@ -147,7 +147,7 @@ describe('Amharic (am)', () => {
     expect(am.weekdaysShort).toEqual(cldrWeekdays('am', 'short'));
   });
 
-  it('is marked for native-speaker review before 1.0 (N-018, #55)', () => {
-    expect(am.reviewed).toBe(false);
+  it('is marked reviewed (owner confirmed, #55)', () => {
+    expect(am.reviewed).toBe(true);
   });
 });
