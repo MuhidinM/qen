@@ -1,5 +1,15 @@
 # @qen/core
 
+## 0.3.0
+
+### Minor Changes
+
+- 62a8103: Add `bahireHasab(ethiopianYear)`, the Ethiopian computus: Amete Alem, evangelist, Wenber, Abekte, Metqe, Beale Metqe, Tewsak, Mebaja Hamer and the date of the Fast of Nineveh, from which Fasika and the other movable feasts follow.
+- 6057974: Add the Islamic holidays: Eid al-Fitr, Eid al-Adha and Mawlid (public), plus the Islamic New Year, Ashura, Isra and Mi'raj, the start of Ramadan, Laylat al-Qadr (approximate) and the Day of Arafah. They follow the Hijri method, can fall twice in one Gregorian year, and are marked `status: 'expected'`. `getHolidays` now returns 13 public holidays a year.
+- 00e5da8: Add the Orthodox movable holidays from Bahire Hasab: Siklet and Fasika (public), plus the Fast of Nineveh, Abiy Tsom, Debre Zeit, Hosanna, Rekebe Kahnat, Erget, Peraklitos, Tsome Hawariyat and Tsome Dihnet (Orthodox). `getHolidays` now returns 10 public holidays a year. Every locale names the new holidays.
+- 640e462: Add `getObservances(start, end)` for multi-day periods: Abiy Tsom, Tsome Hawariyat, Tsome Filseta, Tsome Nebiyat and Ramadan, each with its first and last day in its own calendar and in Gregorian. Locales gain `observances` names.
+- fcf5f4d: Add `isWeeklyFast(date)`: true on Wednesdays and Fridays, except from Fasika to Peraklitos and when Genna or Timket falls on the day.
+
 ## 0.2.0
 
 ### Minor Changes
