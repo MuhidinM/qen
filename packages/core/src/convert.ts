@@ -1,30 +1,10 @@
 import { calendarFor, isCalendarId } from './calendars/index.js';
 import { ethiopianFromJDN, ethiopianToJDN } from './calendars/ethiopian.js';
 import { gregorianFromJDN, gregorianToJDN } from './calendars/gregorian.js';
-import { hijriTabularFromJDN, hijriTabularToJDN } from './calendars/hijri-tabular.js';
-import { umalquraCoversJDN, umalquraFromJDN, umalquraToJDN } from './calendars/hijri-umalqura.js';
+import { umalquraCoversJDN } from './calendars/hijri-umalqura.js';
 import { date } from './date.js';
-import type {
-  CalendarDate,
-  CalendarId,
-  ConvertOptions,
-  HijriExplanation,
-  HijriMethod,
-} from './types.js';
-
-type YMD = { year: number; month: number; day: number };
-
-/** Hijri method implementations (ADR-0006). */
-const HIJRI_METHODS: Readonly<
-  Record<HijriMethod, { toJDN(y: number, m: number, d: number): number; fromJDN(jdn: number): YMD }>
-> = {
-  umalqura: { toJDN: umalquraToJDN, fromJDN: umalquraFromJDN },
-  tabular: { toJDN: hijriTabularToJDN, fromJDN: hijriTabularFromJDN },
-};
-
-/** Umm al-Qura is the default from the first release (N-008). */
-const methodName = (options: ConvertOptions): HijriMethod => options.hijri?.method ?? 'umalqura';
-const hijriMethod = (options: ConvertOptions) => HIJRI_METHODS[methodName(options)];
+import { decidedBy, hijriFromJDN, hijriToJDN, resolve } from './hijri/pipeline.js';
+import type { CalendarDate, CalendarId, ConvertOptions, HijriExplanation } from './types.js';
 
 /** First JDN of year 1 in each calendar (N-002). */
 const FIRST_JDN: Readonly<Record<CalendarId, number>> = {
@@ -53,7 +33,7 @@ export function toJDN(d: CalendarDate, options: ConvertOptions = {}): number {
     case 'ethiopian':
       return ethiopianToJDN(year, month, day);
     case 'hijri':
-      return hijriMethod(options).toJDN(year, month, day);
+      return hijriToJDN(year, month, day, resolve(options));
   }
 }
 
@@ -90,7 +70,7 @@ export function fromJDN<C extends CalendarId>(
       ? gregorianFromJDN(jdn)
       : calendar === 'ethiopian'
         ? ethiopianFromJDN(jdn)
-        : hijriMethod(options).fromJDN(jdn);
+        : hijriFromJDN(jdn, resolve(options));
   return Object.freeze({ calendar, year, month, day });
 }
 
@@ -130,11 +110,12 @@ export function convert<C extends CalendarId>(
  */
 export function explainHijri(d: CalendarDate, options: ConvertOptions = {}): HijriExplanation {
   const jdn = toJDN(d, options);
-  const requested = methodName(options);
-  const fallback = requested === 'umalqura' && !umalquraCoversJDN(jdn);
+  const settings = resolve(options);
+  const fallback = settings.method === 'umalqura' && !umalquraCoversJDN(jdn - settings.offset);
   return Object.freeze({
     date: fromJDN(jdn, 'hijri', options),
-    method: fallback ? 'tabular' : requested,
+    method: fallback ? 'tabular' : settings.method,
     fallback,
+    decidedBy: decidedBy(settings),
   });
 }

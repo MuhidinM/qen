@@ -104,6 +104,7 @@ describe('explainHijri()', () => {
       date: date('hijri', 1448, 5, 6),
       method: 'umalqura',
       fallback: false,
+      decidedBy: 'method',
     });
     expect(explainHijri(date('gregorian', 1850, 1, 1))).toMatchObject({
       method: 'tabular',
@@ -117,6 +118,7 @@ describe('explainHijri()', () => {
       date: date('hijri', 1448, 5, 5),
       method: 'tabular',
       fallback: false,
+      decidedBy: 'method',
     });
   });
 

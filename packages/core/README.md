@@ -56,7 +56,7 @@ date('ethiopian', 2015, 13, 6); // => { calendar: 'ethiopian', year: 2015, month
 - `umalqura` (default): the Umm al-Qura calendar of Saudi Arabia, from a table covering 1300–1500 AH (1882–2077). It matches `Intl`'s `islamic-umalqura` on every day of that range. Month starts for 1420–1449 AH (1999–2028) also match R. H. van Gent's published tables; outside those years, published reconstructions differ by a day in some months. Outside the table it falls back to `tabular` (where `Intl` uses ICU's own extrapolation up to 1600 AH).
 - `tabular`: the arithmetic 30-year cycle with the civil epoch, the same as `Intl`'s `islamic-civil`.
 
-Either may differ by a day from the month start announced locally after moon sighting.
+Either may differ by a day from the month start announced locally after moon sighting. To follow local practice, pass `hijri: { offset }` (−2 to +2 days): +1 starts every month a day later.
 
 ```ts
 import { convert, date, explainHijri } from '@qen/core';
@@ -65,6 +65,7 @@ const oct17 = date('gregorian', 2026, 10, 17);
 convert(oct17, 'hijri'); // => { calendar: 'hijri', year: 1448, month: 5, day: 6 }
 convert(oct17, 'hijri', { hijri: { method: 'tabular' } }); // => { calendar: 'hijri', year: 1448, month: 5, day: 5 }
 explainHijri(date('gregorian', 2100, 1, 1)).fallback; // => true
+convert(oct17, 'hijri', { hijri: { offset: 1 } }); // => { calendar: 'hijri', year: 1448, month: 5, day: 5 }
 ```
 
 **Gregorian**: proleptic Gregorian. Years start at 1 in every calendar.

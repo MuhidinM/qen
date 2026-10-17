@@ -18,7 +18,7 @@ import {
 } from '../src/index.js';
 import { en } from '../src/locales/en.js';
 
-const off = (offset: HijriSettings['offset']) => ({ hijri: { offset } });
+const off = (offset: NonNullable<HijriSettings['offset']>) => ({ hijri: { offset } });
 
 describe('Hijri offset (ADR-0006: method → overrides → offset)', () => {
   it('+1 means months start a day later locally, so a day shows the previous Hijri date', () => {
@@ -87,7 +87,7 @@ describe('Hijri offset (ADR-0006: method → overrides → offset)', () => {
   });
 
   it('rejects offsets outside −2…+2 and non-integers', () => {
-    const bad = (o: number) => ({ hijri: { offset: o as HijriSettings['offset'] } });
+    const bad = (o: number) => ({ hijri: { offset: o as NonNullable<HijriSettings['offset']> } });
     expect(() => convert(date('gregorian', 2026, 1, 1), 'hijri', bad(3))).toThrow(
       'Hijri offset must be -2, -1, 0, 1 or 2, got 3',
     );
