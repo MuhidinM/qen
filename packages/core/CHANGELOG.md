@@ -1,5 +1,15 @@
 # @qen/core
 
+## 0.4.0
+
+### Minor Changes
+
+- 9ae3489: Name the shapes that were inline types: `Age` (returned by `age`), `ClockTime` and `EthiopianTime` (used by the Ethiopian time functions). Every public field is now documented, and the public API is recorded in `etc/core.api.md` and checked in CI. The README gains a compatibility and deprecation policy.
+- 5bd44ee: Add `@qen/core/overrides/ethiopia`: Hijri month starts observed in Ethiopia since 2024 (Eid al-Fitr 2024–2026, Eid al-Adha 2025–2026), each with a dated public source. Pass them as `hijri: { overrides: ethiopianHijriOverrides }` to mark those holidays `confirmed`.
+- 8a12c33: Add `HijriSettings` with an `offset` of −2 to +2 days (`hijri: { method, offset }`) to match local moon sighting. Every function that handles Hijri dates applies it, including formatting, parsing, `today`, holidays and observances. `explainHijri` now reports `decidedBy`.
+- c59abc4: Add official Hijri month overrides (`hijri: { overrides: [{ hijriYear, hijriMonth, startsOn, source }] }`). An announced month start wins for its month, before the user offset; impossible overrides are rejected. `explainHijri` reports `decidedBy: 'override'` with the source.
+- 321a782: Islamic holidays and the Ramadan observance now become `status: 'confirmed'`, with the override's `source`, when an official override fixes their Hijri month; otherwise they stay `expected`.
+
 ## 0.3.0
 
 ### Minor Changes
