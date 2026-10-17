@@ -53,7 +53,7 @@ PLAN.md Phase 2. Done when @qen/core@0.1.0 is live on npm.
 | T-029 | [#24](https://github.com/MuhidinM/qen/issues/24) | Parse date strings and detect which calendar they are in                   | R-FMT-06, R-FMT-07            | L    | done               |
 | T-030 | [#25](https://github.com/MuhidinM/qen/issues/25) | Convert between international and Ethiopian time                           | R-UTIL-07                     | S    | done               |
 | T-031 | [#26](https://github.com/MuhidinM/qen/issues/26) | Document every public function and generate the API reference              | R-LIB-07, X-02                | S    | done               |
-| T-032 | [#27](https://github.com/MuhidinM/qen/issues/27) | Write the core README with install and quick-start examples that run in CI | R-LIB-08                      | S    | todo               |
+| T-032 | [#27](https://github.com/MuhidinM/qen/issues/27) | Write the core README with install and quick-start examples that run in CI | R-LIB-08                      | S    | done               |
 | T-033 | [#28](https://github.com/MuhidinM/qen/issues/28) | Publish @qen/core 0.1.0 to npm                                             | R-LIB-13                      | S    | todo · needs-owner |
 
 ## M3 · Fixed-date holidays
