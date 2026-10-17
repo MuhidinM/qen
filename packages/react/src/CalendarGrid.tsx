@@ -63,6 +63,14 @@ export interface CalendarGridProps {
   /** Today, for the `aria-current` marker. Default: `today(calendar)`. */
   readonly today?: CalendarDate;
   readonly isDateDisabled?: (date: CalendarDate) => boolean;
+  /**
+   * Marks a range as selected instead of `value` (used by {@link DateRangePicker}); the grid
+   * becomes multi-selectable. `end` is null while only the start is chosen; null selects nothing.
+   */
+  readonly selectedRange?: {
+    readonly start: CalendarDate;
+    readonly end: CalendarDate | null;
+  } | null;
   /** Other calendars whose day numbers appear in each cell, in this order. */
   readonly secondary?: readonly CalendarId[];
   /**
@@ -127,7 +135,7 @@ export function CalendarGrid(props: CalendarGridProps) {
 
   const [ownValue, setOwnValue] = useState<CalendarDate | null>(props.defaultValue ?? null);
   const value = props.value !== undefined ? props.value : ownValue;
-  const start = value ?? today;
+  const start = props.selectedRange?.start ?? value ?? today;
   const [ownMonth, setOwnMonth] = useState<VisibleMonth>(
     props.defaultMonth ?? { year: start.year, month: start.month },
   );
@@ -186,7 +194,18 @@ export function CalendarGrid(props: CalendarGridProps) {
   });
 
   // The one tabbable day: the focused day, else the selection, else today, else the 1st.
-  const tabbable = [focusDate, value, today].find((d) => inMonth(d, month)) ?? first;
+  const multi = props.selectedRange !== undefined;
+  const range = props.selectedRange ?? null;
+  const rangeFrom = range ? toJDN(range.start, options) : 0;
+  const rangeTo = range ? toJDN(range.end ?? range.start, options) : 0;
+  const isSelected = (d: CalendarDate) => {
+    if (!multi) return key(d) === key(value);
+    if (!range) return false;
+    const day = toJDN(d, options);
+    return day >= rangeFrom && day <= rangeTo;
+  };
+  const anchor = multi ? (range?.end ?? range?.start) : value;
+  const tabbable = [focusDate, anchor, today].find((d) => inMonth(d, month)) ?? first;
 
   useEffect(() => {
     if (!shouldFocus.current) return;
@@ -283,6 +302,7 @@ export function CalendarGrid(props: CalendarGridProps) {
         // eslint-disable-next-line jsx-a11y/no-noninteractive-element-to-interactive-role
         role="grid"
         aria-labelledby={titleId}
+        aria-multiselectable={multi || undefined}
         className="qen-calendar__grid"
         onKeyDown={onKeyDown}
       >
@@ -301,7 +321,7 @@ export function CalendarGrid(props: CalendarGridProps) {
               {week.map((d, i) => {
                 if (!d) return <td key={i} role="gridcell" className="qen-calendar__empty" />;
                 const disabled = isDateDisabled?.(d) ?? false;
-                const selected = key(d) === key(value);
+                const selected = isSelected(d);
                 const others = secondary.map((c) => convert(d, c, options));
                 const dayHolidays = byDay.get(toJDN(d, options)) ?? [];
                 const names = dayHolidays.map(holidayName);
@@ -321,6 +341,11 @@ export function CalendarGrid(props: CalendarGridProps) {
                     aria-current={key(d) === key(today) ? 'date' : undefined}
                     aria-disabled={disabled || undefined}
                     className="qen-calendar__day"
+                    data-range-edge={
+                      range && (key(d) === key(range.start) || key(d) === key(range.end))
+                        ? true
+                        : undefined
+                    }
                     onClick={() => select(d)}
                     onFocus={() => setFocusDate(d)}
                   >

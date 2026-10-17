@@ -299,6 +299,97 @@
 .qen-date-picker__dialog .qen-calendar {
   box-shadow: var(--qen-shadow-4);
 }
+/* <DateRangePicker>: days inside the range get a tint, the two ends the full fill. */
+.qen-range-picker {
+  display: inline-flex;
+  flex-direction: column;
+  gap: var(--qen-space-2);
+  color: var(--qen-color-text);
+  font-family: var(--qen-font-family);
+}
+.qen-range-picker__label {
+  margin: 0;
+  font-size: var(--qen-font-size-14);
+  font-weight: var(--qen-font-weight-semibold);
+}
+.qen-range-picker__status {
+  margin: 0;
+  color: var(--qen-color-text-muted);
+  font-size: var(--qen-font-size-14);
+}
+.qen-calendar__grid[aria-multiselectable='true'] .qen-calendar__day[aria-selected='true'] {
+  border-radius: 0;
+  background: var(--qen-color-accent-tint);
+  color: var(--qen-color-accent-text);
+}
+.qen-calendar__grid[aria-multiselectable='true'] .qen-calendar__day[data-range-edge='true'] {
+  border-radius: var(--qen-radius-md);
+  background: var(--qen-color-accent);
+  color: var(--qen-color-on-accent);
+}
+
+/* <EthiopianTimeInput>. */
+.qen-time-input {
+  margin: 0;
+  padding: 0;
+  border: none;
+  color: var(--qen-color-text);
+  font-family: var(--qen-font-family);
+}
+.qen-time-input__legend {
+  margin-bottom: var(--qen-space-2);
+  padding: 0;
+  font-size: var(--qen-font-size-14);
+  font-weight: var(--qen-font-weight-semibold);
+}
+.qen-time-input__fields {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: var(--qen-space-3);
+}
+.qen-time-input__field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--qen-space-1);
+}
+.qen-time-input__label {
+  color: var(--qen-color-text-muted);
+  font-size: var(--qen-font-size-12);
+}
+.qen-time-input__number,
+.qen-time-input__period {
+  padding: var(--qen-space-2) var(--qen-space-3);
+  border: 1px solid var(--qen-color-border-strong);
+  border-radius: var(--qen-radius-md);
+  background: var(--qen-color-surface);
+  color: inherit;
+  font: inherit;
+  font-size: var(--qen-font-size-16);
+  font-variant-numeric: tabular-nums;
+}
+.qen-time-input__number {
+  width: var(--qen-space-8);
+}
+.qen-time-input__number:focus-visible,
+.qen-time-input__period:focus-visible {
+  outline: 2px solid var(--qen-color-focus);
+  outline-offset: 2px;
+}
+.qen-time-input__number[aria-invalid='true'] {
+  border-color: var(--qen-color-danger-text);
+}
+.qen-time-input__clock {
+  padding-block: var(--qen-space-2);
+  color: var(--qen-color-text-muted);
+  font-size: var(--qen-font-size-16);
+  font-variant-numeric: tabular-nums;
+}
+.qen-time-input__error {
+  margin: var(--qen-space-2) 0 0;
+  color: var(--qen-color-danger-text);
+  font-size: var(--qen-font-size-14);
+}
 /* Fits a 320 px viewport: 7 × 32 px cells plus padding. */
 @media (max-width: 400px) {
   .qen-calendar {
