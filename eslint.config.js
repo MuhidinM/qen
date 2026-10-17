@@ -42,6 +42,24 @@ export default tseslint.config(
     },
   },
   {
+    // No hidden clock reads in core: "now" is an argument; today() is the only exception.
+    files: ['packages/core/src/**/*.ts'],
+    ignores: ['packages/core/src/today.ts'],
+    rules: {
+      'no-restricted-syntax': [
+        'error',
+        {
+          selector: "CallExpression[callee.object.name='Date'][callee.property.name='now']",
+          message: 'Core never reads the clock; take "now" as an argument (see today.ts).',
+        },
+        {
+          selector: "NewExpression[callee.name='Date'][arguments.length=0]",
+          message: 'Core never reads the clock; take "now" as an argument (see today.ts).',
+        },
+      ],
+    },
+  },
+  {
     files: ['**/smoke/*.{mjs,cjs}', '**/scripts/*.mjs'],
     languageOptions: {
       globals: {

@@ -45,7 +45,7 @@ PLAN.md Phase 2. Done when @qen/core@0.1.0 is live on npm.
 | T-021 | [#16](https://github.com/MuhidinM/qen/issues/16) | Add and subtract days, months and years with day clamping                  | R-UTIL-02, X-01               | M    | done               |
 | T-022 | [#17](https://github.com/MuhidinM/qen/issues/17) | Compare dates and measure the difference between them                      | R-UTIL-03, R-UTIL-04          | M    | done               |
 | T-023 | [#18](https://github.com/MuhidinM/qen/issues/18) | Calculate age from a birth date in any calendar                            | R-UTIL-05                     | S    | done               |
-| T-024 | [#19](https://github.com/MuhidinM/qen/issues/19) | Get today's date in any calendar without hidden clock reads                | R-UTIL-06                     | S    | todo               |
+| T-024 | [#19](https://github.com/MuhidinM/qen/issues/19) | Get today's date in any calendar without hidden clock reads                | R-UTIL-06                     | S    | done               |
 | T-025 | [#20](https://github.com/MuhidinM/qen/issues/20) | Add English and Amharic locale data as separate imports                    | R-FMT-01, R-FMT-03, R-I18N-01 | M    | todo               |
 | T-026 | [#21](https://github.com/MuhidinM/qen/issues/21) | Add Afaan Oromo, Tigrinya and Arabic locale data                           | R-FMT-02, R-I18N-01           | M    | todo               |
 | T-027 | [#22](https://github.com/MuhidinM/qen/issues/22) | Convert numbers to and from Ge'ez numerals                                 | R-FMT-05                      | M    | todo               |
