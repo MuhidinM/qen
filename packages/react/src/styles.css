@@ -390,6 +390,131 @@
   color: var(--qen-color-danger-text);
   font-size: var(--qen-font-size-14);
 }
+/* <YearView>: small months as buttons; holidays bold + underlined, today filled. */
+.qen-year {
+  color: var(--qen-color-text);
+  font-family: var(--qen-font-family);
+}
+.qen-year__title {
+  margin: 0 0 var(--qen-space-4);
+  font-size: var(--qen-font-size-24);
+  font-weight: var(--qen-font-weight-semibold);
+}
+.qen-year__months {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(calc(var(--qen-space-9) * 2), 1fr));
+  gap: var(--qen-space-4);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.qen-year__month {
+  display: flex;
+  flex-direction: column;
+  gap: var(--qen-space-2);
+  width: 100%;
+  height: 100%;
+  padding: var(--qen-space-3);
+  border: none;
+  border-radius: var(--qen-radius-lg);
+  background: var(--qen-color-surface);
+  box-shadow: var(--qen-shadow-1);
+  color: inherit;
+  font: inherit;
+  text-align: start;
+  cursor: pointer;
+}
+.qen-year__month:hover {
+  box-shadow: var(--qen-shadow-2);
+}
+.qen-year__month:focus-visible {
+  outline: 2px solid var(--qen-color-focus);
+  outline-offset: 2px;
+}
+.qen-year__month-name {
+  font-size: var(--qen-font-size-14);
+  font-weight: var(--qen-font-weight-semibold);
+}
+.qen-year__month[aria-current='date'] .qen-year__month-name {
+  color: var(--qen-color-accent-text);
+}
+.qen-year__days {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: var(--qen-space-1) 0;
+  color: var(--qen-color-text-muted);
+  font-size: var(--qen-font-size-12);
+  font-variant-numeric: tabular-nums;
+  text-align: center;
+}
+.qen-year__day[data-holiday='true'] {
+  color: var(--qen-color-holiday-public-text);
+  font-weight: var(--qen-font-weight-semibold);
+  text-decoration: underline;
+}
+.qen-year__day[data-today='true'] {
+  border-radius: var(--qen-radius-full);
+  background: var(--qen-color-accent);
+  color: var(--qen-color-on-accent);
+}
+
+/* <AgendaView>. */
+.qen-agenda {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  color: var(--qen-color-text);
+  font-family: var(--qen-font-family);
+}
+.qen-agenda__item {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: var(--qen-space-1) var(--qen-space-3);
+  padding: var(--qen-space-3) 0;
+  border-bottom: 1px solid var(--qen-color-border);
+}
+.qen-agenda__when {
+  grid-column: 1 / -1;
+  color: var(--qen-color-text-muted);
+  font-size: var(--qen-font-size-12);
+}
+.qen-agenda__name {
+  font-size: var(--qen-font-size-16);
+  font-weight: var(--qen-font-weight-semibold);
+}
+.qen-agenda__tag {
+  align-self: center;
+  padding: 0 var(--qen-space-2);
+  border-radius: var(--qen-radius-full);
+  font-size: var(--qen-font-size-12);
+}
+.qen-agenda__tag[data-category='public'] {
+  background: var(--qen-color-holiday-public-tint);
+  color: var(--qen-color-holiday-public-text);
+}
+.qen-agenda__tag[data-category='orthodox'] {
+  background: var(--qen-color-holiday-orthodox-tint);
+  color: var(--qen-color-holiday-orthodox-text);
+}
+.qen-agenda__tag[data-category='islamic'] {
+  background: var(--qen-color-holiday-islamic-tint);
+  color: var(--qen-color-holiday-islamic-text);
+}
+.qen-agenda__tag[data-category='other'] {
+  background: var(--qen-color-surface-muted);
+  color: var(--qen-color-text-muted);
+}
+.qen-agenda__empty {
+  margin: 0;
+  padding: var(--qen-space-6) var(--qen-space-4);
+  border: 1px dashed var(--qen-color-border-strong);
+  border-radius: var(--qen-radius-lg);
+  color: var(--qen-color-text-muted);
+  font-family: var(--qen-font-family);
+  text-align: center;
+}
 /* Fits a 320 px viewport: 7 × 32 px cells plus padding. */
 @media (max-width: 400px) {
   .qen-calendar {
