@@ -91,7 +91,7 @@ export default tseslint.config(
     },
   },
   {
-    files: ['**/smoke/*.{mjs,cjs}', '**/scripts/*.mjs'],
+    files: ['**/smoke/*.{mjs,cjs}', '**/smoke/browser/run.mjs', '**/scripts/*.mjs'],
     languageOptions: {
       globals: {
         console: 'readonly',
@@ -101,6 +101,13 @@ export default tseslint.config(
         Deno: 'readonly',
         Bun: 'readonly',
       },
+    },
+  },
+  {
+    // Browser smoke test: the page and the service worker.
+    files: ['**/smoke/browser/*.js'],
+    languageOptions: {
+      globals: { window: 'readonly', navigator: 'readonly', self: 'readonly' },
     },
   },
   {
