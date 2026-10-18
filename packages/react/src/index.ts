@@ -21,3 +21,5 @@ export {
   type DateRangePickerProps,
 } from './DateRangePicker.js';
 export { EthiopianTimeInput, type EthiopianTimeInputProps } from './EthiopianTimeInput.js';
+export { AgendaView, type AgendaViewLabels, type AgendaViewProps } from './AgendaView.js';
+export { YearView, type YearViewProps } from './YearView.js';
