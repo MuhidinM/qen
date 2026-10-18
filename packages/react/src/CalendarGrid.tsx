@@ -19,6 +19,7 @@ import {
   type NumeralSystem,
 } from '@qen/core';
 import { useEffect, useId, useRef, useState, type KeyboardEvent } from 'react';
+import { CATEGORY_NAMES, CATEGORY_ORDER } from './shared.js';
 
 /**
  * A month in some calendar, as shown by {@link CalendarGrid}.
@@ -103,14 +104,6 @@ export interface CalendarGridLabels {
   /** Explains the outline marker in the legend. */
   readonly expectedLegend?: string;
 }
-
-const CATEGORY_ORDER: readonly HolidayCategory[] = ['public', 'orthodox', 'islamic', 'other'];
-const CATEGORY_NAMES: Record<HolidayCategory, string> = {
-  public: 'Public',
-  orthodox: 'Orthodox',
-  islamic: 'Islamic',
-  other: 'Other',
-};
 
 const key = (d: CalendarDate | null | undefined) => (d ? `${d.year}-${d.month}-${d.day}` : '');
 const inMonth = (d: CalendarDate | null | undefined, m: VisibleMonth) =>

@@ -117,6 +117,28 @@
         "@qen/core"
       ],
       "limit": "1.5 kB"
+    },
+    {
+      "name": "{ YearView } without React and @qen/core",
+      "path": "dist/index.js",
+      "import": "{ YearView }",
+      "ignore": [
+        "react",
+        "react-dom",
+        "@qen/core"
+      ],
+      "limit": "1.5 kB"
+    },
+    {
+      "name": "{ AgendaView } without React and @qen/core",
+      "path": "dist/index.js",
+      "import": "{ AgendaView }",
+      "ignore": [
+        "react",
+        "react-dom",
+        "@qen/core"
+      ],
+      "limit": "1.5 kB"
     }
   ],
   "devDependencies": {
