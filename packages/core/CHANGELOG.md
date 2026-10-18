@@ -1,5 +1,15 @@
 # @qen/core
 
+## 1.0.0
+
+### Major Changes
+
+- efa6d3c: 1.0: the public API is stable and follows semver from here (see the README's compatibility policy). No code changes from 0.4.0 are required to upgrade. The Hijri default stays Umm al-Qura, as it has been since 0.1.0 (N-008), so there is no default change at 1.0. The Amharic, Afaan Oromo, Tigrinya and Arabic locales are now marked `reviewed: true`.
+
+### Patch Changes
+
+- 692eea1: Tested in Chromium, Firefox and WebKit, on a page and inside a module service worker; the README no longer lists browsers as untested.
+
 ## 0.4.0
 
 ### Minor Changes
