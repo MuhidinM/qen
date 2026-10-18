@@ -235,7 +235,6 @@ Ge'ez numerals follow the W3C CSS `ethiopic-numeric` algorithm.
 
 ## Known limitations
 
-- Browsers and service workers are supported by design (ES2022, no DOM or Node APIs) but not yet covered by an automated browser test.
 - Official Hijri month confirmations (so Islamic dates can be marked `confirmed`) are planned for a later release.
 
 ## License
