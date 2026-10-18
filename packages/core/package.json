@@ -121,13 +121,15 @@
     "check:docs": "typedoc --json docs-api/api.json && node scripts/check-examples.mjs docs-api/api.json",
     "check:readme": "node scripts/check-readme.mjs",
     "check:api": "api-extractor run",
-    "update:api": "api-extractor run --local"
+    "update:api": "api-extractor run --local",
+    "smoke:browser": "node smoke/browser/run.mjs"
   },
   "devDependencies": {
     "@arethetypeswrong/cli": "^0.18.5",
     "@microsoft/api-extractor": "^7.59.4",
     "@size-limit/preset-small-lib": "^14.2.0",
     "@vitest/coverage-v8": "^5.0.4",
+    "playwright": "^1.64.1",
     "publint": "^0.3.25",
     "size-limit": "^14.2.0",
     "tsup": "^9.0.0",

@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>@qen/core browser smoke test</title>
+    <!-- Import by package name, as an app would, through an import map. -->
+    <script type="importmap">
+      {
+        "imports": {
+          "@qen/core": "/dist/index.js",
+          "@qen/core/locales/am": "/dist/locales/am.js",
+          "@qen/core/overrides/ethiopia": "/dist/overrides/ethiopia.js"
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <script type="module">
+      import * as core from '@qen/core';
+      import { am } from '@qen/core/locales/am';
+      import { ethiopianHijriOverrides } from '@qen/core/overrides/ethiopia';
+      import { run } from './checks.js';
+
+      async function inWorker() {
+        const registration = await navigator.serviceWorker.register('/sw.js', { type: 'module' });
+        const worker = registration.installing ?? registration.waiting ?? registration.active;
+        const answer = new Promise((resolve) => {
+          navigator.serviceWorker.addEventListener('message', (e) => resolve(e.data), {
+            once: true,
+          });
+        });
+        await navigator.serviceWorker.ready;
+        worker.postMessage('run');
+        return answer;
+      }
+
+      const settle = (fn) =>
+        Promise.resolve()
+          .then(fn)
+          .catch((e) => `error: ${e?.message ?? e}`);
+      window.smoke = Promise.all([
+        settle(() => run(core, am, ethiopianHijriOverrides)),
+        settle(inWorker),
+      ]).then(([page, worker]) => ({ page, worker }));
+    </script>
+  </body>
+</html>

@@ -100,10 +100,25 @@ jobs:
       - run: pnpm build
       - run: cd packages/core && sh smoke/run.sh deno bun
 
+  browsers:
+    name: smoke (Chromium, Firefox, WebKit + service worker)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: pnpm/action-setup@v6
+      - uses: actions/setup-node@v7
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm --filter @qen/core build
+      - run: pnpm --filter @qen/core exec playwright install --with-deps chromium firefox webkit
+      - run: pnpm --filter @qen/core smoke:browser
+
   # Single required check for branch protection: passes only if every job passed.
   ci:
     if: always()
-    needs: [checks, test, node, deno-bun]
+    needs: [checks, test, node, deno-bun, browsers]
     runs-on: ubuntu-latest
     steps:
       - name: All jobs passed
