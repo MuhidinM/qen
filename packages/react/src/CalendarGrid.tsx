@@ -79,6 +79,11 @@ export interface CalendarGridProps {
    * filter them. Default: none, and no legend.
    */
   readonly holidays?: readonly HolidayCategory[];
+  /**
+   * Show the legend with its filter checkboxes. Default: `true`. Set `false` when the app
+   * filters `holidays` itself (for example, one filter shared by several views).
+   */
+  readonly legend?: boolean;
   /** UI strings, English by default; locales don't carry UI strings yet. */
   readonly labels?: CalendarGridLabels;
 }
@@ -121,7 +126,7 @@ const inMonth = (d: CalendarDate | null | undefined, m: VisibleMonth) =>
  */
 export function CalendarGrid(props: CalendarGridProps) {
   const { calendar, locale, weekStartsOn = 0, numerals, hijri, isDateDisabled, labels } = props;
-  const { secondary = [], holidays: offered = [] } = props;
+  const { secondary = [], holidays: offered = [], legend = true } = props;
   const options = hijri ? { hijri } : {};
   const formatOptions = { ...options, locale, ...(numerals ? { numerals } : {}) };
   const today = props.today ?? todayIn(calendar, options);
@@ -137,7 +142,9 @@ export function CalendarGrid(props: CalendarGridProps) {
   const shouldFocus = useRef(false);
   const gridRef = useRef<HTMLTableElement>(null);
   const titleId = useId();
-  const [shown, setShown] = useState<readonly HolidayCategory[]>(offered);
+  const [filtered, setShown] = useState<readonly HolidayCategory[]>(offered);
+  // Without a legend the app filters, so follow `holidays` as it changes.
+  const shown = legend ? filtered : offered;
 
   const showMonth = (m: VisibleMonth) => {
     setOwnMonth(m);
@@ -367,7 +374,7 @@ export function CalendarGrid(props: CalendarGridProps) {
           ))}
         </tbody>
       </table>
-      {offered.length > 0 && (
+      {legend && offered.length > 0 && (
         <fieldset className="qen-calendar__legend">
           <legend className="qen-calendar__legend-title">{labels?.holidays ?? 'Holidays'}</legend>
           {offered.map((c) => (

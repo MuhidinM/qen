@@ -1,7 +1,6 @@
 import Link from 'next/link';
-import { cookies } from 'next/headers';
 import { TodayHero } from '@/components/TodayHero';
-import { COOKIES, parseGeez, parseLanguage } from '@/lib/settings';
+import { readPreferences } from '@/lib/preferences';
 
 /** Each page's issue adds its `href` when the page ships. */
 const tools: readonly { title: string; text: string; href?: string }[] = [
@@ -12,6 +11,7 @@ const tools: readonly { title: string; text: string; href?: string }[] = [
   },
   {
     title: 'Calendar',
+    href: '/calendar',
     text: 'Month, year and agenda views with holidays from all three calendars.',
   },
   {
@@ -25,7 +25,7 @@ const tools: readonly { title: string; text: string; href?: string }[] = [
 ];
 
 export default async function HomePage() {
-  const jar = await cookies();
+  const prefs = await readPreferences();
   return (
     <>
       <section className="hero" aria-labelledby="hero-title">
@@ -35,8 +35,9 @@ export default async function HomePage() {
           time zone.
         </p>
         <TodayHero
-          initialLanguage={parseLanguage(jar.get(COOKIES.language)?.value)}
-          initialGeez={parseGeez(jar.get(COOKIES.geez)?.value)}
+          initialLanguage={prefs.language}
+          initialGeez={prefs.geez}
+          hijriChoice={prefs.hijri}
         />
       </section>
 

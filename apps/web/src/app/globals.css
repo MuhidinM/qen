@@ -516,3 +516,80 @@ h2 {
     animation: none !important;
   }
 }
+
+/* Calendar page */
+
+.calendar-app__loading {
+  min-height: 480px;
+  color: var(--qen-color-text-muted);
+}
+
+.calendar-app__toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: var(--qen-space-4);
+  margin-bottom: var(--qen-space-5);
+}
+
+.calendar-app__body {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--qen-space-6);
+}
+
+/* A month with three calendars per day can be wider than a phone: it scrolls in place. */
+.calendar-app__view {
+  min-width: 0;
+  overflow-x: auto;
+}
+
+/* Long month spans in the grid's header wrap instead of widening it. */
+.calendar-app__view .qen-calendar {
+  max-width: 100%;
+}
+
+.calendar-app__period {
+  margin-bottom: var(--qen-space-3);
+  font-size: var(--qen-font-size-20);
+}
+
+.calendar-app__pager {
+  display: flex;
+  gap: var(--qen-space-3);
+  margin-bottom: var(--qen-space-4);
+}
+
+.calendar-app__settings {
+  display: flex;
+  flex-direction: column;
+  gap: var(--qen-space-4);
+  align-self: start;
+  padding: var(--qen-space-4);
+  border: 1px solid var(--qen-color-border);
+  border-radius: var(--qen-radius-lg);
+  background: var(--qen-color-surface);
+}
+
+.calendar-app__settings-title {
+  font-size: var(--qen-font-size-18);
+}
+
+.filter {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.filter legend {
+  margin-bottom: var(--qen-space-1);
+  padding: 0;
+}
+
+@media (min-width: 960px) {
+  .calendar-app__body {
+    grid-template-columns: minmax(0, 1fr) 280px;
+  }
+}

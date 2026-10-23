@@ -3,7 +3,10 @@ import type { Theme } from '@/lib/settings';
 import { ThemeSelect } from './ThemeSelect';
 
 /** Pages that exist; each new page's issue adds its entry. */
-const nav = [{ href: '/convert', label: 'Converter' }];
+const nav = [
+  { href: '/convert', label: 'Converter' },
+  { href: '/calendar', label: 'Calendar' },
+];
 
 export function SiteHeader({ theme }: { theme: Theme }) {
   return (

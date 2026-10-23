@@ -1,10 +1,9 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { cookies } from 'next/headers';
 import { date, InvalidDateError, type CalendarDate, type CalendarId } from '@qen/core';
 import { Converter } from '@/components/Converter';
 import { CALENDARS } from '@/lib/locales';
-import { COOKIES, parseGeez, parseLanguage } from '@/lib/settings';
+import { readPreferences } from '@/lib/preferences';
 
 export const metadata: Metadata = {
   title: 'Date converter',
@@ -43,7 +42,7 @@ export default async function ConvertPage({
   const params = await searchParams;
   const one = (v: string | string[] | undefined) => (Array.isArray(v) ? v[0] : v);
   const { value, error } = fromLink(one(params.calendar), one(params.date));
-  const jar = await cookies();
+  const prefs = await readPreferences();
   const initialCalendar: CalendarId = value?.calendar ?? 'gregorian';
 
   return (
@@ -63,8 +62,9 @@ export default async function ConvertPage({
         key={`${one(params.calendar)}-${one(params.date)}`}
         initialCalendar={initialCalendar}
         initialValue={value}
-        initialLanguage={parseLanguage(jar.get(COOKIES.language)?.value)}
-        initialGeez={parseGeez(jar.get(COOKIES.geez)?.value)}
+        initialLanguage={prefs.language}
+        initialGeez={prefs.geez}
+        hijriChoice={prefs.hijri}
       />
       {!value && (
         <section className="examples" aria-labelledby="examples-title">
