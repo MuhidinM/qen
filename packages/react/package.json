@@ -1,6 +1,6 @@
 {
   "name": "@qen/react",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "Accessible React components for Gregorian, Ethiopian and Hijri dates, built on @qen/core.",
   "license": "MIT",
   "author": "Muhidin Misbah",
