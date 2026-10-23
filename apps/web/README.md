@@ -28,7 +28,7 @@ Every route is listed in `e2e/routes.json`; adding a page means adding it there,
 
 ## Deploy (Vercel)
 
-Linked on 2026-10-23 as project `web` (team `muhidin-misbahs-projects`). Production: https://web-five-zeta-14.vercel.app until the custom domain (#141).
+Linked on 2026-10-23 as project `web` (team `muhidin-misbahs-projects`). Production: https://qen-3.vercel.app until the custom domain (#141).
 
 One-time setup, done by the owner:
 
