@@ -114,16 +114,20 @@ jobs:
       - run: pnpm install --frozen-lockfile
       - run: pnpm --filter @qen/core build
       # The runner's apt mirror sometimes crawls (~30 KB/s) and the install never finishes; it
-      # normally takes about a minute. Cap each attempt (a step timeout kills the whole process
-      # tree, sudo apt-get included) and retry once.
+      # normally takes about a minute. Cap the attempt and retry once.
       - id: browsers-install
         timeout-minutes: 6
         continue-on-error: true
         run: pnpm --filter @qen/core exec playwright install --with-deps chromium firefox webkit
       - if: steps.browsers-install.outcome == 'failure'
         name: Retry browser install
-        timeout-minutes: 6
+        timeout-minutes: 8
         run: |
+          # The timed-out attempt's sudo apt-get survives the step timeout and holds the dpkg
+          # lock (seen on #150), so stop it, wait for the lock, and let apt wait for locks too.
+          sudo pkill -f 'apt-get|dpkg' || true
+          while sudo fuser /var/lib/dpkg/lock-frontend /var/lib/dpkg/lock >/dev/null 2>&1; do sleep 2; done
+          echo 'DPkg::Lock::Timeout "120";' | sudo tee /etc/apt/apt.conf.d/99-lock-timeout >/dev/null
           sudo dpkg --configure -a
           pnpm --filter @qen/core exec playwright install --with-deps chromium firefox webkit
       - run: pnpm --filter @qen/core smoke:browser
