@@ -15,6 +15,11 @@ const tools: readonly { title: string; text: string; href?: string }[] = [
     text: 'Month, year and agenda views with holidays from all three calendars.',
   },
   {
+    title: 'Countdown and age',
+    text: 'Days until any date or holiday, and your age from a birth date in any calendar.',
+    href: '/countdown',
+  },
+  {
     title: 'Holidays',
     text: 'Ethiopian public, Orthodox and Islamic holidays, year by year.',
   },

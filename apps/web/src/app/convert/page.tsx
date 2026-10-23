@@ -1,8 +1,8 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { date, InvalidDateError, type CalendarDate, type CalendarId } from '@qen/core';
+import type { CalendarId } from '@qen/core';
 import { Converter } from '@/components/Converter';
-import { CALENDARS } from '@/lib/locales';
+import { fromDateLink, one } from '@/lib/links';
 import { readPreferences } from '@/lib/preferences';
 
 export const metadata: Metadata = {
@@ -17,31 +17,13 @@ const examples = [
   { label: '1 Ramadan 1447', calendar: 'hijri', date: '1447-09-01' },
 ] as const;
 
-/** Reads `?calendar=…&date=YYYY-MM-DD`; a date that doesn't exist says why. */
-function fromLink(
-  calendar: string | undefined,
-  iso: string | undefined,
-): { value: CalendarDate | null; error: string | null } {
-  if (calendar === undefined && iso === undefined) return { value: null, error: null };
-  const match = /^(\d{1,4})-(\d{1,2})-(\d{1,2})$/.exec(iso ?? '');
-  const id = CALENDARS.find((c) => c.id === calendar)?.id;
-  if (!match || !id) return { value: null, error: 'This link has no date we can read.' };
-  try {
-    return { value: date(id, Number(match[1]), Number(match[2]), Number(match[3])), error: null };
-  } catch (e) {
-    if (e instanceof InvalidDateError) return { value: null, error: e.message };
-    throw e;
-  }
-}
-
 export default async function ConvertPage({
   searchParams,
 }: {
   searchParams: Promise<Record<string, string | string[] | undefined>>;
 }) {
   const params = await searchParams;
-  const one = (v: string | string[] | undefined) => (Array.isArray(v) ? v[0] : v);
-  const { value, error } = fromLink(one(params.calendar), one(params.date));
+  const { value, error } = fromDateLink(one(params.calendar), one(params.date));
   const prefs = await readPreferences();
   const initialCalendar: CalendarId = value?.calendar ?? 'gregorian';
 

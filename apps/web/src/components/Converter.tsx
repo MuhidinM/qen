@@ -10,19 +10,13 @@ import {
   type HijriSettings,
   type Locale,
 } from '@qen/core';
-import { DatePicker, DateText } from '@qen/react';
 import { hijriSettings } from '@/lib/hijri';
-import { ALL_LOCALES, CALENDARS, LOCALES } from '@/lib/locales';
+import { datePath } from '@/lib/links';
+import { CALENDARS, LOCALES } from '@/lib/locales';
 import type { DateLanguage, HijriChoice } from '@/lib/settings';
+import { CalendarDateInput } from './CalendarDateInput';
+import { DateCards } from './DateCards';
 import { DatePreferences, useDatePreferences } from './DatePreferences';
-
-const pad = (n: number, width: number) => String(n).padStart(width, '0');
-
-/** `/convert?calendar=…&date=YYYY-MM-DD`, the date written in its own calendar. */
-export function converterPath(d: CalendarDate | null): string {
-  if (!d) return '/convert';
-  return `/convert?calendar=${d.calendar}&date=${pad(d.year, 4)}-${pad(d.month, 2)}-${pad(d.day, 2)}`;
-}
 
 /** One line per calendar, for pasting into a message. */
 function resultText(d: CalendarDate, locale: Locale, hijri: HijriSettings): string {
@@ -48,7 +42,6 @@ export function Converter({
   const hijri = hijriSettings(hijriChoice);
   const preferences = useDatePreferences(initialLanguage, initialGeez);
   const locale = LOCALES[preferences.language];
-  const numerals = preferences.geez ? ({ numerals: 'geez' } as const) : {};
   const [calendar, setCalendar] = useState(initialCalendar);
   const [value, setValue] = useState(
     initialValue && convert(initialValue, initialCalendar, { hijri }),
@@ -59,7 +52,7 @@ export function Converter({
   function show(next: CalendarDate | null) {
     setValue(next);
     setStatus('');
-    window.history.replaceState(null, '', converterPath(next));
+    window.history.replaceState(null, '', datePath('/convert', next));
   }
 
   async function copy(text: string, done: string) {
@@ -76,40 +69,16 @@ export function Converter({
   return (
     <div className="converter">
       <div className="converter__input">
-        <fieldset className="segmented">
-          <legend className="field__label">Enter the date in</legend>
-          {CALENDARS.map((c) => (
-            <label key={c.id} className="segmented__option">
-              <input
-                type="radio"
-                name="calendar"
-                value={c.id}
-                checked={calendar === c.id}
-                onChange={() => {
-                  setCalendar(c.id);
-                  if (value) show(convert(value, c.id, { hijri }));
-                }}
-              />
-              <span>{c.name}</span>
-            </label>
-          ))}
-        </fieldset>
-
-        <DatePicker
+        <CalendarDateInput
           label="Date"
           calendar={calendar}
-          locale={locale}
-          locales={ALL_LOCALES}
+          setCalendar={setCalendar}
           value={value}
           onChange={show}
+          locale={locale}
           hijri={hijri}
-          {...numerals}
+          geez={preferences.geez}
         />
-        <p className="converter__hint">
-          Type or paste a date in any calendar, such as “17 Meskerem 2019 EC” or “12 April 2026”,
-          then press Enter.
-        </p>
-
         <DatePreferences {...preferences} />
       </div>
 
@@ -118,31 +87,13 @@ export function Converter({
           <h2 id="result-title" className="visually-hidden">
             Result
           </h2>
-          <div className="date-cards">
-            {CALENDARS.map((c) => {
-              const d = convert(value, c.id, { hijri });
-              const headingId = `result-${c.id}`;
-              return (
-                <section key={c.id} className="date-card" aria-labelledby={headingId}>
-                  <h3 id={headingId} className="date-card__calendar">
-                    {c.name}
-                  </h3>
-                  <div className="date-card__value" lang={locale.code} dir={locale.direction}>
-                    <p className="date-card__weekday">{format(d, 'EEEE', { locale, hijri })}</p>
-                    <p className="date-card__date">
-                      <DateText
-                        date={d}
-                        locale={locale}
-                        pattern="d MMMM y G"
-                        hijri={hijri}
-                        {...numerals}
-                      />
-                    </p>
-                  </div>
-                </section>
-              );
-            })}
-          </div>
+          <DateCards
+            date={value}
+            idPrefix="result"
+            locale={locale}
+            hijri={hijri}
+            geez={preferences.geez}
+          />
 
           <h3 id="holidays-title" className="converter__subtitle">
             Holidays on this day

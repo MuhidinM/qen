@@ -441,7 +441,7 @@ h2 {
   outline-offset: 2px;
 }
 
-.converter__hint {
+.input-hint {
   margin: calc(-1 * var(--qen-space-2)) 0 0;
   font-size: var(--qen-font-size-14);
   color: var(--qen-color-text-muted);
@@ -623,4 +623,26 @@ h2 {
 
 .offline__links {
   padding-inline-start: var(--qen-space-5);
+}
+
+/* Countdown and age */
+
+.count {
+  margin-bottom: var(--qen-space-5);
+}
+
+.count__big {
+  margin: 0;
+  font-size: var(--qen-font-size-36);
+  font-weight: var(--qen-font-weight-semibold);
+  line-height: var(--qen-line-height-tight);
+}
+
+.count__sub {
+  margin: var(--qen-space-2) 0 var(--qen-space-4);
+  color: var(--qen-color-text-muted);
+}
+
+.birthday {
+  margin-top: var(--qen-space-6);
 }
