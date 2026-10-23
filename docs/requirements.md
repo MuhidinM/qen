@@ -106,18 +106,18 @@ Refined into detailed rows when milestone M6 starts.
 | R-UI-06 | Ge'ez and Arabic script render correctly; Arabic is right-to-left                              | must     | T-104               | `<CalendarGrid>` sets `lang`/`dir` from the locale, Geez numerals, RTL arrow keys; tested and checked in Ladle (#113)                                                                                 | ☑   |
 | R-UI-07 | Light and dark mode through CSS variables                                                      | must     | T-103               | Dark theme via `prefers-color-scheme` and `data-theme`; verified in Ladle (#112)                                                                                                                      | ☑   |
 
-## H. Website (`apps/web`), outline
+## H. Website (`apps/web`)
 
-| ID       | Requirement                                              | Priority | Task  | Evidence | ✓   |
-| -------- | -------------------------------------------------------- | -------- | ----- | -------- | --- |
-| R-WEB-01 | Landing page with a live "today in three calendars" hero | must     | T-110 |          | ☐   |
-| R-WEB-02 | Converter with paste-and-detect                          | must     | T-110 |          | ☐   |
-| R-WEB-03 | Full calendar app, installable as a PWA, works offline   | must     | T-110 |          | ☐   |
-| R-WEB-04 | Docs for `core` and `react` with live, editable examples | must     | T-110 |          | ☐   |
-| R-WEB-05 | Static holiday pages per holiday per year                | should   | T-110 |          | ☐   |
-| R-WEB-06 | Countdown to a date or holiday; age calculator           | should   | T-110 |          | ☐   |
-| R-WEB-07 | Core Web Vitals budget: Lighthouse ≥ 90 on every page    | must     | T-110 |          | ☐   |
-| R-WEB-08 | CSP and security headers                                 | must     | T-110 |          | ☐   |
+| ID       | Requirement                                              | Priority | Task                | Evidence | ✓   |
+| -------- | -------------------------------------------------------- | -------- | ------------------- | -------- | --- |
+| R-WEB-01 | Landing page with a live "today in three calendars" hero | must     | T-112, T-119        |          | ☐   |
+| R-WEB-02 | Converter with paste-and-detect                          | must     | T-113, T-119        |          | ☐   |
+| R-WEB-03 | Full calendar app, installable as a PWA, works offline   | must     | T-114, T-115, T-119 |          | ☐   |
+| R-WEB-04 | Docs for `core` and `react` with live, editable examples | must     | T-118, T-119        |          | ☐   |
+| R-WEB-05 | Static holiday pages per holiday per year                | should   | T-117, T-119        |          | ☐   |
+| R-WEB-06 | Countdown to a date or holiday; age calculator           | should   | T-116, T-119        |          | ☐   |
+| R-WEB-07 | Core Web Vitals budget: Lighthouse ≥ 90 on every page    | must     | T-111, T-119        |          | ☐   |
+| R-WEB-08 | CSP and security headers                                 | must     | T-111, T-119        |          | ☐   |
 
 ## I. Browser extension (`apps/extension`), outline
 
