@@ -1,10 +1,13 @@
+import Link from 'next/link';
 import { cookies } from 'next/headers';
 import { TodayHero } from '@/components/TodayHero';
 import { COOKIES, parseGeez, parseLanguage } from '@/lib/settings';
 
-const tools = [
+/** Each page's issue adds its `href` when the page ships. */
+const tools: readonly { title: string; text: string; href?: string }[] = [
   {
     title: 'Converter',
+    href: '/convert',
     text: 'Paste or pick a date in any calendar and see it in the other two.',
   },
   {
@@ -38,11 +41,14 @@ export default async function HomePage() {
       </section>
 
       <section className="tools" aria-labelledby="tools-title">
-        <h2 id="tools-title">Coming to Qen</h2>
+        <h2 id="tools-title">What you can do</h2>
         <ul className="tools__list">
           {tools.map((t) => (
             <li key={t.title} className="tool">
-              <h3 className="tool__title">{t.title}</h3>
+              <h3 className="tool__title">
+                {t.href ? <Link href={t.href}>{t.title}</Link> : t.title}
+                {!t.href && <span className="badge">Coming soon</span>}
+              </h3>
               <p className="tool__text">{t.text}</p>
             </li>
           ))}

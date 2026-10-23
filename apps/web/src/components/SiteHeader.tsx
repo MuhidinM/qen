@@ -2,6 +2,9 @@ import Link from 'next/link';
 import type { Theme } from '@/lib/settings';
 import { ThemeSelect } from './ThemeSelect';
 
+/** Pages that exist; each new page's issue adds its entry. */
+const nav = [{ href: '/convert', label: 'Converter' }];
+
 export function SiteHeader({ theme }: { theme: Theme }) {
   return (
     <header className="site-header">
@@ -12,6 +15,15 @@ export function SiteHeader({ theme }: { theme: Theme }) {
             ቀን
           </span>
         </Link>
+        <nav aria-label="Main" className="site-nav">
+          <ul>
+            {nav.map((item) => (
+              <li key={item.href}>
+                <Link href={item.href}>{item.label}</Link>
+              </li>
+            ))}
+          </ul>
+        </nav>
         <ThemeSelect initial={theme} />
       </div>
     </header>
