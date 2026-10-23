@@ -33,11 +33,15 @@ test('12 April 2026 is Fasika (anchor) and the day’s holidays are listed', asy
 });
 
 test('Islamic holidays show whether their date is confirmed or expected', async ({ page }) => {
+  // Default Hijri dates include those confirmed in Ethiopia (owner's choice, 2026-10-23).
   await page.goto('/convert?calendar=hijri&date=1447-10-01');
   await expect(result(page, 'Gregorian')).toContainText('20 March 2026');
-  await expect(page.getByRole('list', { name: 'Holidays on this day' })).toContainText(
-    /Eid al-Fitr.*expected/,
-  );
+  const holidays = page.getByRole('list', { name: 'Holidays on this day' });
+  await expect(holidays).toContainText(/Eid al-Fitr.*confirmed/);
+
+  await page.goto('/convert?calendar=hijri&date=1448-10-01');
+  await expect(result(page, 'Gregorian')).toContainText('9 March 2027');
+  await expect(holidays).toContainText(/Eid al-Fitr.*expected/);
 });
 
 test('typed text is read and converted, and the address bar becomes a shareable link', async ({
