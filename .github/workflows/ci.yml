@@ -103,6 +103,7 @@ jobs:
   browsers:
     name: smoke (Chromium, Firefox, WebKit + service worker)
     runs-on: ubuntu-latest
+    timeout-minutes: 20
     steps:
       - uses: actions/checkout@v7
       - uses: pnpm/action-setup@v6
@@ -112,7 +113,19 @@ jobs:
           cache: pnpm
       - run: pnpm install --frozen-lockfile
       - run: pnpm --filter @qen/core build
-      - run: pnpm --filter @qen/core exec playwright install --with-deps chromium firefox webkit
+      # The runner's apt mirror sometimes crawls (~30 KB/s) and the install never finishes; it
+      # normally takes about a minute. Cap each attempt (a step timeout kills the whole process
+      # tree, sudo apt-get included) and retry once.
+      - id: browsers-install
+        timeout-minutes: 6
+        continue-on-error: true
+        run: pnpm --filter @qen/core exec playwright install --with-deps chromium firefox webkit
+      - if: steps.browsers-install.outcome == 'failure'
+        name: Retry browser install
+        timeout-minutes: 6
+        run: |
+          sudo dpkg --configure -a
+          pnpm --filter @qen/core exec playwright install --with-deps chromium firefox webkit
       - run: pnpm --filter @qen/core smoke:browser
 
   web:
