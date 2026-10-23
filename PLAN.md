@@ -478,3 +478,4 @@ Add entries as `YYYY-MM-DD: decision (reason)`.
 - 2026-10-17: Owner reviewed the API report (#46) and kept `toJSDate` at noon, `InvalidDateError.calendar` as `string` and kebab-case English holiday ids; the API is locked for 1.0.
 - 2026-10-17: Owner confirmed the delegated facts reviewed (#55): am/om/ti/ar locale names, holiday list and leap-year rules (N-016, N-017), Tsome Nebiyat and the Nineveh table (N-019), Ethiopian time periods. Locale files flipped to `reviewed: true`. Reviewer names not recorded.
 - 2026-10-18: Published `@qen/core` 1.0.0 and `@qen/react` 0.1.0 (#131, merged by the owner), both with SLSA provenance; release checklist complete. M5 and M6 closed. R-A11Y-01/02 stay open across the apps (M7+).
+- 2026-10-23: M7 (website) planned: outline #49 split into #133–#141. Owner chose Vercel for hosting (ADR-0016) and will pick the custom domain before launch (N-033).

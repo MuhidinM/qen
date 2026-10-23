@@ -19,3 +19,4 @@ One record per choice between real alternatives. Amend in place, with a date, wh
 | [0013](0013-format-patterns-use-ldml-tokens.md)                     | `format()` uses LDML-style pattern tokens; names come from an imported locale | accepted |
 | [0014](0014-parse-detects-the-calendar-but-never-guesses.md)        | `parse()` detects the calendar from explicit signals and never guesses        | accepted |
 | [0015](0015-react-components-hand-rolled-aria-and-css-variables.md) | React components: hand-rolled ARIA patterns, CSS variables, Ladle             | accepted |
+| [0016](0016-website-nextjs-static-first-on-vercel.md)               | Website: Next.js App Router, static-first, on Vercel                          | accepted |
