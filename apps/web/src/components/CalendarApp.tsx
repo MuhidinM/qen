@@ -1,7 +1,6 @@
 'use client';
 
 import { useState } from 'react';
-import { useSearchParams } from 'next/navigation';
 import {
   convert,
   date,
@@ -15,6 +14,7 @@ import {
 } from '@qen/core';
 import { AgendaView, CalendarGrid, YearView, type VisibleMonth } from '@qen/react';
 import { useMinuteClock } from '@/lib/clock';
+import { navigate, useSearch } from '@/lib/location';
 import { hijriSettings } from '@/lib/hijri';
 import { CALENDARS, LOCALES } from '@/lib/locales';
 import type { Preferences } from '@/lib/preferences';
@@ -47,8 +47,15 @@ function calendarPath(view: View, calendar: CalendarId, m: VisibleMonth): string
   return `/calendar?view=${view}&calendar=${calendar}&year=${m.year}&month=${m.month}`;
 }
 
-export function CalendarApp({ preferences }: { preferences: Preferences }) {
-  const params = useSearchParams();
+export function CalendarApp({
+  preferences,
+  search,
+}: {
+  preferences: Preferences;
+  /** The query string the server rendered with. */
+  search: string;
+}) {
+  const params = useSearch(search);
   const now = useMinuteClock();
   const dates = useDatePreferences(preferences.language, preferences.geez);
   const [rememberedCalendar, setRememberedCalendar] = useState(preferences.calendar);
@@ -84,7 +91,7 @@ export function CalendarApp({ preferences }: { preferences: Preferences }) {
   const visible: VisibleMonth = linkedOk ? linked : todayDate;
 
   const go = (nextView: View, nextCalendar: CalendarId, m: VisibleMonth) =>
-    window.history.pushState(null, '', calendarPath(nextView, nextCalendar, m));
+    navigate(calendarPath(nextView, nextCalendar, m));
   const step = (months: number): VisibleMonth => {
     const count = monthsInYear(calendar, visible.year);
     const index = visible.month - 1 + months;

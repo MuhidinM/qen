@@ -8,7 +8,15 @@ export const metadata: Metadata = {
     'Month, year and agenda views of the Ethiopian, Gregorian and Hijri calendars, with Ethiopian public, Orthodox and Islamic holidays.',
 };
 
-export default async function CalendarPage() {
+export default async function CalendarPage({
+  searchParams,
+}: {
+  searchParams: Promise<Record<string, string | string[] | undefined>>;
+}) {
+  const search = new URLSearchParams();
+  for (const [key, value] of Object.entries(await searchParams)) {
+    for (const v of [value ?? []].flat()) search.append(key, v);
+  }
   return (
     <>
       <h1>Calendar</h1>
@@ -16,7 +24,7 @@ export default async function CalendarPage() {
         Any month in the Ethiopian, Gregorian or Hijri calendar, with the other two calendars and
         the holidays in each day.
       </p>
-      <CalendarApp preferences={await readPreferences()} />
+      <CalendarApp preferences={await readPreferences()} search={`?${search}`} />
     </>
   );
 }
