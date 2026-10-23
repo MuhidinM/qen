@@ -39,8 +39,9 @@ export function proxy(request: NextRequest) {
 export const config = {
   matcher: [
     {
-      // Pages only: static files and prefetches don't need a policy of their own.
-      source: '/((?!_next/static|_next/image|favicon.ico).*)',
+      // Pages only: static files, the service worker (its own policy, next.config.ts) and
+      // prefetches don't need a policy of their own.
+      source: '/((?!_next/static|_next/image|favicon.ico|sw\\.js|icon-).*)',
       missing: [
         { type: 'header', key: 'next-router-prefetch' },
         { type: 'header', key: 'purpose', value: 'prefetch' },

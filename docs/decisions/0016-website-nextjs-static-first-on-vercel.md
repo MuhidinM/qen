@@ -36,3 +36,16 @@ Building #133 showed that a static page cannot carry a strict CSP: Next.js write
 The owner chose the strict policy over static pages: `src/proxy.ts` sets `script-src 'self' 'nonce-…' 'strict-dynamic'` with a fresh nonce per request, and the root layout calls `connection()` so every page renders per request. The other option, `'unsafe-inline'` for scripts with static pages, was rejected as weaker against injected scripts.
 
 Consequences: "static-first" above no longer holds for HTML. Pages are server-rendered on each visit (Lighthouse on the placeholder page still scores 99 for performance), holiday pages (#139) render on demand instead of through `generateStaticParams` at build time, and the PWA (#137) caches pages at runtime rather than precaching build output. Data and logic are unchanged: everything still runs from `@qen/core` with no server data.
+
+## Amendment · 2026-10-23 · a hand-written service worker (#137)
+
+The PWA worker is a plain script, `apps/web/public/sw.js`, rather than Serwist. Serwist's strength is precaching the build's output, but under the per-request rendering above there is no build-time list of pages, and it would add a bundler plugin to keep working with Turbopack. The hand-written worker is about 90 lines with no dependencies:
+
+- **Install:** fetches `/`, `/convert`, `/calendar` and `/offline`, plus the static assets each page references.
+- **Pages:** network-first. The cached copy is refreshed on each online visit, kept per path rather than per query string, and falls back to `/offline`.
+- **Hashed assets** (`/_next/static`): cache-first.
+- **Cached pages keep their own response headers.** A page served offline therefore carries the CSP and nonce it was rendered with, so it still hydrates; an e2e test checks this.
+- **Updates:** the worker is registered as `/sw.js?v=<build>`. A new deploy installs and waits, and the page offers "Reload" rather than swapping silently.
+- **Policy:** `/sw.js` is never HTTP-cached and is served under its own strict CSP (`default-src 'self'; script-src 'self'`), outside the page proxy.
+
+Consequence: a shared `/convert?…` link opened offline shows the converter without the linked result, because that result is rendered on the server. Typing the date still works.
