@@ -13,10 +13,11 @@ pnpm --filter @qen/web dev          # http://localhost:3000
 
 ```sh
 pnpm turbo run build --filter=@qen/web
-pnpm --filter @qen/web exec playwright install chromium   # once
 pnpm --filter @qen/web test:e2e     # end-to-end, axe (light/dark, 320 px/desktop), security headers
 pnpm --filter @qen/web lighthouse   # at least 90 in every category on every route
 ```
+
+The tests and Lighthouse use your installed Google Chrome.
 
 Every route is listed in `e2e/routes.json`; adding a page means adding it there, so the accessibility, header and Lighthouse checks cover it.
 
@@ -26,6 +27,8 @@ Every route is listed in `e2e/routes.json`; adding a page means adding it there,
 - The other headers (HSTS, `nosniff`, referrer and permissions policies, framing) are in `next.config.ts`.
 
 ## Deploy (Vercel)
+
+Linked on 2026-10-23 as project `web` (team `muhidin-misbahs-projects`). Production: https://web-five-zeta-14.vercel.app until the custom domain (#141).
 
 One-time setup, done by the owner:
 

@@ -118,6 +118,7 @@ jobs:
   web:
     name: website (e2e, axe, headers, Lighthouse)
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@v7
       - uses: pnpm/action-setup@v6
@@ -127,7 +128,8 @@ jobs:
           cache: pnpm
       - run: pnpm install --frozen-lockfile
       - run: pnpm turbo run build --filter=@qen/web
-      - run: pnpm --filter @qen/web exec playwright install --with-deps chromium
+      # Playwright and Lighthouse use the runner's preinstalled Google Chrome (no apt download).
+      - run: google-chrome --version
       - name: End-to-end, accessibility and security header tests
         run: pnpm --filter @qen/web test:e2e
       - name: Lighthouse budget (at least 90 in every category, every route)

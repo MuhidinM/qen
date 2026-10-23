@@ -480,3 +480,4 @@ Add entries as `YYYY-MM-DD: decision (reason)`.
 - 2026-10-18: Published `@qen/core` 1.0.0 and `@qen/react` 0.1.0 (#131, merged by the owner), both with SLSA provenance; release checklist complete. M5 and M6 closed. R-A11Y-01/02 stay open across the apps (M7+).
 - 2026-10-23: M7 (website) planned: outline #49 split into #133–#141. Owner chose Vercel for hosting (ADR-0016) and will pick the custom domain before launch (N-033).
 - 2026-10-23: Owner chose a strict nonce-based CSP over static pages for the website (#133); every page renders per request (ADR-0016 amendment). Found while building it: `@qen/react` 0.1.0 lacked `'use client'` and failed in Next.js server components; fixed with a patch changeset.
+- 2026-10-23: Owner linked the website to Vercel (project `web`, root `apps/web`); previews per PR work and production serves the nonce CSP. Published `@qen/react` 0.1.1 (`'use client'` fix, #144) with provenance, approved by the owner.
