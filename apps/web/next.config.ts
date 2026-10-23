@@ -17,8 +17,24 @@ export const securityHeaders = [
 const config: NextConfig = {
   reactStrictMode: true,
   poweredByHeader: false,
+  env: {
+    // Names this build for the service worker URL (/sw.js?v=…), so each deploy is a new
+    // version that waits for the visitor to reload.
+    NEXT_PUBLIC_QEN_BUILD: process.env.VERCEL_GIT_COMMIT_SHA ?? String(Date.now()),
+  },
   async headers() {
-    return [{ source: '/(.*)', headers: securityHeaders }];
+    return [
+      { source: '/(.*)', headers: securityHeaders },
+      {
+        // The worker is never cached by HTTP, so updates are seen, and runs under a strict
+        // policy of its own (it is excluded from the page proxy).
+        source: '/sw.js',
+        headers: [
+          { key: 'Cache-Control', value: 'no-cache, no-store, must-revalidate' },
+          { key: 'Content-Security-Policy', value: "default-src 'self'; script-src 'self'" },
+        ],
+      },
+    ];
   },
 };
 

@@ -5,6 +5,7 @@ import type { ReactNode } from 'react';
 import '@qen/react/styles.css';
 import './globals.css';
 import { SiteFooter } from '@/components/SiteFooter';
+import { ServiceWorker } from '@/components/ServiceWorker';
 import { SiteHeader } from '@/components/SiteHeader';
 import { COOKIES, parseTheme } from '@/lib/settings';
 
@@ -36,6 +37,7 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
         <SiteHeader theme={theme} />
         <main id="main">{children}</main>
         <SiteFooter />
+        <ServiceWorker />
       </body>
     </html>
   );

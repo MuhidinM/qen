@@ -21,6 +21,12 @@ The tests and Lighthouse use your installed Google Chrome.
 
 Every route is listed in `e2e/routes.json`; adding a page means adding it there, so the accessibility, header and Lighthouse checks cover it.
 
+## Install and offline
+
+- `public/sw.js` is the service worker (ADR-0016 amendment). It runs in production builds only, registered as `/sw.js?v=<build>`, so each deploy is a new version that waits for the visitor's Reload.
+- Icons in `public/` are rendered from `src/app/icon.svg`. Run `pnpm --filter @qen/web icons` after changing it.
+- `/offline` is the fallback for pages not cached yet. It is `noindex`, so Lighthouse's SEO check is off for it alone.
+
 ## Security headers
 
 - The Content-Security-Policy is built per request in `src/proxy.ts` with a fresh nonce; Next.js puts the nonce on its own scripts. Pages therefore render per request (the root layout calls `connection()`), not at build time. See the ADR-0016 amendment.
