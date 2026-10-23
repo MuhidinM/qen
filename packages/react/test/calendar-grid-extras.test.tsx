@@ -107,6 +107,29 @@ describe('<CalendarGrid> holidays', () => {
     expect(screen.queryByRole('group')).toBeNull();
   });
 
+  it('can hide the legend and show the given categories, for apps with their own filter', () => {
+    setup({ holidays: ['public', 'orthodox'], legend: false });
+    expect(screen.queryByRole('group')).toBeNull();
+    expect(cell(1).getAttribute('aria-label')).toContain(enkutatash);
+    expect(cell(17).getAttribute('aria-label')).toContain(meskel);
+  });
+
+  it('follows changes to the categories when the legend is hidden', () => {
+    const { rerender } = setup({ holidays: ['public', 'orthodox'], legend: false });
+    rerender(
+      <CalendarGrid
+        calendar="ethiopian"
+        locale={en}
+        defaultMonth={{ year: 2019, month: 1 }}
+        today={today}
+        holidays={['orthodox']}
+        legend={false}
+      />,
+    );
+    expect(cell(1).getAttribute('aria-label')).not.toContain(enkutatash);
+    expect(cell(17).getAttribute('aria-label')).toContain(meskel);
+  });
+
   it('has no accessibility violations with other calendars and holidays', async () => {
     const { container } = setup({
       secondary: ['gregorian', 'hijri'],
