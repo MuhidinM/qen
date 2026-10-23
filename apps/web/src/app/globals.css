@@ -1,0 +1,59 @@
+/* Site styles use only the design tokens from @qen/react (ADR-0015, ADR-0016). */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--qen-color-background);
+  color: var(--qen-color-text);
+  font-family: var(--qen-font-family);
+  font-size: var(--qen-font-size-16);
+  line-height: var(--qen-line-height-normal);
+}
+
+:focus-visible {
+  outline: 2px solid var(--qen-color-focus);
+  outline-offset: 2px;
+}
+
+.skip-link {
+  position: absolute;
+  left: var(--qen-space-4);
+  top: calc(-1 * var(--qen-space-7));
+  padding: var(--qen-space-2) var(--qen-space-4);
+  border-radius: var(--qen-radius-md);
+  background: var(--qen-color-accent);
+  color: var(--qen-color-on-accent);
+}
+
+.skip-link:focus {
+  top: var(--qen-space-4);
+}
+
+main {
+  max-width: 768px;
+  margin: 0 auto;
+  padding: var(--qen-space-7) var(--qen-space-4);
+}
+
+h1 {
+  margin: 0 0 var(--qen-space-3);
+  font-size: var(--qen-font-size-36);
+  line-height: var(--qen-line-height-tight);
+}
+
+.lead {
+  color: var(--qen-color-text-muted);
+  font-size: var(--qen-font-size-20);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    scroll-behavior: auto !important;
+    transition: none !important;
+    animation: none !important;
+  }
+}

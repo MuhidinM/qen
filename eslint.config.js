@@ -3,17 +3,39 @@ import tseslint from 'typescript-eslint';
 import prettier from 'eslint-config-prettier';
 import jsxA11y from 'eslint-plugin-jsx-a11y';
 import reactHooks from 'eslint-plugin-react-hooks';
+import nextPlugin from '@next/eslint-plugin-next';
 
 export default tseslint.config(
-  { ignores: ['**/dist/**', '**/coverage/**', '**/.turbo/**', '**/docs-api/**', '**/build/**'] },
+  {
+    ignores: [
+      '**/dist/**',
+      '**/coverage/**',
+      '**/.turbo/**',
+      '**/docs-api/**',
+      '**/build/**',
+      '**/.next/**',
+      '**/next-env.d.ts',
+      '**/.lighthouseci/**',
+    ],
+  },
   js.configs.recommended,
   ...tseslint.configs.strict,
   prettier,
   {
     // React components (ADR-0015): rules of hooks and accessibility checks.
-    files: ['packages/react/**/*.tsx'],
+    files: ['packages/react/**/*.tsx', 'apps/web/**/*.tsx'],
     plugins: { 'react-hooks': reactHooks, 'jsx-a11y': jsxA11y },
     rules: { ...reactHooks.configs.recommended.rules, ...jsxA11y.configs.strict.rules },
+  },
+  {
+    // Website (ADR-0016): Next.js rules, including Core Web Vitals.
+    files: ['apps/web/**/*.{ts,tsx}'],
+    plugins: { '@next/next': nextPlugin },
+    rules: {
+      ...nextPlugin.configs.recommended.rules,
+      ...nextPlugin.configs['core-web-vitals'].rules,
+    },
+    settings: { next: { rootDir: 'apps/web' } },
   },
   {
     rules: {
@@ -112,7 +134,10 @@ export default tseslint.config(
   },
   {
     files: ['**/*.cjs'],
-    languageOptions: { sourceType: 'commonjs', globals: { require: 'readonly' } },
+    languageOptions: {
+      sourceType: 'commonjs',
+      globals: { require: 'readonly', module: 'writable' },
+    },
     rules: { '@typescript-eslint/no-require-imports': 'off' },
   },
 );

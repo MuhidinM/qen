@@ -10,3 +10,9 @@ docs-api/
 .readme-check/
 temp/
 build/
+.next/
+next-env.d.ts
+*.tsbuildinfo
+test-results/
+playwright-report/
+.lighthouseci/
