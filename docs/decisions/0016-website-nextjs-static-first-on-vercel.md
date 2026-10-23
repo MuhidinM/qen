@@ -28,3 +28,11 @@ Alternatives considered:
 - The site depends on Vercel for previews and production; moving hosts later means re-creating the headers config elsewhere (it already lives in `next.config`, so mostly portable).
 - `react-live` evaluates code in the page, so the docs routes may need a looser CSP (`unsafe-eval`) than the rest of the site. #140 records the exact exception here if it is needed.
 - Because nothing runs on the server, the site works offline once cached and can be exported statically if the host ever changes.
+
+## Amendment · 2026-10-23 · per-request rendering for a nonce-based CSP (#133)
+
+Building #133 showed that a static page cannot carry a strict CSP: Next.js writes inline `<script>` tags (the React Server Components payload) into every page, and the experimental SRI option only hashes script files, so `script-src 'self'` blocked hydration. The end-to-end test that fails on any CSP violation caught it.
+
+The owner chose the strict policy over static pages: `src/proxy.ts` sets `script-src 'self' 'nonce-…' 'strict-dynamic'` with a fresh nonce per request, and the root layout calls `connection()` so every page renders per request. The other option, `'unsafe-inline'` for scripts with static pages, was rejected as weaker against injected scripts.
+
+Consequences: "static-first" above no longer holds for HTML. Pages are server-rendered on each visit (Lighthouse on the placeholder page still scores 99 for performance), holiday pages (#139) render on demand instead of through `generateStaticParams` at build time, and the PWA (#137) caches pages at runtime rather than precaching build output. Data and logic are unchanged: everything still runs from `@qen/core` with no server data.

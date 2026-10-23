@@ -8,3 +8,8 @@ packages/core/docs-api
 packages/core/etc
 packages/core/temp
 packages/react/src/tokens.css
+.next
+next-env.d.ts
+.lighthouseci
+test-results
+playwright-report

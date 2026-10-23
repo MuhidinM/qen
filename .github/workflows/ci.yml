@@ -115,10 +115,35 @@ jobs:
       - run: pnpm --filter @qen/core exec playwright install --with-deps chromium firefox webkit
       - run: pnpm --filter @qen/core smoke:browser
 
+  web:
+    name: website (e2e, axe, headers, Lighthouse)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: pnpm/action-setup@v6
+      - uses: actions/setup-node@v7
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm turbo run build --filter=@qen/web
+      - run: pnpm --filter @qen/web exec playwright install --with-deps chromium
+      - name: End-to-end, accessibility and security header tests
+        run: pnpm --filter @qen/web test:e2e
+      - name: Lighthouse budget (at least 90 in every category, every route)
+        run: pnpm --filter @qen/web lighthouse
+      - if: failure()
+        uses: actions/upload-artifact@v7
+        with:
+          name: web-reports
+          path: |
+            apps/web/test-results
+            apps/web/.lighthouseci
+
   # Single required check for branch protection: passes only if every job passed.
   ci:
     if: always()
-    needs: [checks, test, node, deno-bun, browsers]
+    needs: [checks, test, node, deno-bun, browsers, web]
     runs-on: ubuntu-latest
     steps:
       - name: All jobs passed
