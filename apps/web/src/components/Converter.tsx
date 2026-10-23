@@ -7,11 +7,13 @@ import {
   getHolidaysInRange,
   type CalendarDate,
   type CalendarId,
+  type HijriSettings,
   type Locale,
 } from '@qen/core';
 import { DatePicker, DateText } from '@qen/react';
+import { hijriSettings } from '@/lib/hijri';
 import { ALL_LOCALES, CALENDARS, LOCALES } from '@/lib/locales';
-import type { DateLanguage } from '@/lib/settings';
+import type { DateLanguage, HijriChoice } from '@/lib/settings';
 import { DatePreferences, useDatePreferences } from './DatePreferences';
 
 const pad = (n: number, width: number) => String(n).padStart(width, '0');
@@ -23,10 +25,11 @@ export function converterPath(d: CalendarDate | null): string {
 }
 
 /** One line per calendar, for pasting into a message. */
-function resultText(d: CalendarDate, locale: Locale): string {
-  return CALENDARS.map(
-    (c) => `${c.name}: ${format(convert(d, c.id), 'EEEE, d MMMM y G', { locale })}`,
-  ).join('\n');
+function resultText(d: CalendarDate, locale: Locale, hijri: HijriSettings): string {
+  return CALENDARS.map((c) => {
+    const text = format(convert(d, c.id, { hijri }), 'EEEE, d MMMM y G', { locale, hijri });
+    return `${c.name}: ${text}`;
+  }).join('\n');
 }
 
 export function Converter({
@@ -34,17 +37,22 @@ export function Converter({
   initialValue,
   initialLanguage,
   initialGeez,
+  hijriChoice,
 }: {
   initialCalendar: CalendarId;
   initialValue: CalendarDate | null;
   initialLanguage: DateLanguage;
   initialGeez: boolean;
+  hijriChoice: HijriChoice;
 }) {
+  const hijri = hijriSettings(hijriChoice);
   const preferences = useDatePreferences(initialLanguage, initialGeez);
   const locale = LOCALES[preferences.language];
   const numerals = preferences.geez ? ({ numerals: 'geez' } as const) : {};
   const [calendar, setCalendar] = useState(initialCalendar);
-  const [value, setValue] = useState(initialValue && convert(initialValue, initialCalendar));
+  const [value, setValue] = useState(
+    initialValue && convert(initialValue, initialCalendar, { hijri }),
+  );
   const [status, setStatus] = useState('');
 
   // The address bar always holds a link to what is on screen.
@@ -63,7 +71,7 @@ export function Converter({
     }
   }
 
-  const holidays = value ? getHolidaysInRange(value, value) : [];
+  const holidays = value ? getHolidaysInRange(value, value, { hijri }) : [];
 
   return (
     <div className="converter">
@@ -79,7 +87,7 @@ export function Converter({
                 checked={calendar === c.id}
                 onChange={() => {
                   setCalendar(c.id);
-                  if (value) show(convert(value, c.id));
+                  if (value) show(convert(value, c.id, { hijri }));
                 }}
               />
               <span>{c.name}</span>
@@ -94,6 +102,7 @@ export function Converter({
           locales={ALL_LOCALES}
           value={value}
           onChange={show}
+          hijri={hijri}
           {...numerals}
         />
         <p className="converter__hint">
@@ -111,7 +120,7 @@ export function Converter({
           </h2>
           <div className="date-cards">
             {CALENDARS.map((c) => {
-              const d = convert(value, c.id);
+              const d = convert(value, c.id, { hijri });
               const headingId = `result-${c.id}`;
               return (
                 <section key={c.id} className="date-card" aria-labelledby={headingId}>
@@ -119,9 +128,15 @@ export function Converter({
                     {c.name}
                   </h3>
                   <div className="date-card__value" lang={locale.code} dir={locale.direction}>
-                    <p className="date-card__weekday">{format(d, 'EEEE', { locale })}</p>
+                    <p className="date-card__weekday">{format(d, 'EEEE', { locale, hijri })}</p>
                     <p className="date-card__date">
-                      <DateText date={d} locale={locale} pattern="d MMMM y G" {...numerals} />
+                      <DateText
+                        date={d}
+                        locale={locale}
+                        pattern="d MMMM y G"
+                        hijri={hijri}
+                        {...numerals}
+                      />
                     </p>
                   </div>
                 </section>
@@ -154,7 +169,7 @@ export function Converter({
             <button
               type="button"
               className="button"
-              onClick={() => copy(resultText(value, locale), 'Result copied.')}
+              onClick={() => copy(resultText(value, locale, hijri), 'Result copied.')}
             >
               Copy result
             </button>

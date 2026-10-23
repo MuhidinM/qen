@@ -1,10 +1,11 @@
 'use client';
 
-import { useSyncExternalStore } from 'react';
 import { format, today, toEthiopianTime, type CalendarId, type Locale } from '@qen/core';
 import { DateText } from '@qen/react';
+import { useMinuteClock } from '@/lib/clock';
+import { hijriSettings } from '@/lib/hijri';
 import { CALENDARS, LOCALES } from '@/lib/locales';
-import type { DateLanguage } from '@/lib/settings';
+import type { DateLanguage, HijriChoice } from '@/lib/settings';
 import { DatePreferences, useDatePreferences } from './DatePreferences';
 
 const DAY_STARTS: Readonly<Record<CalendarId, string>> = {
@@ -13,40 +14,17 @@ const DAY_STARTS: Readonly<Record<CalendarId, string>> = {
   hijri: 'The day starts at sunset, about 18:00.',
 };
 
-/**
- * The clock, read on each new minute and when the tab becomes visible again. The server
- * snapshot is null: the server can't know the visitor's time zone, so it renders a stable
- * placeholder and the client fills in today, with no hydration mismatch.
- */
-function subscribe(onChange: () => void) {
-  let timer: ReturnType<typeof setTimeout>;
-  const schedule = () => {
-    timer = setTimeout(
-      () => {
-        onChange();
-        schedule();
-      },
-      60_000 - (Date.now() % 60_000),
-    );
-  };
-  schedule();
-  document.addEventListener('visibilitychange', onChange);
-  return () => {
-    clearTimeout(timer);
-    document.removeEventListener('visibilitychange', onChange);
-  };
-}
-const minuteNow = () => Math.floor(Date.now() / 60_000) * 60_000;
-const noClockOnServer = () => null;
-
 export function TodayHero({
   initialLanguage,
   initialGeez,
+  hijriChoice,
 }: {
   initialLanguage: DateLanguage;
   initialGeez: boolean;
+  hijriChoice: HijriChoice;
 }) {
-  const now = useSyncExternalStore(subscribe, minuteNow, noClockOnServer);
+  const now = useMinuteClock();
+  const hijri = hijriSettings(hijriChoice);
   const preferences = useDatePreferences(initialLanguage, initialGeez);
   const locale = LOCALES[preferences.language];
   const numerals = preferences.geez ? ({ numerals: 'geez' } as const) : {};
@@ -57,7 +35,7 @@ export function TodayHero({
 
       <div className="date-cards" aria-busy={now === null}>
         {CALENDARS.map((c) => {
-          const date = now === null ? null : today(c.id, { now: new Date(now) });
+          const date = now === null ? null : today(c.id, { now: new Date(now), hijri });
           const headingId = `today-${c.id}`;
           return (
             <section key={c.id} className="date-card" aria-labelledby={headingId}>
@@ -69,9 +47,15 @@ export function TodayHero({
               ) : (
                 // One direction for the whole date block, so Arabic lines up right to left.
                 <div className="date-card__value" lang={locale.code} dir={locale.direction}>
-                  <p className="date-card__weekday">{format(date, 'EEEE', { locale })}</p>
+                  <p className="date-card__weekday">{format(date, 'EEEE', { locale, hijri })}</p>
                   <p className="date-card__date">
-                    <DateText date={date} locale={locale} pattern="d MMMM y G" {...numerals} />
+                    <DateText
+                      date={date}
+                      locale={locale}
+                      pattern="d MMMM y G"
+                      hijri={hijri}
+                      {...numerals}
+                    />
                   </p>
                   {c.id === 'ethiopian' && <EthiopianClock now={now} locale={locale} />}
                 </div>
