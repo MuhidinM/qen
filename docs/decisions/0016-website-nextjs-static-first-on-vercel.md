@@ -41,7 +41,7 @@ Consequences: "static-first" above no longer holds for HTML. Pages are server-re
 
 The PWA worker is a plain script, `apps/web/public/sw.js`, rather than Serwist. Serwist's strength is precaching the build's output, but under the per-request rendering above there is no build-time list of pages, and it would add a bundler plugin to keep working with Turbopack. The hand-written worker is about 90 lines with no dependencies:
 
-- **Install:** fetches `/`, `/convert`, `/calendar` and `/offline`, plus the static assets each page references.
+- **Install:** fetches `/`, `/convert`, `/calendar`, `/countdown`, `/age` and `/offline` (the client-side tools work without a connection), plus the static assets each page references.
 - **Pages:** network-first. The cached copy is refreshed on each online visit, kept per path rather than per query string, and falls back to `/offline`.
 - **Hashed assets** (`/_next/static`): cache-first.
 - **Cached pages keep their own response headers.** A page served offline therefore carries the CSP and nonce it was rendered with, so it still hydrates; an e2e test checks this.

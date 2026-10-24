@@ -12,7 +12,7 @@
 const VERSION = new URL(self.location.href).searchParams.get('v') ?? 'dev';
 const PAGES = `qen-pages-${VERSION}`;
 const ASSETS = `qen-assets-${VERSION}`;
-const SHELL = ['/', '/convert', '/calendar', '/offline'];
+const SHELL = ['/', '/convert', '/calendar', '/countdown', '/age', '/offline'];
 const OFFLINE = '/offline';
 
 /** Static asset URLs referenced by a page's HTML (scripts, styles, fonts, icons). */
