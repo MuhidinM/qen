@@ -486,3 +486,4 @@ Add entries as `YYYY-MM-DD: decision (reason)`.
 - 2026-10-23: Owner chose Hijri dates on the website to default to Umm al-Qura plus the month starts confirmed in Ethiopia (`@qen/core/overrides/ethiopia`); visitors can switch to Umm al-Qura only or tabular on the calendar page, and the choice applies site-wide (#136).
 - 2026-10-23: The calendar page keeps one holiday filter for all three views; `<CalendarGrid legend={false}>` (new, `@qen/react` minor) hides the grid's own legend so there aren't two. Calendar settings use the same cookies as the rest of the site, not `localStorage` (see 2026-10-23 entry, #134).
 - 2026-10-23: The website works offline through a hand-written service worker (ADR-0016 amendment, #137). Published `@qen/react` 0.2.0 (`<CalendarGrid legend>`, #152) with provenance, approved by the owner.
+- 2026-10-23: The age calculator keeps the birth date out of the URL and off the server (privacy); the countdown is shareable by link (#138).

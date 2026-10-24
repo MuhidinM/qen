@@ -317,13 +317,17 @@ h2 {
 
 /* Navigation */
 
+/* Narrow screens: brand and theme on the first row, the links on their own full-width row
+   that wraps, so the header never overflows whatever the font's widths. */
 .site-nav {
-  margin-inline-end: auto;
+  order: 1;
+  width: 100%;
 }
 
 .site-nav ul {
   display: flex;
-  gap: var(--qen-space-4);
+  flex-wrap: wrap;
+  gap: 0 var(--qen-space-4);
   margin: 0;
   padding: 0;
   list-style: none;
@@ -441,7 +445,7 @@ h2 {
   outline-offset: 2px;
 }
 
-.converter__hint {
+.input-hint {
   margin: calc(-1 * var(--qen-space-2)) 0 0;
   font-size: var(--qen-font-size-14);
   color: var(--qen-color-text-muted);
@@ -496,6 +500,12 @@ h2 {
 }
 
 @media (min-width: 768px) {
+  .site-nav {
+    order: 0;
+    width: auto;
+    margin-inline-end: auto;
+  }
+
   h1 {
     font-size: var(--qen-font-size-36);
   }
@@ -623,4 +633,26 @@ h2 {
 
 .offline__links {
   padding-inline-start: var(--qen-space-5);
+}
+
+/* Countdown and age */
+
+.count {
+  margin-bottom: var(--qen-space-5);
+}
+
+.count__big {
+  margin: 0;
+  font-size: var(--qen-font-size-36);
+  font-weight: var(--qen-font-weight-semibold);
+  line-height: var(--qen-line-height-tight);
+}
+
+.count__sub {
+  margin: var(--qen-space-2) 0 var(--qen-space-4);
+  color: var(--qen-color-text-muted);
+}
+
+.birthday {
+  margin-top: var(--qen-space-6);
 }
