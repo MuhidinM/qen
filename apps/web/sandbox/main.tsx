@@ -1,0 +1,110 @@
+// The docs' live-example runner (#140). It runs in a sandboxed iframe (sandbox="allow-scripts",
+// no allow-same-origin), so it has an opaque origin: no cookies, no storage, no access to the
+// docs page. It is the only place on the site allowed to evaluate code ('unsafe-eval' in its
+// own CSP, next.config.ts); the docs pages keep the strict nonce policy.
+//
+// Protocol: the page posts { type: 'run', code, theme }; the sandbox answers
+// { type: 'result', ok, error? } and { type: 'height', height }.
+import * as React from 'react';
+import { createRoot } from 'react-dom/client';
+import { transform } from 'sucrase';
+import * as core from '@qen/core';
+import * as qenReact from '@qen/react';
+import { am } from '@qen/core/locales/am';
+import { ar } from '@qen/core/locales/ar';
+import { en } from '@qen/core/locales/en';
+import { om } from '@qen/core/locales/om';
+import { ti } from '@qen/core/locales/ti';
+import { ethiopianHijriOverrides } from '@qen/core/overrides/ethiopia';
+
+/** What `import` in an example can reach. */
+const MODULES: Record<string, unknown> = {
+  react: React,
+  '@qen/core': core,
+  '@qen/react': qenReact,
+  '@qen/core/locales/am': { am },
+  '@qen/core/locales/ar': { ar },
+  '@qen/core/locales/en': { en },
+  '@qen/core/locales/om': { om },
+  '@qen/core/locales/ti': { ti },
+  '@qen/core/overrides/ethiopia': { ethiopianHijriOverrides },
+};
+
+function load(name: string): unknown {
+  if (!(name in MODULES))
+    throw new Error(`Examples can import ${Object.keys(MODULES).join(', ')}; not ${name}.`);
+  return MODULES[name];
+}
+
+/** Values the way the docs write them: { calendar: 'ethiopian', year: 2019, … }. */
+function inspect(value: unknown): string {
+  if (typeof value === 'string') return `'${value}'`;
+  if (value === undefined) return 'undefined';
+  if (value === null || typeof value !== 'object') return String(value);
+  if (Array.isArray(value)) return `[${value.map(inspect).join(', ')}]`;
+  const entries = Object.entries(value).map(([k, v]) => `${k}: ${inspect(v)}`);
+  return entries.length === 0 ? '{}' : `{ ${entries.join(', ')} }`;
+}
+
+const root = createRoot(document.getElementById('root') as HTMLElement);
+
+function post(message: object) {
+  // The parent is the docs page on this site; nothing secret is sent.
+  window.parent.postMessage(message, '*');
+}
+
+function run(code: string) {
+  const lines: string[] = [];
+  let element: React.ReactNode = null;
+  try {
+    const compiled = transform(code, {
+      transforms: ['typescript', 'jsx', 'imports'],
+      production: true,
+    }).code;
+    // Evaluating the example is this sandbox's whole purpose (see the top of the file).
+    new Function('require', 'show', 'render', 'React', compiled)(
+      load,
+      (...values: unknown[]) => lines.push(values.map(inspect).join(' ')),
+      (node: React.ReactNode) => {
+        element = node;
+      },
+      React,
+    );
+    root.render(
+      <>
+        {lines.length > 0 && (
+          <pre className="output" aria-label="Output">
+            {lines.join('\n')}
+          </pre>
+        )}
+        {element}
+      </>,
+    );
+    post({ type: 'result', ok: true });
+  } catch (e) {
+    const message = e instanceof Error ? `${e.name}: ${e.message}` : String(e);
+    root.render(
+      <pre className="output output--error" role="alert">
+        {message}
+      </pre>,
+    );
+    post({ type: 'result', ok: false, error: message });
+  }
+}
+
+window.addEventListener('message', (event) => {
+  if (event.source !== window.parent) return;
+  const data = event.data as { type?: string; code?: string; theme?: string };
+  if (data.type !== 'run' || typeof data.code !== 'string') return;
+  if (data.theme === 'light' || data.theme === 'dark') {
+    document.documentElement.setAttribute('data-theme', data.theme);
+  } else {
+    document.documentElement.removeAttribute('data-theme');
+  }
+  run(data.code);
+});
+
+new ResizeObserver(() =>
+  post({ type: 'height', height: document.documentElement.scrollHeight }),
+).observe(document.body);
+post({ type: 'ready' });

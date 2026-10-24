@@ -9,6 +9,7 @@ const nav = [
   { href: '/holidays', label: 'Holidays' },
   { href: '/countdown', label: 'Countdown' },
   { href: '/age', label: 'Age' },
+  { href: '/docs', label: 'Docs' },
 ];
 
 export function SiteHeader({ theme }: { theme: Theme }) {

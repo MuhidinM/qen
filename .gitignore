@@ -16,3 +16,4 @@ next-env.d.ts
 test-results/
 playwright-report/
 .lighthouseci/
+apps/web/public/sandbox/

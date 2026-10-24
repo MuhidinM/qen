@@ -49,3 +49,15 @@ The PWA worker is a plain script, `apps/web/public/sw.js`, rather than Serwist. 
 - **Policy:** `/sw.js` is never HTTP-cached and is served under its own strict CSP (`default-src 'self'; script-src 'self'`), outside the page proxy.
 
 Consequence: a shared `/convert?…` link opened offline shows the converter without the linked result, because that result is rendered on the server. Typing the date still works.
+
+## Amendment · 2026-10-24 · live examples run in a sandboxed frame, not under 'unsafe-eval' (#140)
+
+Running an edited example means compiling and evaluating code (`react-live` and similar tools use sucrase and `new Function`). That needs `'unsafe-eval'`, which the Consequences above expected the docs routes to allow. Instead, no page on the site allows it:
+
+- Examples run in `/sandbox/index.html`, a static page with a separately bundled script (`apps/web/sandbox/main.tsx`, built by `scripts/build-sandbox.mjs` with esbuild). It is the only resource whose CSP allows `'unsafe-eval'`; it can be framed by our own pages only (`frame-ancestors 'self'`) and is outside the page proxy.
+- Docs pages embed it with `sandbox="allow-scripts"` and no `allow-same-origin`, so it runs with an opaque origin: no cookies, no storage, no access to the page (an e2e test reads `document.cookie` and `parent.location` from inside it and gets `SecurityError` for both). The page talks to it only through `postMessage`.
+- The editor is a plain `<textarea>` in the page, so the docs pages themselves never evaluate code and keep the strict nonce policy.
+- The sandbox is a static page rather than a Next route, so Next's client code never has to run in an opaque origin.
+- If the frame is blocked (a content blocker, a browser policy), the example says so after 10 s instead of spinning.
+
+`react-live` itself is not used: the sandbox calls sucrase directly, and examples print values with `show()` and mount components with `render()`.

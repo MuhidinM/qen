@@ -26,6 +26,7 @@ const tools: readonly { title: string; text: string; href?: string }[] = [
   },
   {
     title: 'Docs',
+    href: '/docs',
     text: 'Use the same engine in your own app with @qen/core and @qen/react.',
   },
 ];

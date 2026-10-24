@@ -1,0 +1,39 @@
+export const metadata = {
+  title: 'Docs: holidays and fasts',
+  description: 'Ethiopian public, Orthodox and Islamic holidays and fasts in @qen/core.',
+  alternates: { canonical: '/docs/holidays' },
+};
+
+# Holidays and fasts
+
+Ethiopian public holidays and religious observances, filterable by category: `public` by default, plus `orthodox`, `islamic` and `other`. A holiday's `date` is in its own calendar, and `gregorian` gives the same day. Names are in the locales, keyed by `id`.
+
+<LiveExample
+  title="Holidays in a year"
+  code={`
+import { date, getHolidays, getHolidaysInRange, nextHoliday } from '@qen/core';
+
+show(getHolidays(2026).map((h) => h.id).slice(0, 6));
+show(getHolidays(2027).find((h) => h.id === 'fasika')?.gregorian);
+show(getHolidays(2026, { categories: ['orthodox'] }).length);
+show(nextHoliday(date('gregorian', 2026, 9, 12))?.date);
+show(getHolidaysInRange(date('ethiopian', 2018, 13, 1), date('ethiopian', 2019, 1, 17)).map((h) => h.id));
+`}
+/>
+
+Orthodox holidays that move each year are computed with `bahireHasab()`. Islamic holidays follow the Hijri method you pass, can fall twice in one Gregorian year, and are `expected` until an official month start confirms them (see [Hijri methods and adjustment](/docs/hijri)).
+
+## Fasts and Ramadan
+
+`getObservances(start, end)` returns the periods that overlap a range, with both ends included: Abiy Tsom, Tsome Hawariyat, Tsome Filseta, Tsome Nebiyat and Ramadan. `isWeeklyFast(date)` flags the Wednesday and Friday fasts.
+
+<LiveExample
+  title="Fasts on 10 March 2026"
+  code={`
+import { date, getObservances } from '@qen/core';
+
+const march10 = getObservances(date('gregorian', 2026, 3, 10), date('gregorian', 2026, 3, 10));
+show(march10.map((o) => o.id));
+show(march10[1]?.endGregorian);
+`}
+/>

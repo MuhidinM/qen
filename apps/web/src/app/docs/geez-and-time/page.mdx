@@ -1,0 +1,33 @@
+export const metadata = {
+  title: 'Docs: Ge’ez numerals and Ethiopian time',
+  description:
+    'Ge’ez numerals and Ethiopian time (hours counted from 06:00 and 18:00) in @qen/core.',
+  alternates: { canonical: '/docs/geez-and-time' },
+};
+
+# Ge'ez numerals and Ethiopian time
+
+Ge'ez numerals follow the W3C CSS `ethiopic-numeric` algorithm.
+
+<LiveExample
+  title="Ge'ez numerals"
+  code={`
+import { fromGeezNumeral, toGeezNumeral } from '@qen/core';
+
+show(toGeezNumeral(2019));
+show(fromGeezNumeral('፼'));
+`}
+/>
+
+In Ethiopian time the clock restarts at 12 at 06:00 and at 18:00, so the period of the day tells the repeated hours apart.
+
+<LiveExample
+  title="Ethiopian time"
+  code={`
+import { fromEthiopianTime, toEthiopianTime } from '@qen/core';
+
+show(toEthiopianTime({ hour: 7, minute: 30 }));
+show(toEthiopianTime({ hour: 18, minute: 0 }));
+show(fromEthiopianTime({ hour: 12, minute: 0, period: 'morning' }));
+`}
+/>

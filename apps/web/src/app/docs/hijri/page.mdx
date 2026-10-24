@@ -1,0 +1,44 @@
+export const metadata = {
+  title: 'Docs: Hijri methods and adjustment',
+  description:
+    'Umm al-Qura and tabular Hijri dates in @qen/core, local offsets and official month starts.',
+  alternates: { canonical: '/docs/hijri' },
+};
+
+# Hijri methods and adjustment
+
+- `umalqura` (default): the Umm al-Qura calendar of Saudi Arabia, from a table covering 1300–1500 AH (1882–2077). It matches `Intl`'s `islamic-umalqura` on every day of that range. Outside the table it falls back to `tabular`.
+- `tabular`: the arithmetic 30-year cycle with the civil epoch, the same as `Intl`'s `islamic-civil`.
+
+Either may differ by a day from the month start announced locally after moon sighting. To follow local practice, pass `hijri: { offset }` (−2 to +2 days): +1 starts every month a day later.
+
+<LiveExample
+  title="Methods and offsets"
+  code={`
+import { convert, date, explainHijri } from '@qen/core';
+
+const oct17 = date('gregorian', 2026, 10, 17);
+show(convert(oct17, 'hijri'));
+show(convert(oct17, 'hijri', { hijri: { method: 'tabular' } }));
+show(convert(oct17, 'hijri', { hijri: { offset: 1 } }));
+show(explainHijri(date('gregorian', 2100, 1, 1)).fallback);
+`}
+/>
+
+## Official month starts
+
+Officially announced month starts go in `hijri: { overrides: [{ hijriYear, hijriMonth, startsOn, source }] }`. Each one wins for its own month, and `explainHijri` tells you which step decided a date. Month starts observed in Ethiopia since 2024, each with a dated source, ship as `@qen/core/overrides/ethiopia`; with them, those Eid holidays come out `confirmed`.
+
+<LiveExample
+  title="Eid al-Fitr 2026, confirmed in Ethiopia"
+  code={`
+import { getHolidays } from '@qen/core';
+import { ethiopianHijriOverrides } from '@qen/core/overrides/ethiopia';
+
+const eid = getHolidays(2026, { hijri: { overrides: ethiopianHijriOverrides } }).find(
+  (h) => h.id === 'eid-al-fitr',
+);
+show(eid?.gregorian);
+show(eid?.status);
+`}
+/>
