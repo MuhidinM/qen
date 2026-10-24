@@ -1,6 +1,6 @@
 {
   "name": "@qen/core",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Zero-dependency Gregorian, Ethiopian, and Hijri calendar engine: conversion, arithmetic, formatting, and holidays.",
   "license": "MIT",
   "author": "Muhidin Misbah",

@@ -1,5 +1,13 @@
 # @qen/react
 
+## 0.2.1
+
+### Patch Changes
+
+- 5c5cd8e: Documentation only: the component examples in TSDoc are now self-contained (no undefined `setDate`-style handlers or `from`/`to` variables), so they run as written, including on the website's live API reference.
+- Updated dependencies [5c5cd8e]
+  - @qen/core@1.0.1
+
 ## 0.2.0
 
 ### Minor Changes

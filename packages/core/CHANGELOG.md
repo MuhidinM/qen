@@ -1,5 +1,11 @@
 # @qen/core
 
+## 1.0.1
+
+### Patch Changes
+
+- 5c5cd8e: Documentation only: corrected TSDoc examples that had gone stale (`getHolidays` now lists the Islamic and movable holidays, `explainHijri` shows `decidedBy`, and `compare` has a runnable sort example), and removed outdated README notes ("pre-release", "confirmations planned"). Every example now runs on the website's live API reference.
+
 ## 1.0.0
 
 ### Major Changes
