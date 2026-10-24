@@ -6,6 +6,7 @@ import { ThemeSelect } from './ThemeSelect';
 const nav = [
   { href: '/convert', label: 'Converter' },
   { href: '/calendar', label: 'Calendar' },
+  { href: '/holidays', label: 'Holidays' },
   { href: '/countdown', label: 'Countdown' },
   { href: '/age', label: 'Age' },
 ];

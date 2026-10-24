@@ -21,6 +21,7 @@ const tools: readonly { title: string; text: string; href?: string }[] = [
   },
   {
     title: 'Holidays',
+    href: '/holidays',
     text: 'Ethiopian public, Orthodox and Islamic holidays, year by year.',
   },
   {
