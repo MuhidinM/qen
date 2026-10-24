@@ -57,6 +57,26 @@ test('after one visit, the calendar and the converter work offline', async ({ pa
   expect(errors.filter((e) => /Content Security Policy/.test(e))).toEqual([]);
 });
 
+test('after one visit, the countdown and the age calculator work offline', async ({
+  page,
+  context,
+}) => {
+  await loadControlled(page, '/');
+  await context.setOffline(true);
+
+  await page.goto('/countdown');
+  const date = page.getByRole('textbox', { name: 'Date' });
+  await date.fill('1 Meskerem 2020');
+  await date.press('Enter');
+  await expect(page.getByRole('region', { name: 'Result' })).toContainText(/\d+ days/);
+
+  await page.goto('/age');
+  const birth = page.getByRole('textbox', { name: 'Birth date' });
+  await birth.fill('1 January 2000');
+  await birth.press('Enter');
+  await expect(page.getByRole('region', { name: 'Result' })).toContainText(/\d+ years/);
+});
+
 test('an unknown page offline shows the offline page', async ({ page, context }) => {
   await loadControlled(page, '/');
   await context.setOffline(true);
