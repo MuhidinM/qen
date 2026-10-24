@@ -4,15 +4,19 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
+    "dev": "node scripts/build-sandbox.mjs && next dev",
+    "build": "node scripts/build-sandbox.mjs && next build",
     "start": "next start",
     "typecheck": "next typegen && tsc --noEmit",
     "test:e2e": "playwright test",
     "lighthouse": "lhci autorun --config=lighthouserc.cjs",
-    "icons": "node scripts/icons.mjs"
+    "icons": "node scripts/icons.mjs",
+    "sandbox": "node scripts/build-sandbox.mjs"
   },
   "dependencies": {
+    "@mdx-js/loader": "^3.1.1",
+    "@mdx-js/react": "^3.1.1",
+    "@next/mdx": "16.4.2",
     "@qen/core": "workspace:^",
     "@qen/react": "workspace:^",
     "next": "16.4.2",
@@ -23,9 +27,13 @@
     "@axe-core/playwright": "^4.14.0",
     "@lhci/cli": "^0.15.1",
     "@playwright/test": "^1.64.1",
+    "@types/mdx": "^2.0.14",
     "@types/node": "^26.6.5",
     "@types/react": "^19.3.0",
     "@types/react-dom": "^19.3.0",
+    "esbuild": "^0.28.2",
+    "remark-gfm": "^4.0.1",
+    "sucrase": "^3.35.1",
     "typescript": "~6.0.3"
   }
 }

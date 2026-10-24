@@ -16,6 +16,7 @@ export default tseslint.config(
       '**/.next/**',
       '**/next-env.d.ts',
       '**/.lighthouseci/**',
+      '**/public/sandbox/**',
     ],
   },
   js.configs.recommended,

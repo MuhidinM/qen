@@ -1,0 +1,61 @@
+export const metadata = {
+  title: 'Docs: calendars and conversion',
+  description:
+    'The Ethiopian, Hijri and Gregorian calendars in @qen/core: leap years, Pagume, and converting dates.',
+  alternates: { canonical: '/docs/conversion' },
+};
+
+# Calendars and conversion
+
+## Ethiopian
+
+The Ethiopian calendar (Amete Mihret era) has 12 months of 30 days, then Pagume with 5 days, or 6 when `year % 4 === 3`. Meskerem 1 falls on 11 September, or 12 September after a leap year (1900–2099).
+
+<LiveExample
+  title="Leap years and Pagume"
+  code={`
+import { date, daysInMonth, isLeapYear } from '@qen/core';
+
+show(isLeapYear('ethiopian', 2015));
+show(daysInMonth('ethiopian', 2018, 13));
+show(date('ethiopian', 2015, 13, 6));
+`}
+/>
+
+A date that doesn't exist throws an `InvalidDateError` that says why:
+
+<LiveExample
+  title="Pagume 6 in a common year"
+  code={`
+import { date } from '@qen/core';
+
+try {
+  date('ethiopian', 2018, 13, 6);
+} catch (error) {
+  show(error.message);
+}
+`}
+/>
+
+## Hijri
+
+Two methods: `umalqura` (the default, the Umm al-Qura calendar from a table covering 1300–1500 AH) and `tabular` (the arithmetic 30-year cycle). See [Hijri methods and adjustment](/docs/hijri).
+
+## Gregorian
+
+Proleptic Gregorian. Years start at 1 in every calendar.
+
+## Converting
+
+`convert(date, calendar, options)` returns the same day in another calendar.
+
+<LiveExample
+  title="One day, three calendars"
+  code={`
+import { convert, date } from '@qen/core';
+
+const oct17 = date('gregorian', 2026, 10, 17);
+show(convert(oct17, 'ethiopian'));
+show(convert(oct17, 'hijri'));
+`}
+/>

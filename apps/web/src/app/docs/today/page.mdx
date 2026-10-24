@@ -1,0 +1,39 @@
+export const metadata = {
+  title: 'Docs: today and day boundaries',
+  description:
+    'today(), fromJSDate and toJSDate in @qen/core, and when each calendar’s day starts.',
+  alternates: { canonical: '/docs/today' },
+};
+
+# Today and day boundaries
+
+`@qen/core` never reads the clock except in `today()`, and you can pass `now` to control it. Turning an instant into a date follows each calendar's day boundary:
+
+- Gregorian days start at midnight.
+- Ethiopian days start at 06:00, the first hour of Ethiopian time.
+- Hijri days start at sunset: computed when you pass a `location`, otherwise 18:00.
+
+Pass `boundary: 'midnight'` for the civil rule that government systems and `Intl` use. Converting one date to another (`convert`) is not affected.
+
+<LiveExample
+  title="03:00 UTC is still the previous Ethiopian day"
+  code={`
+import { today } from '@qen/core';
+
+const now = new Date('2026-10-14T03:00:00Z');
+show(today('ethiopian', { now, utc: true }));
+show(today('ethiopian', { now, utc: true, boundary: 'midnight' }));
+`}
+/>
+
+<LiveExample
+  title="Instants and JavaScript dates"
+  code={`
+import { date, fromJSDate, toJSDate } from '@qen/core';
+
+show(fromJSDate(new Date('2026-02-17T18:30:00Z'), 'hijri', { utc: true }));
+show(toJSDate(date('ethiopian', 2019, 1, 1), { utc: true }).toISOString());
+`}
+/>
+
+`toJSDate` returns 12:00 on the matching day, so it round-trips under every boundary rule.

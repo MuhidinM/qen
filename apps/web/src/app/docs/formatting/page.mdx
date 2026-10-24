@@ -1,0 +1,58 @@
+export const metadata = {
+  title: 'Docs: formatting and locales',
+  description: 'format() pattern tokens, the five locales and numeral systems in @qen/core.',
+  alternates: { canonical: '/docs/formatting' },
+};
+
+# Formatting and locales
+
+`format(date, pattern, options)` uses LDML-style tokens:
+
+| Token             | Meaning                   | Meskerem 17, 2019 EC (en) |
+| ----------------- | ------------------------- | ------------------------- |
+| `y`, `yy`, `yyyy` | year                      | 2019, 19, 2019            |
+| `M`, `MM`         | month number              | 1, 01                     |
+| `MMM`, `MMMM`     | short / long month name   | Meskerem                  |
+| `d`, `dd`         | day                       | 17                        |
+| `E`…`EEE`, `EEEE` | short / long weekday      | Sun, Sunday               |
+| `G`…`GGG`, `GGGG` | short / long era          | EC, Ethiopian Calendar    |
+| `'text'`          | literal text (`''` = `'`) |                           |
+
+Name tokens need a locale. Numerals can be `latin` (default), `arabic` (٠–٩) or `geez`.
+
+<LiveExample
+  title="One date, three languages"
+  code={`
+import { date, format } from '@qen/core';
+import { am } from '@qen/core/locales/am';
+import { en } from '@qen/core/locales/en';
+
+const meskel = date('ethiopian', 2019, 1, 17);
+show(format(meskel, 'EEEE, MMMM d, y G', { locale: en }));
+show(format(meskel, 'MMMM d ቀን y G', { locale: am }));
+show(format(meskel, 'MMMM d y', { locale: am, numerals: 'geez' }));
+`}
+/>
+
+<LiveExample
+  title="Arabic-Indic digits and numeric patterns"
+  code={`
+import { date, format } from '@qen/core';
+import { ar } from '@qen/core/locales/ar';
+
+show(format(date('hijri', 1447, 9, 1), 'EEEE d MMMM y G', { locale: ar, numerals: 'arabic' }));
+show(format(date('ethiopian', 2019, 1, 17), 'dd/MM/yyyy'));
+`}
+/>
+
+## Locales
+
+Each locale is its own import, so apps only ship the languages they use (about 0.6 kB each).
+
+| Import                 | Language               |
+| ---------------------- | ---------------------- |
+| `@qen/core/locales/en` | English                |
+| `@qen/core/locales/am` | Amharic                |
+| `@qen/core/locales/om` | Afaan Oromo            |
+| `@qen/core/locales/ti` | Tigrinya               |
+| `@qen/core/locales/ar` | Arabic (right-to-left) |

@@ -1,0 +1,46 @@
+export const metadata = {
+  title: 'Docs: getting started',
+  description:
+    'Use @qen/core and @qen/react for Gregorian, Ethiopian and Hijri dates: install, first conversion, and how the docs examples work.',
+  alternates: { canonical: '/docs' },
+};
+
+# Getting started
+
+`@qen/core` handles Gregorian, Ethiopian and Hijri dates in one small library with no dependencies: conversion, arithmetic, formatting, parsing, holidays, Ge'ez numerals and Ethiopian time. It runs in Node, Deno, Bun, browsers and service workers. `@qen/react` adds accessible components on top of it.
+
+## Install
+
+```sh
+npm install @qen/core
+```
+
+For the React components:
+
+```sh
+npm install @qen/react @qen/core react react-dom
+```
+
+## Your first conversion
+
+Dates are plain, frozen objects with 1-based months: `{ calendar, year, month, day }`. Every conversion goes through the Julian Day Number.
+
+<LiveExample
+  title="Meskel in all three calendars"
+  code={`
+import { convert, date } from '@qen/core';
+
+const meskel = date('ethiopian', 2019, 1, 17);
+show(convert(meskel, 'gregorian'));
+show(convert(meskel, 'hijri'));
+`}
+/>
+
+## How the examples work
+
+Every example on these pages is live: edit the code and the result updates. Examples can import `@qen/core`, its locales (`@qen/core/locales/am` and the others), `@qen/core/overrides/ethiopia`, `@qen/react` and `react`.
+
+- `show(value)` prints a value, the way these docs write dates.
+- `render(<Component />)` shows a React component.
+
+The code runs in an isolated frame with no access to this page, your cookies or your storage.

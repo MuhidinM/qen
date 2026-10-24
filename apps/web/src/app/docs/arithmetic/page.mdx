@@ -1,0 +1,45 @@
+export const metadata = {
+  title: 'Docs: arithmetic and comparison',
+  description:
+    'Adding days, months and years, differences, ages and comparisons across the Gregorian, Ethiopian and Hijri calendars.',
+  alternates: { canonical: '/docs/arithmetic' },
+};
+
+# Arithmetic and comparison
+
+Month and year arithmetic happens in the date's own calendar (13 months per Ethiopian year) and clamps to the last day of the month.
+
+<LiveExample
+  title="Adding days, months and years"
+  code={`
+import { addDays, addMonths, addYears, date } from '@qen/core';
+
+show(addDays(date('ethiopian', 2018, 13, 5), 1));
+show(addYears(date('ethiopian', 2015, 13, 6), 1));
+show(addMonths(date('gregorian', 2025, 1, 31), 1));
+`}
+/>
+
+`diff` counts months and years the same way, in the calendar of its first argument. `age` gives years, months and days; a birthday that doesn't exist in a year (Pagume 6, 29 February, a Hijri 30th) is reached on the month's last day.
+
+<LiveExample
+  title="Differences and ages"
+  code={`
+import { age, date, diff } from '@qen/core';
+
+show(diff(date('ethiopian', 2018, 11, 30), date('ethiopian', 2019, 1, 1), 'months'));
+show(age(date('ethiopian', 1990, 1, 17), date('ethiopian', 2019, 2, 7)));
+`}
+/>
+
+Dates in different calendars compare by the day they fall on:
+
+<LiveExample
+  title="Comparing across calendars"
+  code={`
+import { compare, date, isSame } from '@qen/core';
+
+show(isSame(date('ethiopian', 2019, 2, 7), date('gregorian', 2026, 10, 17)));
+show(compare(date('ethiopian', 2019, 1, 1), date('gregorian', 2026, 9, 12)));
+`}
+/>

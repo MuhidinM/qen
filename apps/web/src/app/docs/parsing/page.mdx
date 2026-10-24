@@ -1,0 +1,42 @@
+export const metadata = {
+  title: 'Docs: parsing',
+  description:
+    'parse() in @qen/core reads dates written by people and detects the calendar, without guessing.',
+  alternates: { canonical: '/docs/parsing' },
+};
+
+# Parsing
+
+`parse(text, options)` reads dates written by people and detects the calendar from an era marker (EC, ዓ.ም., AD, G.C., AH, هـ, or a locale's era label), a month name, or `options.calendar`. It reads Ge'ez numerals and Arabic-Indic digits. Numeric dates are read day/month/year, or year-month-day when the first number has four digits.
+
+<LiveExample
+  title="Month names, Ge'ez numerals and era markers"
+  code={`
+import { parse } from '@qen/core';
+import { am } from '@qen/core/locales/am';
+import { en } from '@qen/core/locales/en';
+
+show(parse('Meskerem 17, 2019', { locales: [en] }));
+show(parse('15 Ramadan 1447', { locales: [en] }));
+show(parse('መስከረም ፲፯ ፳፻፲፱', { locales: [am] }));
+show(parse('17/01/2019 EC'));
+`}
+/>
+
+## It never guesses
+
+`17/01/2019` is a valid date in all three calendars, so `parse` throws an `AmbiguousDateError` whose `candidates` list every reading. Pass `calendar` when you know it.
+
+<LiveExample
+  title="Ambiguous text"
+  code={`
+import { AmbiguousDateError, parse } from '@qen/core';
+
+try {
+  parse('17/01/2019');
+} catch (error) {
+  if (error instanceof AmbiguousDateError) show(error.candidates.map((c) => c.calendar));
+}
+show(parse('17/01/2019', { calendar: 'gregorian' }));
+`}
+/>

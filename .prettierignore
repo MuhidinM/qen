@@ -13,3 +13,6 @@ next-env.d.ts
 .lighthouseci
 test-results
 playwright-report
+apps/web/public/sandbox
+# Docs pages: their live examples are code inside strings, which Prettier would reflow
+**/*.mdx

@@ -1,0 +1,93 @@
+export const metadata = {
+  title: 'Docs: React components',
+  description:
+    'Accessible React components from @qen/react: date text, calendar grid, date pickers, Ethiopian time input, year and agenda views.',
+  alternates: { canonical: '/docs/react' },
+};
+
+# React components
+
+```sh
+npm install @qen/react @qen/core react react-dom
+```
+
+Import the stylesheet once; it holds the design tokens as CSS variables and the component styles.
+
+```tsx
+import '@qen/react/styles.css';
+```
+
+| Component            | What it does                                                                                                     |
+| -------------------- | ---------------------------------------------------------------------------------------------------------------- |
+| `DateText`           | A date in any calendar as a `<time>` element with the Gregorian ISO date in `dateTime`.                          |
+| `CalendarGrid`       | A month in any calendar (13 months for Ethiopian), WAI-ARIA grid keyboard pattern, other calendars and holidays. |
+| `DatePicker`         | Text field read with `parse()` (asks when the calendar is ambiguous) plus the grid in a modal dialog.            |
+| `DateRangePicker`    | Two ends on the grid, in either order, read back in a live status line.                                          |
+| `EthiopianTimeInput` | Hour, minute and period in Ethiopian time, reported as international clock time.                                 |
+| `YearView`           | 12 or 13 small months as buttons, with holiday counts.                                                           |
+| `AgendaView`         | Holidays and observances in a range as a dated list, with an empty state.                                        |
+
+Every component takes a `locale` from `@qen/core/locales/*`, which also sets `lang` and `dir`. UI strings are English by default and can be replaced through `labels`.
+
+<LiveExample
+  title="DateText"
+  code={`
+import { date } from '@qen/core';
+import { am } from '@qen/core/locales/am';
+import { DateText } from '@qen/react';
+
+render(<DateText date={date('ethiopian', 2019, 1, 17)} locale={am} />);
+`}
+/>
+
+<LiveExample
+  title="CalendarGrid with other calendars and holidays"
+  code={`
+import { en } from '@qen/core/locales/en';
+import { CalendarGrid } from '@qen/react';
+
+render(
+  <CalendarGrid
+    calendar="ethiopian"
+    locale={en}
+    defaultMonth={{ year: 2019, month: 1 }}
+    secondary={['gregorian', 'hijri']}
+    holidays={['public', 'orthodox', 'islamic']}
+  />,
+);
+`}
+/>
+
+<LiveExample
+  title="DatePicker"
+  code={`
+import { useState } from 'react';
+import { en } from '@qen/core/locales/en';
+import { DatePicker } from '@qen/react';
+
+function Example() {
+  const [value, setValue] = useState(null);
+  return (
+    <>
+      <DatePicker label="Date" calendar="ethiopian" locale={en} value={value} onChange={setValue} />
+      <p>Chosen: {value ? JSON.stringify(value) : 'nothing yet'}</p>
+    </>
+  );
+}
+render(<Example />);
+`}
+/>
+
+## Theming
+
+Light and dark themes follow `prefers-color-scheme`; set `data-theme="light"` or `"dark"` on `<html>` to force one. Override any `--qen-*` variable to theme the components:
+
+```css
+:root {
+  --qen-color-accent: hsl(150 60% 35%);
+}
+```
+
+## Accessibility
+
+Keyboard use and screen-reader names are tested for every component, with axe run in the tests. The grid follows the WAI-ARIA date grid pattern: one tab stop, arrows (reversed right to left), Home/End, PageUp/PageDown for months and Shift for years. Holidays are marked by shape and named in words, never by colour alone.
