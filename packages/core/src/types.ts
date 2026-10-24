@@ -114,7 +114,7 @@ export interface HijriOverride {
  * @example
  * ```ts
  * const e: HijriExplanation = explainHijri(date('gregorian', 2026, 10, 17));
- * // { date: { calendar: 'hijri', year: 1448, month: 5, day: 6 }, method: 'umalqura', fallback: false }
+ * // { date: { calendar: 'hijri', year: 1448, month: 5, day: 6 }, method: 'umalqura', fallback: false, decidedBy: 'method' }
  * ```
  */
 export interface HijriExplanation {

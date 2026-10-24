@@ -48,9 +48,9 @@ function holidaysIn(year: number, options: HolidayOptions): Holiday[] {
  *
  * @example
  * ```ts
- * getHolidays(2026).map((h) => h.id);
- * // ['genna', 'timket', 'adwa', 'labour-day', 'patriots-victory', 'derg-downfall', 'enkutatash', 'meskel']
- * getHolidays(2026, { categories: ['orthodox'] }).map((h) => h.id); // ['genna', 'timket', 'meskel']
+ * getHolidays(2026).map((h) => h.id).slice(0, 6);
+ * // ['genna', 'timket', 'adwa', 'eid-al-fitr', 'siklet', 'fasika']
+ * getHolidays(2026, { categories: ['orthodox'] }).length; // 14
  * ```
  */
 export function getHolidays(gregorianYear: number, options: HolidayOptions = {}): Holiday[] {

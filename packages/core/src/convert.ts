@@ -103,9 +103,9 @@ export function convert<C extends CalendarId>(
  * @example
  * ```ts
  * explainHijri(date('gregorian', 2026, 10, 17));
- * // { date: { calendar: 'hijri', year: 1448, month: 5, day: 6 }, method: 'umalqura', fallback: false }
+ * // { date: { calendar: 'hijri', year: 1448, month: 5, day: 6 }, method: 'umalqura', fallback: false, decidedBy: 'method' }
  * explainHijri(date('gregorian', 2100, 1, 1));
- * // { date: …, method: 'tabular', fallback: true }
+ * // { date: …, method: 'tabular', fallback: true, decidedBy: 'method' }
  * ```
  */
 export function explainHijri(d: CalendarDate, options: ConvertOptions = {}): HijriExplanation {

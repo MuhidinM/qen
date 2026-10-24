@@ -58,7 +58,7 @@ export interface DateRangePickerProps extends Omit<
  *
  * @example
  * ```tsx
- * <DateRangePicker label="Trip" calendar="ethiopian" locale={am} onChange={setRange} />
+ * <DateRangePicker label="Trip" calendar="ethiopian" locale={am} onChange={(range) => console.log(range)} />
  * ```
  */
 export function DateRangePicker(props: DateRangePickerProps) {

@@ -57,7 +57,7 @@ const FOCUSABLE = 'button:not([disabled]), input:not([disabled]), [tabindex="0"]
  *
  * @example
  * ```tsx
- * <DatePicker label="Start date" calendar="ethiopian" locale={am} onChange={setDate} />
+ * <DatePicker label="Start date" calendar="ethiopian" locale={am} onChange={(d) => console.log(d)} />
  * ```
  */
 export function DatePicker(props: DatePickerProps) {

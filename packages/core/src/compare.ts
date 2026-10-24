@@ -11,7 +11,7 @@ import type { CalendarDate, ConvertOptions } from './types.js';
  * @example
  * ```ts
  * compare(date('ethiopian', 2019, 1, 1), date('gregorian', 2026, 9, 11)); // 0
- * dates.sort(compare);
+ * [date('gregorian', 2026, 9, 27), date('ethiopian', 2019, 1, 1)].sort(compare)[0]; // { calendar: 'ethiopian', year: 2019, month: 1, day: 1 }
  * ```
  */
 export function compare(
