@@ -103,7 +103,14 @@ jobs:
   browsers:
     name: smoke (Chromium, Firefox, WebKit + service worker)
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 15
+    # Playwright's own image has the three browsers and their system libraries, so nothing is
+    # installed from the runner's apt mirror, which sometimes crawls at ~30 KB/s and hung or
+    # timed out this job on #147, #150 and #154. The tag must match the installed Playwright.
+    container:
+      image: mcr.microsoft.com/playwright:v1.64.1-noble
+      env:
+        HOME: /root # Firefox refuses to start as root with another user's home
     steps:
       - uses: actions/checkout@v7
       - uses: pnpm/action-setup@v6
@@ -112,24 +119,12 @@ jobs:
           node-version-file: .nvmrc
           cache: pnpm
       - run: pnpm install --frozen-lockfile
-      - run: pnpm --filter @qen/core build
-      # The runner's apt mirror sometimes crawls (~30 KB/s) and the install never finishes; it
-      # normally takes about a minute. Cap the attempt and retry once.
-      - id: browsers-install
-        timeout-minutes: 6
-        continue-on-error: true
-        run: pnpm --filter @qen/core exec playwright install --with-deps chromium firefox webkit
-      - if: steps.browsers-install.outcome == 'failure'
-        name: Retry browser install
-        timeout-minutes: 8
+      - name: Playwright matches the image
         run: |
-          # The timed-out attempt's sudo apt-get survives the step timeout and holds the dpkg
-          # lock (seen on #150), so stop it, wait for the lock, and let apt wait for locks too.
-          sudo pkill -f 'apt-get|dpkg' || true
-          while sudo fuser /var/lib/dpkg/lock-frontend /var/lib/dpkg/lock >/dev/null 2>&1; do sleep 2; done
-          echo 'DPkg::Lock::Timeout "120";' | sudo tee /etc/apt/apt.conf.d/99-lock-timeout >/dev/null
-          sudo dpkg --configure -a
-          pnpm --filter @qen/core exec playwright install --with-deps chromium firefox webkit
+          version=$(pnpm --filter @qen/core exec playwright --version)
+          echo "$version"
+          [ "$version" = "Version 1.64.1" ] || { echo "Update the container tag to match Playwright"; exit 1; }
+      - run: pnpm --filter @qen/core build
       - run: pnpm --filter @qen/core smoke:browser
 
   web:
