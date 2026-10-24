@@ -109,8 +109,6 @@ jobs:
     # timed out this job on #147, #150 and #154. The tag must match the installed Playwright.
     container:
       image: mcr.microsoft.com/playwright:v1.64.1-noble
-      env:
-        HOME: /root # Firefox refuses to start as root with another user's home
     steps:
       - uses: actions/checkout@v7
       - uses: pnpm/action-setup@v6
@@ -126,6 +124,10 @@ jobs:
           [ "$version" = "Version 1.64.1" ] || { echo "Update the container tag to match Playwright"; exit 1; }
       - run: pnpm --filter @qen/core build
       - run: pnpm --filter @qen/core smoke:browser
+        env:
+          # Firefox won't run as root under another user's home; GitHub sets HOME to
+          # /github/home in containers, so it is set per step (Playwright's CI docs).
+          HOME: /root
 
   web:
     name: website (e2e, axe, headers, Lighthouse)
