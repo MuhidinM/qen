@@ -3,8 +3,10 @@
 // docs page. It is the only place on the site allowed to evaluate code ('unsafe-eval' in its
 // own CSP, next.config.ts); the docs pages keep the strict nonce policy.
 //
-// Protocol: the page posts { type: 'run', code, theme }; the sandbox answers
-// { type: 'result', ok, error? } and { type: 'height', height }.
+// Protocol: the page posts { type: 'ping' } (answered with 'ready') and
+// { type: 'run', code, theme, globals? }; the sandbox answers
+// { type: 'result', ok, error? } and { type: 'height', height }. With `globals`, the library
+// exports, locales, overrides and React are in scope without imports (API reference examples).
 import * as React from 'react';
 import { createRoot } from 'react-dom/client';
 import { transform } from 'sucrase';
@@ -48,28 +50,28 @@ function inspect(value: unknown): string {
 
 const root = createRoot(document.getElementById('root') as HTMLElement);
 
+/** Everything an API-reference example may use without importing it. */
+const GLOBALS: Record<string, unknown> = {
+  ...core,
+  ...qenReact,
+  am,
+  ar,
+  en,
+  om,
+  ti,
+  ethiopianHijriOverrides,
+};
+
 function post(message: object) {
   // The parent is the docs page on this site; nothing secret is sent.
   window.parent.postMessage(message, '*');
 }
 
-function run(code: string) {
+function run(code: string, globals: boolean) {
   const lines: string[] = [];
   let element: React.ReactNode = null;
-  try {
-    const compiled = transform(code, {
-      transforms: ['typescript', 'jsx', 'imports'],
-      production: true,
-    }).code;
-    // Evaluating the example is this sandbox's whole purpose (see the top of the file).
-    new Function('require', 'show', 'render', 'React', compiled)(
-      load,
-      (...values: unknown[]) => lines.push(values.map(inspect).join(' ')),
-      (node: React.ReactNode) => {
-        element = node;
-      },
-      React,
-    );
+  let ran = false;
+  const paint = () =>
     root.render(
       <>
         {lines.length > 0 && (
@@ -80,6 +82,30 @@ function run(code: string) {
         {element}
       </>,
     );
+  // show() and console.log() print; lines logged later (from event handlers) repaint.
+  const show = (...values: unknown[]) => {
+    lines.push(values.map(inspect).join(' '));
+    if (ran) paint();
+  };
+  try {
+    const compiled = transform(code, {
+      transforms: ['typescript', 'jsx', 'imports'],
+      production: true,
+    }).code;
+    const scope: Record<string, unknown> = {
+      ...(globals ? GLOBALS : {}),
+      require: load,
+      show,
+      render: (node: React.ReactNode) => {
+        element = node;
+      },
+      console: { ...console, log: show },
+      React,
+    };
+    // Evaluating the example is this sandbox's whole purpose (see the top of the file).
+    new Function(...Object.keys(scope), compiled)(...Object.values(scope));
+    ran = true;
+    paint();
     post({ type: 'result', ok: true });
   } catch (e) {
     const message = e instanceof Error ? `${e.name}: ${e.message}` : String(e);
@@ -94,14 +120,16 @@ function run(code: string) {
 
 window.addEventListener('message', (event) => {
   if (event.source !== window.parent) return;
-  const data = event.data as { type?: string; code?: string; theme?: string };
+  const data = event.data as { type?: string; code?: string; theme?: string; globals?: boolean };
+  // The page asks after hydrating, in case our first 'ready' arrived before it listened.
+  if (data.type === 'ping') return post({ type: 'ready' });
   if (data.type !== 'run' || typeof data.code !== 'string') return;
   if (data.theme === 'light' || data.theme === 'dark') {
     document.documentElement.setAttribute('data-theme', data.theme);
   } else {
     document.documentElement.removeAttribute('data-theme');
   }
-  run(data.code);
+  run(data.code, data.globals === true);
 });
 
 new ResizeObserver(() =>

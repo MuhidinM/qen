@@ -909,3 +909,99 @@ h2 {
     top: var(--qen-space-5);
   }
 }
+
+/* Docs search and API reference */
+
+.docs__side {
+  display: flex;
+  flex-direction: column;
+  gap: var(--qen-space-5);
+}
+
+.docs-search {
+  display: flex;
+  flex-direction: column;
+  gap: var(--qen-space-1);
+}
+
+.docs-search input {
+  min-height: 40px;
+  padding: var(--qen-space-2) var(--qen-space-3);
+  border: 1px solid var(--qen-color-border-strong);
+  border-radius: var(--qen-radius-md);
+  background: var(--qen-color-surface);
+  color: var(--qen-color-text);
+  font: inherit;
+}
+
+.docs-search__results {
+  margin: var(--qen-space-2) 0 0;
+  padding: 0;
+  list-style: none;
+  border: 1px solid var(--qen-color-border);
+  border-radius: var(--qen-radius-md);
+  background: var(--qen-color-surface);
+}
+
+.docs-search__results a {
+  display: flex;
+  flex-direction: column;
+  padding: var(--qen-space-2) var(--qen-space-3);
+  text-decoration: none;
+}
+
+.docs-search__results li + li {
+  border-top: 1px solid var(--qen-color-border);
+}
+
+.docs-search__title {
+  font-weight: var(--qen-font-weight-semibold);
+}
+
+.docs-search__section,
+.docs-search__empty {
+  color: var(--qen-color-text-muted);
+  font-size: var(--qen-font-size-12);
+}
+
+.api-toc {
+  display: grid;
+  gap: var(--qen-space-4);
+  margin-bottom: var(--qen-space-7);
+}
+
+.api-toc__title {
+  margin: 0;
+  font-size: var(--qen-font-size-14);
+  color: var(--qen-color-text-muted);
+}
+
+.api-toc ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--qen-space-1) var(--qen-space-4);
+  margin: var(--qen-space-2) 0 0;
+  padding: 0;
+  list-style: none;
+  font-size: var(--qen-font-size-14);
+}
+
+.api-item {
+  padding-top: var(--qen-space-6);
+  border-top: 1px solid var(--qen-color-border);
+  scroll-margin-top: var(--qen-space-4);
+}
+
+.prose .api-item__title {
+  margin-top: 0;
+  font-size: var(--qen-font-size-20);
+}
+
+.api-item__entry {
+  color: var(--qen-color-text-muted);
+  font-size: var(--qen-font-size-14);
+}
+
+.api-item__subtitle {
+  font-size: var(--qen-font-size-16);
+}
