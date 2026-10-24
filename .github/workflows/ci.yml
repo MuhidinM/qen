@@ -132,7 +132,9 @@ jobs:
   web:
     name: website (e2e, axe, headers, Lighthouse)
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    # ~5 min of e2e and ~10 min of Lighthouse (14 routes × 3 runs) as of #140; the cap only
+    # guards against a hang.
+    timeout-minutes: 25
     steps:
       - uses: actions/checkout@v7
       - uses: pnpm/action-setup@v6
