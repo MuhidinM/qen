@@ -656,3 +656,85 @@ h2 {
 .birthday {
   margin-top: var(--qen-space-6);
 }
+
+/* Holiday pages */
+
+.holiday__breadcrumb {
+  margin: 0 0 var(--qen-space-3);
+  font-size: var(--qen-font-size-14);
+  color: var(--qen-color-text-muted);
+}
+
+.holiday__date + .holiday__date {
+  margin-top: var(--qen-space-6);
+}
+
+.facts {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  gap: var(--qen-space-2) var(--qen-space-4);
+  margin: var(--qen-space-5) 0 0;
+}
+
+.facts dt {
+  color: var(--qen-color-text-muted);
+}
+
+.facts dd {
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+
+.holiday__names {
+  margin-top: var(--qen-space-7);
+}
+
+.holiday__names ul,
+.year-links,
+.holiday-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--qen-space-2) var(--qen-space-5);
+  margin: var(--qen-space-3) 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.holiday__language {
+  font-size: var(--qen-font-size-14);
+  color: var(--qen-color-text-muted);
+}
+
+.holiday__years {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--qen-space-3) var(--qen-space-5);
+  margin-top: var(--qen-space-7);
+}
+
+.table-scroll {
+  overflow-x: auto;
+}
+
+.holiday-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--qen-font-size-14);
+}
+
+.holiday-table th,
+.holiday-table td {
+  padding: var(--qen-space-2) var(--qen-space-3);
+  border-bottom: 1px solid var(--qen-color-border);
+  text-align: start;
+  vertical-align: top;
+}
+
+.holiday-table thead th {
+  color: var(--qen-color-text-muted);
+  font-weight: var(--qen-font-weight-semibold);
+}
+
+.holiday-table tbody th {
+  font-weight: var(--qen-font-weight-semibold);
+}

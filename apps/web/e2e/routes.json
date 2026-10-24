@@ -1,1 +1,12 @@
-["/", "/convert", "/calendar", "/countdown", "/age", "/offline"]
+[
+  "/",
+  "/convert",
+  "/calendar",
+  "/countdown",
+  "/age",
+  "/holidays",
+  "/holidays/2027",
+  "/holidays/fasika/2027",
+  "/holidays/eid-al-fitr/2033",
+  "/offline"
+]

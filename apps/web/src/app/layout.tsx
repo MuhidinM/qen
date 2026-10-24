@@ -8,8 +8,10 @@ import { SiteFooter } from '@/components/SiteFooter';
 import { ServiceWorker } from '@/components/ServiceWorker';
 import { SiteHeader } from '@/components/SiteHeader';
 import { COOKIES, parseTheme } from '@/lib/settings';
+import { SITE_URL } from '@/lib/site';
 
 export const metadata: Metadata = {
+  metadataBase: new URL(SITE_URL),
   title: { default: 'Qen · Gregorian, Ethiopian and Hijri dates', template: '%s · Qen' },
   description:
     'Convert and explore dates in the Gregorian, Ethiopian and Hijri calendars, with holidays and moon-sighting adjustments.',
