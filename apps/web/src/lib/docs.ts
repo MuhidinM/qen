@@ -10,4 +10,6 @@ export const DOCS_PAGES = [
   { href: '/docs/hijri', title: 'Hijri methods and adjustment' },
   { href: '/docs/geez-and-time', title: 'Ge’ez numerals and Ethiopian time' },
   { href: '/docs/react', title: 'React components' },
+  { href: '/docs/api/core', title: 'API: @qen/core' },
+  { href: '/docs/api/react', title: 'API: @qen/react' },
 ] as const;

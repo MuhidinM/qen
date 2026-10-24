@@ -62,7 +62,7 @@ const pad = (n: number) => String(n).padStart(2, '0');
  *
  * @example
  * ```tsx
- * <EthiopianTimeInput label="Meeting time" locale={am} onChange={setTime} />
+ * <EthiopianTimeInput label="Meeting time" locale={am} onChange={(time) => console.log(time)} />
  * ```
  */
 export function EthiopianTimeInput(props: EthiopianTimeInputProps) {

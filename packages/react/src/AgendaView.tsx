@@ -75,7 +75,7 @@ interface Item {
  *
  * @example
  * ```tsx
- * <AgendaView calendar="ethiopian" locale={am} start={from} end={to} holidays={['public', 'orthodox']} />
+ * <AgendaView calendar="ethiopian" locale={am} start={date('ethiopian', 2019, 1, 1)} end={date('ethiopian', 2019, 1, 30)} holidays={['public', 'orthodox']} />
  * ```
  */
 export function AgendaView(props: AgendaViewProps) {

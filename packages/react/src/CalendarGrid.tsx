@@ -121,7 +121,7 @@ const inMonth = (d: CalendarDate | null | undefined, m: VisibleMonth) =>
  *
  * @example
  * ```tsx
- * <CalendarGrid calendar="ethiopian" locale={am} numerals="geez" onChange={setDate} />
+ * <CalendarGrid calendar="ethiopian" locale={am} numerals="geez" onChange={(d) => console.log(d)} />
  * ```
  */
 export function CalendarGrid(props: CalendarGridProps) {

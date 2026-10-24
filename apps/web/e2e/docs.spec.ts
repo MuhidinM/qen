@@ -111,6 +111,49 @@ test('only the sandbox may evaluate code', async ({ request }) => {
   expect(docs['content-security-policy']).toContain("'nonce-");
 });
 
+test('the API reference has an entry per export, with signature, links and a live example', async ({
+  page,
+}) => {
+  await page.goto('/docs/api/core');
+  const entry = page.getByRole('region', { name: 'toGeezNumeral function', exact: true });
+  await expect(entry).toContainText('function toGeezNumeral(n: number): string;');
+  const example = entry.locator('[data-live-example]');
+  await example.scrollIntoViewIfNeeded();
+  await expect(example).toHaveAttribute('data-status', 'ok');
+  await expect(output(example)).toContainText("'፳፻፲፱'");
+
+  // {@link InvalidDateError} in date()'s "Throws" links to that entry.
+  await page
+    .getByRole('region', { name: 'date function', exact: true })
+    .getByRole('link', { name: 'InvalidDateError' })
+    .click();
+  await expect(page).toHaveURL(/\/docs\/api\/core#InvalidDateError$/);
+
+  // A React component's example renders it.
+  await page.goto('/docs/api/react#YearView');
+  const year = page
+    .getByRole('region', { name: 'YearView function' })
+    .locator('[data-live-example]');
+  await year.scrollIntoViewIfNeeded();
+  await expect(year.frameLocator('iframe').getByRole('heading', { name: '2019' })).toBeVisible();
+});
+
+test('search finds guides and exports and goes to them', async ({ page }) => {
+  await page.goto('/docs');
+  const search = page.getByRole('searchbox', { name: 'Search the docs' });
+  await search.fill('geez');
+  const results = page.getByRole('list', { name: 'Search results' });
+  await expect(results.getByRole('link', { name: /toGeezNumeral/ })).toBeVisible();
+  await expect(
+    results.getByRole('link', { name: /Ge’ez numerals and Ethiopian time/ }),
+  ).toBeVisible();
+  await results.getByRole('link', { name: /toGeezNumeral/ }).click();
+  await expect(page).toHaveURL(/\/docs\/api\/core#toGeezNumeral$/);
+
+  await search.fill('zzzz');
+  await expect(page.getByText('No matches.')).toBeVisible();
+});
+
 test('code blocks can be copied', async ({ page, context }) => {
   await context.grantPermissions(['clipboard-read', 'clipboard-write']);
   await page.goto('/docs');

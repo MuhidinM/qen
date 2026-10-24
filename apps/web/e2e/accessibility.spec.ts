@@ -23,6 +23,9 @@ function unexplained(v: Result): string[] {
 for (const route of routes) {
   for (const colorScheme of ['light', 'dark'] as const) {
     test(`${route} has no axe violations (${colorScheme})`, async ({ page }) => {
+      // axe also visits each loaded example frame; on the API reference that takes over 30 s
+      // when the machine is busy.
+      test.slow();
       await page.emulateMedia({ colorScheme });
       await gotoReady(page, route);
       const { violations } = await new AxeBuilder({ page })

@@ -53,7 +53,7 @@ const holidayCount = (n: number) => (n === 1 ? '1 holiday' : `${n} holidays`);
  *
  * @example
  * ```tsx
- * <YearView calendar="ethiopian" locale={am} year={2019} onSelectMonth={setMonth} />
+ * <YearView calendar="ethiopian" locale={am} year={2019} onSelectMonth={(m) => console.log(m)} />
  * ```
  */
 export function YearView(props: YearViewProps) {

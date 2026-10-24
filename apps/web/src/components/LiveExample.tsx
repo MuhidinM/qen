@@ -9,7 +9,16 @@ type Status = 'running' | 'ok' | 'error';
  * this page, so the docs keep the strict CSP. `show(value)` prints a value; `render(<X />)`
  * shows a component.
  */
-export function LiveExample({ title, code }: { title: string; code: string }) {
+export function LiveExample({
+  title,
+  code,
+  globals = false,
+}: {
+  title: string;
+  code: string;
+  /** The library's exports are in scope without imports (API reference examples). */
+  globals?: boolean;
+}) {
   const original = code.trim();
   const [source, setSource] = useState(original);
   const [status, setStatus] = useState<Status>('running');
@@ -34,6 +43,10 @@ export function LiveExample({ title, code }: { title: string; code: string }) {
       }
     };
     window.addEventListener('message', onMessage);
+    // A frame in the server HTML can load before hydration, so its 'ready' (and React's
+    // onLoad) may be missed: ask again now that we listen. If it hasn't loaded yet, the
+    // message is dropped and its own 'ready' arrives later.
+    frame.current?.contentWindow?.postMessage({ type: 'ping' }, '*');
     return () => window.removeEventListener('message', onMessage);
   }, []);
 
@@ -68,10 +81,10 @@ export function LiveExample({ title, code }: { title: string; code: string }) {
       const theme = document.documentElement.getAttribute('data-theme') ?? 'system';
       // The sandbox has an opaque origin, so '*' is the only target that reaches it; the code
       // is the visitor's own and not secret.
-      frame.current?.contentWindow?.postMessage({ type: 'run', code: source, theme }, '*');
+      frame.current?.contentWindow?.postMessage({ type: 'run', code: source, theme, globals }, '*');
     }, 300);
     return () => clearTimeout(timer);
-  }, [ready, source]);
+  }, [ready, source, globals]);
 
   return (
     <figure className="live-example" data-live-example data-status={status}>

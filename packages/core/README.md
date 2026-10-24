@@ -2,8 +2,6 @@
 
 Gregorian, Ethiopian and Hijri dates in one small, dependency-free library: conversion, arithmetic, formatting, parsing, Ge'ez numerals and Ethiopian time. Runs in Node, Deno, Bun, browsers and service workers.
 
-> Pre-release (0.x). The API may change before 1.0. Locale names other than English are awaiting native-speaker review.
-
 ## Install
 
 ```sh
@@ -235,7 +233,7 @@ Ge'ez numerals follow the W3C CSS `ethiopic-numeric` algorithm.
 
 ## Known limitations
 
-- Official Hijri month confirmations (so Islamic dates can be marked `confirmed`) are planned for a later release.
+- Islamic holidays are `confirmed` only for month starts with an official announcement in the overrides you pass. Ethiopia's ship as `@qen/core/overrides/ethiopia`; without overrides, they stay `expected`.
 
 ## License
 
