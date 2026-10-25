@@ -14,6 +14,7 @@
 
 - **May do without asking:** create and update issues, labels, milestones and the project board; push branches; open PRs; merge PRs when CI is green.
 - **Always ask first:** npm publishing (merging the "Version packages" PR), store submissions, production deploys, repo settings (branch protection, secrets), anything involving accounts, money or credentials, deleting data, publishing third-party material.
+- **Standing approval, M8 (owner, 2026-10-25):** patch and minor releases of `@qen/core` and `@qen/react` that the extension work needs may be published without asking, through the usual Version packages PR with CI green and provenance; never a major version. Each release is reported afterwards.
 - **Facts:** holiday dates, religious rules and names in any language come from a cited source (CLDR, an official text) or, where the owner delegated it (2026-10-17), from Claude's best knowledge marked "review before 1.0" (T-068). `needs-owner` marks issues waiting on owner approval or facts.
 - **Merge style:** merge commits; branches deleted after merge.
 - **Public docs:** `docs/` · **private notes:** `notes/private/` (gitignored).

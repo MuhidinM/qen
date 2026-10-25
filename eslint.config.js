@@ -17,6 +17,8 @@ export default tseslint.config(
       '**/next-env.d.ts',
       '**/.lighthouseci/**',
       '**/public/sandbox/**',
+      '**/.output/**',
+      '**/.wxt/**',
     ],
   },
   js.configs.recommended,
@@ -24,7 +26,7 @@ export default tseslint.config(
   prettier,
   {
     // React components (ADR-0015): rules of hooks and accessibility checks.
-    files: ['packages/react/**/*.tsx', 'apps/web/**/*.tsx'],
+    files: ['packages/react/**/*.tsx', 'apps/web/**/*.tsx', 'apps/extension/**/*.tsx'],
     plugins: { 'react-hooks': reactHooks, 'jsx-a11y': jsxA11y },
     rules: { ...reactHooks.configs.recommended.rules, ...jsxA11y.configs.strict.rules },
   },

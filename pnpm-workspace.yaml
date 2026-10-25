@@ -6,3 +6,5 @@ allowBuilds:
   esbuild: true
   msw: false
   simple-git-hooks: true
+  # via web-ext (WXT): its postinstall only matters on Node without child_process.spawnSync
+  spawn-sync: false
