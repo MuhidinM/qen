@@ -121,13 +121,13 @@ Refined into detailed rows when milestone M6 starts.
 
 ## I. Browser extension (`apps/extension`), outline
 
-| ID       | Requirement                                                                          | Priority | Task  | Evidence | ✓   |
-| -------- | ------------------------------------------------------------------------------------ | -------- | ----- | -------- | --- |
-| R-EXT-01 | Popup: today, converter, upcoming holidays, settings                                 | must     | T-120 |          | ☐   |
-| R-EXT-02 | Select-to-convert tooltip                                                            | must     | T-120 |          | ☐   |
-| R-EXT-03 | Google Calendar overlay; selectors isolated in one module; fails quietly             | should   | T-120 |          | ☐   |
-| R-EXT-04 | Minimum permissions; no data leaves the browser except the Hijri override feed fetch | must     | T-120 |          | ☐   |
-| R-EXT-05 | Published to Chrome Web Store and Firefox Add-ons                                    | must     | T-120 |          | ☐   |
+| ID       | Requirement                                                                          | Priority | Task                | Evidence | ✓   |
+| -------- | ------------------------------------------------------------------------------------ | -------- | ------------------- | -------- | --- |
+| R-EXT-01 | Popup: today, converter, upcoming holidays, settings                                 | must     | T-122, T-123        |          | ☐   |
+| R-EXT-02 | Select-to-convert tooltip                                                            | must     | T-124               |          | ☐   |
+| R-EXT-03 | Google Calendar overlay; selectors isolated in one module; fails quietly             | should   | T-125               |          | ☐   |
+| R-EXT-04 | Minimum permissions; no data leaves the browser except the Hijri override feed fetch | must     | T-121, T-124, T-126 |          | ☐   |
+| R-EXT-05 | Published to Chrome Web Store and Firefox Add-ons                                    | must     | T-126, T-127        |          | ☐   |
 
 ## J. Hosted feeds (`apps/feeds`), outline
 
