@@ -14,6 +14,9 @@ export const test = base.extend<{ context: BrowserContext; extensionId: string }
         ? { executablePath: process.env.CHROMIUM_PATH }
         : { channel: 'chromium' }),
       args: [`--disable-extensions-except=${extensionPath}`, `--load-extension=${extensionPath}`],
+      // Dates follow each calendar's day boundary in local time; tests run in Addis Ababa's.
+      timezoneId: 'Africa/Addis_Ababa',
+      locale: 'en-GB',
     });
     await use(context);
     await context.close();
@@ -25,3 +28,11 @@ export const test = base.extend<{ context: BrowserContext; extensionId: string }
 });
 
 export const expect = test.expect;
+
+/** Opens the popup page, optionally with the clock fixed at `time`. */
+export async function openPopup(context: BrowserContext, extensionId: string, time?: string) {
+  const page = await context.newPage();
+  if (time) await page.clock.install({ time: new Date(time) });
+  await page.goto(`chrome-extension://${extensionId}/popup.html`);
+  return page;
+}
