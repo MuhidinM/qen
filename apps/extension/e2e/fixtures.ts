@@ -1,7 +1,7 @@
 import { chromium, test as base, type BrowserContext } from '@playwright/test';
 import { fileURLToPath } from 'node:url';
 
-const extensionPath = fileURLToPath(new URL('../.output/chrome-mv3', import.meta.url));
+const extensionPath = fileURLToPath(new URL('../.output/chrome-mv3-e2e', import.meta.url));
 
 /** A Chromium profile with the built extension loaded, and the extension's id. */
 export const test = base.extend<{ context: BrowserContext; extensionId: string }>({
