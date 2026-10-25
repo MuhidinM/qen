@@ -14,6 +14,10 @@ for (const target of ['chrome-mv3', 'firefox-mv3']) {
     expect(manifest.optional_permissions ?? []).toEqual([]);
     expect(manifest.content_security_policy).toBeUndefined(); // the browsers' strict default
     expect(manifest.commands).toEqual(COMMANDS); // select-to-convert's shortcut (#168)
+    // The Google Calendar overlay is the only content script, and runs only there (#169).
+    expect(manifest.content_scripts.map((c: { matches: string[] }) => c.matches)).toEqual([
+      HOST_PERMISSIONS,
+    ]);
   });
 }
 

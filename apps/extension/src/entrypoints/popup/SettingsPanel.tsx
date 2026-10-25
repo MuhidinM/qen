@@ -2,8 +2,10 @@ import {
   CALENDARS,
   HIJRI_CHOICES,
   LANGUAGES,
+  OVERLAY_CHOICES,
   type HijriChoice,
   type Language,
+  type OverlayChoice,
   type Settings,
 } from '@/lib/settings';
 
@@ -63,6 +65,19 @@ export function SettingsPanel({
           onChange={(e) => update({ hijri: e.target.value as HijriChoice })}
         >
           {HIJRI_CHOICES.map((c) => (
+            <option key={c.value} value={c.value}>
+              {c.label}
+            </option>
+          ))}
+        </select>
+      </label>
+      <label className="field">
+        <span className="field__label">In Google Calendar, show</span>
+        <select
+          value={settings.overlay}
+          onChange={(e) => update({ overlay: e.target.value as OverlayChoice })}
+        >
+          {OVERLAY_CHOICES.map((c) => (
             <option key={c.value} value={c.value}>
               {c.label}
             </option>

@@ -9,16 +9,24 @@ describe('sanitize', () => {
       geez: false,
       calendar: 'ethiopian',
       hijri: 'ethiopia',
+      overlay: 'both',
     });
   });
 
   it('keeps valid values and drops anything unknown or malformed', () => {
     expect(
-      sanitize({ language: 'am', geez: true, calendar: 'hijri', hijri: 'tabular', extra: 1 }),
-    ).toEqual({ language: 'am', geez: true, calendar: 'hijri', hijri: 'tabular' });
-    expect(sanitize({ language: 'xx', geez: 'yes', calendar: 3, hijri: null })).toEqual(
-      DEFAULT_SETTINGS,
-    );
+      sanitize({
+        language: 'am',
+        geez: true,
+        calendar: 'hijri',
+        hijri: 'tabular',
+        overlay: 'off',
+        extra: 1,
+      }),
+    ).toEqual({ language: 'am', geez: true, calendar: 'hijri', hijri: 'tabular', overlay: 'off' });
+    expect(
+      sanitize({ language: 'xx', geez: 'yes', calendar: 3, hijri: null, overlay: 'all' }),
+    ).toEqual(DEFAULT_SETTINGS);
     expect(sanitize('not an object')).toEqual(DEFAULT_SETTINGS);
   });
 });
