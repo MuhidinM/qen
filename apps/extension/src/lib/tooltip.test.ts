@@ -23,6 +23,14 @@ describe('readings', () => {
     ]);
   });
 
+  it('reads Gregorian and Hijri dates too', () => {
+    const fromGregorian = readings('12 April 2026', DEFAULT_SETTINGS);
+    const fromHijri = readings('24 Shawwal 1447', DEFAULT_SETTINGS);
+    expect(fromHijri).toEqual(fromGregorian);
+    if (fromHijri.kind !== 'date') return;
+    expect(fromHijri.rows[1]?.text).toBe('Sunday, 4 Miyazia 2018 EC');
+  });
+
   it('lists every reading of ambiguous text instead of guessing (ADR-0014)', () => {
     const r = readings('17/01/2019', DEFAULT_SETTINGS);
     expect(r.kind).toBe('ambiguous');
