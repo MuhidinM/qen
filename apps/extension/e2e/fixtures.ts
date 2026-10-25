@@ -4,9 +4,14 @@ import { fileURLToPath } from 'node:url';
 const extensionPath = fileURLToPath(new URL('../.output/chrome-mv3-e2e', import.meta.url));
 
 /** A Chromium profile with the built extension loaded, and the extension's id. */
-export const test = base.extend<{ context: BrowserContext; extensionId: string }>({
-  // eslint-disable-next-line no-empty-pattern -- Playwright fixtures take their deps first
-  context: async ({}, use) => {
+export const test = base.extend<{
+  context: BrowserContext;
+  extensionId: string;
+  /** Device pixels per CSS pixel; the store screenshots render at 1.6. */
+  scale: number;
+}>({
+  scale: [1, { option: true }],
+  context: async ({ scale }, use) => {
     const context = await chromium.launchPersistentContext('', {
       // CHROMIUM_PATH overrides the bundled Chromium, for machines where it won't start
       // (e.g. Chrome for Testing 156 on some Windows Insider builds).
@@ -17,6 +22,7 @@ export const test = base.extend<{ context: BrowserContext; extensionId: string }
       // Dates follow each calendar's day boundary in local time; tests run in Addis Ababa's.
       timezoneId: 'Africa/Addis_Ababa',
       locale: 'en-GB',
+      deviceScaleFactor: scale,
     });
     await use(context);
     await context.close();

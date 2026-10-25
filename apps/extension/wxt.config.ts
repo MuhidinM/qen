@@ -1,3 +1,4 @@
+import { fileURLToPath } from 'node:url';
 import { defineConfig } from 'wxt';
 
 // ADR-0017: the minimum permissions. A test (e2e/manifest.spec.ts) fails if the built
@@ -20,6 +21,30 @@ const E2E_HOSTS = ['http://qen.test/*'];
 export default defineConfig({
   srcDir: 'src',
   modules: ['@wxt-dev/module-react'],
+  // Firefox reviewers rebuild from the sources zip, which needs the workspace packages, so it is
+  // rooted at the monorepo. notes/ (private, gitignored) and anything not needed to build stay out.
+  zip: {
+    sourcesRoot: fileURLToPath(new URL('../..', import.meta.url)),
+    includeSources: ['**/*', '.nvmrc'],
+    excludeSources: [
+      'notes/**',
+      'apps/web/**',
+      'docs/**',
+      '.github/**',
+      '.changeset/**',
+      '**/dist/**',
+      '**/coverage/**',
+      '**/test-results/**',
+      '**/.turbo/**',
+      '**/.wxt/**',
+      '**/e2e/**',
+      '**/test/**',
+      '**/store/**',
+      '**/__fixtures__/**',
+      '**/*.test.ts',
+      '**/*.test.tsx',
+    ],
+  },
   manifest: ({ mode }) => ({
     name: 'Qen: Ethiopian, Hijri and Gregorian dates',
     short_name: 'Qen',
