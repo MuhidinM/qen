@@ -3,8 +3,7 @@
 // docs page. It is the only place on the site allowed to evaluate code ('unsafe-eval' in its
 // own CSP, next.config.ts); the docs pages keep the strict nonce policy.
 //
-// Protocol: the page posts { type: 'ping' } (answered with 'ready') and
-// { type: 'run', code, theme, globals? }; the sandbox answers
+// Protocol: the page posts { type: 'run', code, theme, globals? }; the sandbox answers
 // { type: 'result', ok, error? } and { type: 'height', height }. With `globals`, the library
 // exports, locales, overrides and React are in scope without imports (API reference examples).
 import * as React from 'react';
@@ -121,8 +120,6 @@ function run(code: string, globals: boolean) {
 window.addEventListener('message', (event) => {
   if (event.source !== window.parent) return;
   const data = event.data as { type?: string; code?: string; theme?: string; globals?: boolean };
-  // The page asks after hydrating, in case our first 'ready' arrived before it listened.
-  if (data.type === 'ping') return post({ type: 'ready' });
   if (data.type !== 'run' || typeof data.code !== 'string') return;
   if (data.theme === 'light' || data.theme === 'dark') {
     document.documentElement.setAttribute('data-theme', data.theme);
