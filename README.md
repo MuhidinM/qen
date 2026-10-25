@@ -2,14 +2,17 @@
 
 A multi-calendar toolkit for **Gregorian, Ethiopian, and Hijri** dates: conversion, arithmetic, formatting, holidays, and Hijri moon-sighting adjustment.
 
-> Early development. Nothing is published yet. See [PLAN.md](PLAN.md) for the product spec, [docs/](docs/README.md) for requirements, architecture and decisions, and the [roadmap board](https://github.com/users/MuhidinM/projects/3) for progress.
+**Website:** [qen-3.vercel.app](https://qen-3.vercel.app): today in three calendars, a converter, a full calendar, holiday pages, countdowns and an age calculator. It installs as an app and works offline. **Docs** with live examples: [qen-3.vercel.app/docs](https://qen-3.vercel.app/docs).
+
+See [PLAN.md](PLAN.md) for the product spec, [docs/](docs/README.md) for requirements, architecture and decisions, and the [roadmap board](https://github.com/users/MuhidinM/projects/3) for progress.
 
 ## Packages
 
-| Package                        | Description                                                                                                  |
-| ------------------------------ | ------------------------------------------------------------------------------------------------------------ |
-| [`@qen/core`](packages/core)   | Zero-dependency calendar engine: conversion, arithmetic, formatting, parsing, Ge'ez numerals, Ethiopian time |
-| [`@qen/react`](packages/react) | Accessible React components and design tokens (in progress)                                                  |
+| Package                                                  | Description                                                                                                                                      |
+| -------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------ |
+| [`@qen/core`](https://www.npmjs.com/package/@qen/core)   | Zero-dependency calendar engine: conversion, arithmetic, formatting, parsing, holidays, Ge'ez numerals, Ethiopian time ([source](packages/core)) |
+| [`@qen/react`](https://www.npmjs.com/package/@qen/react) | Accessible React components and design tokens ([source](packages/react))                                                                         |
+| [`apps/web`](apps/web)                                   | The website, built on both packages (not published)                                                                                              |
 
 ## Development
 

@@ -115,20 +115,20 @@ PLAN.md Phase 6. Done when @qen/react@0.1.0 is published.
 
 ## M7 · Website
 
-PLAN.md Phase 7. Done when the site, PWA and docs are deployed on the custom domain. Decisions: ADR-0016; spec notes N-031–N-033.
+PLAN.md Phase 7. Done when the site, PWA and docs are live in production (owner, 2026-10-25: the custom domain follows once the site gains traction, #163). Decisions: ADR-0016; spec notes N-031–N-033.
 
-| ID    | Issue                                              | Task                                                                                     | Reqs                                     | Size | Status                      |
-| ----- | -------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------- | ---- | --------------------------- |
-| T-110 | [#49](https://github.com/MuhidinM/qen/issues/49)   | Plan and split the website milestone                                                     | R-WEB-01–R-WEB-08, R-A11Y-01, R-A11Y-02  | —    | done (split into #133–#141) |
-| T-111 | [#133](https://github.com/MuhidinM/qen/issues/133) | Create the website app with security headers, accessibility and performance checks in CI | R-WEB-07, R-WEB-08, R-A11Y-01, R-A11Y-02 | L    | done                        |
-| T-112 | [#134](https://github.com/MuhidinM/qen/issues/134) | Build the site layout and the landing page with today in three calendars                 | R-WEB-01, R-A11Y-01, R-A11Y-02           | M    | done                        |
-| T-113 | [#135](https://github.com/MuhidinM/qen/issues/135) | Build the converter with paste-and-detect                                                | R-WEB-02, R-A11Y-01                      | M    | done                        |
-| T-114 | [#136](https://github.com/MuhidinM/qen/issues/136) | Build the full calendar page with month, year and agenda views                           | R-WEB-03, R-A11Y-01, R-A11Y-02           | M    | done                        |
-| T-115 | [#137](https://github.com/MuhidinM/qen/issues/137) | Make the site installable and usable offline (PWA)                                       | R-WEB-03                                 | M    | done                        |
-| T-116 | [#138](https://github.com/MuhidinM/qen/issues/138) | Add the countdown and age calculator pages                                               | R-WEB-06                                 | M    | done                        |
-| T-117 | [#139](https://github.com/MuhidinM/qen/issues/139) | Generate static holiday pages for each holiday and year                                  | R-WEB-05                                 | M    | done                        |
-| T-118 | [#140](https://github.com/MuhidinM/qen/issues/140) | Write the docs for core and react with live, editable examples                           | R-WEB-04                                 | L    | done                        |
-| T-119 | [#141](https://github.com/MuhidinM/qen/issues/141) | Launch the website on its custom domain                                                  | R-WEB-01–R-WEB-08, R-A11Y-01, R-A11Y-02  | S    | todo (needs-owner: domain)  |
+| ID    | Issue                                              | Task                                                                                     | Reqs                                     | Size | Status                             |
+| ----- | -------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------- | ---- | ---------------------------------- |
+| T-110 | [#49](https://github.com/MuhidinM/qen/issues/49)   | Plan and split the website milestone                                                     | R-WEB-01–R-WEB-08, R-A11Y-01, R-A11Y-02  | —    | done (split into #133–#141)        |
+| T-111 | [#133](https://github.com/MuhidinM/qen/issues/133) | Create the website app with security headers, accessibility and performance checks in CI | R-WEB-07, R-WEB-08, R-A11Y-01, R-A11Y-02 | L    | done                               |
+| T-112 | [#134](https://github.com/MuhidinM/qen/issues/134) | Build the site layout and the landing page with today in three calendars                 | R-WEB-01, R-A11Y-01, R-A11Y-02           | M    | done                               |
+| T-113 | [#135](https://github.com/MuhidinM/qen/issues/135) | Build the converter with paste-and-detect                                                | R-WEB-02, R-A11Y-01                      | M    | done                               |
+| T-114 | [#136](https://github.com/MuhidinM/qen/issues/136) | Build the full calendar page with month, year and agenda views                           | R-WEB-03, R-A11Y-01, R-A11Y-02           | M    | done                               |
+| T-115 | [#137](https://github.com/MuhidinM/qen/issues/137) | Make the site installable and usable offline (PWA)                                       | R-WEB-03                                 | M    | done                               |
+| T-116 | [#138](https://github.com/MuhidinM/qen/issues/138) | Add the countdown and age calculator pages                                               | R-WEB-06                                 | M    | done                               |
+| T-117 | [#139](https://github.com/MuhidinM/qen/issues/139) | Generate static holiday pages for each holiday and year                                  | R-WEB-05                                 | M    | done                               |
+| T-118 | [#140](https://github.com/MuhidinM/qen/issues/140) | Write the docs for core and react with live, editable examples                           | R-WEB-04                                 | L    | done                               |
+| T-119 | [#141](https://github.com/MuhidinM/qen/issues/141) | Launch the website (in production at qen-3.vercel.app)                                   | R-WEB-01–R-WEB-08, R-A11Y-01, R-A11Y-02  | S    | done (custom domain moved to #163) |
 
 ## M8 · Browser extension
 
@@ -153,3 +153,11 @@ PLAN.md Phase 10. Done when signed installers ship for Windows, macOS and Linux.
 | ID    | Issue                                            | Task                                     | Reqs                            | Size | Status  |
 | ----- | ------------------------------------------------ | ---------------------------------------- | ------------------------------- | ---- | ------- |
 | T-140 | [#52](https://github.com/MuhidinM/qen/issues/52) | Plan and split the desktop app milestone | R-DESK-01, R-DESK-02, R-DESK-03 | —    | outline |
+
+## Later (no milestone)
+
+Work that waits on an owner decision rather than a phase.
+
+| ID    | Issue                                              | Task                                | Reqs              | Size | Status                                           |
+| ----- | -------------------------------------------------- | ----------------------------------- | ----------------- | ---- | ------------------------------------------------ |
+| T-150 | [#163](https://github.com/MuhidinM/qen/issues/163) | Move the website to a custom domain | R-WEB-01–R-WEB-08 | S    | todo (needs-owner: domain, once it has traction) |
