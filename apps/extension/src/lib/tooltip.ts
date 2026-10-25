@@ -182,7 +182,10 @@ export function showTooltip(
   const below = rect.bottom + 8;
   const top = below + box.height > height ? Math.max(8, rect.top - box.height - 8) : below;
   const left = Math.min(Math.max(8, rect.left), Math.max(8, width - box.width - 8));
-  dialog.style.top = `${top}px`;
-  dialog.style.left = `${left}px`;
+  // Measurements are in viewport pixels, but a page that zooms its root with CSS zooms our
+  // fixed position again, so undo that (#178).
+  const zoom = Number.parseFloat(view?.getComputedStyle(doc.documentElement).zoom ?? '') || 1;
+  dialog.style.top = `${top / zoom}px`;
+  dialog.style.left = `${left / zoom}px`;
   dialog.focus();
 }
