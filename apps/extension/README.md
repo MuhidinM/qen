@@ -43,3 +43,15 @@ Google changes its markup without notice. Every selector the overlay uses is in 
 The icons in `public/icon/` are rendered from the website's `apps/web/src/app/icon.svg` (`pnpm --filter @qen/extension icons`), so both products share one mark. Everything the stores ask for is in `store/`: the listing text, permission justifications and answers in `store/listing.md`, and the images in `store/images/` (`pnpm --filter @qen/extension store:screenshots`). The privacy policy is the website's `/privacy`.
 
 `pnpm --filter @qen/extension zip` writes the Chrome and Firefox packages and, for Firefox's reviewers, a sources zip rooted at the monorepo that rebuilds the Firefox package exactly. It leaves out `notes/` and everything not needed to build.
+
+## Releasing to the stores
+
+The stores need a higher version for every upload. The version is `version` in `package.json` (WXT copies it into both manifests); Changesets doesn't manage it, because the extension isn't published to npm.
+
+1. On a branch, bump `version` (patch for fixes, minor for features) and note what changed in the PR. Merge it when CI is green.
+2. Download the `extension-zips` artifact from the CI run on `main` (or run `pnpm --filter @qen/extension zip`). It contains `qenextension-<version>-chrome.zip`, `-firefox.zip` and `-sources.zip`.
+3. **Chrome Web Store** (developer dashboard): upload the Chrome zip. For a first upload, fill in the listing from `store/listing.md` and add the images in `store/images/`.
+4. **Firefox Add-ons** (developer hub): upload the Firefox zip and, when asked, the sources zip with the build steps from `store/listing.md`.
+5. When both are live, install each from its store and check the popup, select-to-convert and Google Calendar.
+
+Uploads can be automated later (Chrome Web Store API, `web-ext sign`) once the owner adds store API keys as repository secrets.
