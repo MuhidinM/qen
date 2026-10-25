@@ -1,32 +1,18 @@
-'use client';
+import type { ComponentProps } from 'react';
+import { CopyButton } from './CopyButton';
 
-import { useRef, useState, type ComponentProps } from 'react';
-
-/** A code block from the docs' Markdown, with a copy button. */
+/**
+ * A code block from the docs' Markdown or the API reference, with a copy button. A server
+ * component: only the button hydrates, which matters on the API reference with ~100 blocks.
+ */
 export function CodeBlock(props: ComponentProps<'pre'>) {
-  const pre = useRef<HTMLPreElement>(null);
-  const [copied, setCopied] = useState(false);
   return (
     <div className="code-block">
       {/* A scrollable region keyboard users can focus to scroll long lines: tabindex plus a
           role and name, as axe's scrollable-region-focusable guidance asks. */}
       {/* eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex */}
-      <pre ref={pre} tabIndex={0} role="region" aria-label="Code" {...props} />
-      <button
-        type="button"
-        className="code-block__copy"
-        onClick={async () => {
-          try {
-            await navigator.clipboard.writeText(pre.current?.textContent ?? '');
-            setCopied(true);
-            setTimeout(() => setCopied(false), 2000);
-          } catch {
-            // Clipboard blocked: the code stays selectable.
-          }
-        }}
-      >
-        {copied ? 'Copied' : 'Copy'}
-      </button>
+      <pre tabIndex={0} role="region" aria-label="Code" {...props} />
+      <CopyButton />
     </div>
   );
 }

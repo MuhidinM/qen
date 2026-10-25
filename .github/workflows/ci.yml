@@ -154,6 +154,8 @@ jobs:
         uses: actions/upload-artifact@v7
         with:
           name: web-reports
+          # .lighthouseci is a hidden folder, which upload-artifact skips unless told.
+          include-hidden-files: true
           path: |
             apps/web/test-results
             apps/web/.lighthouseci

@@ -13,13 +13,16 @@ async function runAll(page: Page) {
   const count = await all.count();
   for (let i = 0; i < count; i++) {
     await all.nth(i).scrollIntoViewIfNeeded();
-    await expect(all.nth(i)).not.toHaveAttribute('data-status', 'running', { timeout: 15_000 });
+    await expect(all.nth(i)).toHaveAttribute('data-status', /^(ok|error)$/, { timeout: 15_000 });
   }
   return count;
 }
 
 for (const { href, title } of DOCS_PAGES) {
   test(`every example on “${title}” runs without errors`, async ({ page }) => {
+    // Frames are created as each example is scrolled to, so the API pages' ~40 examples load
+    // one after another.
+    test.slow();
     await page.goto(href);
     const count = await runAll(page);
     expect(count).toBeGreaterThan(0);
@@ -136,6 +139,21 @@ test('the API reference has an entry per export, with signature, links and a liv
     .locator('[data-live-example]');
   await year.scrollIntoViewIfNeeded();
   await expect(year.frameLocator('iframe').getByRole('heading', { name: '2019' })).toBeVisible();
+});
+
+test('example frames are only created as you scroll to them', async ({ page }) => {
+  // Each sandboxed frame downloads and runs the sandbox on its own (no shared cache across
+  // opaque origins), so a page must not create them all on load.
+  await page.goto('/docs/api/core');
+  await page.waitForLoadState('networkidle');
+  await expect(page.locator('[data-live-example] iframe')).toHaveCount(0);
+
+  const example = page
+    .getByRole('region', { name: 'toGeezNumeral function', exact: true })
+    .locator('[data-live-example]');
+  await example.scrollIntoViewIfNeeded();
+  await expect(example.locator('iframe')).toHaveCount(1);
+  await expect(example).toHaveAttribute('data-status', 'ok');
 });
 
 test('search finds guides and exports and goes to them', async ({ page }) => {
