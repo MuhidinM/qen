@@ -9,7 +9,7 @@
     "zip": "wxt zip && wxt zip -b firefox --mv3",
     "typecheck": "wxt prepare && tsc --noEmit",
     "test": "wxt prepare && vitest run --passWithNoTests",
-    "test:e2e": "playwright test",
+    "test:e2e": "wxt build --mode e2e && playwright test",
     "lint:firefox": "web-ext lint --source-dir .output/firefox-mv3 --self-hosted=false"
   },
   "dependencies": {

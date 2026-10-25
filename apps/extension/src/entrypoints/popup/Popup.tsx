@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Tabs } from '@/components/Tabs';
-import { useSettings } from '@/lib/settings';
+import { useSettings } from '@/lib/use-settings';
 import { ConvertPanel } from './ConvertPanel';
 import { SettingsPanel } from './SettingsPanel';
 import { TodayPanel } from './TodayPanel';

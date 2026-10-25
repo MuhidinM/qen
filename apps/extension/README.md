@@ -14,14 +14,20 @@ pnpm --filter @qen/extension dev        # opens a browser with the extension loa
 ```sh
 pnpm turbo run build --filter=@qen/extension   # .output/chrome-mv3 and .output/firefox-mv3
 pnpm --filter @qen/extension lint:firefox      # Mozilla's add-on linter
-pnpm --filter @qen/extension test:e2e          # loads the built extension into Chromium
+pnpm --filter @qen/extension test:e2e          # builds the e2e variant and loads it into Chromium
 pnpm --filter @qen/extension zip               # store uploads in .output/*.zip
 ```
 
 The tests load the extension into Playwright's bundled Chromium (branded Chrome no longer loads unpacked extensions from the command line). If it won't start on your machine, point `CHROMIUM_PATH` at another Chromium build.
+
+They use an e2e build (`.output/chrome-mv3-e2e`): the store build plus the test page's host `http://qen.test/*`, standing in for the `activeTab` grant a real click gives, and the context menu's handler exposed to the service worker so tests can call it.
 
 ## Permissions
 
 `storage`, `activeTab`, `contextMenus`, `scripting`, and `https://calendar.google.com/*`, and nothing else (ADR-0017, R-EXT-04). `e2e/manifest.spec.ts` fails if a build asks for more. Firefox's manifest declares that the extension collects no data.
 
 `web-ext lint` reports two warnings about `innerHTML` in the popup bundle: they come from React DOM's own code, not from the extension.
+
+## Select-to-convert
+
+Select a date on any page, then right-click → **Convert date with Qen**, or press `Alt+Shift+Q` (change it in the browser's extension shortcut settings). The extension reads the page only then, through `activeTab`, and shows the date in all three calendars in a tooltip. Ambiguous text such as `17/01/2019` lists every reading instead of guessing.

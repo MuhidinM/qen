@@ -1,6 +1,6 @@
 import { defineConfig } from '@playwright/test';
 
-// Extension tests load the built extension (.output/chrome-mv3) into Playwright's bundled
+// Extension tests load the e2e build (.output/chrome-mv3-e2e) into Playwright's bundled
 // Chromium: branded Google Chrome no longer accepts --load-extension (Chrome 137+).
 export default defineConfig({
   testDir: 'e2e',

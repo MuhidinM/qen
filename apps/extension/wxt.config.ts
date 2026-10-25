@@ -5,16 +5,29 @@ import { defineConfig } from 'wxt';
 export const PERMISSIONS = ['storage', 'activeTab', 'contextMenus', 'scripting'];
 export const HOST_PERMISSIONS = ['https://calendar.google.com/*'];
 
+/** The keyboard command that converts the selection; users can change the keys. */
+export const COMMANDS = {
+  'convert-selection': {
+    suggested_key: { default: 'Alt+Shift+Q' },
+    description: 'Convert the selected date',
+  },
+};
+
+// e2e builds (`wxt build --mode e2e`, in .output/*-e2e) may also script the test page's host,
+// which stands in for the activeTab grant a real click gives. Store builds never include it.
+const E2E_HOSTS = ['http://qen.test/*'];
+
 export default defineConfig({
   srcDir: 'src',
   modules: ['@wxt-dev/module-react'],
-  manifest: {
+  manifest: ({ mode }) => ({
     name: 'Qen: Ethiopian, Hijri and Gregorian dates',
     short_name: 'Qen',
     description:
       'Today in the Ethiopian, Hijri and Gregorian calendars, a converter, upcoming holidays, and dates converted on request.',
     permissions: PERMISSIONS,
-    host_permissions: HOST_PERMISSIONS,
+    host_permissions: mode === 'e2e' ? [...HOST_PERMISSIONS, ...E2E_HOSTS] : HOST_PERMISSIONS,
+    commands: COMMANDS,
     browser_specific_settings: {
       gecko: {
         id: 'qen@muhidinm.github.io',
@@ -26,5 +39,5 @@ export default defineConfig({
       // Firefox for Android added the data-collection key in 142.
       gecko_android: { strict_min_version: '142.0' },
     },
-  },
+  }),
 });

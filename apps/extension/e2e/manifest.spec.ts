@@ -1,6 +1,6 @@
 import { readFileSync } from 'node:fs';
 import { expect, test } from '@playwright/test';
-import { HOST_PERMISSIONS, PERMISSIONS } from '../wxt.config';
+import { COMMANDS, HOST_PERMISSIONS, PERMISSIONS } from '../wxt.config';
 
 // R-EXT-04, ADR-0017: the built manifests ask for exactly the minimum permissions, nothing more.
 for (const target of ['chrome-mv3', 'firefox-mv3']) {
@@ -13,6 +13,7 @@ for (const target of ['chrome-mv3', 'firefox-mv3']) {
     expect(manifest.host_permissions).toEqual(HOST_PERMISSIONS);
     expect(manifest.optional_permissions ?? []).toEqual([]);
     expect(manifest.content_security_policy).toBeUndefined(); // the browsers' strict default
+    expect(manifest.commands).toEqual(COMMANDS); // select-to-convert's shortcut (#168)
   });
 }
 

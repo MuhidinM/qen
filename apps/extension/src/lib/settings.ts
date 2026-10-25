@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react';
 import { browser } from 'wxt/browser';
 import type { CalendarId, HijriSettings, Locale } from '@qen/core';
 import { am } from '@qen/core/locales/am';
@@ -66,36 +65,10 @@ export function hijriSettings(choice: HijriChoice): HijriSettings {
   return {};
 }
 
-const KEY = 'settings';
+/** The storage.sync key holding the settings. */
+export const SETTINGS_KEY = 'settings';
 
 export async function loadSettings(): Promise<Settings> {
-  const stored = await browser.storage.sync.get(KEY);
-  return sanitize(stored[KEY]);
-}
-
-/**
- * The settings, kept in sync with storage (so the popup, the tooltip and the overlay agree),
- * and a function to change some of them. Null until loaded.
- */
-export function useSettings(): [Settings | null, (patch: Partial<Settings>) => void] {
-  const [settings, setSettings] = useState<Settings | null>(null);
-  useEffect(() => {
-    let live = true;
-    void loadSettings().then((s) => live && setSettings(s));
-    const onChanged = (changes: Record<string, { newValue?: unknown }>, area: string) => {
-      if (area === 'sync' && KEY in changes) setSettings(sanitize(changes[KEY]?.newValue));
-    };
-    browser.storage.onChanged.addListener(onChanged);
-    return () => {
-      live = false;
-      browser.storage.onChanged.removeListener(onChanged);
-    };
-  }, []);
-  const update = (patch: Partial<Settings>) => {
-    if (!settings) return;
-    const next = { ...settings, ...patch };
-    setSettings(next);
-    void browser.storage.sync.set({ [KEY]: next });
-  };
-  return [settings, update];
+  const stored = await browser.storage.sync.get(SETTINGS_KEY);
+  return sanitize(stored[SETTINGS_KEY]);
 }
