@@ -1,4 +1,5 @@
 const links = [
+  { label: 'Privacy', href: '/privacy' },
   { label: 'GitHub', href: 'https://github.com/MuhidinM/qen' },
   { label: '@qen/core on npm', href: 'https://www.npmjs.com/package/@qen/core' },
   { label: '@qen/react on npm', href: 'https://www.npmjs.com/package/@qen/react' },

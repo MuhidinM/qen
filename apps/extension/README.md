@@ -37,3 +37,9 @@ Select a date on any page, then right-click → **Convert date with Qen**, or pr
 On `calendar.google.com` each day gets its Ethiopian and Hijri day numbers: beside the day number in month view, after the weekday name in week and day views. Hover a badge for the full dates. Choose Ethiopian, Hijri, both or off under **Settings → In Google Calendar, show**.
 
 Google changes its markup without notice. Every selector the overlay uses is in `src/lib/gcal.ts`; when they stop matching, the overlay shows nothing and the page is untouched. The test fixtures in `src/lib/__fixtures__/` copy only that structure.
+
+## Icons and store listing
+
+The icons in `public/icon/` are rendered from the website's `apps/web/src/app/icon.svg` (`pnpm --filter @qen/extension icons`), so both products share one mark. Everything the stores ask for is in `store/`: the listing text, permission justifications and answers in `store/listing.md`, and the images in `store/images/` (`pnpm --filter @qen/extension store:screenshots`). The privacy policy is the website's `/privacy`.
+
+`pnpm --filter @qen/extension zip` writes the Chrome and Firefox packages and, for Firefox's reviewers, a sources zip rooted at the monorepo that rebuilds the Firefox package exactly. It leaves out `notes/` and everything not needed to build.

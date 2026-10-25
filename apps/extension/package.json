@@ -10,7 +10,9 @@
     "typecheck": "wxt prepare && tsc --noEmit",
     "test": "wxt prepare && vitest run --passWithNoTests",
     "test:e2e": "wxt build --mode e2e && playwright test",
-    "lint:firefox": "web-ext lint --source-dir .output/firefox-mv3 --self-hosted=false"
+    "lint:firefox": "web-ext lint --source-dir .output/firefox-mv3 --self-hosted=false",
+    "icons": "node scripts/icons.mjs",
+    "store:screenshots": "wxt build --mode e2e && playwright test --config playwright.store.config.ts"
   },
   "dependencies": {
     "@qen/core": "workspace:^",
