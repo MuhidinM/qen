@@ -21,6 +21,8 @@ test('at 06:00 the Ethiopian New Year begins, and the popup updates', async ({
   extensionId,
 }) => {
   const page = await openPopup(context, extensionId, '2026-09-11T05:59:30+03:00');
+  // Let the popup load its settings and start its minute timer before moving the clock.
+  await expect(row(page, 'Ethiopian')).toContainText('5 Pagume 2018');
   await page.clock.runFor(60_000);
   await expect(row(page, 'Ethiopian')).toContainText('1 Meskerem 2019');
   await expect(page.getByRole('list').first()).toContainText(/Enkutatash.*today/);
