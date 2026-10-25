@@ -17,3 +17,5 @@ apps/web/public/sandbox
 # Docs pages: their live examples are code inside strings, which Prettier would reflow
 **/*.mdx
 apps/web/src/generated
+.output
+.wxt

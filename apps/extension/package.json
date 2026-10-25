@@ -1,0 +1,32 @@
+{
+  "name": "@qen/extension",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "wxt",
+    "build": "wxt build && wxt build -b firefox --mv3",
+    "zip": "wxt zip && wxt zip -b firefox --mv3",
+    "typecheck": "wxt prepare && tsc --noEmit",
+    "test": "vitest run --passWithNoTests",
+    "test:e2e": "playwright test",
+    "lint:firefox": "web-ext lint --source-dir .output/firefox-mv3 --self-hosted=false"
+  },
+  "dependencies": {
+    "@qen/core": "workspace:^",
+    "@qen/react": "workspace:^",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "^4.14.0",
+    "@playwright/test": "^1.64.1",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "@wxt-dev/module-react": "^1.2.2",
+    "typescript": "~6.0.3",
+    "vitest": "^5.0.5",
+    "web-ext": "^9.4.0",
+    "wxt": "^0.21.4"
+  }
+}

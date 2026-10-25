@@ -6,3 +6,4 @@ allowBuilds:
   esbuild: true
   msw: false
   simple-git-hooks: true
+  spawn-sync: set this to true or false

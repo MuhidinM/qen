@@ -13,6 +13,7 @@ See [PLAN.md](PLAN.md) for the product spec, [docs/](docs/README.md) for require
 | [`@qen/core`](https://www.npmjs.com/package/@qen/core)   | Zero-dependency calendar engine: conversion, arithmetic, formatting, parsing, holidays, Ge'ez numerals, Ethiopian time ([source](packages/core)) |
 | [`@qen/react`](https://www.npmjs.com/package/@qen/react) | Accessible React components and design tokens ([source](packages/react))                                                                         |
 | [`apps/web`](apps/web)                                   | The website, built on both packages (not published)                                                                                              |
+| [`apps/extension`](apps/extension)                       | Browser extension for Chrome and Firefox (in progress)                                                                                           |
 
 ## Development
 

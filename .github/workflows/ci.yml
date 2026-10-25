@@ -160,10 +160,39 @@ jobs:
             apps/web/test-results
             apps/web/.lighthouseci
 
+  extension:
+    name: extension (builds, manifest, Firefox lint, e2e)
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    # Playwright's image: its Chromium can load unpacked extensions (branded Chrome can't).
+    container:
+      image: mcr.microsoft.com/playwright:v1.64.1-noble
+    steps:
+      - uses: actions/checkout@v7
+      - uses: pnpm/action-setup@v6
+      - uses: actions/setup-node@v7
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm turbo run build --filter=@qen/extension
+      - name: Mozilla's add-on linter on the Firefox build (fails on errors)
+        run: pnpm --filter @qen/extension lint:firefox
+      - name: End-to-end tests with the extension loaded
+        run: pnpm --filter @qen/extension test:e2e
+        env:
+          HOME: /root
+      - name: Store zips
+        run: pnpm --filter @qen/extension zip
+      - uses: actions/upload-artifact@v7
+        with:
+          name: extension-zips
+          path: apps/extension/.output/*.zip
+
   # Single required check for branch protection: passes only if every job passed.
   ci:
     if: always()
-    needs: [checks, test, node, deno-bun, browsers, web]
+    needs: [checks, test, node, deno-bun, browsers, web, extension]
     runs-on: ubuntu-latest
     steps:
       - name: All jobs passed

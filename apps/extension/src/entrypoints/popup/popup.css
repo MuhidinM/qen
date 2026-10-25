@@ -1,0 +1,30 @@
+/* Popup styles use only the design tokens from @qen/react (ADR-0015). */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  width: 360px;
+  background: var(--qen-color-background);
+  color: var(--qen-color-text);
+  font-family: var(--qen-font-family);
+  font-size: var(--qen-font-size-14);
+  line-height: var(--qen-line-height-normal);
+}
+
+.popup {
+  padding: var(--qen-space-4);
+}
+
+.popup__title {
+  margin: 0;
+  font-size: var(--qen-font-size-18);
+}
+
+.popup__lead {
+  margin: var(--qen-space-1) 0 0;
+  color: var(--qen-color-text-muted);
+}

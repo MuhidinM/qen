@@ -18,3 +18,5 @@ playwright-report/
 .lighthouseci/
 apps/web/public/sandbox/
 apps/web/src/generated/
+.output/
+.wxt/
