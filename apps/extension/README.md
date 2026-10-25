@@ -31,3 +31,9 @@ They use an e2e build (`.output/chrome-mv3-e2e`): the store build plus the test 
 ## Select-to-convert
 
 Select a date on any page, then right-click → **Convert date with Qen**, or press `Alt+Shift+Q` (change it in the browser's extension shortcut settings). The extension reads the page only then, through `activeTab`, and shows the date in all three calendars in a tooltip. Ambiguous text such as `17/01/2019` lists every reading instead of guessing.
+
+## Google Calendar
+
+On `calendar.google.com` each day gets its Ethiopian and Hijri day numbers: beside the day number in month view, after the weekday name in week and day views. Hover a badge for the full dates. Choose Ethiopian, Hijri, both or off under **Settings → In Google Calendar, show**.
+
+Google changes its markup without notice. Every selector the overlay uses is in `src/lib/gcal.ts`; when they stop matching, the overlay shows nothing and the page is untouched. The test fixtures in `src/lib/__fixtures__/` copy only that structure.
