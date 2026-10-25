@@ -2,13 +2,18 @@ import { COMMAND, MENU_ID, convertInTab } from '@/lib/convert-selection';
 
 // The background service worker: select-to-convert's context menu and keyboard command.
 export default defineBackground(() => {
-  browser.runtime.onInstalled.addListener(() => {
+  // Created on install and on every browser start: Chrome keeps menus between restarts, but
+  // not every browser does for event pages. removeAll() first so there's never a duplicate.
+  const createMenu = async () => {
+    await browser.contextMenus.removeAll();
     browser.contextMenus.create({
       id: MENU_ID,
       title: 'Convert date with Qen',
       contexts: ['selection'],
     });
-  });
+  };
+  browser.runtime.onInstalled.addListener(() => void createMenu());
+  browser.runtime.onStartup.addListener(() => void createMenu());
   browser.contextMenus.onClicked.addListener((info, tab) => {
     if (info.menuItemId === MENU_ID && tab?.id !== undefined)
       void convertInTab(tab.id, info.frameId);
