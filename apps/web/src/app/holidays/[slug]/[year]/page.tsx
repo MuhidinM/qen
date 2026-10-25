@@ -104,6 +104,8 @@ export default async function HolidayPage({ params }: { params: Params }) {
           : `In ${year}, ${name} falls twice: ${dates.map((d) => long(d.gregorian)).join(' and ')}.`}
       </p>
 
+      {/* Keeps the heading levels in order: the date cards' calendar names are h3. */}
+      <h2 className="visually-hidden">Dates</h2>
       {dates.map((h, i) => (
         <section
           key={iso(h.gregorian)}

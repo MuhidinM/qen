@@ -19,6 +19,12 @@ pnpm --filter @qen/web lighthouse   # at least 90 in every category on every rou
 
 The tests and Lighthouse use your installed Google Chrome.
 
+To check the live site, run the same suite against it (no local server):
+
+```sh
+pnpm --filter @qen/web test:production   # BASE_URL=https://qen-3.vercel.app
+```
+
 Every route is listed in `e2e/routes.json`; adding a page means adding it there, so the accessibility, header and Lighthouse checks cover it.
 
 ## Install and offline
