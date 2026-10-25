@@ -132,3 +132,30 @@ test('does nothing when no text is selected', async ({ context }) => {
   await convert(context);
   await expect(page.locator('#qen-tooltip-host')).toHaveCount(0);
 });
+
+test('sits just below the selection on a page that zooms itself with CSS (#178)', async ({
+  context,
+}) => {
+  const { page } = await strictPage(context);
+  // The strict CSP blocks <style>, so zoom through the CSSOM, as a page's own script would.
+  await page.evaluate(() => {
+    document.documentElement.style.zoom = '1.6';
+  });
+  await select(page, 'date', '12 April 2026');
+  await convert(context);
+  await expect(tooltip(page)).toBeVisible();
+  const [selection, box, width] = await page.evaluate(() => {
+    const dialog = document
+      .getElementById('qen-tooltip-host')
+      ?.shadowRoot?.querySelector('[role="dialog"]');
+    return [
+      getSelection()?.getRangeAt(0).getBoundingClientRect().toJSON(),
+      dialog?.getBoundingClientRect().toJSON(),
+      innerWidth,
+    ] as const;
+  });
+  expect(box.top - selection.bottom).toBeGreaterThanOrEqual(0);
+  expect(box.top - selection.bottom).toBeLessThan(24);
+  expect(Math.abs(box.left - selection.left)).toBeLessThan(24);
+  expect(box.right).toBeLessThanOrEqual(width);
+});

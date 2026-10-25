@@ -143,7 +143,7 @@ PLAN.md Phase 8. Done when the extension is live on the Chrome Web Store and Fir
 | T-124 | [#168](https://github.com/MuhidinM/qen/issues/168) | Convert a selected date on any page, on request                           | R-EXT-02, R-EXT-04, R-A11Y-01 | M    | done                               |
 | T-125 | [#169](https://github.com/MuhidinM/qen/issues/169) | Show Ethiopian and Hijri dates in Google Calendar                         | R-EXT-03                      | L    | done                               |
 | T-126 | [#170](https://github.com/MuhidinM/qen/issues/170) | Publish the extension's privacy policy and store listing material         | R-EXT-04, R-EXT-05            | S    | done                               |
-| T-128 | [#178](https://github.com/MuhidinM/qen/issues/178) | Place the select-to-convert tooltip correctly on pages that set CSS zoom  | R-EXT-02                      | S    | todo                               |
+| T-128 | [#178](https://github.com/MuhidinM/qen/issues/178) | Place the select-to-convert tooltip correctly on pages that set CSS zoom  | R-EXT-02                      | S    | done                               |
 | T-127 | [#171](https://github.com/MuhidinM/qen/issues/171) | Publish the extension to the Chrome Web Store and Firefox Add-ons         | R-EXT-05                      | S    | todo (needs-owner: store accounts) |
 
 ## M9 · Hosted feeds
