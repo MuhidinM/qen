@@ -26,6 +26,15 @@ export const HIJRI_CHOICES = [
 ] as const;
 export type HijriChoice = (typeof HIJRI_CHOICES)[number]['value'];
 
+/** Which calendars the Google Calendar overlay adds under each day (R-EXT-03). */
+export const OVERLAY_CHOICES = [
+  { value: 'both', label: 'Ethiopian and Hijri' },
+  { value: 'ethiopian', label: 'Ethiopian' },
+  { value: 'hijri', label: 'Hijri' },
+  { value: 'off', label: 'Off' },
+] as const;
+export type OverlayChoice = (typeof OVERLAY_CHOICES)[number]['value'];
+
 export const CALENDARS: readonly { id: CalendarId; name: string }[] = [
   { id: 'gregorian', name: 'Gregorian' },
   { id: 'ethiopian', name: 'Ethiopian' },
@@ -39,6 +48,8 @@ export interface Settings {
   /** The calendar the converter starts in. */
   calendar: CalendarId;
   hijri: HijriChoice;
+  /** What the Google Calendar overlay shows. */
+  overlay: OverlayChoice;
 }
 
 export const DEFAULT_SETTINGS: Settings = {
@@ -46,6 +57,7 @@ export const DEFAULT_SETTINGS: Settings = {
   geez: false,
   calendar: 'ethiopian',
   hijri: 'ethiopia',
+  overlay: 'both',
 };
 
 /** Stored settings are untrusted (older versions, other devices): keep only valid values. */
@@ -56,6 +68,7 @@ export function sanitize(raw: unknown): Settings {
     geez: typeof r.geez === 'boolean' ? r.geez : DEFAULT_SETTINGS.geez,
     calendar: CALENDARS.find((c) => c.id === r.calendar)?.id ?? DEFAULT_SETTINGS.calendar,
     hijri: HIJRI_CHOICES.find((c) => c.value === r.hijri)?.value ?? DEFAULT_SETTINGS.hijri,
+    overlay: OVERLAY_CHOICES.find((c) => c.value === r.overlay)?.value ?? DEFAULT_SETTINGS.overlay,
   };
 }
 
